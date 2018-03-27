@@ -1,0 +1,187 @@
+<b2b-header>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="mo-tit-section">
+          <h4>
+            <span class="lnr lnr-bookmark"></span>
+            <span i18n="@@my">My</span>
+            <strong i18n="@@booking">Bookings</strong>
+          </h4>
+          <h5 i18n="@@title-accomodations">Choose from more than 500,000 accommodations. We are present in ALL countries of the world!</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="iso-deco-triangles"></div>
+</b2b-header>
+
+<div class="container">
+  <form class="fm-smy my-book" [formGroup]="myBookingForm">
+    <b2b-supplier-accesses (accessesToSearchOutput)="saveAccessesToSearch($event)"></b2b-supplier-accesses>
+    <div class="row" style="margin-top: 30px;">
+      <div class="col-md-2">
+        <label>
+          <span i18n="@@supplier">Search type</span>:</label>
+        <select class="form-control" formControlName="typeSearch">
+          <option *ngFor="let type of bookingCriteriaTypeArray" [value]="type.value">{{type.name}}</option>
+        </select>
+      </div>
+      <ng-container class="align-items-end" *ngIf="myBookingForm.controls['typeSearch'].value === bookingCriteriaType.REFERENCES">
+        <div class="col-md-2">
+          <div class="form-group">
+            <label>
+              <span i18n="@@booking-reference">Client reference:</span>
+              <a class="tip" data-toggle="tooltip" data-placement="top" i18n-title="@@booking-reference-tooltip" title="Corresponds to the provider locator">
+                <i class="fa fa-question-circle" aria-hidden="true"></i>
+              </a>
+            </label>
+            <input type="text" class="bordered form-control" placeholder="Ej: 213832WC212K" [disabled]="!accessesToSearch || accessesToSearch.length === 0">
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label>
+              <span i18n="@@booking-reference">Supplier reference:</span>
+              <a class="tip" data-toggle="tooltip" data-placement="top" i18n-title="@@booking-reference-tooltip" title="Corresponds to the provider locator">
+                <i class="fa fa-question-circle" aria-hidden="true"></i>
+              </a>
+            </label>
+            <input type="text" class="bordered form-control" placeholder="Ej: 213832WC212K" [disabled]="!accessesToSearch || accessesToSearch.length === 0">
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label>
+              <span i18n="@@booking-reference">Hotel code:</span>
+              <a class="tip" data-toggle="tooltip" data-placement="top" i18n-title="@@booking-reference-tooltip" title="Corresponds to the provider locator">
+                <i class="fa fa-question-circle" aria-hidden="true"></i>
+              </a>
+            </label>
+            <input type="text" class="bordered form-control" placeholder="Ej: 213832WC212K" [disabled]="!accessesToSearch || accessesToSearch.length === 0">
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label>
+              <span i18n="@@booking-reference">Currency:</span>
+              <a class="tip" data-toggle="tooltip" data-placement="top" i18n-title="@@booking-reference-tooltip" title="Corresponds to the provider locator">
+                <i class="fa fa-question-circle" aria-hidden="true"></i>
+              </a>
+            </label>
+            <input type="text" class="bordered form-control" placeholder="Ej: 213832WC212K" [disabled]="!accessesToSearch || accessesToSearch.length === 0">
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label></label>
+            <a class="btn btn-primary smy-bordered btn-block disabled" *ngIf="!accessesToSearch || accessesToSearch.length === 0; else searchReference"
+              i18n="@@search">Search</a>
+            <ng-template #searchReference>
+              <a class="btn btn-primary smy-bordered btn-block" i18n="@@search" (click)="searchByReference()">Search</a>
+            </ng-template>
+          </div>
+        </div>
+
+      </ng-container>
+      <ng-container *ngIf="myBookingForm.controls['typeSearch'].value === bookingCriteriaType.DATES">
+        <ng-container formGroupName="dates">
+          <div class="col-md-3">
+            <label>
+              <span i18n="@@supplier">Date type</span>:</label>
+            <select class="form-control" formControlName="dateType">
+              <option *ngFor="let type of bookingCriteriaDateTypeArray" [value]="type.value">{{type.name}}</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <label i18n="@@by-dates">Start date:</label>
+              <input style="background-color: white;" class="form-control" placeholder="YYYY-MM-DD" [minDate]="calendar.getToday()" formControlName="start"
+                ngbDatepicker #sToggle="ngbDatepicker" (click)="sToggle.toggle(); eToggle.close();" (close)="eToggle.open()"
+                (ngModelChange)="onChange(sToggle, eToggle)" [disabled]="!accessesToSearch || accessesToSearch.length === 0"
+                readonly>
+              <!-- <input type="text" class="bordered form-control" formControlName="start" placeholder="Start Date" [disabled]="!accessesToSearch || accessesToSearch.length === 0"> -->
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <label>End date:</label>
+              <input style="background-color: white;" class="form-control" placeholder="YYYY-MM-DD" [minDate]="myBookingForm.controls['dates'].controls['start'].value"
+                formControlName="end" ngbDatepicker #eToggle="ngbDatepicker" (click)="eToggle.toggle(); sToggle.close()" [disabled]="!accessesToSearch || accessesToSearch.length === 0"
+                readonly>
+              <!-- <input type="text" class="bordered form-control" formControlName="end" placeholder="End Date" [disabled]="!accessesToSearch || accessesToSearch.length === 0"> -->
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label></label>
+              <a class="btn btn-primary smy-bordered btn-block disabled" *ngIf="!accessesToSearch || accessesToSearch.length === 0; else searchDates"
+                i18n="@@search">Search</a>
+              <ng-template #searchDates>
+                <a class="btn btn-primary smy-bordered btn-block" i18n="@@search" (click)="searchByDate(myBookingForm.value)">Search</a>
+              </ng-template>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </form>
+
+
+  <div class="row">
+    <div class="col">
+      <div class="mo-my-bookings">
+        <table class="tb-rooms table table-hover">
+          <thead>
+            <tr>
+              <th i18n="@@booking-day">Booking day</th>
+              <th i18n="@@hotel">Hotel</th>
+              <th i18n="@@status">Status</th>
+              <th i18n="@@price">Price</th>
+              <th i18n="@@provided-locator">Client reference</th>
+              <th i18n="@@provided-locator">Provider reference</th>
+              <th class="text-right" i18n="@@options">Options</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let booking of bookings">
+              <td>{{booking.hotel.creationDate}}</td>
+              <td>
+                <p class="hotelname">{{booking.hotel.hotelName}}
+                  <!-- <i class="fa fa-star fill" aria-hidden="true">
+                    <i class="fa fa-star fill" aria-hidden="true"></i>
+                    <i class="fa fa-star fill" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                  </i> -->
+                </p>
+                <!-- TODO check and i18n -->
+                <!-- <p class="country">Barcelona, Spain</p> -->
+                <p class="compo">Del {{booking.hotel.checkIn}} al {{booking.hotel.checkOut}}, {{booking.hotel.rooms.length}} habitación</p>
+              </td>
+              <!-- TODO check and i18n -->
+              <td>
+                <span [class]="'iso-status ' + booking.status.toLowerCase()">{{booking.status}}</span>
+              </td>
+              <td class="price">
+                <a class="tip" data-toggle="tooltip" data-placement="top" title="">{{booking.price.net}} {{booking.price.currency}}</a>
+              </td>
+              <td>{{booking.reference.client}}</td>
+              <td>{{booking.reference.supplier}}</td>
+              <td class="text-right">
+                <p class="cancel">
+                  <a i18n="@@cancel" (click)="onCancel(booking)">Cancel</a>
+                </p>
+                <p class="xml">
+                  <!-- <a i18n="@@view-rq">View RQ</a>
+                  <a i18n="@@view-rs">View RS</a> -->
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- .mo-my-bookings -->
+    </div>
+  </div>
+</div>

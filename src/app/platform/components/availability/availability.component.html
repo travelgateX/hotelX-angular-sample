@@ -1,0 +1,112 @@
+<div #mo_main_search_element class="mo-main-search" [ngClass]="{'bordered': bordered}">
+  <form #form="ngForm" class="fm-smy">
+    <b2b-supplier-accesses (accessesToSearchOutput)="saveAccessesToSearch($event)"></b2b-supplier-accesses>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label i18n="@@destination">Destination:</label>
+
+          <tag-input name="auto" [onAdding]="onAdd" [maxItems]="maxItems" [theme]="'bootstrap'" [(ngModel)]="criteria.items" [placeholder]="'Hotel or Destination'"
+            [secondaryPlaceholder]="'...'" [onTextChangeDebounce]="500" [onlyFromAutocomplete]="true" [disable]="!accessesToSearch || accessesToSearch.length === 0"
+            [class]="getDisabled(accessesToSearch, 'autocompleter')" [clearOnBlur]="true" #searcher>
+
+            <ng-template let-item="item" let-index="index">
+              <span (click)="onRemoveItem(item, index)" class="ng2-tag__remove-button">x</span>
+              <span *ngIf="item.destination">[D] - {{item.display}} - ({{item.value}})</span>
+              <span *ngIf="!item.destination">[H] - {{item.display}} - ({{item.value}})</span>
+            </ng-template>
+
+            <tag-input-dropdown [offset]="getDropdownOffset(mo_main_search_element.getBoundingClientRect()) || '44 6'" [minimumTextLength]="3"
+              [autocompleteObservable]="requestAutocompleteItems" [appendToBody]="true">
+              <ng-template let-item="item" let-index="index">
+                <span *ngIf="item.destination">[D] - {{item.display}} - ({{item.value}})</span>
+                <span *ngIf="!item.destination">[H] - {{item.display}} - ({{item.value}})</span>
+              </ng-template>
+            </tag-input-dropdown>
+          </tag-input>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label i18n="@@date-from">Date from:</label>
+          <input style="background-color: white;" class="form-control" placeholder="YYYY-MM-DD" [minDate]="now" name="startDate" [(ngModel)]="criteria.checkIn"
+            ngbDatepicker #sToggle="ngbDatepicker" (click)="sToggle.toggle(); eToggle.close();" (close)="eToggle.open()" (ngModelChange)="onChange(sToggle, eToggle)"
+            [disabled]="!accessesToSearch || accessesToSearch.length === 0" readonly>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label i18n="@@date-to">Date to:</label>
+          <div class="input-group">
+            <input style="background-color: white;" class="form-control" placeholder="YYYY-MM-DD" [minDate]="minDateTo" name="endDate"
+              [(ngModel)]="criteria.checkOut" ngbDatepicker #eToggle="ngbDatepicker" (click)="eToggle.toggle(); sToggle.close()"
+              [disabled]="!accessesToSearch || accessesToSearch.length === 0" readonly>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label i18n="@@market">Market:</label>
+          <div class="input-group">
+            <input type="text" class="form-control" [(ngModel)]="criteria.market" marketMatch [ngbTypeahead]="marketsFilter" name="markets"
+              [disabled]="!accessesToSearch || accessesToSearch.length === 0" [inputFormatter]="inputFormatter" [resultFormatter]="resultFormatter"
+              placeholder="Select Market" i18n-placeholder="@@market-placeholder" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template ngFor let-room [ngForOf]="criteria.rooms" let-i="index">
+      <h5 class="tit-rooms clearfix">
+        <span i18n="@@room">Room</span> {{i+1}}
+        <p *ngIf="criteria.rooms.length === (i+1) && criteria.rooms.length !== 1" class="addroom float-right" (click)="removeRoom()">
+          <a href="javascript:void(0);">
+            <span class="fa fa-close"></span>
+          </a>
+        </p>
+        <p *ngIf="i === 0" class="addroom float-right" (click)="addRoom()">
+          <a href="javascript:void(0);" i18n="@@add-room">Add another room</a>
+        </p>
+      </h5>
+      <div class="row">
+        <div class="col-md-6 col-lg-3">
+          <div class="form-group">
+            <label>
+              <span i18n="@@paxes">Paxes</span> ...</label>
+            <select class="form-control" [(ngModel)]="room.paxes.length" (change)="setPaxes(room)" [ngModelOptions]="{standalone: true}"
+              [disabled]="!accessesToSearch || accessesToSearch.length === 0">
+              <option *ngFor="let pax of maxNumPaxes" [value]="pax">{{pax}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3 col-lg-3" *ngFor="let pax of room.paxes; let i = index">
+          <div class="form-group">
+            <label>
+              <span i18n="@@age">Age</span> (Pax {{i+1}})</label>
+            <input name="num" class="form-control" [(ngModel)]="pax.age" [ngModelOptions]="{standalone: true}" type="number" min="1"
+              max="100" step="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57" [disabled]="!accessesToSearch || accessesToSearch.length === 0">
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="submit">
+          <p class="float-right">
+            <a class="btn btn-primary smy disabled" *ngIf="(!form.valid || !criteria.checkIn || !criteria.checkOut || !criteria.items?.length || !criteria.market); else search"
+              i18n="@@search">Search</a>
+            <ng-template #search>
+              <a class="btn btn-primary smy" (click)="onSearch()" i18n="@@search">Search</a>
+            </ng-template>
+          </p>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

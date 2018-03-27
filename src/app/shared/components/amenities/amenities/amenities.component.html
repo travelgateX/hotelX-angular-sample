@@ -1,0 +1,23 @@
+<ul *ngIf="data" class="services float-right list-inline">
+  <li *ngFor="let amenity of data" class="list-inline-item">
+    <!-- Cannot have just one line cause i18n-title don't let you to call a function or a variable in typescript -->
+
+    <span *ngIf="amenity?.code === '0'" class="ico others" i18n-title="@@airConditioner" title="airConditioner"></span>
+    <span *ngIf="amenity?.code === '1'" class="ico others" i18n-title="@@cleaning" title="cleaning"></span>
+    <span *ngIf="amenity?.code === '2'" class="ico laundry" i18n-title="@@laundry" title="laundry"></span>
+    <span *ngIf="amenity?.code === '3'" class="ico others" i18n-title="@@lifts" title="lifts"></span>
+    <span *ngIf="amenity?.code === '4'" class="ico reception" i18n-title="@@reception" title="reception"></span>
+    <span *ngIf="amenity?.code === '5'" class="ico parking" i18n-title="@@parking" title="parking"></span>
+    <span *ngIf="amenity?.code === '6'" class="ico transfer" i18n-title="@@transfer" title="transfer"></span>
+    <span *ngIf="amenity?.code === '7'" class="ico wifi" i18n-title="@@internet" title="internet"></span>
+    <span *ngIf="amenity?.code === '8'" class="ico childrenAmenities" i18n-title="@@childrenAmenities"
+      title="childrenAmenities"></span>
+    <span *ngIf="amenity?.code === '9'" class="ico bar" i18n-title="@@bar" title="bar"></span>
+    <span *ngIf="amenity?.code === '10'" class="ico restaurant" i18n-title="@@restaurant" title="restaurant"></span>
+    <span *ngIf="amenity?.code === '11'" class="ico pool" i18n-title="@@pool" title="pool"></span>
+    <span *ngIf="amenity?.code === '12'" class="ico privateBeach" i18n-title="@@privateBeach" title="privateBeach"></span>
+    <span *ngIf="amenity?.code === '13'" class="ico healthAndSpa" i18n-title="@@healthAndSpa" title="healthAndSpa"></span>
+    <span *ngIf="amenity?.code === '14'" class="ico others" i18n-title="@@businessInstallations" title="businessInstallations"></span>
+
+  </li>
+</ul>

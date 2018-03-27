@@ -1,0 +1,6 @@
+<div *ngIf="stars" class="stars-container">
+  <ng-container *ngFor="let number of numbers">
+    <i *ngIf="number < stars; else noFilled" class="fa fa-star fill" aria-hidden="true"></i>
+    <ng-template #noFilled><i class="fa fa-star" aria-hidden="true"></i></ng-template>
+  </ng-container>
+</div>

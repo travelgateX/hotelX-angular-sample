@@ -1,0 +1,66 @@
+<b2b-header>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="mo-tit-section">
+
+          <div *ngIf="!(loading$ | async); else noLoading">
+            <h4 [ngSwitch]="book.booking?.status">
+              <div *ngSwitchCase="'OK'">
+                <span class="lnr lnr-checkmark-circle"></span>
+                <strong i18n="@@book-success">Booking success!</strong>
+              </div>
+              <div *ngSwitchCase="'RQ'">
+                <span class="lnr lnr-sync-circle"></span>
+                <strong i18n="@@book-pending">Booking pending!</strong>
+              </div>
+              <div *ngSwitchDefault>
+                <span class="lnr lnr-cross-circle"></span>
+                <strong i18n="@@book-error">Booking error!</strong>
+              </div>
+            </h4>
+          </div>
+          <ng-template #noLoading>
+            <h4 *ngIf="book">
+              <span class="lnr lnr-sync-circle"></span>
+              <strong i18n="@@book-pending">Booking pending!</strong>
+            </h4>
+          </ng-template>
+
+          <h5 i18n="@@title-accomodations">Choose from more than 500,000 accommodations. We are present in ALL countries of the world!</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="iso-deco-triangles"></div>
+</b2b-header>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <b2b-booking-detail *ngIf="!(loading$ | async)" [bookingDetail]="bookingDetail" [book]="book"></b2b-booking-detail>
+    </div>
+    <!-- .mo-summary-thanks -->
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-md-7">
+      <div class="mo-tit-section inv">
+        <h4>
+          <strong i18n="@@availability">Availability</strong>
+          <span i18n="@@request">request</span>
+        </h4>
+      </div>
+      <!-- mo-tit-section -->
+      <b2b-availability [bordered]="'true'" (output)="onSearch($event)"></b2b-availability>
+    </div>
+
+    <!-- <div class="col-md-5">
+      <div class="mo-tit-section inv">
+        <h4>Your <strong>bookings</strong></h4>
+      </div>
+      <b2b-bookings [bordered]="'true'"></b2b-bookings>
+    </div> -->
+  </div>
+</div>
+
+<b2b-footer></b2b-footer>

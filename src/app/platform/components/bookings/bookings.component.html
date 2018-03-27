@@ -1,0 +1,70 @@
+<div class="mo-search-bookings" [ngClass]="{'bordered': bordered}">
+  <form class="fm-smy">
+    <div class="booking-number">
+      <div class="row align-items-center">
+        <div class="col-md-8">
+          <div class="form-group">
+            <label><span i18n="@@reservation-locator">Reservation locator:</span>
+              <a class="tip" data-toggle="tooltip" data-placement="top" i18n-title="@@booking-reference-tooltip" title="Corresponds to the provider locator">
+                <i class="fa fa-question-circle" aria-hidden="true"></i>
+              </a>
+            </label>
+            <input type="text" class="form-control" placeholder="Ej: 213832WC212K">
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio"> <span i18n="@@client">Client</span>
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio"> <span i18n="@@provider">Provider</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <p><a href="#" class="btn btn-primary smy-bordered btn-block" i18n="@@search">Search</a></p>
+        </div>
+      </div>
+    </div>
+    <!-- .booking-number -->
+
+    <div class="date-picker" id="dpk">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label i18n="@@date-from">Date from:</label>
+            <input type="text" class="form-control" placeholder="DD-MM-YYYY" [maxDate]="endDate" name="dp" [(ngModel)]="startDate" ngbDatepicker
+              #s="ngbDatepicker" (click)="s.toggle()">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label i18n="@@date-to">Date to:</label>
+            <input type="text" class="form-control" placeholder="DD-MM-YYYY" [minDate]="startDate" name="dp" [(ngModel)]="endDate" ngbDatepicker
+              #e="ngbDatepicker" (click)="e.toggle()">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <p><a href="#" class="btn btn-primary smy-bordered" i18n="@@view-bookings">View bookings</a></p>
+        </div>
+      </div>
+    </div>
+    <!-- .date-picker -->
+
+    <div class="quick-search">
+      <div class="row">
+        <div class="col">
+          <p class="text-center"><a href="#" i18n="@@todays-bookings">Today's bookings</a></p>
+        </div>
+        <div class="col">
+          <p class="text-center"><a href="#" i18n="@@yesterdays-bookings">Yesterday's bookings</a></p>
+        </div>
+      </div>
+    </div>
+
+  </form>
+</div>
+<!-- mo-search-bookings-->

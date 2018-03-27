@@ -1,0 +1,393 @@
+/* Auth0 */
+.auth0-lock-header-welcome {
+  margin: 0 auto;
+}
+img.auth0-lock-header-logo.centered {
+  width: 80% !important;
+}
+.mo-myaccount-header.dropdown img.rounded-circle {
+  width: 40px;
+  height: auto;
+}
+
+/* Various */
+.mo-search-filter-hotel {
+  width: 100%;
+}
+
+.mo-search-filter-hotel a {
+  color: #fff !important;
+}
+
+.mo-search-filter-hotel .form-group {
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.modal-smy.booking .submit a {
+  cursor: pointer;
+}
+
+.mo-search-filter-hotel .form-group p {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.mo-search-filter-hotel .form-group label {
+  font-size: 12px;
+  margin: 0 auto;
+}
+
+.mo-search-filter-entries.mo-search-filter-hotel {
+  background-color: transparent !important;
+}
+
+.mo-search-filter-hotel a {
+  cursor: pointer;
+}
+
+.btn-warning.smy {
+  text-transform: uppercase;
+  border: none;
+  font-weight: 300;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.mo-search-filter-hotel .btn.smy {
+  margin: 0 5px;
+}
+
+/***** Landing Page *****/
+/* Title */
+.mo-aboutus .row.mo-aboutus-subtitle h4 {
+  padding-top: 40px;
+  font-size: 40px;
+}
+
+/***** Platform *****/
+/* Hotels Product */
+.hotels {
+  margin: 80px 0;
+  border-bottom: solid 1px #d8d8d8;
+  padding-bottom: 60px;
+}
+
+.hotels ul.list-unstyled ul.list-unstyled {
+  margin-left: 15px;
+}
+
+.hotel-star i.fa.fa-star {
+  margin-right: -0.1em;
+}
+
+.more-rooms-buttons {
+  text-align: center;
+}
+
+.more-rooms-buttons .more-rooms {
+  padding: 0px 20px;
+  display: inline-block;
+}
+
+.tb-rooms i.fa.fa-info-circle {
+  cursor: pointer;
+}
+
+/* ngx-chips */
+.ng2-dropdown-menu[_ngcontent-c9] {
+  z-index: 10000 !important;
+}
+
+.ng2-dropdown-menu {
+  z-index: 10000 !important;
+}
+
+.ng2-dropdown-menu.ng2-dropdown-menu---width--4.ng-trigger.ng-trigger-fade {
+  width: auto !important;
+}
+
+.bootstrap[_ngcontent-c6] tag[_ngcontent-c6] {
+  max-width: 594px !important;
+}
+
+.ng2-tags-container tag {
+  overflow: visible !important;
+  height: auto !important;
+  max-width: 100% !important;
+}
+
+.autocompleter {
+  background-color: white;
+}
+
+/* Availability Search */
+b2b-availability .submit a {
+  cursor: pointer;
+}
+
+.fm-smy a.btn.btn-primary.smy {
+  color: white;
+}
+
+/* Google Maps Modal */
+.modal-smy.google-maps .close {
+  z-index: 10000;
+}
+
+.mo-search-item address a {
+  color: #0084ff !important;
+  text-decoration: none !important;
+  cursor: pointer;
+}
+
+/* Wrap destinations */
+span.destination {
+  display: inline-block;
+  max-width: 250px;
+  white-space: nowrap;
+  vertical-align: middle;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+}
+
+/* Quote */
+.fm-smy a.btn.btn-secondary.smy.btn-lg {
+  color: white;
+}
+
+/* Form Validation */
+.invalid-feedback {
+  margin-top: 0.25rem;
+  margin-bottom: 0.5rem;
+  font-size: 13px;
+  color: #dc3545;
+}
+
+.form-control.is-invalid {
+  border-color: #dc3545 !important;
+}
+
+/* Close Bookings */
+.mo-summary-thanks .summary.ok {
+  background-color: rgba(184, 233, 134, 0.3);
+}
+
+.mo-summary-thanks .summary.pending {
+  background-color: rgba(243, 175, 77, 0.26);
+}
+
+.mo-summary-thanks .summary.ko {
+  background-color: #ffc6c6;
+}
+
+.xml a {
+  color: #0084ff !important;
+}
+
+.modal-smy.rq-modal .summary,
+.modal-smy.rs-modal .summary {
+  padding: 35px;
+}
+
+/* Not Found */
+.not-found {
+  height: 100vh;
+  background-position: right center;
+}
+
+.not-found .overlay {
+  background: #012168;
+  background: linear-gradient(135deg, #012168 0%, #b27226 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(
+      startColorstr='#012168',
+      endColorstr='#b27226',
+      GradientType=1
+    );
+  opacity: 0.7;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.not-found .content {
+  text-align: center;
+  position: relative;
+  top: 40vh;
+}
+
+.not-found .tit {
+  font-size: 52px;
+  font-weight: 100;
+  color: #ffffff;
+}
+
+.not-found .subtit {
+  font-size: 16px;
+  font-weight: 300;
+  color: #ffffff;
+}
+
+.not-found .btn-primary {
+  padding: 15px 30px;
+  text-transform: uppercase;
+  border: none;
+  background: #0084ff;
+  background: linear-gradient(135deg, #0084ff 0%, #00c7ff 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(
+      startColorstr='#0084ff',
+      endColorstr='#00c7ff',
+      GradientType=1
+    );
+  font-weight: 500;
+}
+
+.not-found .links {
+  margin-top: 50px;
+}
+
+/* Menu */
+.mo-myaccount-header .dropdown-item span {
+  text-transform: capitalize;
+}
+
+.mo-myaccount-header {
+  display: inline-block;
+}
+
+.mo-myaccount-header {
+  margin-right: 15px;
+}
+
+/* Canel Penalties Modal Table */
+.tb-cancel-penalties td,
+.tb-cancel-penalties th {
+  font-size: 14px;
+  padding: 8px 10px;
+}
+.tb-cancel-penalties tbody tr:hover {
+  background-color: #fdffc6;
+  background-color: #fdffc6;
+}
+.tb-cancel-penalties tbody + tbody {
+  border-top: none;
+}
+.tb-cancel-penalties thead {
+  background-color: #eaeff3;
+  background-color: #eaeff3;
+}
+.tb-cancel-penalties .price {
+  font-size: 21px;
+  font-weight: 600;
+}
+.tb-cancel-penalties p {
+  margin: 0;
+}
+
+/* Footer */
+footer.mo-footer ul li a {
+  text-transform: capitalize;
+}
+
+b2b-lang-select {
+  display: inline-block;
+}
+
+b2b-lang-select .btn {
+  border: none;
+  background-color: transparent;
+  display: inline-block;
+  padding: 0;
+  font-weight: 100;
+}
+
+b2b-lang-select.lang-home .btn {
+  color: #ffffff;
+  font-size: 14px;
+  margin-left: 15px;
+  text-transform: uppercase;
+}
+
+b2b-lang-select.lang-platform a.dropdown-item {
+  font-size: 13px;
+}
+
+b2b-lang-select.lang-platform .btn {
+  color: #ffffff;
+  margin: 15px;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+b2b-lang-select a.dropdown-item {
+  color: #888888;
+}
+
+@media (max-width: 767px) {
+  .mo-mainpage #header .tgx-logo {
+    width: auto;
+  }
+
+  b2b-lang-select.lang-platform {
+    position: absolute;
+    top: -2.8rem;
+    right: 2rem;
+  }
+
+  b2b-lang-select.lang-home .btn {
+    color: #888888;
+  }
+}
+
+/* Criteria */
+.mo-main-search ngb-typeahead-window {
+  overflow-y: auto;
+  max-height: 300px;
+  border-radius: 5px;
+}
+
+/* If tag-input dropdown is appended to body  */
+body > ng2-dropdown-menu > div > div {
+  max-height: 15rem !important;
+}
+
+/* Total entries */
+.total-entries {
+  font-size: 12px;
+}
+
+/* Hotel Code */
+p.hotel-code {
+  font-size: 12px;
+  margin: 0;
+}
+
+/* Markets */
+ngb-typeahead-window button {
+  font-size: 12px;
+}
+
+ngb-typeahead-window button ngb-highlight {
+  color: black;
+}
+
+ngb-typeahead-window button,
+ngb-typeahead-window button:active,
+ngb-typeahead-window button:focus {
+  background-color: transparent !important;
+}
+
+ngb-typeahead-window button:hover {
+  background-color: rgb(0, 156, 255) !important;
+}
+
+/* Pagination */
+.pagination-wrapper li.page-item.active:hover a {
+  color: white;
+}
+
+.pagination-wrapper li:hover {
+  cursor: pointer;
+}

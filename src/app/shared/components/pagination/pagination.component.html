@@ -1,0 +1,18 @@
+<pagination-template #p="paginationApi" [maxSize]="10" (pageChange)="onPageChange($event)">
+  <nav aria-label="Page navigation example" class="pagination-wrapper">
+    <ul class="pagination justify-content-center" role="navigation" *ngIf="!(autoHide && p.pages.length <= 1)">
+      <li class="page-item" [class.disabled]="p.isFirstPage()" *ngIf="directionLinks">
+        <span class="page-link" *ngIf="1 < p.getCurrent()" (click)="p.previous()"> {{ previousLabel }}</span>
+        <span class="page-link" aria-hidden="true" *ngIf="p.isFirstPage()">{{ previousLabel }}</span>
+      </li>
+      <li class="page-item" [class.active]="p.getCurrent() === page.value" *ngFor="let page of p.pages">
+        <a class="page-link" (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">{{ page.label }}</a>
+        <a class="page-link" *ngIf="p.getCurrent() === page.value">{{ page.label }}</a>
+      </li>
+      <li class="page-item" [class.disabled]="p.isLastPage()" *ngIf="directionLinks">
+        <span class="page-link" *ngIf="!p.isLastPage()" (click)="p.next()">{{ nextLabel }}</span>
+        <span class="page-link" aria-hidden="true" *ngIf="p.isLastPage()">{{ nextLabel }}</span>
+      </li>
+    </ul>
+  </nav>
+</pagination-template>

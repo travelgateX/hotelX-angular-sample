@@ -1,0 +1,100 @@
+<div class="mo-summary-thanks" *ngIf="book && book.booking && criteria && bookingDetail; else noBooking">
+  <div class="media">
+    <img class="d-flex rounded-circle mr-3" src="http://cdn.roomdi.com/wsimgresize/resize/crop/55/55/cdn.roomdi.com/contenidosShared/fotos/agregadorHotelero/fotos_hotelv4/1/355/7.jpg?f=1612252115"
+      alt="">
+    <div class="media-body">
+      <h6 class="hotelname">{{bookingDetail.hotelInfo?.hotelName}}
+        <b2b-star [max]="5" [filled]="bookingDetail.hotelInfo?.categoryCode"></b2b-star>
+      </h6>
+      <p class="country">{{bookingDetail.hotelInfo?.location.city}}, {{bookingDetail.hotelInfo?.location.zipCode}}</p>
+      <p class="compo">
+        <span i18n="@@from">From</span> {{criteria.checkIn | dateFormat:environment.organization.dateFormat}}
+        <span i18n="@@to">to</span> {{criteria.checkOut | dateFormat:environment.organization.dateFormat}}, {{bookingDetail.search?.roomsNum}}
+        <span i18n="@@detail-room-plural">{bookingDetail.search.roomsNum, plural, =0 {rooms} =1 {room} other {rooms}}</span>, {{bookingDetail.search?.adultsNum}}
+        <span i18n="@@detail-adult-plural">{bookingDetail.search.adultsNum, plural, =0 {adults} =1 {adult} other {adults}}</span>
+        <span i18n="@@and">and</span> {{bookingDetail.search?.childsNum}}
+        <span i18n="@@detail-child-plural">{bookingDetail.search.childsNum, plural, =0 {children} =1 {child} other {children}}</span>
+      </p>
+    </div>
+    <div class="bookingtime float-right ml-3">
+      <p>
+        <i class="fa fa-history" aria-hidden="true"></i>
+        <span i18n="@@booked-at">Booked at</span> {{book.auditData[0]?.timeStamp | date: 'short'}}</p>
+    </div>
+  </div>
+  <div class="summary" [ngClass]="{'ok': book.booking?.status == 'OK', 'pending': book.booking?.status == 'RQ'}">
+    <div class="row">
+      <div class="col-md-4">
+        <p>
+          <span i18n="@@provider-locator">Provider locator:</span>
+          <strong>{{book.booking?.reference?.supplier}}</strong>
+        </p>
+      </div>
+      <div class="col-md-4">
+        <p>
+          <span i18n="@@booking-status">Booking status:</span>
+
+          <!-- TODO check in different lang -->
+          <strong>
+            <ng-container *ngIf="book.booking?.status == 'OK'">
+              <span class="iso-status ok" i18n="@@ok">
+                Ok
+              </span>
+            </ng-container>
+
+            <ng-container *ngIf="book.booking?.status == 'PENDING'">
+              <span class="iso-status pending" i18n="@@pending">
+                Pending
+              </span>
+            </ng-container>
+
+            <ng-container *ngIf="book.booking?.status == 'ERROR' || book.booking?.status == 'UNKNOWN'">
+              <span class="iso-status error" i18n="@@book-error">
+                Error
+              </span>
+            </ng-container>
+          </strong>
+        </p>
+      </div>
+      <div class="col-md-4">
+        <p>
+          <span i18n="@@price">Price</span>:
+          <ng-container *ngIf="environment.organization.code === 'smy'">
+            <strong *ngIf="book.booking?.price?.binding">{{book.booking?.price?.gross | number : '1.2-2'}} {{book.booking?.price?.currency}}</strong>
+            <strong *ngIf="!book.booking?.price?.binding">{{book.booking?.price?.net | number : '1.2-2'}} {{book.booking?.price?.currency}}</strong>
+          </ng-container>
+          <ng-container *ngIf="environment.organization.code === 'mgr'">
+            <strong>{{book.booking?.price?.gross | number : '1.2-2'}} {{book.booking?.price?.currency}}</strong>
+          </ng-container>
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="xml clearfix">
+    <ul class="float-right list-inline">
+      <li class="list-inline-item"><a (click)="onOpenRS()">View RS</a></li>
+      <li class="list-inline-item"><a (click)="onOpenRQ()">View RQ</a></li>
+    </ul>
+  </div> -->
+</div>
+
+<ng-template #noBooking>
+  <div class="mo-summary-thanks">
+    <div class="summary ko">
+      <div class="row">
+        <div class="col-md-8">
+          <p i18n="@@booking-possible-error">It is possible that there was an error making the request or that you are trying to access it without following
+            the reservation process.</p>
+        </div>
+        <div class="col-md-4">
+          <p>
+            <span i18n="@@booking-status">Booking status:</span>
+            <strong>
+              <span class="iso-status ko">ERROR</span>
+            </strong>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

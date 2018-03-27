@@ -1,0 +1,4 @@
+{
+  "explorer.sortOrder": "type",
+  "typescript.tsdk": "node_modules\\typescript\\lib"
+}

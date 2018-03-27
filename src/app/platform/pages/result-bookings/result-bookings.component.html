@@ -1,0 +1,141 @@
+<b2b-header>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="mo-tit-section">
+          <h4>
+            <span class="lnr lnr-magnifier"></span>
+            <strong *ngIf="availability">{{availability?.length}}
+              <span i18n="@@results">{availability?.length, plural, =0 {Results} =1 {Result} other {Results}}</span>
+            </strong>
+            <span i18n="@@for">for</span> "{{criteria | result}}"</h4>
+          <h5 i18n="@@title-accomodations">Choose from more than 500,000 accommodations. We are present in ALL countries of the world.</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="iso-deco-triangles"></div>
+</b2b-header>
+
+<div class="container">
+
+  <div class="row">
+    <div class="col">
+      <div class="mo-search-summary">
+        <p class="text-center">
+          <strong i18n="@@your-search">Your search:</strong>
+          <i class="fa fa-map-marker"></i>
+          <span class="destination">{{criteria | destination}}</span>
+          <span class="sep">|</span>
+          <i class="fa fa-calendar"></i>
+          <span i18n="@@from">From</span> {{criteria.checkIn | dateFormat:environment.organization.dateFormat}}
+          <span i18n="@@to">to</span> {{criteria.checkOut | dateFormat:environment.organization.dateFormat}}
+          <span class="sep">|</span>
+          <i class="fa fa-bed" aria-hidden="true"></i> {{search?.roomsNum}}
+          <span i18n="@@room-plural">{search.roomsNum, plural, =0 {rooms} =1 {room} other {rooms}}</span>, {{search?.adultsNum}}
+          <span i18n="@@adult-plural">{search.adultsNum, plural, =0 {adults} =1 {adult} other {adults}}</span>
+          <span i18n="@@and">and</span> {{search?.childsNum}}
+          <span i18n="@@child-plural">{search.childsNum, plural, =0 {children} =1 {child} other {children}}</span>
+          <a href="javascript:void(0)" (click)="openModalEdit()" class="btn btn-tertiary smy">
+            <i class="fa fa-pencil"></i>
+            <span i18n="@@edit">Edit</span>
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="mo-search-filter-hotel">
+      <form class="fm-smy">
+
+        <div class="form-group">
+          <label for="inlineFormInput" class="mr-3" i18n="@@search-hotel">Hotel</label>
+          <input type="text" class="bordered form-control" i18n-placeholder="@@hotel-name-placeholder" placeholder="Hotel name..."
+            [(ngModel)]="filter.codeName" name="codeName" (keyup.enter)="filterAvailability()">
+        </div>
+
+        <div class="form-group">
+          <label i18n="@@category">Category</label>
+          <select class="bordered form-control" [(ngModel)]="filter.category" name="category">
+            <option [ngValue]="null" i18n="@@select-category">Select Category</option>
+            <option *ngFor="let category of categories" [value]="category.categoryCode">{{category?.texts[0]?.text}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label i18n="@@mealplan">Mealplan</label>
+          <select class="bordered form-control" [(ngModel)]="filter.boardCode" name="boardCode">
+            <option [ngValue]="null" i18n="@@select-mealplan">Select Mealplan</option>
+            <option *ngFor="let mealplan of mealplans" [value]="mealplan.boardCode">{{mealplan?.texts[0]?.text}} - {{mealplan?.boardCode}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label i18n="@@rate">Rate</label>
+          <select class="bordered form-control" [(ngModel)]="filter.rate" name="rate">
+            <option [ngValue]="null" i18n="@@select-rate">Select Rate</option>
+            <option [value]="'NON_REFUNDABLE'">NRF</option>
+            <option [value]="'PACKAGE'">PACKAGE</option>
+            <option [value]="'both'">NRF, PACKAGE</option>
+            <option [value]="'empty'" i18n="@@empty">Empty</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label i18n="@@price">Price</label>
+          <select class="bordered form-control" [(ngModel)]="filter.price" name="price">
+            <option [ngValue]="null" i18n="@@select-price">Select Price</option>
+            <option [value]="'ASC'">ASC</option>
+            <option [value]="'DESC'">DESC</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <a class="btn btn-secondary smy" (click)="filterAvailability()" i18n="@@search">Search</a>
+          <a class="btn btn-warning smy" (click)="clearFilter()" i18n="@@clear">Clear</a>
+        </div>
+      </form>
+    </div>
+
+    <div class="mo-search-filter-entries mo-search-filter-hotel" *ngIf="availability.length">
+      <form class="fm-smy form-inline">
+        <label for="inlineFormInput" class="mr-3" i18n="@@show-entries">Show entries:</label>
+        <select class="bordered form-control" [(ngModel)]="itemsPerPage" name="itemsPerPage">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      </form>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div *ngIf="availability.length; then results else noResults"></div>
+      <ng-template #results>
+        <b2b-hotel-option *ngFor="let hotel of availability | paginate: { itemsPerPage: itemsPerPage, currentPage: page }; let i = index"
+          [hotel]="hotel" [hotelDetailInfo]="getHotelDetailInfo(hotel)" [search]="search" [criteria]="criteria" [mealplansAvailable]="mealplans" [context]="context"></b2b-hotel-option>
+      </ng-template>
+
+      <ng-template #noResults>
+        <div class="mo-no-results">
+          <p i18n="@@no-results">It seems we have no results for this request.</p>
+        </div>
+      </ng-template>
+
+    </div>
+  </div>
+
+  <div class="row" *ngIf="availability.length">
+    <div class="col">
+      <!-- TODO paginate entries -->
+      <!-- <span class="total-entries">Showing 1 to 10 of {{availability.length}} entries (filtered from {{availabilityList.length}} total entries)</span> -->
+      <b2b-pagination [page]="page" (pageChanges)="page = $event"></b2b-pagination>
+    </div>
+  </div>
+</div>
+
+<b2b-footer></b2b-footer>

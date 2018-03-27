@@ -1,0 +1,126 @@
+<div class="mo-search-item" *ngIf="hotel && hotel.options && hotel.options.length">
+  <div class="media">
+    <img class="d-flex" style="width: 250px; height:250px"  (error)="registerBrokenURL($event, mediaMainImageIndex)" src="{{this.images[mediaMainImageIndex] && this.images.length !== this.imageErrors.length ? this.images[mediaMainImageIndex] : 'http://cdn.roomdi.com/wsimgresize/resize/crop/250/250/cdn.roomdi.com/contenidosShared/fotos/agregadorHotelero/fotos_hotelv4/1/355/7.jpg?f=1612252115'}}"
+      alt="Generic placeholder image" (error)="mainImage($event.target)" (click)="openModalCarousel()">
+    <div class="media-body">
+      <h5 class="hotelname mt-0">{{hotelDetailInfo?.hotelName}}
+        <!-- <b2b-star [max]="5" [filled]="hotelDetailInfo?.categoryCode"></b2b-star> -->
+      </h5>
+      <b2b-amenities [data]="hotelDetailInfo?.amenities"></b2b-amenities>
+      <p class="hotel-code">
+        <strong i18n="@@code">Code:</strong> {{hotelDetailInfo?.hotelCode}}
+      </p>
+      <address>
+        {{hotelDetailInfo?.location?.city}}, {{hotelDetailInfo?.location?.country}} - {{hotelDetailInfo?.location?.zipCode}}
+        <a *ngIf="hotelDetailInfo?.location?.coordinates?.latitude && hotelDetailInfo?.location?.coordinates?.latitude" (click)="openGoogleMaps(hotelDetailInfo.location.coordinates)">
+          <i class="fa fa-map-marker"></i>
+          <span i18n="@@view-map">View map</span>
+        </a>
+      </address>
+      <p *ngIf="hotelDetailInfo?.descriptions" class="info-button">
+        <a class="btn btn-secondary smy" data-toggle="collapse" [attr.data-target]="'#' + hotelDetailInfo?.hotelCode" [href]="'#' + hotelDetailInfo?.hotelCode"
+          aria-expanded="false">Info</a>
+      </p>
+      <div class="collapse description" [id]="hotelDetailInfo?.hotelCode" *ngIf="hotelDetailInfo?.descriptions">
+        <div class="card card-block">
+          <ng-container *ngFor="let description of hotelDetailInfo?.descriptions">
+            <p *ngIf="description.type === 'GENERAL'">{{description.texts[0].text}}</p>
+          </ng-container>
+          <ng-container *ngFor="let description of hotelDetailInfo?.descriptions">
+            <p *ngIf="description.type !== 'GENERAL'">{{description.texts[0].text}}</p>
+          </ng-container>
+        </div>
+      </div>
+      <table class="tb-rooms table table-hover">
+        <thead>
+          <tr>
+            <th i18n="@@room">Room</th>
+            <th i18n="@@mealplan">Meaplan</th>
+            <th i18n="@@no-expenses-until">No expenses until</th>
+            <th i18n="@@rate">Rate</th>
+            <th i18n="@@price-type">Price type</th>
+            <th i18n="@@price">Price</th>
+            <th i18n="@@total-price">Total price</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let option of hotel.options | slice:0:counter; let i = index">
+            <td>
+              <div *ngFor="let room of option.rooms">{{room.description}}</div>
+            </td>
+
+            <td>{{option.boardCode | mealplan : mealplansAvailable}}</td>
+
+            <td *ngIf="option.cancelPolicy.cancelPenalties | getMax; else noOptions; let maxOption" (click)="openCancelPolicyModal(option?.cancelPolicy?.cancelPenalties)">
+              <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" i18n-title="@@penalty-tooltip"
+                title="Click to see penalty list"></i>
+              {{(maxOption | mainPenalty : criteria.checkIn) | dateFormat:environment.organization.dateFormat}} | {{maxOption.value | number
+              : '1.2-2'}} {{maxOption.currency}}
+            </td>
+
+            <ng-template #noOptions>
+              <td></td>
+            </ng-template>
+
+            <td>{{option.rateRules | package}}</td>
+
+            <ng-container *ngIf="environment.organization.code === 'smy'">
+              <ng-container *ngIf="option.price.binding; else noBinding">
+                <td (click)="openBindingModal(option)">
+                  <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" i18n-title="@@penalty-tooltip"
+                    title="Binding"></i>
+                  <span i18n="@@min-sell-price">Minimum selling price</span>
+                </td>
+                <td>
+                  <div *ngFor="let room of option.rooms">{{room.roomPrice.price.gross | number : '1.2-2'}} {{room.roomPrice.price.currency}}</div>
+                </td>
+                <td class="price">
+                  {{option.price.gross | number : '1.2-2'}} {{option.price.currency}}
+                </td>
+              </ng-container>
+
+              <ng-template #noBinding>
+                <td i18n="@@net">Net</td>
+                <td>
+                  <div *ngFor="let room of option.rooms">{{room.roomPrice.price.net | number : '1.2-2'}} {{room.roomPrice.price.currency}}</div>
+                </td>
+                <td class="price">
+                  {{option.price.net | number : '1.2-2'}} {{option.price.currency}}
+                </td>
+              </ng-template>
+            </ng-container>
+
+            <ng-container *ngIf="environment.organization.code === 'mgr'">
+              <td i18n="@@gross">Gross</td>
+              <td>
+                <div *ngFor="let room of option.rooms">{{room.roomPrice.price.gross | number : '1.2-2'}} {{room.roomPrice.price.currency}}</div>
+              </td>
+              <td class="price">
+                {{option.price.gross | number : '1.2-2'}} {{option.price.currency}}
+              </td>
+            </ng-container>
+
+
+            <td align="right">
+              <p>
+                <a href="javascript:void(0)" class="btn btn-secondary smy" (click)="openModalValuation(option, hotelDetailInfo)" i18n="@@book">Book</a>
+              </p>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="more-rooms-buttons">
+        <p class="more-rooms" (click)="showMore()" *ngIf="counter != total">
+          <span i18n="@@show-more">Show more</span>
+          <span>({{total - counter}})</span>
+        </p>
+        <p class="more-rooms" (click)="showAll()" *ngIf="counter < total" i18n="@@show-all">Show all</p>
+        <p class="more-rooms" (click)="showLess()" *ngIf="counter > 2" i18n="@@show-less">Show less</p>
+      </div>
+
+    </div>
+  </div>
+</div>

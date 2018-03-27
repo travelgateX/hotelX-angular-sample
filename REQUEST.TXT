@@ -1,0 +1,41 @@
+Request URL:http://localhost:5000/smyrooms-b2b-dev/us-central1/gateway
+Request Method:POST
+Status Code:200 OK
+Remote Address:127.0.0.1:8888
+Referrer Policy:no-referrer-when-downgradeERAL
+
+access-control-allow-origin:http://localhost:4200
+cache-control:no-cache, no-store, must-revalidate
+connection:close
+content-length:191
+content-type:application/json; charset=utf-8
+date:Fri, 27 Oct 2017 07:30:47 GMT
+etag:W/"bf-XdwggHDUr+hNlSXhQRhfkslXCa8"
+expires:0
+pragma:no-cache
+vary:Origin
+x-powered-by:Express
+Request Headers
+view source
+
+
+Accept:*/*
+Accept-Encoding:gzip, deflate, br
+Accept-Language:es-ES,es;q=0.8
+Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik5UZzBPREJGTVRSQ1JURXdOVFEyUkRBek9UbEJRemN4TkVZMU5EUkRPVVJCTVVNMlJqZzVPQSJ9.eyJodHRwczovL3h0Zy5jb20vZ3JvdXBzIjpbImxndCIsInRybCIsImd1ZSJdLCJodHRwczovL3h0Zy5jb20vcm9sZXMiOltdLCJodHRwczovL3h0Zy5jb20vcGVybWlzc2lvbnMiOltdLCJodHRwczovL3h0Zy5jb20vaWFtIjpbeyJjIjoiMy54dGciLCJ0IjoidGVhbSIsInAiOnsiaHViZ3JhIjp7ImhvdCI6IjFzcWJjbyJ9LCJodWItbWFuYWdlbWVudCI6eyJodWJ1c2VyIjoiY3J1ZDEiLCJodWJwcm92aWRlciI6ImNydWQxIiwib3JnYW5pemF0aW9uIjoiY3J1ZDEifX0sImciOltdfV0sImh0dHBzOi8veHRnLmNvbS9tZW1iZXJfaWQiOiJrY3ViZXJvQHhtbHRyYXZlbGdhdGUuY29tIiwibmlja25hbWUiOiJrY3ViZXJvIiwibmFtZSI6ImtjdWJlcm9AeG1sdHJhdmVsZ2F0ZS5jb20iLCJwaWN0dXJlIjoiaHR0cHM6Ly9zLmdyYXZhdGFyLmNvbS9hdmF0YXIvM2M2MTc2YWNmZWYyNmIxNjM1ZWY4ZDUyN2E1YmRkNjg_cz00ODAmcj1wZyZkPWh0dHBzJTNBJTJGJTJGY2RuLmF1dGgwLmNvbSUyRmF2YXRhcnMlMkZrYy5wbmciLCJ1cGRhdGVkX2F0IjoiMjAxNy0xMC0yN1QwNzoxMToyMS4xNTVaIiwiZW1haWwiOiJrY3ViZXJvQHhtbHRyYXZlbGdhdGUuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImlzcyI6Imh0dHBzOi8veHRnLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1OGQwZmI4ZWY2NjZhODVjODhmYWM4MmYiLCJhdWQiOiIwVjI0cHlwYzFWVHFPYjFFblR2aVZENzlCNVNza2IwaSIsImlhdCI6MTUwOTA4ODI4MywiZXhwIjoxNTA5MTI0MjgzLCJhdF9oYXNoIjoiLU8tbDVBb05KazBQRGlDbkFwdG1uUSIsIm5vbmNlIjoiZEMtUWUzYm9KU3VQb2lZSTYudll4TkFaN084cTRGbVYifQ.UW-7lWAtSPkf2reG0XNvf8GLvPIi7djiJ5uPfv7Z6yvN7MGajTJBU8bWyusZhrkzQZXSa3qy5FtxeKdD6WZbwoHutBSGGHrSwb8xn20xlKVCp6Nu5xUJK76cuRuZUwheEXoIDet7SPpM3TwkWl4D1MaxcUQX9eySrm61qO93Vx3wFPREjTIaUT1RILvdjLgKCuAXZs-rTDZdMZ6VOWPJ5kSEsP7dsJMxLgg9KnKCxx110cA1EIC58mNUTaPaxOTgdsoeg8-S_43_HvQFH_qankrjK_KnyUU5J-IHbcFhH-0G_QutFSvPe1IutjpJRIoQp3cKWS1KnGN-ML8qvYB7tg
+Cache-Control:no-cache
+Content-Length:648
+Content-Type:application/json
+Host:localhost:5000
+Origin:http://localhost:4200
+Pragma:no-cache
+Proxy-Connection:keep-alive
+Referer:http://localhost:4200/platform/results-bookings
+User-Agent:Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36
+Request Payload
+view parsed
+{"query":"query Query($checkIn: Date!, $checkOut: Date!, $hotels: [String!]!, $occupancies: [RoomInput!]!, $market: String, $language: Language) {\n  search {\n    hotel(criteria: {checkIn: $checkIn, checkOut: $checkOut, hotels: $hotels, occupancies: $occupancies, market: $market, language: $language}, settings: {useContext: false}) {\n      options {\n        hotelCode\n        hotelName\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n","variables":{"checkIn":"2018-01-30","checkOut":"2018-01-31","hotels":["1100245"],"occupancies":[{"paxes":[{"age":30}]}],"market":"es","language":"en"},"operationName":"Query"}
+
+
+Response
+"<html>\r\n<head><title>502 Bad Gateway</title></head>\r\n<body bgcolor=\"white\">\r\n<center><h1>502 Bad Gateway</h1></center>\r\n<hr><center>nginx/1.13.5</center>\r\n</body>\r\n</html>\r\n"

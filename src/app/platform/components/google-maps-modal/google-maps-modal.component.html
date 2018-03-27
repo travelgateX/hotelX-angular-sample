@@ -1,0 +1,9 @@
+<div class="modal-smy google-maps">
+  <button type="button" (click)="activeModal.close(false)" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">×</span>
+  </button>
+
+  <agm-map *ngIf="latitude && longitude" [latitude]="latitude" [longitude]="longitude">
+    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+  </agm-map>
+</div>

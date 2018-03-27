@@ -1,0 +1,253 @@
+<div class="mo-mainpage parallax-window-mainpage">
+  <div class="overlay"></div>
+  <nav class="navbar navbar-toggleable-sm navbar-light fixed-top" id="header">
+    <div class="container">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <a class="navbar-brand" href="/home">
+        <img [src]="environment.organization.logoNav" class="tgx-logo">
+      </a>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="nav navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link smooth-scroll" href="/home" i18n="@@home">home</a>
+          </li>
+          <li class="nav-item">
+            <a appScroll class="nav-link smooth-scroll" [height]="75" href="#about-us" i18n="@@about">about</a>
+          </li>
+          <li class="nav-item">
+            <a appScroll class="nav-link smooth-scroll" href="#our-products" i18n="@@products">products</a>
+          </li>
+          <li class="nav-item">
+            <a appScroll class="nav-link smooth-scroll" href="#get-connected" i18n="@@contact-us">contact us</a>
+          </li>
+        </ul>
+      </div>
+
+      <b2b-lang-select [class]="'lang-home'"></b2b-lang-select>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <img class="img-responsive" [src]="environment.organization.logoHome">
+      </div>
+      <!-- <div class="col-sm-12">
+        <h1 class="tit text-center">Specialist in leisure travel</h1>
+      </div> -->
+      <div class="mainpage-buttons">
+        <p *ngIf="profile">
+          <a (click)="onLogout()" class="btn btn-primary smy" i18n="@@logout">Logout</a>
+        </p>
+        <p *ngIf="profile">
+          <a [routerLink]="['/platform/search-bookings']" class="btn btn-primary signup" i18n="@@b2bplatform">B2B Platform</a>
+        </p>
+        <p *ngIf="!profile">
+          <a (click)="onLogin()" class="btn btn-primary smy" i18n="@@login">Login</a>
+        </p>
+        <!-- <p *ngIf="!profile"><a href="#" class="btn btn-primary signup" i18n="@@signup">Sign up</a></p> -->
+      </div>
+      <!-- <div class="col-sm-12">
+        <p class="api text-center">XML Travelgate’s API allows clients to access content from XML Travelgate’s inventory of partners - <a href="#">Check out now.</a></p>
+      </div> -->
+    </div>
+  </div>
+  <div class="iso-deco-triangles"></div>
+</div>
+
+<div class="mo-aboutus" id="about-us">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h3 class="tit text-center" i18n="@@about-title">Welcome to Travelgatex</h3>
+        <p class="subtit text-center" i18n="@@about-subtitle">Specialist in leisure travel.</p>
+        <p></p>
+      </div>
+    </div>
+
+    <div class="row mo-aboutus-subtitle">
+      <div class="col-xs-12 col-md-6">
+        <h4 class="tit text-center" i18n="@@about-p-1">Know more about us</h4>
+        <p class="subtit text-center" i18n="@@about-p-2">Travelgatex is dedicated 100% to the integrations of the different touristic providers, be it hotels, flights, ferries, trains, rental cars and transfers.</p>
+      </div>
+      <div class="col-xs-12 col-md-6">
+        <h4 class="tit text-center" i18n="@@about-p-3">Travel product available in one single connection</h4>
+        <p class="subtit text-center" i18n="@@about-p-4">Travelgatex has the most extensive product on the market. More than 800,000 hotels, both directly contracted and more than 600 suppliers.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mo-transition products parallax-window-transition-why-travelgatex" id="why-travelgatex">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 class="tit text-center" i18n="@@service-title">Why Travelgatex?</h2>
+      </div>
+    </div>
+  </div>
+  <div class="iso-deco-triangles"></div>
+</div>
+
+<div class="mo-aboutus">
+  <div class="container">
+    <div class="row">
+      <div class="about-us">
+        <div class="first-row-about-us">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="secondary">
+                <img class="img-responsive ico-technology" src="assets/img/techno-icon.svg" alt="ico technology">
+                <h5 class="tit text-center" i18n="@@service-2-title">Advanced technology</h5>
+                <p class="desc text-center" i18n="@@service-2-subtitle">We use the latest technology to offer 800,000 hotels in a single XML connection with a response time of less than 1 second.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="second-row-about-us">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="secondary">
+                <img class="img-responsive ico-suppliers" src="assets/img/suppliers-icon.svg" alt="ico suppliers">
+                <h5 class="tit text-center" i18n="@@service-3-title">More than 600 suppliers</h5>
+                <p class="desc text-center" i18n="@@service-3-subtitle">We add the options of all our suppliers to offer you the best available option in less time.</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="secondary">
+                <img class="img-responsive ico-location" src="assets/img/location-icon.svg" alt="ico location">
+                <h5 class="tit text-center" i18n="@@service-4-title">Free mapping services</h5>
+                <p class="desc text-center" i18n="@@service-4-subtitle">Our mapping tool will help you prioritize the hotels you already have in your system and will also propose others to expand your product.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mo-transition products parallax-window-transition-products" id="our-products">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 class="tit text-center" i18n="@@product-title">Learn about our products</h2>
+      </div>
+    </div>
+  </div>
+  <div class="iso-deco-triangles"></div>
+</div>
+
+<div class="mo-products">
+  <div class="container">
+
+    <div class="secondary-products" *ngIf="environment.organization.code !== 'mgr'">
+      <div class="row">
+        <div class="col-lg-3">
+          <img src="assets/img/products-flights.svg" class="product" alt="flights">
+          <h4 class="tit text-center" i18n="@@flight-title">Flights</h4>
+          <p class="desc text-center" i18n="@@flight-subtitlt">XML integration with different GDS and LowCost Platforms such as Amadeus, Travelport, Sabre, Travelfusion and HitchHiker.</p>
+        </div>
+        <div class="col-lg-3">
+          <img src="assets/img/products-packages.svg" class="product" alt="packages">
+          <h4 class="tit text-center" i18n="@@packages">Packages</h4>
+          <p class="desc text-center" i18n="@@package-subtitle">Tailor made dynamic packages on XML.</p>
+        </div>
+        <div class="col-lg-3">
+          <img src="assets/img/products-transfers.svg" class="product" alt="transfers">
+          <h4 class="tit text-center" i18n="@@transfer-title">Transfers</h4>
+          <p class="desc text-center" i18n="@@transfer-subtitle">Worldwide private or shared transfers.</p>
+        </div>
+        <div class="col-lg-3">
+          <img src="assets/img/products-activities.svg" class="product" alt="activities">
+          <h4 class="tit text-center" i18n="@@activity-title">Activities</h4>
+          <p class="desc text-center" i18n="@@activity-subtitle">Activities in more than 4.000 destinations worldwide including theme parks, museums, guided tours, tickets, sport
+            events, restaurants and many more...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mo-transition getconnected parallax-window-transition-getconnected">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 class="tit text-center" i18n="@@connect">Let's get connected</h2>
+      </div>
+    </div>
+  </div>
+  <div class="iso-deco-triangles"></div>
+</div>
+
+<div class="mo-getconnected" id="get-connected">
+  <div class="container">
+    <div class="getintouch">
+      <div class="row">
+        <div class="col-sm-12">
+          <h3 class="tit text-center" i18n="@@get-in-touch">Get in touch</h3>
+          <p class="subtit text-center">Contact us at
+            <a [href]="'mailto:' + environment.organization.email + '?subject=Contact%20from%20web'" target="_top">{{environment.organization.email}}</a>
+          </p>
+          <p class="subtit text-center" *ngIf="environment.organization.telephone">
+            Telephone: <a [href]="'tel:' + environment.organization.telephone">{{environment.organization.telephone}}</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="locations">
+      <div class="row">
+        <div [class]="'col-sm-12 col-md-12 offset-3 col-md-offset-5 secondary'" *ngFor=" let item of environment.organization.headquarters">
+          <p class="tit">{{item.country}}</p>
+          <div class="media" *ngIf="item.telephone">
+            <div class="media-left">
+              <div class="ico">
+                <img src="assets/img/mobile-icon.svg" alt="mail-icon">
+              </div>
+            </div>
+            <div class="media-body">
+              <p class="desc">{{item.telephone}}</p>
+            </div>
+          </div>
+          <div class="media">
+            <div class="media-left">
+              <div class="ico">
+                <img src="assets/img/ubication-icon.svg" alt="mail-icon">
+              </div>
+            </div>
+            <div class="media-body">
+              <p class="desc">{{item.address}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="workwithus">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="media media-smy">
+            <div class="media-left">
+              <div class="tgx-logo">
+                <img [src]="environment.organization.logo" alt="logo travelgatex">
+              </div>
+            </div>
+            <div class="media-body">
+              <p class="desc">
+                <strong i18n="@@work-with-us">Work with us</strong> -
+                <span i18n="@@work-with-us-desc">To stay abreast of travel and technology requires a constant search for the best professionals in all areas of the business. If you are ambitious and want to be part of a company with a high annual growth rate since 2011, get in touch with us and discover how you can be part of a team of great talent and experience.</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<b2b-footer></b2b-footer>
