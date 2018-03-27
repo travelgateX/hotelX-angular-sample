@@ -171,7 +171,7 @@ export class HubService {
    * @param text text to search
    */
   destinationSearcher(access: Access, text: string): QueryRef<any> {
-    return this.apollo.use("searcher").watchQuery<any>({
+    return this.apollo.watchQuery<any>({
       query: destinationSearcher,
       variables: { access: access.code, text: text },
       fetchPolicy: "network-only"
@@ -190,7 +190,6 @@ export class HubService {
     let accessCodes = access.map(res => res.code);
     return new Promise((resolve, reject) => {
       this.apollo
-        .use("searcher")
         .watchQuery<any>({
           query: hotelCodesFromDestination,
           variables: {

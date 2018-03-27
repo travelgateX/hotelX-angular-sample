@@ -105,17 +105,9 @@ export class CoreModule {
       introspectionQueryResultData
     });
     const http = httpLink.create({ uri: "https://api.travelgatex.com" });
-    const searcher = httpLink.create({
-      uri: "https://dev-api.travelgatex.com/"
-    });
 
     apollo.create({
       link: http,
-      cache: new InMemoryCache()
-    });
-
-    apollo.createNamed("searcher", {
-      link: searcher,
       cache: new InMemoryCache({ fragmentMatcher })
     });
   }
