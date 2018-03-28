@@ -84,45 +84,40 @@
         </div>
 
       </ng-container>
-      <ng-container *ngIf="myBookingForm.controls['typeSearch'].value === bookingCriteriaType.DATES">
-        <ng-container formGroupName="dates">
-          <div class="col-md-3">
-            <label>
-              <span i18n="@@supplier">Date type</span>:</label>
-            <select class="form-control" formControlName="dateType">
-              <option *ngFor="let type of bookingCriteriaDateTypeArray" [value]="type.value">{{type.name}}</option>
-            </select>
+      <ng-container *ngIf="myBookingForm.controls['typeSearch'].value === bookingCriteriaType.DATES" formGroupName="dates">
+        <div class="col-md-3">
+          <label>
+            <span i18n="@@supplier">Date type</span>:</label>
+          <select class="form-control" formControlName="dateType">
+            <option *ngFor="let type of bookingCriteriaDateTypeArray" [value]="type.value">{{type.name}}</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label i18n="@@by-dates">Start date:</label>
+            <input style="background-color: white;" class="form-control" placeholder="YYYY-MM-DD" formControlName="start" ngbDatepicker
+              #sToggle="ngbDatepicker" (click)="sToggle.toggle(); eToggle.close();" (close)="eToggle.open()" (ngModelChange)="onChange(sToggle, eToggle)"
+              [disabled]="!accessesToSearch || accessesToSearch.length === 0" readonly>
           </div>
-          <div class="col-md-2">
-            <div class="form-group">
-              <label i18n="@@by-dates">Start date:</label>
-              <input style="background-color: white;" class="form-control" placeholder="YYYY-MM-DD" [minDate]="calendar.getToday()" formControlName="start"
-                ngbDatepicker #sToggle="ngbDatepicker" (click)="sToggle.toggle(); eToggle.close();" (close)="eToggle.open()"
-                (ngModelChange)="onChange(sToggle, eToggle)" [disabled]="!accessesToSearch || accessesToSearch.length === 0"
-                readonly>
-              <!-- <input type="text" class="bordered form-control" formControlName="start" placeholder="Start Date" [disabled]="!accessesToSearch || accessesToSearch.length === 0"> -->
-            </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label>End date:</label>
+            <input style="background-color: white;" class="form-control" placeholder="YYYY-MM-DD" [minDate]="myBookingForm.controls['dates'].controls['start'].value"
+              formControlName="end" ngbDatepicker #eToggle="ngbDatepicker" (click)="eToggle.toggle(); sToggle.close()" [disabled]="!accessesToSearch || accessesToSearch.length === 0"
+              readonly>
           </div>
-          <div class="col-md-2">
-            <div class="form-group">
-              <label>End date:</label>
-              <input style="background-color: white;" class="form-control" placeholder="YYYY-MM-DD" [minDate]="myBookingForm.controls['dates'].controls['start'].value"
-                formControlName="end" ngbDatepicker #eToggle="ngbDatepicker" (click)="eToggle.toggle(); sToggle.close()" [disabled]="!accessesToSearch || accessesToSearch.length === 0"
-                readonly>
-              <!-- <input type="text" class="bordered form-control" formControlName="end" placeholder="End Date" [disabled]="!accessesToSearch || accessesToSearch.length === 0"> -->
-            </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label></label>
+            <a class="btn btn-primary smy-bordered btn-block disabled" *ngIf="!accessesToSearch || accessesToSearch.length === 0; else searchDates"
+              i18n="@@search">Search</a>
+            <ng-template #searchDates>
+              <a class="btn btn-primary smy-bordered btn-block" i18n="@@search" (click)="searchByDate(myBookingForm.value)">Search</a>
+            </ng-template>
           </div>
-          <div class="col-md-3">
-            <div class="form-group">
-              <label></label>
-              <a class="btn btn-primary smy-bordered btn-block disabled" *ngIf="!accessesToSearch || accessesToSearch.length === 0; else searchDates"
-                i18n="@@search">Search</a>
-              <ng-template #searchDates>
-                <a class="btn btn-primary smy-bordered btn-block" i18n="@@search" (click)="searchByDate(myBookingForm.value)">Search</a>
-              </ng-template>
-            </div>
-          </div>
-        </ng-container>
+        </div>
       </ng-container>
     </div>
   </form>

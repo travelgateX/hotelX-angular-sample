@@ -6,7 +6,7 @@
 
 ### Prerequisites
 
-You need to install [NodeJS](https://nodejs.org/es/). Run `npm install -g @angular/cli` to install [Angular CLI](https://cli.angular.io/). To install [Firebase](https://firebase.google.com) Tools just run `npm install -g firebase-tools`.
+You need to install [NodeJS](https://nodejs.org/es/). Run `npm install -g @angular/cli` to install [Angular CLI](https://cli.angular.io/).
 
 ### Installing
 
@@ -70,7 +70,7 @@ See also the list of [contributors](https://github.com/your/project/contributors
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
 ## Acknowledgments
 

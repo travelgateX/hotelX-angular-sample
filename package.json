@@ -9,14 +9,14 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "lang:es": "ng serve -e tgx-dev --i18n-file=src/i18n/messages.travelgatex.es.xlf --locale=es --i18n-format=xlf",
-    "lang:en": "ng serve -e tgx-dev --i18n-file=src/i18n/messages.travelgatex.en.xlf --locale=en --i18n-format=xlf",
+    "lang:es": "ng serve --i18n-file=src/i18n/messages.travelgatex.es.xlf --locale=es --i18n-format=xlf",
+    "lang:en": "ng serve --i18n-file=src/i18n/messages.travelgatex.en.xlf --locale=en --i18n-format=xlf",
     "build:i18n:tgx": "npm run build:i18n:tgx:en && npm run build:i18n:tgx:es",
-    "build:i18n:tgx:en": "ng build -e tgx-dev --output-path=dist/en --aot --bh /en/ --i18n-file=src/i18n/messages.travelgatex.en.xlf --i18n-format=xlf --locale=en",
-    "build:i18n:tgx:es": "ng build -e tgx-dev --output-path=dist/es --aot --bh /es/ --i18n-file=src/i18n/messages.travelgatex.es.xlf --i18n-format=xlf --locale=es",
+    "build:i18n:tgx:en": "ng build --output-path=dist/en --aot --bh /en/ --i18n-file=src/i18n/messages.travelgatex.en.xlf --i18n-format=xlf --locale=en",
+    "build:i18n:tgx:es": "ng build --output-path=dist/es --aot --bh /es/ --i18n-file=src/i18n/messages.travelgatex.es.xlf --i18n-format=xlf --locale=es",
     "build:i18n:tgx:prod": "npm run build:i18n:tgx:prod:en && npm run build:i18n:tgx:prod:es",
-    "build:i18n:tgx:prod:en": "ng build -e tgx-prod --output-path=dist/en --aot --prod --bh /en/ --i18n-file=src/i18n/messages.travelgatex.en.xlf --i18n-format=xlf --locale=en",
-    "build:i18n:tgx:prod:es": "ng build -e tgx-prod --output-path=dist/es --aot --prod --bh /es/ --i18n-file=src/i18n/messages.travelgatex.es.xlf --i18n-format=xlf --locale=es"
+    "build:i18n:tgx:prod:en": "ng build --output-path=dist/en --aot --prod --bh /en/ --i18n-file=src/i18n/messages.travelgatex.en.xlf --i18n-format=xlf --locale=en",
+    "build:i18n:tgx:prod:es": "ng build --output-path=dist/es --aot --prod --bh /es/ --i18n-file=src/i18n/messages.travelgatex.es.xlf --i18n-format=xlf --locale=es"
   },
   "private": true,
   "dependencies": {

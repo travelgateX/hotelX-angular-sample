@@ -44,11 +44,18 @@ export class MyBookingsComponent implements OnInit {
       typeSearch: {
         value: BookingCriteriaType.REFERENCES,
         disabled: !this.accessesToSearch || this.accessesToSearch.length === 0
-      }
+      },
+      dates: this.fb.group({
+        dateType: BookingCriteriaDateType.ARRIVAL,
+        start: this.calendar.getToday(),
+        end: this.calendar.getNext(this.calendar.getToday(), "d", 1)
+      }),
+      references: this.fb.group({
+        hotelCode: "",
+        currency: "",
+        references: this.fb.group({ client: "", supplier: "" })
+      })
     });
-    this.myBookingForm.controls["typeSearch"].valueChanges.subscribe(type =>
-      this.changeForm(type)
-    );
   }
 
   getMyBookings(criteriaBooking) {
@@ -98,62 +105,11 @@ export class MyBookingsComponent implements OnInit {
     );
   }
 
-  changeForm(type: string) {
-    this.removeDataExtraForm();
-    switch (type) {
-      case BookingCriteriaType.REFERENCES:
-        this.addReferencesForm();
-        break;
-      case BookingCriteriaType.DATES:
-        this.addDatesForm();
-        break;
-    }
-  }
-
-  removeDataExtraForm() {
-    if (this.myBookingForm.controls["references"]) {
-      this.deleteReferencesForm();
-    }
-    if (this.myBookingForm.controls["dates"]) {
-      this.deleteDatesForm();
-    }
-  }
-
-  addDatesForm() {
-    this.myBookingForm.addControl(
-      "dates",
-      this.fb.group({
-        dateType: BookingCriteriaDateType.ARRIVAL,
-        start: this.calendar.getToday(),
-        end: this.calendar.getNext(this.calendar.getToday(), "d", 1)
-      })
-    );
-  }
-
-  deleteDatesForm() {
-    this.myBookingForm.removeControl("dates");
-  }
-
   searchByDate(value) {
     let criteriaBooking: CriteriaBooking = {...value}
-    // criteriaBooking.dates.start = "2018-02-15";
-    // criteriaBooking.dates.end = this.dateFormatter.format(value.dates.end);
+    criteriaBooking.dates.start = this.dateFormatter.format(value.dates.start);
+    criteriaBooking.dates.end = this.dateFormatter.format(value.dates.end);
     this.getMyBookings(criteriaBooking);
-  }
-
-  addReferencesForm() {
-    this.myBookingForm.addControl(
-      "references",
-      this.fb.group({
-        hotelCode: "",
-        currency: "",
-        references: this.fb.group({ client: "", supplier: "" })
-      })
-    );
-  }
-
-  deleteReferencesForm() {
-    this.myBookingForm.removeControl("references");
   }
 
   searchByReference() {

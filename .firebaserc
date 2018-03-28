@@ -1,6 +1,0 @@
-{
-  "projects": {
-    "develop": "travelgatex-b2b-dev",
-    "production": "travelgatex-b2b"
-  }
-}
