@@ -11,7 +11,11 @@ import { CancelBooking } from "../../../core/interfaces/cancel-booking";
 import { NotificationService } from "app/core/services/notification.service";
 import { BookingCriteriaDateType } from "app/core/enumerates/booking-criteria-date-type";
 import { FormBuilder, FormGroup } from "@angular/forms";
-import { NgbInputDatepicker, NgbCalendar, NgbDateParserFormatter } from "@ng-bootstrap/ng-bootstrap";
+import {
+  NgbInputDatepicker,
+  NgbCalendar,
+  NgbDateParserFormatter
+} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: "b2b-my-bookings",
@@ -27,6 +31,7 @@ export class MyBookingsComponent implements OnInit {
   bookingCriteriaDateType = BookingCriteriaDateType;
   bookingCriteriaDateTypeArray = enumToArray(BookingCriteriaDateType);
   bookings: any[];
+  loading: boolean;
 
   constructor(
     private hubService: HubService,
@@ -41,10 +46,7 @@ export class MyBookingsComponent implements OnInit {
     this.myBookingForm = this.fb.group({
       accessCode: "",
       language: this.langService.getLang(),
-      typeSearch: {
-        value: BookingCriteriaType.REFERENCES,
-        disabled: !this.accessesToSearch || this.accessesToSearch.length === 0
-      },
+      typeSearch: BookingCriteriaType.REFERENCES,
       dates: this.fb.group({
         dateType: BookingCriteriaDateType.ARRIVAL,
         start: this.calendar.getToday(),
@@ -56,22 +58,31 @@ export class MyBookingsComponent implements OnInit {
         references: this.fb.group({ client: "", supplier: "" })
       })
     });
+    this.myBookingForm.disable();
   }
 
   getMyBookings(criteriaBooking) {
     this.bookings = [];
-    this.hubService.getMyBookings(criteriaBooking).valueChanges.subscribe(res => {
-      if (
-        res.data &&
-        res.data.hotelX &&
-        res.data.hotelX.booking &&
-        res.data.hotelX.booking.bookings
-      ) {
-        this.bookings = JSON.parse(
-          JSON.stringify(res.data.hotelX.booking.bookings)
-        );
+    this.loading = true;
+    this.hubService.getMyBookings(criteriaBooking).valueChanges.subscribe(
+      res => {
+        this.loading = false;
+        if (
+          res.data &&
+          res.data.hotelX &&
+          res.data.hotelX.booking &&
+          res.data.hotelX.booking.bookings
+        ) {
+          this.bookings = JSON.parse(
+            JSON.stringify(res.data.hotelX.booking.bookings)
+          );
+        }
+      },
+      err => {
+        this.notificationService.error(err);
+        this.loading = false;
       }
-    });
+    );
   }
 
   onCancel(booking) {
@@ -106,15 +117,19 @@ export class MyBookingsComponent implements OnInit {
   }
 
   searchByDate(value) {
-    let criteriaBooking: CriteriaBooking = {...value}
-    criteriaBooking.dates.start = this.dateFormatter.format(value.dates.start);
-    criteriaBooking.dates.end = this.dateFormatter.format(value.dates.end);
+    let criteriaBooking: CriteriaBooking = JSON.parse(JSON.stringify(value));
+    delete criteriaBooking.references;
+    criteriaBooking.dates.start = this.dateFormatter.format(<any>criteriaBooking
+      .dates.start);
+    criteriaBooking.dates.end = this.dateFormatter.format(<any>criteriaBooking
+      .dates.end);
     this.getMyBookings(criteriaBooking);
   }
 
-  searchByReference() {
-    // this.criteriaBooking.typeSearch = BookingCriteriaType.REFERENCES;
-    // this.getMyBookings();
+  searchByReference(value) {
+    let criteriaBooking: CriteriaBooking = JSON.parse(JSON.stringify(value));
+    delete criteriaBooking.dates;
+    this.getMyBookings(criteriaBooking);
   }
 
   saveAccessesToSearch(accessesToSearch) {
@@ -124,8 +139,8 @@ export class MyBookingsComponent implements OnInit {
         this.accessesToSearch.length !== 0 ? this.accessesToSearch[0].code : ""
     });
     this.accessesToSearch.length !== 0
-      ? this.myBookingForm.controls["typeSearch"].enable()
-      : this.myBookingForm.controls["typeSearch"].disable();
+      ? this.myBookingForm.enable()
+      : this.myBookingForm.disable();
   }
 
   /**

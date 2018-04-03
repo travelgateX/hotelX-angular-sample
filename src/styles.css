@@ -391,3 +391,8 @@ ngb-typeahead-window button:hover {
 .pagination-wrapper li:hover {
   cursor: pointer;
 }
+
+.col-centered{
+  float: none;
+  margin: 0 auto;
+}

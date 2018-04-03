@@ -383,6 +383,10 @@
         <source>Booking reference:</source>
         <target>Referencia reserva:</target>
       </trans-unit>
+      <trans-unit id="supplier-reference" datatype="html">
+        <source>Supplier reference:</source>
+        <target>Referencia proveedor:</target>
+      </trans-unit>
       <trans-unit id="by-dates" datatype="html">
         <source>By dates:</source>
         <target>Por fechas:</target>
@@ -802,6 +806,14 @@
       <trans-unit id="accesses" datatype="html">
         <source>Accesses</source>
         <target>Accesos</target>
+      </trans-unit>
+      <trans-unit id="searchType" datatype="html">
+        <source>Search type</source>
+        <target>Tipo de búsqueda</target>
+      </trans-unit>
+      <trans-unit id="currency" datatype="html">
+        <source>Currency</source>
+        <target>Moneda</target>
       </trans-unit>
     </body>
   </file>

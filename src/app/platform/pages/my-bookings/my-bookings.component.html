@@ -27,49 +27,52 @@
           <option *ngFor="let type of bookingCriteriaTypeArray" [value]="type.value">{{type.name}}</option>
         </select>
       </div>
-      <ng-container class="align-items-end" *ngIf="myBookingForm.controls['typeSearch'].value === bookingCriteriaType.REFERENCES">
+      <ng-container class="align-items-end" *ngIf="myBookingForm.controls['typeSearch'].value === bookingCriteriaType.REFERENCES"
+        formGroupName="references">
+        <ng-container formGroupName="references">
+          <div class="col-md-2">
+            <div class="form-group">
+              <label>
+                <span i18n="@@client-reference">Client reference:</span>
+                <a class="tip" data-toggle="tooltip" data-placement="top">
+                  <i class="fa fa-question-circle" aria-hidden="true"></i>
+                </a>
+              </label>
+              <input type="text" class="bordered form-control" placeholder="Ej: 213832WC212K" formControlName="client">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <label>
+                <span i18n="@@supplier-reference">Supplier reference:</span>
+                <a class="tip" data-toggle="tooltip" data-placement="top">
+                  <i class="fa fa-question-circle" aria-hidden="true"></i>
+                </a>
+              </label>
+              <input type="text" class="bordered form-control" placeholder="Ej: 213832WC212K" formControlName="supplier">
+            </div>
+          </div>
+        </ng-container>
         <div class="col-md-2">
           <div class="form-group">
             <label>
-              <span i18n="@@booking-reference">Client reference:</span>
-              <a class="tip" data-toggle="tooltip" data-placement="top" i18n-title="@@booking-reference-tooltip" title="Corresponds to the provider locator">
+              <span i18n="@@hotel-code">Hotel code:</span>
+              <a class="tip" data-toggle="tooltip" data-placement="top">
                 <i class="fa fa-question-circle" aria-hidden="true"></i>
               </a>
             </label>
-            <input type="text" class="bordered form-control" placeholder="Ej: 213832WC212K" [disabled]="!accessesToSearch || accessesToSearch.length === 0">
+            <input type="text" class="bordered form-control" placeholder="Ej: 213832WC212K" formControlName="hotelCode">
           </div>
         </div>
         <div class="col-md-2">
           <div class="form-group">
             <label>
-              <span i18n="@@booking-reference">Supplier reference:</span>
-              <a class="tip" data-toggle="tooltip" data-placement="top" i18n-title="@@booking-reference-tooltip" title="Corresponds to the provider locator">
+              <span i18n="@@currency">Currency:</span>
+              <a class="tip" data-toggle="tooltip" data-placement="top">
                 <i class="fa fa-question-circle" aria-hidden="true"></i>
               </a>
             </label>
-            <input type="text" class="bordered form-control" placeholder="Ej: 213832WC212K" [disabled]="!accessesToSearch || accessesToSearch.length === 0">
-          </div>
-        </div>
-        <div class="col-md-2">
-          <div class="form-group">
-            <label>
-              <span i18n="@@booking-reference">Hotel code:</span>
-              <a class="tip" data-toggle="tooltip" data-placement="top" i18n-title="@@booking-reference-tooltip" title="Corresponds to the provider locator">
-                <i class="fa fa-question-circle" aria-hidden="true"></i>
-              </a>
-            </label>
-            <input type="text" class="bordered form-control" placeholder="Ej: 213832WC212K" [disabled]="!accessesToSearch || accessesToSearch.length === 0">
-          </div>
-        </div>
-        <div class="col-md-2">
-          <div class="form-group">
-            <label>
-              <span i18n="@@booking-reference">Currency:</span>
-              <a class="tip" data-toggle="tooltip" data-placement="top" i18n-title="@@booking-reference-tooltip" title="Corresponds to the provider locator">
-                <i class="fa fa-question-circle" aria-hidden="true"></i>
-              </a>
-            </label>
-            <input type="text" class="bordered form-control" placeholder="Ej: 213832WC212K" [disabled]="!accessesToSearch || accessesToSearch.length === 0">
+            <input type="text" class="bordered form-control" placeholder="Ej: EUR" formControlName="currency">
           </div>
         </div>
         <div class="col-md-2">
@@ -78,7 +81,7 @@
             <a class="btn btn-primary smy-bordered btn-block disabled" *ngIf="!accessesToSearch || accessesToSearch.length === 0; else searchReference"
               i18n="@@search">Search</a>
             <ng-template #searchReference>
-              <a class="btn btn-primary smy-bordered btn-block" i18n="@@search" (click)="searchByReference()">Search</a>
+              <a class="btn btn-primary smy-bordered btn-block" i18n="@@search" (click)="searchByReference(myBookingForm.value)">Search</a>
             </ng-template>
           </div>
         </div>
@@ -97,15 +100,14 @@
             <label i18n="@@by-dates">Start date:</label>
             <input style="background-color: white;" class="form-control" placeholder="YYYY-MM-DD" formControlName="start" ngbDatepicker
               #sToggle="ngbDatepicker" (click)="sToggle.toggle(); eToggle.close();" (close)="eToggle.open()" (ngModelChange)="onChange(sToggle, eToggle)"
-              [disabled]="!accessesToSearch || accessesToSearch.length === 0" readonly>
+              readonly>
           </div>
         </div>
         <div class="col-md-2">
           <div class="form-group">
             <label>End date:</label>
             <input style="background-color: white;" class="form-control" placeholder="YYYY-MM-DD" [minDate]="myBookingForm.controls['dates'].controls['start'].value"
-              formControlName="end" ngbDatepicker #eToggle="ngbDatepicker" (click)="eToggle.toggle(); sToggle.close()" [disabled]="!accessesToSearch || accessesToSearch.length === 0"
-              readonly>
+              formControlName="end" ngbDatepicker #eToggle="ngbDatepicker" (click)="eToggle.toggle(); sToggle.close()" readonly>
           </div>
         </div>
         <div class="col-md-3">
@@ -133,8 +135,8 @@
               <th i18n="@@hotel">Hotel</th>
               <th i18n="@@status">Status</th>
               <th i18n="@@price">Price</th>
-              <th i18n="@@provided-locator">Client reference</th>
-              <th i18n="@@provided-locator">Provider reference</th>
+              <th i18n="@@client-reference">Client reference</th>
+              <th i18n="@@supplier-reference">Supplier reference</th>
               <th class="text-right" i18n="@@options">Options</th>
             </tr>
           </thead>
@@ -177,6 +179,18 @@
         </table>
       </div>
       <!-- .mo-my-bookings -->
+    </div>
+  </div>
+  <div class="row">
+    <ng-container *ngIf="bookings && bookings.length === 0 && !loading">
+      <div class="mo-no-results">
+        <p i18n="@@no-results">It seems we have no results for this request.</p>
+      </div>
+    </ng-container>
+  </div>
+  <div class="row">
+    <div class="col-md-1 col-centered">
+      <i class="fa fa-spinner fa-spin" style="font-size:36px;" *ngIf="loading"></i>
     </div>
   </div>
 </div>
