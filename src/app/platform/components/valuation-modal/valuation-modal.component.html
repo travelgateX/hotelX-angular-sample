@@ -7,9 +7,9 @@
       <img class="d-flex rounded-circle mr-3" src="http://cdn.roomdi.com/wsimgresize/resize/crop/55/55/cdn.roomdi.com/contenidosShared/fotos/agregadorHotelero/fotos_hotelv4/1/355/7.jpg?f=1612252115"
         alt="">
       <div class="media-body">
-        <h6 class="hotelname">{{hotelInfo?.hotelName}}
+        <!-- <h6 class="hotelname">{{hotelInfo?.hotelName}}
           <b2b-star [max]="5" [filled]="hotelInfo?.categoryCode"></b2b-star>
-        </h6>
+        </h6> -->
         <p class="country">{{hotelInfo?.location?.city}}, {{hotelInfo?.location?.country}}</p>
         <p class="compo">From {{criteria.checkIn | dateFormat:environment.organization.dateFormat}} to {{criteria.checkOut | dateFormat:environment.organization.dateFormat}},
           {{roomsSearch?.roomsNum}}
@@ -25,11 +25,14 @@
       </div>
     </div>
   </div>
+  <div class="cancellation" *ngIf="quote.remarks">
+    <h3 class="tit" i18n="@@remarks">Remarks</h3>
+    <p class="desc" [innerHTML]="quote.remarks"></p>
+  </div>
   <div class="cancellation">
     <h3 class="tit" i18n="@@cancellation-policies">Cancellation polices</h3>
     <h6 class="subtit" i18n="@@cancellation-rules">Cancellation rules</h6>
-    <p class="desc" [innerHTML]="quote.remarks"></p>
-    <table class="tb-cancellation table table-hover" *ngIf="quote.cancelPolicy; else noCancelPolicy">
+    <table class="tb-cancellation table table-hover" *ngIf="quote?.cancelPolicy?.cancelPenalties; else noCancelPolicy">
       <thead>
         <tr>
           <th i18n="@@penalty-type">Penalty type</th>
@@ -54,6 +57,8 @@
     <ng-template #noCancelPolicy>
       <p class="desc" i18n="@@no-cancellation-policies">Seems there are no cancellation policies.</p>
     </ng-template>
+
+    <p class="desc">This option <b *ngIf="quote?.cancelPolicy?.refundable; else noRefundable">is</b><ng-template #noRefundable><b>isn't</b></ng-template> refundable</p>
 
   </div>
   <div class="booking">
