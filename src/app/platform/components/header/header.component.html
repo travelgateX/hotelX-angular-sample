@@ -31,6 +31,8 @@
                       <span class="fa fa-home"></span>
                       <span i18n="@@home">Home</span>
                     </a>
+                    <a class="dropdown-item" [routerLink]="['/platform/search-bookings']" [routerLinkActive]="['active']">
+                      <span class="fa fa-search"></span> Search</a>
                     <a class="dropdown-item" [routerLink]="['/platform/my-bookings']" [routerLinkActive]="['active']">
                       <span class="fa fa-bookmark"></span> My bookings</a>
                     <a class="dropdown-item" style="color:#cc0033;" (click)="authService.logout()">
