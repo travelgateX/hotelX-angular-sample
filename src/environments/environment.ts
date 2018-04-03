@@ -32,7 +32,7 @@ export const environment = {
   function: 'https://us-central1-smyrooms-b2b-dev.cloudfunctions.net/',
   googleMapsKey: 'AIzaSyDnnHGVUJJCRIzFTmRwdASd60QnQi2L7LY',
   organization: {
-    code: 'smy',
+    code: 'tgx',
     assetsPath: 'assets/img/travelgatex/',
     defaultMarket: {
       isoCode: 'es',

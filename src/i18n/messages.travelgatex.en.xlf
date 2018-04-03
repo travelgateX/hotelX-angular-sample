@@ -820,6 +820,10 @@
         <source>Quote</source>
         <target>Quote</target>
       </trans-unit>
+      <trans-unit id="payment-type" datatype="html">
+        <source>Payment type</source>
+        <target>Payment type</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

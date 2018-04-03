@@ -9,7 +9,7 @@
       <tr>
         <th i18n="@@penalty-type">Penalty type</th>
         <th i18n="@@value">Value</th>
-        <th i18n="@@days-before">Days before checkin</th>
+        <th i18n="@@hours-before">Hours before checkin</th>
       </tr>
     </thead>
 
@@ -17,7 +17,8 @@
       <tr *ngFor="let cancelPenalty of cancelPenalties">
         <td>{{cancelPenalty.penaltyType.toUpperCase() === 'IMPORT' ? "Amount" : cancelPenalty.penaltyType}}</td>
         <td>{{cancelPenalty.value | number : '1.2-2'}} {{cancelPenalty.currency}}</td>
-        <td>{{formatHoursToDaysHours(cancelPenalty.hoursBefore)}}</td>
+        <!-- <td>{{formatHoursToDaysHours(cancelPenalty.hoursBefore)}}</td> -->
+        <td>{{cancelPenalty.hoursBefore}}</td>
     </tbody>
 
   </table>

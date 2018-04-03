@@ -59,13 +59,8 @@
       <div class="col-md-4">
         <p>
           <span i18n="@@price">Price</span>:
-          <ng-container *ngIf="environment.organization.code === 'smy'">
-            <strong *ngIf="book.booking?.price?.binding">{{book.booking?.price?.gross | number : '1.2-2'}} {{book.booking?.price?.currency}}</strong>
-            <strong *ngIf="!book.booking?.price?.binding">{{book.booking?.price?.net | number : '1.2-2'}} {{book.booking?.price?.currency}}</strong>
-          </ng-container>
-          <ng-container *ngIf="environment.organization.code === 'mgr'">
-            <strong>{{book.booking?.price?.gross | number : '1.2-2'}} {{book.booking?.price?.currency}}</strong>
-          </ng-container>
+          <strong *ngIf="book.booking?.price?.binding">{{book.booking?.price?.gross | number : '1.2-2'}} {{book.booking?.price?.currency}}</strong>
+          <strong *ngIf="!book.booking?.price?.binding">{{book.booking?.price?.net | number : '1.2-2'}} {{book.booking?.price?.currency}}</strong>
         </p>
       </div>
     </div>

@@ -44,7 +44,8 @@
           <td>
             <a class="tip" data-toggle="tooltip" data-placement="top" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua">{{policy.value | number : '1.2-2'}} {{policy.currency}}</a>
           </td>
-          <td>{{formatHoursToDaysHours(policy.hoursBefore)}}</td>
+          <!-- <td>{{formatHoursToDaysHours(policy.hoursBefore)}}</td> -->
+          <td>{{policy.hoursBefore}}</td>
           <td>{{policy.appliedOver}}</td>
         </tr>
       </tbody>

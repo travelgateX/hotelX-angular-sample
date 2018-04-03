@@ -72,11 +72,13 @@
     <div class="row mo-aboutus-subtitle">
       <div class="col-xs-12 col-md-6">
         <h4 class="tit text-center" i18n="@@about-p-1">Know more about us</h4>
-        <p class="subtit text-center" i18n="@@about-p-2">Travelgatex is dedicated 100% to the integrations of the different touristic providers, be it hotels, flights, ferries, trains, rental cars and transfers.</p>
+        <p class="subtit text-center" i18n="@@about-p-2">Travelgatex is dedicated 100% to the integrations of the different touristic providers, be it hotels, flights, ferries,
+          trains, rental cars and transfers.</p>
       </div>
       <div class="col-xs-12 col-md-6">
         <h4 class="tit text-center" i18n="@@about-p-3">Travel product available in one single connection</h4>
-        <p class="subtit text-center" i18n="@@about-p-4">Travelgatex has the most extensive product on the market. More than 800,000 hotels, both directly contracted and more than 600 suppliers.</p>
+        <p class="subtit text-center" i18n="@@about-p-4">Travelgatex has the most extensive product on the market. More than 800,000 hotels, both directly contracted and
+          more than 600 suppliers.</p>
       </div>
     </div>
   </div>
@@ -104,7 +106,8 @@
               <div class="secondary">
                 <img class="img-responsive ico-technology" src="assets/img/techno-icon.svg" alt="ico technology">
                 <h5 class="tit text-center" i18n="@@service-2-title">Advanced technology</h5>
-                <p class="desc text-center" i18n="@@service-2-subtitle">We use the latest technology to offer 800,000 hotels in a single XML connection with a response time of less than 1 second.</p>
+                <p class="desc text-center" i18n="@@service-2-subtitle">We use the latest technology to offer 800,000 hotels in a single XML connection with a response time of less
+                  than 1 second.</p>
               </div>
             </div>
           </div>
@@ -122,7 +125,8 @@
               <div class="secondary">
                 <img class="img-responsive ico-location" src="assets/img/location-icon.svg" alt="ico location">
                 <h5 class="tit text-center" i18n="@@service-4-title">Free mapping services</h5>
-                <p class="desc text-center" i18n="@@service-4-subtitle">Our mapping tool will help you prioritize the hotels you already have in your system and will also propose others to expand your product.</p>
+                <p class="desc text-center" i18n="@@service-4-subtitle">Our mapping tool will help you prioritize the hotels you already have in your system and will also propose
+                  others to expand your product.</p>
               </div>
             </div>
           </div>
@@ -147,33 +151,33 @@
 <div class="mo-products">
   <div class="container">
 
-    <div class="secondary-products" *ngIf="environment.organization.code !== 'mgr'">
-      <div class="row">
-        <div class="col-lg-3">
-          <img src="assets/img/products-flights.svg" class="product" alt="flights">
-          <h4 class="tit text-center" i18n="@@flight-title">Flights</h4>
-          <p class="desc text-center" i18n="@@flight-subtitlt">XML integration with different GDS and LowCost Platforms such as Amadeus, Travelport, Sabre, Travelfusion and HitchHiker.</p>
-        </div>
-        <div class="col-lg-3">
-          <img src="assets/img/products-packages.svg" class="product" alt="packages">
-          <h4 class="tit text-center" i18n="@@packages">Packages</h4>
-          <p class="desc text-center" i18n="@@package-subtitle">Tailor made dynamic packages on XML.</p>
-        </div>
-        <div class="col-lg-3">
-          <img src="assets/img/products-transfers.svg" class="product" alt="transfers">
-          <h4 class="tit text-center" i18n="@@transfer-title">Transfers</h4>
-          <p class="desc text-center" i18n="@@transfer-subtitle">Worldwide private or shared transfers.</p>
-        </div>
-        <div class="col-lg-3">
-          <img src="assets/img/products-activities.svg" class="product" alt="activities">
-          <h4 class="tit text-center" i18n="@@activity-title">Activities</h4>
-          <p class="desc text-center" i18n="@@activity-subtitle">Activities in more than 4.000 destinations worldwide including theme parks, museums, guided tours, tickets, sport
-            events, restaurants and many more...</p>
-        </div>
+
+    <div class="row">
+      <div class="col-lg-3">
+        <img src="assets/img/products-flights.svg" class="product" alt="flights">
+        <h4 class="tit text-center" i18n="@@flight-title">Flights</h4>
+        <p class="desc text-center" i18n="@@flight-subtitlt">XML integration with different GDS and LowCost Platforms such as Amadeus, Travelport, Sabre, Travelfusion and HitchHiker.</p>
+      </div>
+      <div class="col-lg-3">
+        <img src="assets/img/products-packages.svg" class="product" alt="packages">
+        <h4 class="tit text-center" i18n="@@packages">Packages</h4>
+        <p class="desc text-center" i18n="@@package-subtitle">Tailor made dynamic packages on XML.</p>
+      </div>
+      <div class="col-lg-3">
+        <img src="assets/img/products-transfers.svg" class="product" alt="transfers">
+        <h4 class="tit text-center" i18n="@@transfer-title">Transfers</h4>
+        <p class="desc text-center" i18n="@@transfer-subtitle">Worldwide private or shared transfers.</p>
+      </div>
+      <div class="col-lg-3">
+        <img src="assets/img/products-activities.svg" class="product" alt="activities">
+        <h4 class="tit text-center" i18n="@@activity-title">Activities</h4>
+        <p class="desc text-center" i18n="@@activity-subtitle">Activities in more than 4.000 destinations worldwide including theme parks, museums, guided tours, tickets, sport
+          events, restaurants and many more...</p>
       </div>
     </div>
   </div>
 </div>
+
 
 <div class="mo-transition getconnected parallax-window-transition-getconnected">
   <div class="overlay"></div>
@@ -197,7 +201,8 @@
             <a [href]="'mailto:' + environment.organization.email + '?subject=Contact%20from%20web'" target="_top">{{environment.organization.email}}</a>
           </p>
           <p class="subtit text-center" *ngIf="environment.organization.telephone">
-            Telephone: <a [href]="'tel:' + environment.organization.telephone">{{environment.organization.telephone}}</a>
+            Telephone:
+            <a [href]="'tel:' + environment.organization.telephone">{{environment.organization.telephone}}</a>
           </p>
         </div>
       </div>
@@ -241,7 +246,10 @@
             <div class="media-body">
               <p class="desc">
                 <strong i18n="@@work-with-us">Work with us</strong> -
-                <span i18n="@@work-with-us-desc">To stay abreast of travel and technology requires a constant search for the best professionals in all areas of the business. If you are ambitious and want to be part of a company with a high annual growth rate since 2011, get in touch with us and discover how you can be part of a team of great talent and experience.</span></p>
+                <span i18n="@@work-with-us-desc">To stay abreast of travel and technology requires a constant search for the best professionals in all areas
+                  of the business. If you are ambitious and want to be part of a company with a high annual growth rate since
+                  2011, get in touch with us and discover how you can be part of a team of great talent and experience.</span>
+              </p>
             </div>
           </div>
         </div>

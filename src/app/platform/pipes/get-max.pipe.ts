@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class GetMaxPipe implements PipeTransform {
   transform(value: any[]): any {
     if (value && value.length) {
-      let max = { hoursBefore: 0 };
+      let max: any = value[0];
       value.forEach(element => {
         max = element.hoursBefore > max.hoursBefore ? element : max;
       });

@@ -819,6 +819,10 @@
         <source>Quote</source>
         <target>Valoración</target>
       </trans-unit>
+      <trans-unit id="payment-type" datatype="html">
+        <source>Payment type</source>
+        <target>Tipo de pago</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

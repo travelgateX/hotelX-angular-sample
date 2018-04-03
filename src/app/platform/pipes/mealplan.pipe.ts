@@ -21,7 +21,7 @@ export class MealplanPipe implements PipeTransform {
       let result = null;
       mealplans.forEach(x => {
         if (x.boardCode === value) {
-          result = x.boardCode;
+          result = x.texts[0].text ? x.texts[0].text : x.boardCode;
           return;
         }
       });
