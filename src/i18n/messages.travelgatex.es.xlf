@@ -815,6 +815,10 @@
         <source>Currency</source>
         <target>Moneda</target>
       </trans-unit>
+      <trans-unit id="quote" datatype="html">
+        <source>Quote</source>
+        <target>Valoración</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
