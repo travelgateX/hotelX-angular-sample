@@ -116,7 +116,6 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
     this.clearFilter();
     const lang = this.langService.getLang();
     this.searchService.transform(this.criteria).then(hotelCriteriaSearch => {
-      hotelCriteriaSearch['language'] = lang;
 
       if (this.criteria.items.length) {
         this.subscriptions$[1] = this.hubService

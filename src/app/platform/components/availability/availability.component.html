@@ -54,8 +54,40 @@
           <label i18n="@@market">Market:</label>
           <div class="input-group">
             <input type="text" class="form-control" [(ngModel)]="criteria.market" marketMatch [ngbTypeahead]="marketsFilter" name="markets"
-              [disabled]="!accessesToSearch || accessesToSearch.length === 0" [inputFormatter]="inputFormatter" [resultFormatter]="resultFormatter"
+              [disabled]="!accessesToSearch || accessesToSearch.length === 0" [inputFormatter]="countryInputFormatter" [resultFormatter]="countryResultFormatter"
               placeholder="Select Market" i18n-placeholder="@@market-placeholder" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label i18n="@@language">Language:</label>
+          <input type="text" class="form-control" [(ngModel)]="criteria.language" name="language" [ngbTypeahead]="languageFilter" [disabled]="!accessesToSearch || accessesToSearch.length === 0"
+            placeholder="Select Language" i18n-placeholder="@@market-placeholder" [resultFormatter]="languageResultFormatter"
+            [inputFormatter]="languageInputFormatter" />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label i18n="@@currency">Currency:</label>
+          <div class="input-group">
+            <input type="text" class="form-control" [(ngModel)]="criteria.currency" name="currency" [ngbTypeahead]="currencyFilter" [disabled]="!accessesToSearch || accessesToSearch.length === 0"
+              placeholder="Select Currency" i18n-placeholder="@@market-placeholder" [resultFormatter]="currencyResultFormatter"
+              [inputFormatter]="currencyInputFormatter"/>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label i18n="@@nationality">Nationality:</label>
+          <div class="input-group">
+            <input type="text" class="form-control" [(ngModel)]="criteria.nationality" marketMatch [ngbTypeahead]="marketsFilter" name="nationality"
+              [disabled]="!accessesToSearch || accessesToSearch.length === 0" [inputFormatter]="countryInputFormatter" [resultFormatter]="countryResultFormatter"
+              placeholder="Select Nationality" i18n-placeholder="@@market-placeholder" />
           </div>
         </div>
       </div>

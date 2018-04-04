@@ -6,4 +6,7 @@ export interface CriteriaSearch {
   hotels: string[];
   occupancies: Occupancy[];
   market: string;
+  language?: string;
+  nationality?: string;
+  currency?: string;
 }

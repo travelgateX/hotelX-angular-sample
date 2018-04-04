@@ -28,12 +28,18 @@ import { Observable } from "rxjs/Observable";
 import { Subscription } from "rxjs/Subscription";
 
 import { MARKETS } from "./../../../core/interfaces/markets";
-import { getArrayUses, getDisabled } from "./../../../shared/utilities/functions";
+import {
+  getArrayUses,
+  getDisabled
+} from "./../../../shared/utilities/functions";
 import { NgbDateMomentParserFormatter } from "app/shared/utilities/ngbParserFormatter";
 import { HubService } from "app/core/services/hub.service";
 import { Supplier } from "app/core/interfaces/supplier";
 import { Access } from "../../../core/interfaces/access";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { LANGUAGES } from "app/core/interfaces/languages";
+import { Country } from "app/core/interfaces/country";
+import { CURRENCIES } from "app/core/interfaces/currencies";
 
 @Component({
   selector: "b2b-availability",
@@ -61,15 +67,23 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
   context: string;
   getDisabled = getDisabled;
   markets = MARKETS;
+  languages = LANGUAGES;
+  currencies = CURRENCIES;
   maxItems = 5;
   maxNumPaxes = getArrayUses(12, false);
   minDateTo;
   now: NgbDateStruct;
   subscriptions$: Subscription[];
   subscriptionsSearch$: Subscription;
-  resultFormatter = (result: any) =>
+  countryResultFormatter = (result: any) =>
     `${result.iso_code.toUpperCase()} - ${result.country_name}`;
-  inputFormatter = (result: any) => result.country_name;
+  countryInputFormatter = (result: any) => result.country_name;
+  languageResultFormatter = (result: any) =>
+    `${result.iso_code.toUpperCase()} - ${result.language_name}`;
+  languageInputFormatter = (result: any) => result.language_name;
+  currencyResultFormatter = (result: any) =>
+    `${result.iso_code.toUpperCase()} - ${result.currency_name}`;
+  currencyInputFormatter = (result: any) => result.currency_name;
 
   constructor(
     private searchService: SearchService,
@@ -133,9 +147,41 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
         term =>
           term === ""
             ? []
-            : this.markets.filter(item => {
+            : this.markets.filter((item: Country) => {
                 const name =
                   item.country_name.toLowerCase().indexOf(term) !== -1;
+
+                return item.iso_code.toLowerCase().indexOf(term) !== -1 || name;
+              })
+      );
+
+  languageFilter = (text$: Observable<string>) =>
+    text$
+      .debounceTime(250)
+      .distinctUntilChanged()
+      .map(
+        term =>
+          term === ""
+            ? []
+            : this.languages.filter(item => {
+                const name =
+                  item.language_name.toLowerCase().indexOf(term) !== -1;
+
+                return item.iso_code.toLowerCase().indexOf(term) !== -1 || name;
+              })
+      );
+
+  currencyFilter = (text$: Observable<string>) =>
+    text$
+      .debounceTime(250)
+      .distinctUntilChanged()
+      .map(
+        term =>
+          term === ""
+            ? []
+            : this.currencies.filter(item => {
+                const name =
+                  item.currency_name.toLowerCase().indexOf(term) !== -1;
 
                 return item.iso_code.toLowerCase().indexOf(term) !== -1 || name;
               })
@@ -246,7 +292,7 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
   onSearch() {
     this.bookingService.setSearchValue(this.criteria);
     this.output.emit({
-      criteria: this.criteria,
+      criteria: this.criteria
     });
   }
 

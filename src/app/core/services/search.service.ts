@@ -12,6 +12,9 @@ import { environment } from "environments/environment";
 import { Access } from "../interfaces/access";
 import { HubService } from "./hub.service";
 import { WebConfigService } from "./web-config.service";
+import { Country } from "app/core/interfaces/country";
+import { LangService } from "app/core/services/lang.service";
+import { LANGUAGES } from "app/core/interfaces/languages";
 
 /**
  * Handles search criteria for availability request
@@ -20,6 +23,7 @@ import { WebConfigService } from "./web-config.service";
 export class SearchService {
   private criteria = new BehaviorSubject<Criteria>(null);
   criteria$ = this.criteria.asObservable();
+  languages = LANGUAGES;
 
   /**
    * Inits a default criteria
@@ -30,7 +34,8 @@ export class SearchService {
     private dateFormatter: NgbDateParserFormatter,
     private calendar: NgbCalendar,
     private hubService: HubService,
-    private webConfigService: WebConfigService
+    private webConfigService: WebConfigService,
+    private langService: LangService
   ) {
     if (!this.criteria.value) {
       this.getCriteria();
@@ -43,22 +48,26 @@ export class SearchService {
   setDefault() {
     const today = this.calendar.getToday();
     const tomorrow = this.calendar.getNext(this.calendar.getToday(), "d", 1);
-    const market = {};
-    market["iso_code"] = environment.organization.defaultMarket.isoCode
-      ? environment.organization.defaultMarket.isoCode
-      : "es";
-    market["name"] = environment.organization.defaultMarket.name
-      ? environment.organization.defaultMarket.name
-      : "Spain";
+    const language = {}
+    language['iso_code'] = this.langService.getLang();
+    language['language_name'] = this.languages.find(item => item.iso_code = language['iso_code']).language_name;
     const defaultCriteria: Criteria = {
-      rooms: [{ paxes: [{age: 30}, {age: 31}]}],
+      rooms: [{ paxes: [{ age: 30 }, { age: 31 }] }],
       checkIn: today,
       checkOut: tomorrow,
       city: false,
       items: [],
       market: {
-        iso_code: market["iso_code"],
-        country_name: market["name"]
+        iso_code: "es",
+        country_name: "Spain"
+      },
+      language: {
+        iso_code: language['iso_code'] ? language['iso_code'] : "es",
+        language_name: language['language_name'] ? language['language_name'] : "Spanish"
+      },
+      nationality: {
+        iso_code: "es",
+        country_name: "Spain"
       }
     };
 
@@ -111,7 +120,10 @@ export class SearchService {
       checkOut: this.dateFormatter.format(criteria.checkOut),
       hotels: await this.transformItemsToHotels(criteria.items),
       occupancies: this.transformRoomsToOcupancies(criteria.rooms),
-      market: criteria.market ? criteria.market.iso_code : null
+      market: criteria.market ? criteria.market.iso_code : null,
+      language: criteria.language ? criteria.language.iso_code : null,
+      nationality : criteria.nationality ? criteria.nationality.iso_code.toUpperCase() : null,
+      currency: criteria.currency ? criteria.currency.iso_code: null
     };
     return criteriaSearch;
   }
@@ -123,8 +135,10 @@ export class SearchService {
   async transformItemsToHotels(items): Promise<string[]> {
     let hotelCodes = [];
     if (items.length === 1 && items[0].destination) {
-      const res = await this.hubService
-        .getHotelCodesDestination([this.webConfigService.getAccess()], items[0].key);
+      const res = await this.hubService.getHotelCodesDestination(
+        [this.webConfigService.getAccess()],
+        items[0].key
+      );
       res.data.hotelX.hotels.edges.forEach(element => {
         if (
           element.node &&
@@ -157,7 +171,6 @@ export class SearchService {
    * @param occupancies Occupancy
    */
   transformOcupanciesToRooms(occupancies: Occupancy[]): Distribution[] {
-    debugger;
     return occupancies.map(r => {
       let adults = 0;
       let children = 0;

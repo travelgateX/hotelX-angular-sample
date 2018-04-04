@@ -1,5 +1,6 @@
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Distribution } from 'app/core/interfaces/distribution';
+import { Country } from 'app/core/interfaces/country';
 
 export interface Criteria {
   rooms: Distribution[];
@@ -14,5 +15,8 @@ export interface Criteria {
     hotels?: any[];
     destination? : boolean;
   }[];
-  market: any;
+  market?: Country;
+  language?: any;
+  currency?: any;
+  nationality?: Country;
 }
