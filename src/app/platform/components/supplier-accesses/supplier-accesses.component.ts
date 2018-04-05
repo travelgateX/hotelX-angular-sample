@@ -36,6 +36,15 @@ export class SupplierAccessesComponent implements OnInit {
             this.suppliers.push(element.node.supplierData);
           }
         });
+        if (
+          this.suppliers.findIndex(
+            supplier =>
+              supplier.code === this.webConfigService.getSupplier().code
+          ) !== -1
+        ) {
+          this.supplierSelected = this.webConfigService.getSupplier().code;
+          this.onSupplierSelected();
+        }
       },
       err => {
         this.showErrorSuppliers = true;
@@ -55,6 +64,7 @@ export class SupplierAccessesComponent implements OnInit {
     let supplier = this.suppliers.find(
       supplier => supplier.code === this.supplierSelected
     );
+    this.webConfigService.setSupplier(supplier);
     this.webConfigService.setContext(supplier.context);
     if (supplier && supplier.accesses) {
       supplier.accesses["edges"].forEach(element => {
@@ -63,10 +73,19 @@ export class SupplierAccessesComponent implements OnInit {
       });
     }
     if (this.accesses.length === 1) {
-      this.onAccessSelected(this.accesses[0].code);
       this.accessesSelected.push(this.accesses[0].code);
+      this.onAccessSelected(this.accesses[0].code);
     } else {
-      this.onAccessSelected("");
+      if (
+        this.accesses.findIndex(
+          access => access.code === this.webConfigService.getAccess().code
+        ) !== -1
+      ) {
+        this.accessesSelected.push(this.webConfigService.getAccess().code);
+        this.onAccessSelected(this.webConfigService.getAccess().code);
+      } else {
+        this.onAccessSelected("");
+      }
     }
   }
 
@@ -80,6 +99,8 @@ export class SupplierAccessesComponent implements OnInit {
     );
     if (this.accessesToSearch.length !== 0) {
       this.webConfigService.setAccess(this.accessesToSearch[0]);
+    } else {
+      this.webConfigService.setAccess({ code: "", name: "" });
     }
     this.accessesToSearchOutput.emit(this.accessesToSearch);
   }
