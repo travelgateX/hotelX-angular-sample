@@ -65,7 +65,7 @@
       <div class="col-md-4">
         <div class="form-group">
           <label i18n="@@language">Language:</label>
-          <input type="text" class="form-control" [(ngModel)]="criteria.language" name="language" [ngbTypeahead]="languageFilter" [disabled]="!accessesToSearch || accessesToSearch.length === 0"
+          <input type="text" class="form-control" [(ngModel)]="criteria.language" languageMatch name="language" [ngbTypeahead]="languageFilter" [disabled]="!accessesToSearch || accessesToSearch.length === 0"
             placeholder="Select Language" i18n-placeholder="@@market-placeholder" [resultFormatter]="languageResultFormatter"
             [inputFormatter]="languageInputFormatter" />
         </div>
@@ -74,7 +74,7 @@
         <div class="form-group">
           <label i18n="@@currency">Currency:</label>
           <div class="input-group">
-            <input type="text" class="form-control" [(ngModel)]="criteria.currency" name="currency" [ngbTypeahead]="currencyFilter" [disabled]="!accessesToSearch || accessesToSearch.length === 0"
+            <input type="text" class="form-control" [(ngModel)]="criteria.currency" currencyMatch name="currency" [ngbTypeahead]="currencyFilter" [disabled]="!accessesToSearch || accessesToSearch.length === 0"
               placeholder="Select Currency" i18n-placeholder="@@market-placeholder" [resultFormatter]="currencyResultFormatter"
               [inputFormatter]="currencyInputFormatter"/>
           </div>

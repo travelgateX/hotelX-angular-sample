@@ -101,7 +101,6 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
    * it will appear unchanged
    */
   ngOnInit() {
-    console.log(this.dropdownOffset);
     this.subscriptions$ = [];
     this.subscriptions$[0] = this.searchService.criteria$.subscribe(res => {
       this.criteria_copy = res;

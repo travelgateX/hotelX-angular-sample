@@ -36,6 +36,8 @@ import { CarouselModalComponent } from './components/carousel-modal/carousel-mod
 import { MultiSelectModule } from 'primeng/multiselect';
 import { MyBookingsComponent } from './pages/my-bookings/my-bookings.component';
 import { SupplierAccessesComponent } from 'app/platform/components/supplier-accesses/supplier-accesses.component';
+import { LanguageValidatorDirective } from './directives/language-validator.directive';
+import { CurrencyValidatorDirective } from './directives/currency-validator.directive';
 
 @NgModule({
   imports: [
@@ -72,7 +74,9 @@ import { SupplierAccessesComponent } from 'app/platform/components/supplier-acce
     MealplanPipe,
     BindingModalComponent,
     CarouselModalComponent,
-    SupplierAccessesComponent
+    SupplierAccessesComponent,
+    LanguageValidatorDirective,
+    CurrencyValidatorDirective
   ],
   entryComponents: [
     EditCriteriaModalComponent,
