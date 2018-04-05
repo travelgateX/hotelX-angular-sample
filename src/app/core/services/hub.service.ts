@@ -1,29 +1,29 @@
-import { Subject } from "rxjs/Subject";
-import { Injectable } from "@angular/core";
-import { Apollo, QueryRef } from "apollo-angular";
-import gql from "graphql-tag";
+import { Subject } from 'rxjs/Subject';
+import { Injectable } from '@angular/core';
+import { Apollo, QueryRef } from 'apollo-angular';
+import gql from 'graphql-tag';
 
-import { avail } from "app/core/graphQL/availability";
-import { quote } from "app/core/graphQL/quote";
-import { CriteriaSearch } from "app/core/interfaces/criteria-search";
-import { HotelInfo } from "app/core/interfaces/hotel-info";
-import { HotelAvail } from "app/core/interfaces/hotel-avail";
-import { book } from "app/core/graphQL/book";
-import { HotelBookInput } from "app/core/interfaces/hotel-book-input";
-import { Observable } from "rxjs/Observable";
-import { Subscriber } from "rxjs/Subscriber";
-import { ApolloQueryResult } from "apollo-client";
-import { hotelInfo } from "../graphQL/hotel-info";
-import { suppliersAccesses } from "../graphQL/suppliers-accesses";
-import { Access } from "app/core/interfaces/access";
-import { destinationSearcher } from "app/core/graphQL/destination-searcher";
-import { hotelCodesFromDestination } from "app/core/graphQL/hotel-codes-from-destination";
-import { boards } from "app/core/graphQL/boards";
-import { categories } from "app/core/graphQL/categories";
-import { booking } from "app/core/graphQL/booking";
-import { CriteriaBooking } from "../interfaces/criteria-booking";
-import { cancelBooking } from "../graphQL/cancelBooking";
-import { CancelBooking } from "../interfaces/cancel-booking";
+import { avail } from 'app/core/graphQL/availability';
+import { quote } from 'app/core/graphQL/quote';
+import { CriteriaSearch } from 'app/core/interfaces/criteria-search';
+import { HotelInfo } from 'app/core/interfaces/hotel-info';
+import { HotelAvail } from 'app/core/interfaces/hotel-avail';
+import { book } from 'app/core/graphQL/book';
+import { HotelBookInput } from 'app/core/interfaces/hotel-book-input';
+import { Observable } from 'rxjs/Observable';
+import { Subscriber } from 'rxjs/Subscriber';
+import { ApolloQueryResult } from 'apollo-client';
+import { hotelInfo } from '../graphQL/hotel-info';
+import { suppliersAccesses } from '../graphQL/suppliers-accesses';
+import { Access } from 'app/core/interfaces/access';
+import { destinationSearcher } from 'app/core/graphQL/destination-searcher';
+import { hotelCodesFromDestination } from 'app/core/graphQL/hotel-codes-from-destination';
+import { boards } from 'app/core/graphQL/boards';
+import { categories } from 'app/core/graphQL/categories';
+import { booking } from 'app/core/graphQL/booking';
+import { CriteriaBooking } from '../interfaces/criteria-booking';
+import { cancelBooking } from '../graphQL/cancelBooking';
+import { CancelBooking } from '../interfaces/cancel-booking';
 
 /**
  * Handles availability, quote and book requests to the Gateway
@@ -83,7 +83,7 @@ export class HubService {
     access: Access[],
     context: string
   ): QueryRef<any> {
-    let accessCodes = access.map(res => res.code);
+    const accessCodes = access.map(res => res.code);
     return this.apollo.watchQuery<any>({
       query: avail,
       variables: { criteria: criteria, access: accessCodes, context: context }
@@ -95,10 +95,18 @@ export class HubService {
    * @param optionRefId
    * @param language
    */
-  getQuote(optionRefId: string, language: string, context: string): QueryRef<any> {
+  getQuote(
+    optionRefId: string,
+    language: string,
+    context: string
+  ): QueryRef<any> {
     return this.apollo.watchQuery<any>({
       query: quote,
-      variables: { optionRefId: optionRefId, language: language, context: context }
+      variables: {
+        optionRefId: optionRefId,
+        language: language,
+        context: context
+      }
     });
   }
 
@@ -122,7 +130,7 @@ export class HubService {
     return this.apollo.watchQuery<any>({
       query: booking,
       variables: { criteriaBooking: criteriaBooking },
-      fetchPolicy: "network-only"
+      fetchPolicy: 'network-only'
     });
   }
 
@@ -149,7 +157,7 @@ export class HubService {
     access: Access[],
     language: string
   ): QueryRef<any> {
-    let accessCodes = access.map(res => res.code);
+    const accessCodes = access.map(res => res.code);
     return this.apollo.watchQuery<any>({
       query: hotelInfo,
       variables: { codes: hotels, access: accessCodes[0], language: [language] }
@@ -174,7 +182,7 @@ export class HubService {
     return this.apollo.watchQuery<any>({
       query: destinationSearcher,
       variables: { access: access.code, text: text },
-      fetchPolicy: "network-only"
+      fetchPolicy: 'network-only'
     });
   }
 
@@ -187,7 +195,7 @@ export class HubService {
     access: Access[],
     destinationCodes: string
   ): Promise<any> {
-    let accessCodes = access.map(res => res.code);
+    const accessCodes = access.map(res => res.code);
     return new Promise((resolve, reject) => {
       this.apollo
         .watchQuery<any>({

@@ -822,6 +822,14 @@
       <trans-unit id="payment-type" datatype="html">
         <source>Payment type</source>
         <target>Tipo de pago</target>
+        </trans-unit>
+      <trans-unit id="show-request" datatype="html">
+        <source>Show rq</source>
+        <target>Mostrar petición</target>
+      </trans-unit>
+      <trans-unit id="copy-to-clipboard" datatype="html">
+        <source>Copy to clipboard</source>
+        <target>Copiar al portapapeles</target>
       </trans-unit>
     </body>
   </file>

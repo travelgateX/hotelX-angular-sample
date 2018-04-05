@@ -25,10 +25,22 @@
       </div>
     </div>
   </div>
-  <div class="cancellation" *ngIf="quote.remarks">
-    <h3 class="tit" i18n="@@remarks">Remarks</h3>
-    <p class="desc" [innerHTML]="quote.remarks"></p>
+  <div>
+    <div class="cancellation" *ngIf="quote.remarks">
+      <div class="row">
+        <div class="col-md-8">
+          <h3 class="tit" i18n="@@remarks">Remarks</h3>
+        </div>
+        <div class="col-md-4">
+            <a class="btn btn-sm btn-info smy" (click)="showRequest()" i18n="@@show-request">Show RQ</a>
+            <a class="btn btn-sm btn-info smy ml-10" (click)="showResponse()" i18n="@@show-request">Show RS</a>
+        </div>
+      </div>
+
+      <p class="desc" [innerHTML]="quote.remarks"></p>
+    </div>
   </div>
+
   <div class="cancellation">
     <h3 class="tit" i18n="@@cancellation-policies">Cancellation polices</h3>
     <h6 class="subtit" i18n="@@cancellation-rules">Cancellation rules</h6>
@@ -58,7 +70,11 @@
       <p class="desc" i18n="@@no-cancellation-policies">Seems there are no cancellation policies.</p>
     </ng-template>
 
-    <p class="desc">This option <b *ngIf="quote?.cancelPolicy?.refundable; else noRefundable">is</b><ng-template #noRefundable><b>isn't</b></ng-template> refundable</p>
+    <p class="desc">This option
+      <b *ngIf="quote?.cancelPolicy?.refundable; else noRefundable">is</b>
+      <ng-template #noRefundable>
+        <b>isn't</b>
+      </ng-template> refundable</p>
 
   </div>
   <div class="booking">

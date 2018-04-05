@@ -21,6 +21,9 @@ import { Access } from '../../../core/interfaces/access';
 import { Board } from 'app/core/interfaces/board';
 import { Category } from 'app/core/interfaces/category';
 import { WebConfigService } from '../../../core/services/web-config.service';
+import { RsModalComponent } from 'app/platform/components/rs-modal/rs-modal.component';
+import { RqModalComponent } from 'app/platform/components/rq-modal/rq-modal.component';
+import { loadRequest, storeResponse, loadResponse } from 'app/shared/utilities/functions';
 
 @Component({
   selector: 'b2b-result-bookings',
@@ -116,13 +119,13 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
     this.clearFilter();
     const lang = this.langService.getLang();
     this.searchService.transform(this.criteria).then(hotelCriteriaSearch => {
-
       if (this.criteria.items.length) {
         this.subscriptions$[1] = this.hubService
           .getAvailability(hotelCriteriaSearch, this.access, this.context)
           .valueChanges.subscribe(
             res => {
               const response = res.data.hotelX.search;
+              storeResponse('hotelRS', response);
 
               if (response) {
                 if (response.errors) {
@@ -226,26 +229,30 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
    * Executes a boards request to obtain the mealplans availables
    */
   getBoards() {
-    this.subscriptions$[3] = this.hubService.getBoards(this.access, this.langService.getLang()).valueChanges.subscribe(res => {
-      res.data.hotelX.boards.edges.map(board => {
-        if (board.node && board.node.boardData) {
-          this.mealplans.push(board.node.boardData)
-        }
-      })
-    })
+    this.subscriptions$[3] = this.hubService
+      .getBoards(this.access, this.langService.getLang())
+      .valueChanges.subscribe(res => {
+        res.data.hotelX.boards.edges.map(board => {
+          if (board.node && board.node.boardData) {
+            this.mealplans.push(board.node.boardData);
+          }
+        });
+      });
   }
 
   /**
    * Executes a categories request to obtain the categories availables
    */
   getCategories() {
-    this.subscriptions$[4] = this.hubService.getCategories(this.access, this.langService.getLang()).valueChanges.subscribe(res => {
-      res.data.hotelX.categories.edges.map(category => {
-        if (category.node && category.node.categoryData) {
-          this.categories.push(category.node.categoryData)
-        }
-      })
-    })
+    this.subscriptions$[4] = this.hubService
+      .getCategories(this.access, this.langService.getLang())
+      .valueChanges.subscribe(res => {
+        res.data.hotelX.categories.edges.map(category => {
+          if (category.node && category.node.categoryData) {
+            this.categories.push(category.node.categoryData);
+          }
+        });
+      });
   }
 
   /**
@@ -260,11 +267,41 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.isEdit = true;
     modalRef.result.then(event => {
       if (event.criteria) {
-        this.searchService.setCriteria(
-          event.criteria,
-        );
+        this.searchService.setCriteria(event.criteria);
       }
     });
+  }
+
+  /**
+   * Opens modal to show last request made of hotel type
+   */
+  showRequest() {
+    if (sessionStorage.getItem('interceptedRequest')) {
+      const modalRef = this.modalService.open(RqModalComponent, {
+        size: 'lg',
+        keyboard: false,
+        backdrop: 'static'
+      });
+
+      const request = loadRequest('hotelRQ');
+      modalRef.componentInstance.input = request;
+    }
+  }
+
+  /**
+   * Opens modal to show last response got form hotel request
+   */
+  showResponse() {
+    if (sessionStorage.getItem('storedResponses')) {
+      const modalRef = this.modalService.open(RsModalComponent, {
+        size: 'lg',
+        keyboard: false,
+        backdrop: 'static'
+      });
+
+      const response = loadResponse('hotelRS');
+      modalRef.componentInstance.book = response;
+    }
   }
 
   /**
@@ -344,10 +381,7 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
     let pass = false;
     if (this.filter.codeName) {
       const val = this.filter.codeName.toUpperCase();
-      if (
-        hotel.hotelName &&
-        hotel.hotelName.toUpperCase().includes(val)
-      ) {
+      if (hotel.hotelName && hotel.hotelName.toUpperCase().includes(val)) {
         pass = true;
       } else if (
         hotel.hotelCode &&
@@ -369,10 +403,7 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
     let pass = false;
     if (this.filter.category) {
       const val = this.filter.category;
-      if (
-        hotelDetail.categoryCode &&
-        hotelDetail.categoryCode === val
-      ) {
+      if (hotelDetail.categoryCode && hotelDetail.categoryCode === val) {
         pass = true;
       }
     } else {
@@ -416,8 +447,11 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
 
     this.copyAvailability = this.copyAvailability.filter(
       (hotel: HotelAvail) => {
-        hotelDetailInfo = this.getHotelDetailInfo(hotel)
-        if (this.filterHotelCodeName(hotelDetailInfo) && this.filterCategory(hotelDetailInfo)) {
+        hotelDetailInfo = this.getHotelDetailInfo(hotel);
+        if (
+          this.filterHotelCodeName(hotelDetailInfo) &&
+          this.filterCategory(hotelDetailInfo)
+        ) {
           hotel.options = hotel.options.filter((option: Option) => {
             let passFilter = true;
             if (!this.filterBoardCode(option, passFilter)) {

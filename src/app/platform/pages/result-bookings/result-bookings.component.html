@@ -98,17 +98,23 @@
       </form>
     </div>
 
-    <div class="mo-search-filter-entries mo-search-filter-hotel" *ngIf="availability.length">
-      <form class="fm-smy form-inline">
-        <label for="inlineFormInput" class="mr-3" i18n="@@show-entries">Show entries:</label>
-        <select class="bordered form-control" [(ngModel)]="itemsPerPage" name="itemsPerPage">
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="50">50</option>
-          <option value="100">100</option>
-        </select>
-      </form>
+    <div class="mo-search-filter-entries mo-search-filter-hotel row" *ngIf="availability.length">
+      <div class="col-md-9">
+        <form class="fm-smy form-inline">
+          <label for="inlineFormInput" class="mr-3" i18n="@@show-entries">Show entries:</label>
+          <select class="bordered form-control" [(ngModel)]="itemsPerPage" name="itemsPerPage">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+        </form>
+      </div>
+      <div class="col-md-3">
+        <a class="btn btn-info smy" (click)="showRequest()" i18n="@@show-request">Show RQ</a>
+        <a class="btn btn-danger smy ml-10" (click)="showResponse()" i18n="@@show-request">Show RS</a>
+      </div>
     </div>
   </div>
 
@@ -117,7 +123,8 @@
       <div *ngIf="availability.length; then results else noResults"></div>
       <ng-template #results>
         <b2b-hotel-option *ngFor="let hotel of availability | paginate: { itemsPerPage: itemsPerPage, currentPage: page }; let i = index"
-          [hotel]="hotel" [hotelDetailInfo]="getHotelDetailInfo(hotel)" [search]="search" [criteria]="criteria" [mealplansAvailable]="mealplans" [context]="context"></b2b-hotel-option>
+          [hotel]="hotel" [hotelDetailInfo]="getHotelDetailInfo(hotel)" [search]="search" [criteria]="criteria" [mealplansAvailable]="mealplans"
+          [context]="context"></b2b-hotel-option>
       </ng-template>
 
       <ng-template #noResults>

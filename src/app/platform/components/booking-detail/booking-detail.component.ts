@@ -10,6 +10,7 @@ import { NotificationService } from 'app/core/services/notification.service';
 import { Criteria } from 'app/core/interfaces/criteria';
 import { SpinnerService } from 'app/core/services/spinner.service';
 import { environment } from 'environments/environment';
+import { loadRequest, loadResponse } from 'app/shared/utilities/functions';
 
 @Component({
   selector: 'b2b-booking-detail',
@@ -51,4 +52,53 @@ export class BookingDetailComponent implements OnInit {
   //   const modalRef = this.modalService.open(RqModalComponent);
   //   // modalRef.componentInstance.input = this.input;
   // }
+
+  /**
+   * Opens modal to show last request made of booking type
+   */
+  showRequest() {
+    if (sessionStorage.getItem('interceptedRequest')) {
+      const modalRef = this.modalService.open(RqModalComponent, {
+        size: 'lg',
+        keyboard: false,
+        backdrop: 'static'
+      });
+
+      const request = loadRequest('bookRQ');
+
+      modalRef.componentInstance.input = request;
+      modalRef.result
+      .then(res => {
+        // https://github.com/ng-bootstrap/ng-bootstrap/issues/643#issuecomment-306256651
+        document.body.classList.add('modal-open');
+      })
+      .catch(err => {
+        document.body.classList.add('modal-open');
+      });
+    }
+  }
+
+  /**
+   * Opens modal to show last response got form booking request
+   */
+  showResponse() {
+    if (sessionStorage.getItem('storedResponses')) {
+      const modalRef = this.modalService.open(RsModalComponent, {
+        size: 'lg',
+        keyboard: false,
+        backdrop: 'static'
+      });
+
+      const response = loadResponse('bookRQ');
+      modalRef.componentInstance.book = response;
+      modalRef.result
+      .then(res => {
+        // https://github.com/ng-bootstrap/ng-bootstrap/issues/643#issuecomment-306256651
+        document.body.classList.add('modal-open');
+      })
+      .catch(err => {
+        document.body.classList.add('modal-open');
+      });
+    }
+  }
 }

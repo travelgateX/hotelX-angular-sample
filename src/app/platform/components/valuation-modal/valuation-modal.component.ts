@@ -1,6 +1,6 @@
 import { HotelOptionQuote } from './../../../core/interfaces/hotel-option-quote';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Option } from 'app/core/interfaces/option';
 import { SearchService } from 'app/core/services/search.service';
 import { Criteria } from 'app/core/interfaces/criteria';
@@ -15,9 +15,11 @@ import { Router } from '@angular/router';
 import { SpinnerService } from 'app/core/services/spinner.service';
 import { Search } from 'app/core/interfaces/search';
 import { BookingService } from 'app/core/services/booking.service';
-import { formatHoursToDaysHours } from 'app/shared/utilities/functions';
+import { formatHoursToDaysHours, loadRequest, loadResponse } from 'app/shared/utilities/functions';
 import { environment } from 'environments/environment';
 import { HotelInfoDetail } from 'app/core/interfaces/hotel-info/hotel-info-detail';
+import { RsModalComponent } from 'app/platform/components/rs-modal/rs-modal.component';
+import { RqModalComponent } from 'app/platform/components/rq-modal/rq-modal.component';
 
 @Component({
   selector: 'b2b-valuation-modal',
@@ -40,6 +42,7 @@ export class ValuationModalComponent implements OnInit, OnDestroy {
 
   constructor(
     public activeModal: NgbActiveModal,
+    private modalService: NgbModal,
     private hubService: HubService,
     private searchService: SearchService,
     private notificationService: NotificationService,
@@ -75,7 +78,7 @@ export class ValuationModalComponent implements OnInit, OnDestroy {
     const roomArray = new FormArray([]);
 
     this.criteria.rooms.forEach(room => {
-      room.paxes.sort(function(a,b) {
+      room.paxes.sort(function(a, b) {
         if (a.age < b.age) {
           return 1;
         }
@@ -188,6 +191,55 @@ export class ValuationModalComponent implements OnInit, OnDestroy {
       return true;
     } else {
       return false;
+    }
+  }
+
+  /**
+   * Opens modal to show last request made of hotel type
+   */
+  showRequest() {
+    if (sessionStorage.getItem('interceptedRequest')) {
+      const modalRef = this.modalService.open(RqModalComponent, {
+        size: 'lg',
+        keyboard: false,
+        backdrop: 'static'
+      });
+
+      const request = loadRequest('quoteRQ');
+
+      modalRef.componentInstance.input = request;
+      modalRef.result
+      .then(res => {
+        // https://github.com/ng-bootstrap/ng-bootstrap/issues/643#issuecomment-306256651
+        document.body.classList.add('modal-open');
+      })
+      .catch(err => {
+        document.body.classList.add('modal-open');
+      });
+    }
+  }
+
+  /**
+   * Opens modal to show last response got form hotel request
+   */
+  showResponse() {
+    if (sessionStorage.getItem('storedResponses')) {
+      const modalRef = this.modalService.open(RsModalComponent, {
+        size: 'lg',
+        keyboard: false,
+        backdrop: 'static'
+      });
+
+      const response = loadResponse('quoteRS');
+      modalRef.componentInstance.book = response;
+      modalRef.result
+      .then(res => {
+        // https://github.com/ng-bootstrap/ng-bootstrap/issues/643#issuecomment-306256651
+        document.body.classList.add('modal-open');
+      })
+      .catch(err => {
+        document.body.classList.add('modal-open');
+      });
     }
   }
 

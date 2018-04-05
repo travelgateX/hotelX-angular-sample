@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CommonModule } from '@angular/common';
 import { AmenitiesComponent } from './components/amenities/amenities/amenities.component';
+import { ClipboardPipe } from './pipes/clipboard.pipe';
 @NgModule({
   imports: [
     CommonModule,
@@ -36,7 +37,8 @@ import { AmenitiesComponent } from './components/amenities/amenities/amenities.c
     ResultPipe,
     LangSelectComponent,
     LangUrlPipe,
-    AmenitiesComponent
+    AmenitiesComponent,
+    ClipboardPipe
   ],
   exports: [
     CommonModule,
@@ -55,7 +57,8 @@ import { AmenitiesComponent } from './components/amenities/amenities/amenities.c
     ResultPipe,
     LangSelectComponent,
     LangUrlPipe,
-    AmenitiesComponent
+    AmenitiesComponent,
+    ClipboardPipe
   ],
 })
 export class SharedModule {}

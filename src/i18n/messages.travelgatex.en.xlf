@@ -824,6 +824,14 @@
         <source>Payment type</source>
         <target>Payment type</target>
       </trans-unit>
+      <trans-unit id="show-request" datatype="html">
+        <source>Show rq</source>
+        <target>Show rq</target>
+      </trans-unit>
+      <trans-unit id="copy-to-clipboard" datatype="html">
+        <source>Copy to clipboard</source>
+        <target>Copy to clipboard</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

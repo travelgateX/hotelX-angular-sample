@@ -3,9 +3,20 @@
     <span aria-hidden="true">×</span>
   </button>
 
+  <div class="modal-header">
+    <h2>Response data</h2>
+  </div>
   <div class="summary modal-body">
-    <pre>
-        {{book | json}}
+    <pre #pre style="max-height: 70vh; overflow-y:auto">
+          {{book | json}}
     </pre>
+  </div>
+  <div class="modal-footer">
+    <div class="col-md-8">
+      <p *ngIf="isCopied" class="text-success">Text copied to clipboard!</p>
+    </div>
+    <div class="col-md-3">
+        <a class="btn btn-info smy" (click)="copy()" i18n="@@copy-to-clipboard">Copy to clipboard</a>
+    </div>
   </div>
 </div>

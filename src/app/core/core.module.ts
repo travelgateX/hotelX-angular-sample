@@ -1,36 +1,36 @@
-import { LangService } from "./services/lang.service";
-import { ApolloModule, Apollo } from "apollo-angular";
-import { RequestOptions } from "@angular/http";
+import { LangService } from './services/lang.service';
+import { ApolloModule, Apollo } from 'apollo-angular';
+import { RequestOptions } from '@angular/http';
 import {
   NgModule,
   ModuleWithProviders,
   Optional,
   SkipSelf
-} from "@angular/core";
-import { CommonModule } from "@angular/common";
+} from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import { LoginGuard } from "./guard/login.guard";
-import { SearchService } from "app/core/services/search.service";
-import { SpinnerService } from "app/core/services/spinner.service";
-import { HttpService } from "app/core/services/http.service";
-import { AuthService } from "app/core/services/auth.service";
-import { NotificationService } from "app/core/services/notification.service";
-import { HubService } from "app/core/services/hub.service";
-import { BookingService } from "app/core/services/booking.service";
+import { LoginGuard } from './guard/login.guard';
+import { SearchService } from 'app/core/services/search.service';
+import { SpinnerService } from 'app/core/services/spinner.service';
+import { HttpService } from 'app/core/services/http.service';
+import { AuthService } from 'app/core/services/auth.service';
+import { NotificationService } from 'app/core/services/notification.service';
+import { HubService } from 'app/core/services/hub.service';
+import { BookingService } from 'app/core/services/booking.service';
 import {
   InMemoryCache,
   IntrospectionFragmentMatcher
-} from "apollo-cache-inmemory";
+} from 'apollo-cache-inmemory';
 import {
   HttpClient,
   HttpClientModule,
   HTTP_INTERCEPTORS,
   HttpHeaders
-} from "@angular/common/http";
-import { HttpHeadersInterceptor } from "./httpHeaders.interceptor";
-import { HttpLinkModule, HttpLink } from "apollo-angular-link-http";
-import {fragmentTypes} from './fragmentTypes';
-import { WebConfigService } from "./services/web-config.service";
+} from '@angular/common/http';
+import { HttpHeadersInterceptor } from './httpHeaders.interceptor';
+import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
+import { fragmentTypes } from './fragmentTypes';
+import { WebConfigService } from './services/web-config.service';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, ApolloModule, HttpLinkModule],
@@ -97,14 +97,14 @@ export class CoreModule {
     let test: any;
     if (parentModule) {
       throw new Error(
-        "CoreModule is already loaded. Import it in the AppModule only"
+        'CoreModule is already loaded. Import it in the AppModule only'
       );
     }
     const introspectionQueryResultData = fragmentTypes;
     const fragmentMatcher = new IntrospectionFragmentMatcher({
       introspectionQueryResultData
     });
-    const http = httpLink.create({ uri: "https://api.travelgatex.com" });
+    const http = httpLink.create({ uri: 'https://api.travelgatex.com' });
 
     apollo.create({
       link: http,

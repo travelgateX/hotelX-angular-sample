@@ -21,6 +21,7 @@ import { EditCriteriaModalComponent } from 'app/platform/components/edit-criteri
 import { CarouselModalComponent } from 'app/platform/components/carousel-modal/carousel-modal/carousel-modal.component';
 import { HotelInfoGeocode } from 'app/core/interfaces/hotel-info/geocode';
 import { Board } from 'app/core/interfaces/board';
+import { storeResponse } from '../../../shared/utilities/functions';
 
 @Component({
   selector: 'b2b-hotel-option',
@@ -127,6 +128,7 @@ export class HotelOptionComponent implements OnInit, OnDestroy, OnChanges {
       .valueChanges.subscribe(
         res => {
           const response = res.data.hotelX.quote;
+          storeResponse('quoteRS', response);
 
           if (response.warnings) {
             console.log(response.warnings);

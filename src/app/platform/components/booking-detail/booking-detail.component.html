@@ -1,4 +1,10 @@
 <div class="mo-summary-thanks" *ngIf="book && book.booking && criteria && bookingDetail; else noBooking">
+  <div class="row">
+    <div class="col-md-4 pb-4">
+      <a class="btn btn-sm btn-info smy" (click)="showRequest()" i18n="@@show-request">Show RQ</a>
+      <a class="btn btn-sm btn-info smy ml-10" (click)="showResponse()" i18n="@@show-request">Show RS</a>
+    </div>
+  </div>
   <div class="media">
     <img class="d-flex rounded-circle mr-3" src="http://cdn.roomdi.com/wsimgresize/resize/crop/55/55/cdn.roomdi.com/contenidosShared/fotos/agregadorHotelero/fotos_hotelv4/1/355/7.jpg?f=1612252115"
       alt="">
