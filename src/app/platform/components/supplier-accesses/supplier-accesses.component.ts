@@ -1,13 +1,13 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
-import { HubService } from "app/core/services/hub.service";
-import { Supplier } from "app/core/interfaces/supplier";
-import { Access } from "app/core/interfaces/access";
-import { WebConfigService } from "../../../core/services/web-config.service";
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { HubService } from 'app/core/services/hub.service';
+import { Supplier } from 'app/core/interfaces/supplier';
+import { Access } from 'app/core/interfaces/access';
+import { WebConfigService } from '../../../core/services/web-config.service';
 
 @Component({
-  selector: "b2b-supplier-accesses",
-  templateUrl: "./supplier-accesses.component.html",
-  styleUrls: ["./supplier-accesses.component.css"]
+  selector: 'b2b-supplier-accesses',
+  templateUrl: './supplier-accesses.component.html',
+  styleUrls: ['./supplier-accesses.component.css']
 })
 export class SupplierAccessesComponent implements OnInit {
   @Output() accessesToSearchOutput = new EventEmitter();
@@ -61,14 +61,12 @@ export class SupplierAccessesComponent implements OnInit {
     this.accessesToSearch = [];
     // this.criteria.items = [];
 
-    let supplier = this.suppliers.find(
-      supplier => supplier.code === this.supplierSelected
-    );
+    const supplier = this.suppliers.find(s => s.code === this.supplierSelected);
     this.webConfigService.setSupplier(supplier);
     this.webConfigService.setContext(supplier.context);
     if (supplier && supplier.accesses) {
-      supplier.accesses["edges"].forEach(element => {
-        let access = element.node.accessData;
+      supplier.accesses['edges'].forEach(element => {
+        const access = element.node.accessData;
         this.accesses.push(access);
       });
     }
@@ -84,13 +82,14 @@ export class SupplierAccessesComponent implements OnInit {
         this.accessesSelected.push(this.webConfigService.getAccess().code);
         this.onAccessSelected(this.webConfigService.getAccess().code);
       } else {
-        this.onAccessSelected("");
+        this.onAccessSelected('');
       }
     }
   }
 
   /**
-   * Save the access selected cause the select save the object as string "[Object object]" and we need another variable to store the access selected
+   * Save the access selected cause the select save the object as string "[Object object]"
+   * and we need another variable to store the access selected
    * @param $event Code of access selected
    */
   onAccessSelected($event) {
@@ -100,7 +99,7 @@ export class SupplierAccessesComponent implements OnInit {
     if (this.accessesToSearch.length !== 0) {
       this.webConfigService.setAccess(this.accessesToSearch[0]);
     } else {
-      this.webConfigService.setAccess({ code: "", name: "" });
+      this.webConfigService.setAccess({ code: '', name: '' });
     }
     this.accessesToSearchOutput.emit(this.accessesToSearch);
   }

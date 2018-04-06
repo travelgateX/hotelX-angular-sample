@@ -1,26 +1,35 @@
-import { Component, OnInit } from "@angular/core";
-import { HubService } from "app/core/services/hub.service";
-import { CriteriaBooking } from "app/core/interfaces/criteria-booking";
-import { LangService } from "../../../core/services/lang.service";
-import { BookingCriteriaType } from "../../../core/enumerates/booking-criteria-type";
-import { CriteriaBookingReference } from "app/core/interfaces/criteria-booking-reference";
-import { CriteriaBookingDates } from "app/core/interfaces/criteria-booking-dates";
-import { Access } from "app/core/interfaces/access";
-import { getDisabled, enumToArray } from "../../../shared/utilities/functions";
-import { CancelBooking } from "../../../core/interfaces/cancel-booking";
-import { NotificationService } from "app/core/services/notification.service";
-import { BookingCriteriaDateType } from "app/core/enumerates/booking-criteria-date-type";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { Component, OnInit } from '@angular/core';
+import { HubService } from 'app/core/services/hub.service';
+import { CriteriaBooking } from 'app/core/interfaces/criteria-booking';
+import { LangService } from '../../../core/services/lang.service';
+import { BookingCriteriaType } from '../../../core/enumerates/booking-criteria-type';
+import { CriteriaBookingReference } from 'app/core/interfaces/criteria-booking-reference';
+import { CriteriaBookingDates } from 'app/core/interfaces/criteria-booking-dates';
+import { Access } from 'app/core/interfaces/access';
+import {
+  getDisabled,
+  enumToArray,
+  loadRequest,
+  loadResponse,
+  storeResponse
+} from '../../../shared/utilities/functions';
+import { CancelBooking } from '../../../core/interfaces/cancel-booking';
+import { NotificationService } from 'app/core/services/notification.service';
+import { BookingCriteriaDateType } from 'app/core/enumerates/booking-criteria-date-type';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import {
   NgbInputDatepicker,
   NgbCalendar,
-  NgbDateParserFormatter
-} from "@ng-bootstrap/ng-bootstrap";
+  NgbDateParserFormatter,
+  NgbModal
+} from '@ng-bootstrap/ng-bootstrap';
+import { RqModalComponent } from 'app/platform/components/rq-modal/rq-modal.component';
+import { RsModalComponent } from 'app/platform/components/rs-modal/rs-modal.component';
 
 @Component({
-  selector: "b2b-my-bookings",
-  templateUrl: "./my-bookings.component.html",
-  styleUrls: ["./my-bookings.component.css"]
+  selector: 'b2b-my-bookings',
+  templateUrl: './my-bookings.component.html',
+  styleUrls: ['./my-bookings.component.css']
 })
 export class MyBookingsComponent implements OnInit {
   accessesToSearch: Access[];
@@ -39,23 +48,24 @@ export class MyBookingsComponent implements OnInit {
     private notificationService: NotificationService,
     private fb: FormBuilder,
     public calendar: NgbCalendar,
-    private dateFormatter: NgbDateParserFormatter
+    private dateFormatter: NgbDateParserFormatter,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit() {
     this.myBookingForm = this.fb.group({
-      accessCode: "",
+      accessCode: '',
       language: this.langService.getLang(),
       typeSearch: BookingCriteriaType.REFERENCES,
       dates: this.fb.group({
         dateType: BookingCriteriaDateType.ARRIVAL,
         start: this.calendar.getToday(),
-        end: this.calendar.getNext(this.calendar.getToday(), "d", 1)
+        end: this.calendar.getNext(this.calendar.getToday(), 'd', 1)
       }),
       references: this.fb.group({
-        hotelCode: "",
-        currency: "",
-        references: this.fb.group({ client: "", supplier: "" })
+        hotelCode: '',
+        currency: '',
+        references: this.fb.group({ client: '', supplier: '' })
       })
     });
     this.myBookingForm.disable();
@@ -66,6 +76,7 @@ export class MyBookingsComponent implements OnInit {
     this.loading = true;
     this.hubService.getMyBookings(criteriaBooking).valueChanges.subscribe(
       res => {
+        storeResponse('myBookingsRS', res);
         this.loading = false;
         if (
           res.data &&
@@ -86,7 +97,7 @@ export class MyBookingsComponent implements OnInit {
   }
 
   onCancel(booking) {
-    let cancelBooking: CancelBooking = {
+    const cancelBooking: CancelBooking = {
       accessCode: this.accessesToSearch[0].code,
       hotelCode: booking.hotel.hotelCode,
       reference: {}
@@ -97,19 +108,22 @@ export class MyBookingsComponent implements OnInit {
     if (booking && booking.reference && booking.reference.client) {
       cancelBooking.reference.client = booking.reference.client;
     }
+    booking['loading'] = true;
 
     this.hubService.cancelBook(cancelBooking).subscribe(
       res => {
+        storeResponse('cancelBookingRS', res);
+        booking['loading'] = false;
         if (
           res.data &&
           res.data.hotelX &&
           res.data.hotelX.cancel &&
           res.data.hotelX.cancel.cancellation &&
           res.data.hotelX.cancel.cancellation.status &&
-          res.data.hotelX.cancel.cancellation.status === "CANCELLED"
+          res.data.hotelX.cancel.cancellation.status === 'CANCELLED'
         ) {
-          booking.status = "CANCELLED";
-          this.notificationService.success("Booking Cancelled");
+          booking.status = 'CANCELLED';
+          this.notificationService.success('Booking Cancelled');
         }
       },
       err => this.notificationService.error(err)
@@ -117,7 +131,7 @@ export class MyBookingsComponent implements OnInit {
   }
 
   searchByDate(value) {
-    let criteriaBooking: CriteriaBooking = JSON.parse(JSON.stringify(value));
+    const criteriaBooking: CriteriaBooking = JSON.parse(JSON.stringify(value));
     delete criteriaBooking.references;
     criteriaBooking.dates.start = this.dateFormatter.format(<any>criteriaBooking
       .dates.start);
@@ -127,7 +141,7 @@ export class MyBookingsComponent implements OnInit {
   }
 
   searchByReference(value) {
-    let criteriaBooking: CriteriaBooking = JSON.parse(JSON.stringify(value));
+    const criteriaBooking: CriteriaBooking = JSON.parse(JSON.stringify(value));
     delete criteriaBooking.dates;
     this.getMyBookings(criteriaBooking);
   }
@@ -136,7 +150,7 @@ export class MyBookingsComponent implements OnInit {
     this.accessesToSearch = [...accessesToSearch];
     this.myBookingForm.patchValue({
       accessCode:
-        this.accessesToSearch.length !== 0 ? this.accessesToSearch[0].code : ""
+        this.accessesToSearch.length !== 0 ? this.accessesToSearch[0].code : ''
     });
     this.accessesToSearch.length !== 0
       ? this.myBookingForm.enable()
@@ -157,5 +171,43 @@ export class MyBookingsComponent implements OnInit {
     // this.minDateTo.month = date.getMonth() + 1;
     // this.minDateTo.day = date.getDate();
     // sToggle.open();
+  }
+
+  /**
+   * Opens modal to show last request made of myBookings type
+   */
+  showRequest(booking = false) {
+    if (sessionStorage.getItem('interceptedRequest')) {
+      const modalRef = this.modalService.open(RqModalComponent, {
+        size: 'lg',
+        keyboard: false,
+        backdrop: 'static'
+      });
+
+      if (booking) {
+        modalRef.componentInstance.input = loadRequest('cancelBookingRQ');
+      } else {
+        modalRef.componentInstance.input = loadRequest('myBookingsRQ');
+      }
+    }
+  }
+
+  /**
+   * Opens modal to show last response got form myBookings request
+   */
+  showResponse(booking = false) {
+    if (sessionStorage.getItem('storedResponses')) {
+      const modalRef = this.modalService.open(RsModalComponent, {
+        size: 'lg',
+        keyboard: false,
+        backdrop: 'static'
+      });
+
+      if (booking) {
+        modalRef.componentInstance.book = loadResponse('cancelBookingRS');
+      } else {
+        modalRef.componentInstance.book = loadResponse('myBookingsRS');
+      }
+    }
   }
 }

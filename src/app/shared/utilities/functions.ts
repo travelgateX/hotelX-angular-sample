@@ -68,19 +68,14 @@ export function enumToArray(enumerate: any) {
  */
 export function storeRequest(req) {
   // Filtrado GUARRO según las propiedades dentro de 'variables'
-  // IMP
 
   const requestsToSave =
     JSON.parse(sessionStorage.getItem('interceptedRequest')) || {};
-  const isHotelCriteria =
-    'criteria' in req.body['variables'] &&
-    req.body.query.includes('HotelCriteriaSearchInput');
-
-  const isQuoting =
-    'optionRefId' in req.body['variables'] &&
-    req.body.query.includes('optionRefId');
-
+  const isHotelCriteria = req.body.query.includes('HotelCriteriaSearchInput');
+  const isQuoting = req.body.query.includes('optionRefId');
   const isBooking = req.body.query.includes('Mutation($input: HotelBookInput!');
+  const isMyBookings = req.body.query.includes('booking($criteriaBooking');
+  const isCancelBooking = req.body.query.includes('cancelBooking');
 
   if (isHotelCriteria) {
     requestsToSave['hotelRQ'] = req;
@@ -88,7 +83,12 @@ export function storeRequest(req) {
     requestsToSave['quoteRQ'] = req;
   } else if (isBooking) {
     requestsToSave['bookRQ'] = req;
-  } else if (false) {
+  } else if (isMyBookings) {
+    requestsToSave['myBookingsRQ'] = req;
+  } else if (isCancelBooking) {
+    requestsToSave['cancelBookingRQ'] = req;
+  } else {
+    return;
   }
 
   sessionStorage.setItem('interceptedRequest', JSON.stringify(requestsToSave));

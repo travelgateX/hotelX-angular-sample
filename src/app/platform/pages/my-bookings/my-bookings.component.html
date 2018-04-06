@@ -18,6 +18,12 @@
 
 <div class="container">
   <form class="fm-smy my-book" [formGroup]="myBookingForm">
+    <div class="row pt-3">
+      <div class="col-md-4 offset-md-8">
+        <button class="btn btn-sm btn-info smy" [disabled]="!bookings" (click)="showRequest()" i18n="@@show-request">Show RQ</button>
+        <button class="btn btn-sm btn-info smy ml-10" [disabled]="!bookings || loading" (click)="showResponse()" i18n="@@show-response">Show RS</button>
+      </div>
+    </div>
     <b2b-supplier-accesses (accessesToSearchOutput)="saveAccessesToSearch($event)"></b2b-supplier-accesses>
     <div class="row" style="margin-top: 30px;">
       <div class="col-md-2">
@@ -138,6 +144,7 @@
               <th i18n="@@client-reference">Client reference</th>
               <th i18n="@@supplier-reference">Supplier reference</th>
               <th class="text-right" i18n="@@options">Options</th>
+              <th class="text-right" i18n="@@request">Request</th>
             </tr>
           </thead>
           <tbody>
@@ -173,6 +180,14 @@
                   <!-- <a i18n="@@view-rq">View RQ</a>
                   <a i18n="@@view-rs">View RS</a> -->
                 </p>
+              </td>
+              <td>
+                  <div class="row">
+                      <div class="col-sm-12">
+                        <button class="btn btn-sm btn-info smy" [disabled]="booking.loading === undefined" (click)="showRequest(booking)">RQ</button>
+                        <button class="btn btn-sm btn-info smy ml-10" [disabled]="booking.loading !== false" (click)="showResponse(booking)">RS</button>
+                      </div>
+                    </div>
               </td>
             </tr>
           </tbody>

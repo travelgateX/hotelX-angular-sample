@@ -825,8 +825,12 @@
         <target>Payment type</target>
       </trans-unit>
       <trans-unit id="show-request" datatype="html">
-        <source>Show rq</source>
-        <target>Show rq</target>
+        <source>Show RQ</source>
+        <target>Show RQ</target>
+      </trans-unit>
+      <trans-unit id="show-response" datatype="html">
+        <source>Show RS</source>
+        <target>Show RS</target>
       </trans-unit>
       <trans-unit id="copy-to-clipboard" datatype="html">
         <source>Copy to clipboard</source>

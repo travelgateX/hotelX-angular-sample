@@ -5,7 +5,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TagInputModule } from 'ngx-chips';
 import { NgxPaginationModule } from 'ngx-pagination';
-
 import { SharedModule } from './../shared/shared.module';
 import { LoginGuard } from './../core/guard/login.guard';
 import { ResultBookingsComponent } from './pages/result-bookings/result-bookings.component';
