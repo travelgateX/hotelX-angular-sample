@@ -1,6 +1,6 @@
-import "rxjs/add/operator/debounceTime";
-import "rxjs/add/operator/distinctUntilChanged";
-import "rxjs/add/operator/map";
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/map';
 
 import {
   Component,
@@ -9,42 +9,42 @@ import {
   OnDestroy,
   OnInit,
   Output
-} from "@angular/core";
-import { Response } from "@angular/http";
+} from '@angular/core';
+import { Response } from '@angular/http';
 import {
   NgbCalendar,
   NgbDateStruct,
   NgbInputDatepicker,
   NgbTypeaheadConfig,
   NgbDateParserFormatter
-} from "@ng-bootstrap/ng-bootstrap";
-import { Criteria } from "app/core/interfaces/criteria";
-import { Distribution } from "app/core/interfaces/distribution";
-import { Pax } from "app/core/interfaces/pax";
-import { BookingService } from "app/core/services/booking.service";
-import { NotificationService } from "app/core/services/notification.service";
-import { SearchService } from "app/core/services/search.service";
-import { Observable } from "rxjs/Observable";
-import { Subscription } from "rxjs/Subscription";
+} from '@ng-bootstrap/ng-bootstrap';
+import { Criteria } from 'app/core/interfaces/criteria';
+import { Distribution } from 'app/core/interfaces/distribution';
+import { Pax } from 'app/core/interfaces/pax';
+import { BookingService } from 'app/core/services/booking.service';
+import { NotificationService } from 'app/core/services/notification.service';
+import { SearchService } from 'app/core/services/search.service';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 
-import { MARKETS } from "./../../../core/interfaces/markets";
+import { MARKETS } from './../../../core/interfaces/markets';
 import {
   getArrayUses,
   getDisabled
-} from "./../../../shared/utilities/functions";
-import { NgbDateMomentParserFormatter } from "app/shared/utilities/ngbParserFormatter";
-import { HubService } from "app/core/services/hub.service";
-import { Supplier } from "app/core/interfaces/supplier";
-import { Access } from "../../../core/interfaces/access";
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
-import { LANGUAGES } from "app/core/interfaces/languages";
-import { Country } from "app/core/interfaces/country";
-import { CURRENCIES } from "app/core/interfaces/currencies";
+} from './../../../shared/utilities/functions';
+import { NgbDateMomentParserFormatter } from 'app/shared/utilities/ngbParserFormatter';
+import { HubService } from 'app/core/services/hub.service';
+import { Supplier } from 'app/core/interfaces/supplier';
+import { Access } from '../../../core/interfaces/access';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { LANGUAGES } from 'app/core/interfaces/languages';
+import { Country } from 'app/core/interfaces/country';
+import { CURRENCIES } from 'app/core/interfaces/currencies';
 
 @Component({
-  selector: "b2b-availability",
-  templateUrl: "./availability.component.html",
-  styleUrls: ["./availability.component.css"],
+  selector: 'b2b-availability',
+  templateUrl: './availability.component.html',
+  styleUrls: ['./availability.component.css'],
   providers: [
     NgbTypeaheadConfig,
     {
@@ -57,7 +57,7 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
   @Output() output = new EventEmitter();
   @Input() bordered: boolean;
   @Input() isEdit: boolean;
-  dropdownOffset = "44 6";
+  dropdownOffset = '44 6';
   private maNumRooms = 6;
   accessesToSearch: Access[];
   adultAge = 33;
@@ -120,7 +120,7 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
     //   this.criteria.city = true;
     // }
 
-    this.context = "";
+    this.context = '';
   }
 
   getDropdownOffset(position) {
@@ -132,7 +132,7 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
     // } else {
     //   return '56 6';
     // }
-    return "59 6";
+    return '59 6';
     // const lateralOffset = (Number(position.x) - XoffsetModifier) * -1;
     // console.log(YoffsetModifier + ' ' + lateralOffset);
     // return YoffsetModifier + ' ' + lateralOffset;
@@ -144,7 +144,7 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
       .distinctUntilChanged()
       .map(
         term =>
-          term === ""
+          term === ''
             ? []
             : this.markets.filter((item: Country) => {
                 const name =
@@ -160,7 +160,7 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
       .distinctUntilChanged()
       .map(
         term =>
-          term === ""
+          term === ''
             ? []
             : this.languages.filter(item => {
                 const name =
@@ -176,7 +176,7 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
       .distinctUntilChanged()
       .map(
         term =>
-          term === ""
+          term === ''
             ? []
             : this.currencies.filter(item => {
                 const name =
@@ -274,7 +274,7 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
     if (this.criteria.rooms.length < 6) {
       this.criteria.rooms.push({ paxes: [{ age: 30 }, { age: 31 }] });
     } else {
-      this.notificationService.warning("Cannot add more rooms.");
+      this.notificationService.warning('Cannot add more rooms.');
     }
   }
 
@@ -309,6 +309,13 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
 
   saveAccessesToSearch(accessesToSearch) {
     this.accessesToSearch = [...accessesToSearch];
+  }
+
+  decideClosure(event, datepicker) {
+    const path = event.path.map(p => p.localName);
+    if (!path.includes('ngb-datepicker')) {
+      datepicker.close();
+    }
   }
 
   /**

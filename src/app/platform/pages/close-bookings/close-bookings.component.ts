@@ -1,23 +1,25 @@
-import { LangService } from "./../../../core/services/lang.service";
-import { HotelBookPayload } from "app/core/interfaces/hotel-book-payload";
-import { Component, OnInit } from "@angular/core";
-import { SpinnerService } from "app/core/services/spinner.service";
-import { HubService } from "app/core/services/hub.service";
-import { NotificationService } from "app/core/services/notification.service";
-import { BookingService } from "app/core/services/booking.service";
-import { BookingDetail } from "app/core/interfaces/booking-detail";
-import { Router } from "@angular/router";
-import { SearchService } from "app/core/services/search.service";
-import { WebConfigService } from "../../../core/services/web-config.service";
+import { LangService } from './../../../core/services/lang.service';
+import { HotelBookPayload } from 'app/core/interfaces/hotel-book-payload';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { SpinnerService } from 'app/core/services/spinner.service';
+import { HubService } from 'app/core/services/hub.service';
+import { NotificationService } from 'app/core/services/notification.service';
+import { BookingService } from 'app/core/services/booking.service';
+import { BookingDetail } from 'app/core/interfaces/booking-detail';
+import { Router } from '@angular/router';
+import { SearchService } from 'app/core/services/search.service';
+import { WebConfigService } from '../../../core/services/web-config.service';
+import { Subscription } from 'apollo-client/util/Observable';
 
 @Component({
-  selector: "b2b-close-bookings",
-  templateUrl: "./close-bookings.component.html",
-  styleUrls: ["./close-bookings.component.css"]
+  selector: 'b2b-close-bookings',
+  templateUrl: './close-bookings.component.html',
+  styleUrls: ['./close-bookings.component.css']
 })
-export class CloseBookingsComponent implements OnInit {
+export class CloseBookingsComponent implements OnInit, OnDestroy {
   book: HotelBookPayload;
   bookingDetail: BookingDetail;
+  bookingSubscription: Subscription;
   loading$;
 
   constructor(
@@ -32,9 +34,10 @@ export class CloseBookingsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log('On init close-bookings');
     this.spinnerService.start();
     this.loading$ = this.spinnerService.loading$;
-    this.bookingService.booking$.subscribe(
+    this.bookingSubscription = this.bookingService.booking$.subscribe(
       res => {
         this.bookingDetail = res;
         this.getBook();
@@ -54,23 +57,25 @@ export class CloseBookingsComponent implements OnInit {
       const lang = this.langService.getLang();
       this.bookingDetail.input.language = lang;
 
-      this.hubService.getBook(this.bookingDetail.input, this.webConfigService.getContext()).subscribe(
-        res => {
-          if (res.errors) {
-            this.notificationService.handleIError(res.errors);
-          }
+      this.hubService
+        .getBook(this.bookingDetail.input, this.webConfigService.getContext())
+        .subscribe(
+          res => {
+            if (res.errors) {
+              this.notificationService.handleIError(res.errors);
+            }
 
-          if (res.warnings) {
-            this.notificationService.handlIWarning(res.warnings);
+            if (res.warnings) {
+              this.notificationService.handlIWarning(res.warnings);
+            }
+            this.book = res.data.hotelX.book;
+            this.spinnerService.stop();
+          },
+          err => {
+            this.spinnerService.stop();
+            this.notificationService.error(err);
           }
-          this.book = res.data.hotelX.book;
-          this.spinnerService.stop();
-        },
-        err => {
-          this.spinnerService.stop();
-          this.notificationService.error(err);
-        }
-      );
+        );
     } else {
       this.spinnerService.stop();
     }
@@ -84,6 +89,10 @@ export class CloseBookingsComponent implements OnInit {
     if (event.criteria) {
       this.searchService.setCriteria(event.criteria);
     }
-    this.router.navigate(["/platform/results-bookings"]);
+    this.router.navigate(['/platform/results-bookings']);
+  }
+
+  ngOnDestroy() {
+    this.bookingSubscription.unsubscribe();
   }
 }

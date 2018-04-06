@@ -139,7 +139,6 @@ export class BookingService {
       search: this.booking.getValue() ? this.booking.getValue().search : null,
       input: input,
     };
-
     this.booking.next(booking);
   }
 
