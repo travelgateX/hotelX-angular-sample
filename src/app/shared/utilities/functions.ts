@@ -86,7 +86,8 @@ export function storeRequest(req) {
   } else if (isMyBookings) {
     requestsToSave['myBookingsRQ'] = req;
   } else if (isCancelBooking) {
-    requestsToSave['cancelBookingRQ'] = req;
+    const input = req.body.variables.input;
+    requestsToSave['cancelBookingRQ_' + input.reference.supplier] = req;
   } else {
     return;
   }
