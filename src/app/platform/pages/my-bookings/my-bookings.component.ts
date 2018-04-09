@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { HubService } from 'app/core/services/hub.service';
-import { CriteriaBooking } from 'app/core/interfaces/criteria-booking';
-import { LangService } from '../../../core/services/lang.service';
-import { BookingCriteriaType } from '../../../core/enumerates/booking-criteria-type';
-import { CriteriaBookingReference } from 'app/core/interfaces/criteria-booking-reference';
-import { CriteriaBookingDates } from 'app/core/interfaces/criteria-booking-dates';
-import { Access } from 'app/core/interfaces/access';
+import { Component, OnInit } from "@angular/core";
+import { HubService } from "app/core/services/hub.service";
+import { CriteriaBooking } from "app/core/interfaces/criteria-booking";
+import { LangService } from "../../../core/services/lang.service";
+import { BookingCriteriaType } from "../../../core/enumerates/booking-criteria-type";
+import { CriteriaBookingReference } from "app/core/interfaces/criteria-booking-reference";
+import { CriteriaBookingDates } from "app/core/interfaces/criteria-booking-dates";
+import { Access } from "app/core/interfaces/access";
 import {
   getDisabled,
   enumToArray,
@@ -13,35 +13,41 @@ import {
   loadResponse,
   storeResponse,
   decideClosure
-} from '../../../shared/utilities/functions';
-import { CancelBooking } from '../../../core/interfaces/cancel-booking';
-import { NotificationService } from 'app/core/services/notification.service';
-import { BookingCriteriaDateType } from 'app/core/enumerates/booking-criteria-date-type';
-import { FormBuilder, FormGroup } from '@angular/forms';
+} from "../../../shared/utilities/functions";
+import { CancelBooking } from "../../../core/interfaces/cancel-booking";
+import { NotificationService } from "app/core/services/notification.service";
+import { BookingCriteriaDateType } from "app/core/enumerates/booking-criteria-date-type";
+import { FormBuilder, FormGroup } from "@angular/forms";
 import {
   NgbInputDatepicker,
   NgbCalendar,
   NgbDateParserFormatter,
   NgbModal
-} from '@ng-bootstrap/ng-bootstrap';
-import { RqModalComponent } from 'app/platform/components/rq-modal/rq-modal.component';
-import { RsModalComponent } from 'app/platform/components/rs-modal/rs-modal.component';
+} from "@ng-bootstrap/ng-bootstrap";
+import { Board } from "app/core/interfaces/board";
+import { Subscription } from "rxjs/Subscription";
+import { CurrencySelectorService } from "app/shared/components/selectors/currency-selector/currency-selector.service";
+import { RqModalComponent } from "app/platform/components/rq-modal/rq-modal.component";
+import { RsModalComponent } from "app/platform/components/rs-modal/rs-modal.component";
+import { LanguageSelectorService } from "../../../shared/components/selectors/language-selector/language-selector.service";
 
 @Component({
-  selector: 'b2b-my-bookings',
-  templateUrl: './my-bookings.component.html',
-  styleUrls: ['./my-bookings.component.css']
+  selector: "b2b-my-bookings",
+  templateUrl: "./my-bookings.component.html",
+  styleUrls: ["./my-bookings.component.css"]
 })
 export class MyBookingsComponent implements OnInit {
   accessesToSearch: Access[];
   myBookingForm: FormGroup;
   getDisabled = getDisabled;
+  boards: Board[];
   bookingCriteriaType = BookingCriteriaType;
   bookingCriteriaTypeArray = enumToArray(BookingCriteriaType);
   bookingCriteriaDateType = BookingCriteriaDateType;
   bookingCriteriaDateTypeArray = enumToArray(BookingCriteriaDateType);
   bookings: any[];
   loading: boolean;
+  subscriptions$: Subscription[];
 
   constructor(
     private hubService: HubService,
@@ -50,35 +56,57 @@ export class MyBookingsComponent implements OnInit {
     private fb: FormBuilder,
     public calendar: NgbCalendar,
     private dateFormatter: NgbDateParserFormatter,
+    private currencySelectorService: CurrencySelectorService,
+    private languageSelectorService: LanguageSelectorService,
     private modalService: NgbModal
   ) {}
 
   ngOnInit() {
+    this.boards = [];
+    this.subscriptions$ = [];
     this.myBookingForm = this.fb.group({
-      accessCode: '',
-      language: this.langService.getLang(),
+      accessCode: "",
+      language: "",
       typeSearch: BookingCriteriaType.REFERENCES,
       dates: this.fb.group({
         dateType: BookingCriteriaDateType.ARRIVAL,
         start: this.calendar.getToday(),
-        end: this.calendar.getNext(this.calendar.getToday(), 'd', 1)
+        end: this.calendar.getNext(this.calendar.getToday(), "d", 1)
       }),
       references: this.fb.group({
-        hotelCode: '',
-        currency: '',
-        references: this.fb.group({ client: '', supplier: '' })
+        hotelCode: "",
+        currency: "",
+        references: this.fb.group({ client: "", supplier: "" })
       })
     });
-    this.myBookingForm.disable();
+
+    this.subscriptions$[
+      "currency"
+    ] = this.currencySelectorService.currency$.subscribe(res => {
+      if (res && res.iso_code) {
+        this.myBookingForm.controls["references"].patchValue(
+          "currency",
+          res.iso_code
+        );
+      }
+    });
+
+    this.subscriptions$[
+      "language"
+    ] = this.languageSelectorService.language$.subscribe(res => {
+      if (res && res.iso_code) {
+        this.myBookingForm.controls["language"].setValue(res.iso_code);
+      }
+    });
   }
 
-  getMyBookings(criteriaBooking) {
-    this.bookings = [];
+  getMyBookings(criteriaBooking: CriteriaBooking) {
     this.loading = true;
     this.hubService.getMyBookings(criteriaBooking).valueChanges.subscribe(
       res => {
-        storeResponse('myBookingsRS', res);
+        this.bookings = [];
         this.loading = false;
+        storeResponse('myBookingsRS', res);
         if (
           res.data &&
           res.data.hotelX &&
@@ -94,40 +122,6 @@ export class MyBookingsComponent implements OnInit {
         this.notificationService.error(err);
         this.loading = false;
       }
-    );
-  }
-
-  onCancel(booking) {
-    const cancelBooking: CancelBooking = {
-      accessCode: this.accessesToSearch[0].code,
-      hotelCode: booking.hotel.hotelCode,
-      reference: {}
-    };
-    if (booking && booking.reference && booking.reference.supplier) {
-      cancelBooking.reference.supplier = booking.reference.supplier;
-    }
-    if (booking && booking.reference && booking.reference.client) {
-      cancelBooking.reference.client = booking.reference.client;
-    }
-    booking['loading'] = true;
-
-    this.hubService.cancelBook(cancelBooking).subscribe(
-      res => {
-        storeResponse('cancelBookingRS', res);
-        booking['loading'] = false;
-        if (
-          res.data &&
-          res.data.hotelX &&
-          res.data.hotelX.cancel &&
-          res.data.hotelX.cancel.cancellation &&
-          res.data.hotelX.cancel.cancellation.status &&
-          res.data.hotelX.cancel.cancellation.status === 'CANCELLED'
-        ) {
-          booking.status = 'CANCELLED';
-          this.notificationService.success('Booking Cancelled');
-        }
-      },
-      err => this.notificationService.error(err)
     );
   }
 
@@ -151,7 +145,7 @@ export class MyBookingsComponent implements OnInit {
     this.accessesToSearch = [...accessesToSearch];
     this.myBookingForm.patchValue({
       accessCode:
-        this.accessesToSearch.length !== 0 ? this.accessesToSearch[0].code : ''
+        this.accessesToSearch.length !== 0 ? this.accessesToSearch[0].code : ""
     });
     this.accessesToSearch.length !== 0
       ? this.myBookingForm.enable()
@@ -159,37 +153,24 @@ export class MyBookingsComponent implements OnInit {
   }
 
   /**
-   * Toggle dates to make a range input
-   * Cannot do it in the view because it seems that min date does not update
-   * @param eToggle ngbDatepicker
-   * @param sToggle ngbDatepicker
+   * Unsubscribe from all events
    */
-  onChange(eToggle: NgbInputDatepicker, sToggle: NgbInputDatepicker) {
-    // eToggle.close();
-    // const date = new Date(`25/03/2018`);
-    // date.setDate(date.getDate() + 1);
-    // this.minDateTo.year = date.getFullYear();
-    // this.minDateTo.month = date.getMonth() + 1;
-    // this.minDateTo.day = date.getDate();
-    // sToggle.open();
+  ngOnDestroy() {
+    this.subscriptions$.map(i => i.unsubscribe());
   }
 
   /**
    * Opens modal to show last request made of myBookings type
    */
   showRequest(booking = false) {
-    if (sessionStorage.getItem('interceptedRequest')) {
+    if (sessionStorage.getItem("interceptedRequest")) {
       const modalRef = this.modalService.open(RqModalComponent, {
-        size: 'lg',
+        size: "lg",
         keyboard: false,
-        backdrop: 'static'
+        backdrop: "static"
       });
 
-      if (booking) {
-        modalRef.componentInstance.input = loadRequest('cancelBookingRQ');
-      } else {
-        modalRef.componentInstance.input = loadRequest('myBookingsRQ');
-      }
+      modalRef.componentInstance.input = loadRequest("myBookingsRQ");
     }
   }
 
@@ -197,18 +178,14 @@ export class MyBookingsComponent implements OnInit {
    * Opens modal to show last response got form myBookings request
    */
   showResponse(booking = false) {
-    if (sessionStorage.getItem('storedResponses')) {
+    if (sessionStorage.getItem("storedResponses")) {
       const modalRef = this.modalService.open(RsModalComponent, {
-        size: 'lg',
+        size: "lg",
         keyboard: false,
-        backdrop: 'static'
+        backdrop: "static"
       });
 
-      if (booking) {
-        modalRef.componentInstance.book = loadResponse('cancelBookingRS');
-      } else {
-        modalRef.componentInstance.book = loadResponse('myBookingsRS');
-      }
+      modalRef.componentInstance.book = loadResponse("myBookingsRS");
     }
   }
 

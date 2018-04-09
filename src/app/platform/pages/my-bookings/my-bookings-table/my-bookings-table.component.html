@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col">
+    <div class="mo-my-bookings">
+      <table class="tb-rooms table table-hover">
+        <thead>
+          <tr>
+            <th i18n="@@booking-day">Booking day</th>
+            <th i18n="@@hotel">Hotel</th>
+            <th i18n="@@mealplan">Mealplan</th>
+            <th i18n="@@status">Status</th>
+            <th i18n="@@price">Price</th>
+            <th i18n="@@client-reference">Client reference</th>
+            <th i18n="@@supplier-reference">Supplier reference</th>
+            <th class="text-right" i18n="@@options">Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let booking of bookings">
+            <td>{{booking.hotel.creationDate}}</td>
+            <td>
+              <p class="hotelname">{{booking.hotel.hotelName}}</p>
+              <!-- TODO check and i18n -->
+              <p class="compo">Del {{booking.hotel.checkIn}} al {{booking.hotel.checkOut}}, {{booking.hotel.rooms.length}} habitación</p>
+            </td>
+            <!-- TODO check and i18n -->
+            <td>{{booking.hotel.boardCode | mealplan : boards}}</td>
+            <td>
+              <span [class]="'iso-status ' + booking.status.toLowerCase()">{{booking.status}}</span>
+            </td>
+            <td class="price">
+              <a class="tip" data-toggle="tooltip" data-placement="top" title="">{{booking.price.net}} {{booking.price.currency}}</a>
+            </td>
+            <td>{{booking.reference.client}}</td>
+            <td>{{booking.reference.supplier}}</td>
+            <td class="text-right">
+              <p class="cancel">
+                <a *ngIf="booking.status.toLowerCase() !== 'cancelled'" i18n="@@cancel" (click)="onCancel(booking)">Cancel</a>
+              </p>
+              <button *ngIf="booking.showMoreOptions" class="btn btn-sm btn-info smy" (click)="showRequest(booking)">RQ</button>
+              <button *ngIf="booking.showMoreOptions" class="btn btn-sm btn-info smy ml-10 mt-10" (click)="showResponse(booking)">RS</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- .mo-my-bookings -->
+  </div>
+</div>
+<div class="row">
+  <ng-container *ngIf="bookings && bookings.length === 0">
+    <div class="mo-no-results">
+      <p i18n="@@no-results">It seems we have no results for this request.</p>
+    </div>
+  </ng-container>
+</div>

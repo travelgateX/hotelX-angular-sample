@@ -18,25 +18,24 @@
 
 <div class="container">
   <form class="fm-smy my-book" [formGroup]="myBookingForm">
-    <div class="row pt-3">
-      <div class="col-md-4 offset-md-8">
-        <button class="btn btn-sm btn-info smy" [disabled]="!bookings" (click)="showRequest()" i18n="@@show-request">Show RQ</button>
-        <button class="btn btn-sm btn-info smy ml-10" [disabled]="!bookings || loading" (click)="showResponse()" i18n="@@show-response">Show RS</button>
-      </div>
-    </div>
-    <b2b-supplier-accesses (accessesToSearchOutput)="saveAccessesToSearch($event)"></b2b-supplier-accesses>
     <div class="row" style="margin-top: 30px;">
-      <div class="col-md-2">
+      <div class="col-md-6">
+        <b2b-supplier-accesses (accessesToSearchOutput)="saveAccessesToSearch($event)"></b2b-supplier-accesses>
+      </div>
+      <div class="col-md-3">
         <label>
           <span i18n="@@supplier">Search type</span>:</label>
         <select class="form-control" formControlName="typeSearch">
           <option *ngFor="let type of bookingCriteriaTypeArray" [value]="type.value">{{type.name}}</option>
         </select>
       </div>
+      <div class="col-md-3">
+        <b2b-language-selector [disabled]="!accessesToSearch || accessesToSearch.length === 0"></b2b-language-selector>
+      </div>
       <ng-container class="align-items-end" *ngIf="myBookingForm.controls['typeSearch'].value === bookingCriteriaType.REFERENCES"
         formGroupName="references">
         <ng-container formGroupName="references">
-          <div class="col-md-2">
+          <div class="col-md-3">
             <div class="form-group">
               <label>
                 <span i18n="@@client-reference">Client reference:</span>
@@ -47,7 +46,7 @@
               <input type="text" class="bordered form-control" placeholder="Ej: 213832WC212K" formControlName="client">
             </div>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-3">
             <div class="form-group">
               <label>
                 <span i18n="@@supplier-reference">Supplier reference:</span>
@@ -71,15 +70,7 @@
           </div>
         </div>
         <div class="col-md-2">
-          <div class="form-group">
-            <label>
-              <span i18n="@@currency">Currency:</span>
-              <a class="tip" data-toggle="tooltip" data-placement="top">
-                <i class="fa fa-question-circle" aria-hidden="true"></i>
-              </a>
-            </label>
-            <input type="text" class="bordered form-control" placeholder="Ej: EUR" formControlName="currency">
-          </div>
+          <b2b-currency-selector [disabled]="!accessesToSearch || accessesToSearch.length === 0"></b2b-currency-selector>
         </div>
         <div class="col-md-2">
           <div class="form-group">
@@ -101,15 +92,15 @@
             <option *ngFor="let type of bookingCriteriaDateTypeArray" [value]="type.value">{{type.name}}</option>
           </select>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
           <div class="form-group">
             <label i18n="@@by-dates">Start date:</label>
             <input style="background-color: white;" class="form-control" placeholder="YYYY-MM-DD" formControlName="start" ngbDatepicker
               #sToggle="ngbDatepicker" (click)="sToggle.toggle(); eToggle.close();$event.stopPropagation()" (close)="eToggle.open()"
-              (document:click)="decideIfClose($event, sToggle)" (ngModelChange)="onChange(sToggle, eToggle)" readonly>
+              (document:click)="decideIfClose($event, sToggle)" readonly>
           </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
           <div class="form-group">
             <label>End date:</label>
             <input style="background-color: white;" class="form-control" placeholder="YYYY-MM-DD" [minDate]="myBookingForm.controls['dates'].controls['start'].value"
@@ -130,80 +121,14 @@
       </ng-container>
     </div>
   </form>
-
-
-  <div class="row">
-    <div class="col">
-      <div class="mo-my-bookings">
-        <table class="tb-rooms table table-hover">
-          <thead>
-            <tr>
-              <th i18n="@@booking-day">Booking day</th>
-              <th i18n="@@hotel">Hotel</th>
-              <th i18n="@@status">Status</th>
-              <th i18n="@@price">Price</th>
-              <th i18n="@@client-reference">Client reference</th>
-              <th i18n="@@supplier-reference">Supplier reference</th>
-              <th class="text-right" i18n="@@options">Options</th>
-              <th class="text-right" i18n="@@request">Request</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let booking of bookings">
-              <td>{{booking.hotel.creationDate}}</td>
-              <td>
-                <p class="hotelname">{{booking.hotel.hotelName}}
-                  <!-- <i class="fa fa-star fill" aria-hidden="true">
-                    <i class="fa fa-star fill" aria-hidden="true"></i>
-                    <i class="fa fa-star fill" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                  </i> -->
-                </p>
-                <!-- TODO check and i18n -->
-                <!-- <p class="country">Barcelona, Spain</p> -->
-                <p class="compo">Del {{booking.hotel.checkIn}} al {{booking.hotel.checkOut}}, {{booking.hotel.rooms.length}} habitación</p>
-              </td>
-              <!-- TODO check and i18n -->
-              <td>
-                <span [class]="'iso-status ' + booking.status.toLowerCase()">{{booking.status}}</span>
-              </td>
-              <td class="price">
-                <a class="tip" data-toggle="tooltip" data-placement="top" title="">{{booking.price.net}} {{booking.price.currency}}</a>
-              </td>
-              <td>{{booking.reference.client}}</td>
-              <td>{{booking.reference.supplier}}</td>
-              <td class="text-right">
-                <p class="cancel">
-                  <a i18n="@@cancel" (click)="onCancel(booking)">Cancel</a>
-                </p>
-                <p class="xml">
-                  <!-- <a i18n="@@view-rq">View RQ</a>
-                  <a i18n="@@view-rs">View RS</a> -->
-                </p>
-              </td>
-              <td>
-                <div class="row">
-                  <div class="col-sm-12">
-                    <button class="btn btn-sm btn-info smy" [disabled]="booking.loading === undefined" (click)="showRequest(booking)">RQ</button>
-                    <button class="btn btn-sm btn-info smy ml-10" [disabled]="booking.loading !== false" (click)="showResponse(booking)">RS</button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <!-- .mo-my-bookings -->
+  <div class="row" *ngIf="bookings">
+    <div class="col-md-2 offset-md-10">
+      <button class="btn btn-sm btn-info smy" (click)="showRequest()" i18n="@@show-request">Show RQ</button>
+      <button class="btn btn-sm btn-info smy ml-10" (click)="showResponse()" i18n="@@show-response">Show RS</button>
     </div>
   </div>
-  <div class="row">
-    <ng-container *ngIf="bookings && bookings.length === 0 && !loading">
-      <div class="mo-no-results">
-        <p i18n="@@no-results">It seems we have no results for this request.</p>
-      </div>
-    </ng-container>
-  </div>
+
+  <b2b-my-bookings-table [bookings]="bookings" [boards]="boards"></b2b-my-bookings-table>
   <div class="row">
     <div class="col-md-1 col-centered">
       <i class="fa fa-spinner fa-spin" style="font-size:36px;" *ngIf="loading"></i>

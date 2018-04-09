@@ -1,4 +1,3 @@
-import { MEALPLANS } from '../../interfaces/mealplans';
 import { HotelAvail } from './../../../core/interfaces/hotel-avail';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -26,9 +25,9 @@ import { RqModalComponent } from 'app/platform/components/rq-modal/rq-modal.comp
 import { loadRequest, storeResponse, loadResponse } from 'app/shared/utilities/functions';
 
 @Component({
-  selector: 'b2b-result-bookings',
-  templateUrl: './result-bookings.component.html',
-  styleUrls: ['./result-bookings.component.css']
+  selector: "b2b-result-bookings",
+  templateUrl: "./result-bookings.component.html",
+  styleUrls: ["./result-bookings.component.css"]
 })
 export class ResultBookingsComponent implements OnInit, OnDestroy {
   subscriptions$: Subscription[];
@@ -54,7 +53,7 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
     price: string | null;
   };
   environment: any;
-  test = '-';
+  test = "-";
 
   constructor(
     private hubService: HubService,
@@ -82,7 +81,7 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
     });
     this.bookingService.booking$.subscribe(
       res => {
-        if (!res || !res.hasOwnProperty('search')) {
+        if (!res || !res.hasOwnProperty("search")) {
           this.bookingService.setSearchValue(this.criteria);
         } else {
           this.search = res.search;
@@ -103,7 +102,7 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
     this.hotels = [];
     this.page = 1;
     this.filter = {
-      codeName: '',
+      codeName: "",
       category: null,
       rate: null,
       boardCode: null,
@@ -132,7 +131,7 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
                   this.notificationService.error(
                     res.data.hotelX.search.errors
                       .map(x => x.description)
-                      .join('\n')
+                      .join("\n")
                   );
                 }
 
@@ -214,12 +213,12 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
     }
     if (this.hotelsDetailInfo) {
       const result = this.hotelsDetailInfo.filter(item => {
-        if (item && item['node'] && item['node'].hotelData) {
-          return item['node'].hotelData.hotelCode === hotel.hotelCode;
+        if (item && item["node"] && item["node"].hotelData) {
+          return item["node"].hotelData.hotelCode === hotel.hotelCode;
         }
       });
-      if (result[0] && result[0]['node'].hotelData) {
-        return result[0]['node'].hotelData;
+      if (result[0] && result[0]["node"].hotelData) {
+        return result[0]["node"].hotelData;
       }
     }
     return undefined;
@@ -260,9 +259,9 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
    */
   openModalEdit() {
     const modalRef = this.modalService.open(EditCriteriaModalComponent, {
-      size: 'lg',
+      size: "lg",
       keyboard: false,
-      backdrop: 'static'
+      backdrop: "static"
     });
     modalRef.componentInstance.isEdit = true;
     modalRef.result.then(event => {
@@ -309,7 +308,7 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
    */
   clearFilter() {
     this.filter = {
-      codeName: '',
+      codeName: "",
       category: null,
       rate: null,
       boardCode: null,
@@ -345,17 +344,17 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
     if (this.filter.rate !== null && passFilter) {
       const rate = option.rateRules;
       switch (this.filter.rate) {
-        case 'empty':
+        case "empty":
           if (rate !== null) {
             passed = false;
           }
           break;
-        case 'both':
+        case "both":
           if (
             rate === null ||
             rate.length !== 2 ||
-            !rate.includes('NON_REFUNDABLE') ||
-            !rate.includes('PACKAGE')
+            !rate.includes("NON_REFUNDABLE") ||
+            !rate.includes("PACKAGE")
           ) {
             passed = false;
           }
@@ -418,12 +417,12 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
    */
   filterPrice() {
     switch (this.filter.price) {
-      case 'DESC':
+      case "DESC":
         this.copyAvailability.sort((a, b) => {
           return b.options[0].price.net - a.options[0].price.net;
         });
         break;
-      case 'ASC':
+      case "ASC":
         this.copyAvailability.sort((a, b) => {
           return a.options[0].price.net - b.options[0].price.net;
         });

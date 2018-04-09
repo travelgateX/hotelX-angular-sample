@@ -6,10 +6,9 @@
         <div class="form-group">
           <label i18n="@@destination">Destination:</label>
 
-          <tag-input name="auto" [onAdding]="onAdd" [maxItems]="maxItems" [theme]="'bootstrap'" [(ngModel)]="criteria.items"
-            [placeholder]="'Hotel or Destination'" [secondaryPlaceholder]="'...'" [onTextChangeDebounce]="500" [onlyFromAutocomplete]="true"
-            [disable]="!accessesToSearch || accessesToSearch.length === 0" [class]="getDisabled(accessesToSearch, 'autocompleter')"
-            [clearOnBlur]="true" #searcher>
+          <tag-input name="auto" [onAdding]="onAdd" [maxItems]="maxItems" [theme]="'bootstrap'" [(ngModel)]="criteria.items" [placeholder]="'Hotel or Destination'"
+            [secondaryPlaceholder]="'...'" [onTextChangeDebounce]="500" [onlyFromAutocomplete]="true" [disable]="!accessesToSearch || accessesToSearch.length === 0"
+            [class]="getDisabled(accessesToSearch, 'autocompleter')" [clearOnBlur]="true" #searcher>
 
             <ng-template let-item="item" let-index="index">
               <span (click)="onRemoveItem(item, index)" class="ng2-tag__remove-button">x</span>
@@ -17,8 +16,8 @@
               <span *ngIf="!item.destination">[H] - {{item.display}} - ({{item.value}})</span>
             </ng-template>
 
-            <tag-input-dropdown [dynamicUpdate]="false" [offset]="getDropdownOffset(mo_main_search_element.getBoundingClientRect()) || '44 6'" [minimumTextLength]="3"
-              [autocompleteObservable]="requestAutocompleteItems" [appendToBody]="true">
+            <tag-input-dropdown [dynamicUpdate]="false" [offset]="getDropdownOffset(mo_main_search_element.getBoundingClientRect()) || '44 6'"
+              [minimumTextLength]="3" [autocompleteObservable]="requestAutocompleteItems" [appendToBody]="true">
               <ng-template let-item="item" let-index="index">
                 <span *ngIf="item.destination">[D] - {{item.display}} - ({{item.value}})</span>
                 <span *ngIf="!item.destination">[H] - {{item.display}} - ({{item.value}})</span>
@@ -66,22 +65,11 @@
 
     <div class="row">
       <div class="col-md-4">
-        <div class="form-group">
-          <label i18n="@@language">Language:</label>
-          <input type="text" class="form-control" [(ngModel)]="criteria.language" languageMatch name="language" [ngbTypeahead]="languageFilter"
-            [disabled]="!accessesToSearch || accessesToSearch.length === 0" placeholder="Select Language" i18n-placeholder="@@market-placeholder"
-            [resultFormatter]="languageResultFormatter" [inputFormatter]="languageInputFormatter" />
-        </div>
+        <b2b-language-selector [disabled]="!accessesToSearch || accessesToSearch.length === 0"></b2b-language-selector>
       </div>
+
       <div class="col-md-4">
-        <div class="form-group">
-          <label i18n="@@currency">Currency:</label>
-          <div class="input-group">
-            <input type="text" class="form-control" [(ngModel)]="criteria.currency" currencyMatch name="currency" [ngbTypeahead]="currencyFilter"
-              [disabled]="!accessesToSearch || accessesToSearch.length === 0" placeholder="Select Currency" i18n-placeholder="@@market-placeholder"
-              [resultFormatter]="currencyResultFormatter" [inputFormatter]="currencyInputFormatter" />
-          </div>
-        </div>
+        <b2b-currency-selector [disabled]="!accessesToSearch || accessesToSearch.length === 0"></b2b-currency-selector>
       </div>
 
       <div class="col-md-4">
@@ -134,7 +122,7 @@
       <div class="col-12">
         <div class="submit">
           <p class="float-right">
-            <a class="btn btn-primary smy disabled" *ngIf="(!form.valid || !criteria.checkIn || !criteria.checkOut || !criteria.items?.length || !criteria.market); else search"
+            <a class="btn btn-primary smy disabled" *ngIf="(!form.valid || !criteria.checkIn || !criteria.checkOut || !criteria.items?.length || !criteria.market || !criteria.currency || !criteria.language); else search"
               i18n="@@search">Search</a>
             <ng-template #search>
               <a class="btn btn-primary smy" (click)="onSearch()" i18n="@@search">Search</a>

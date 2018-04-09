@@ -13,4 +13,5 @@ export interface HotelBookingDetail {
   remarks: string;
   status: 'OK' | 'RQ';
   payable: string;
+  showMoreOptions: Boolean;
 }

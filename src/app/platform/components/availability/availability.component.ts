@@ -37,10 +37,10 @@ import { HubService } from 'app/core/services/hub.service';
 import { Supplier } from 'app/core/interfaces/supplier';
 import { Access } from '../../../core/interfaces/access';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { LANGUAGES } from 'app/core/interfaces/languages';
 import { Country } from 'app/core/interfaces/country';
-import { CURRENCIES } from 'app/core/interfaces/currencies';
 import { decideClosure } from 'app/shared/utilities/functions';
+import { CurrencySelectorService } from "../../../shared/components/selectors/currency-selector/currency-selector.service";
+import { LanguageSelectorService } from "../../../shared/components/selectors/language-selector/language-selector.service";
 
 @Component({
   selector: 'b2b-availability',
@@ -68,8 +68,6 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
   context: string;
   getDisabled = getDisabled;
   markets = MARKETS;
-  languages = LANGUAGES;
-  currencies = CURRENCIES;
   maxItems = 5;
   maxNumPaxes = getArrayUses(12, false);
   minDateTo;
@@ -82,9 +80,6 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
   languageResultFormatter = (result: any) =>
     `${result.iso_code.toUpperCase()} - ${result.language_name}`;
   languageInputFormatter = (result: any) => result.language_name;
-  currencyResultFormatter = (result: any) =>
-    `${result.iso_code.toUpperCase()} - ${result.currency_name}`;
-  currencyInputFormatter = (result: any) => result.currency_name;
 
   constructor(
     private searchService: SearchService,
@@ -92,7 +87,9 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
     private notificationService: NotificationService,
     private calendar: NgbCalendar,
     private config: NgbTypeaheadConfig,
-    private hubService: HubService
+    private hubService: HubService,
+    private currencySelectorService: CurrencySelectorService,
+    private languageSelectorService: LanguageSelectorService
   ) {
     this.config.focusFirst = false;
   }
@@ -103,17 +100,30 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
     this.subscriptions$ = [];
-    this.subscriptions$[0] = this.searchService.criteria$.subscribe(res => {
-      this.criteria_copy = res;
-      this.criteria = JSON.parse(JSON.stringify(res));
-      if (this.criteria) {
-        this.criteria.items = [];
+    this.subscriptions$["criteria"] = this.searchService.criteria$.subscribe(
+      res => {
+        this.criteria_copy = res;
+        this.criteria = JSON.parse(JSON.stringify(res));
+        if (this.criteria) {
+          this.criteria.items = [];
+        }
+        this.minDateTo = this.criteria.checkIn;
       }
-      this.minDateTo = this.criteria.checkIn;
-    });
+    );
     this.now = this.calendar.getToday();
     this.minDateTo = this.calendar.getToday();
 
+    this.subscriptions$[
+      "currency"
+    ] = this.currencySelectorService.currency$.subscribe(res => {
+      this.criteria.currency = res;
+    });
+
+    this.subscriptions$[
+      "language"
+    ] = this.languageSelectorService.language$.subscribe(res => {
+      this.criteria.language = res;
+    });
     // this.criteria = JSON.parse(JSON.stringify(this.criteria_copy));
     // if (this.criteria.items.length > 0) {
     //   this.onAdd(this.criteria.items[0], true);
@@ -154,38 +164,6 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
             : this.markets.filter((item: Country) => {
                 const name =
                   item.country_name.toLowerCase().indexOf(term) !== -1;
-
-                return item.iso_code.toLowerCase().indexOf(term) !== -1 || name;
-              })
-      );
-
-  languageFilter = (text$: Observable<string>) =>
-    text$
-      .debounceTime(250)
-      .distinctUntilChanged()
-      .map(
-        term =>
-          term === ''
-            ? []
-            : this.languages.filter(item => {
-                const name =
-                  item.language_name.toLowerCase().indexOf(term) !== -1;
-
-                return item.iso_code.toLowerCase().indexOf(term) !== -1 || name;
-              })
-      );
-
-  currencyFilter = (text$: Observable<string>) =>
-    text$
-      .debounceTime(250)
-      .distinctUntilChanged()
-      .map(
-        term =>
-          term === ''
-            ? []
-            : this.currencies.filter(item => {
-                const name =
-                  item.currency_name.toLowerCase().indexOf(term) !== -1;
 
                 return item.iso_code.toLowerCase().indexOf(term) !== -1 || name;
               })

@@ -17,7 +17,7 @@
         [disabled]="!accesses || accesses.length === 0">
         <option *ngFor="let access of accesses" [value]="access.code">{{access.name}}</option>
       </select>
-      <!-- <p *ngIf="supplierSelected && (!accesses || accesses.length === 0)">There aren't accesses available</p> -->
+      <p *ngIf="supplierSelected && (!accesses || accesses.length === 0)">There aren't accesses available</p>
     </div>
   </div>
   <!-- <div class="col-md-6">
