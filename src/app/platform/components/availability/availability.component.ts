@@ -40,6 +40,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { LANGUAGES } from 'app/core/interfaces/languages';
 import { Country } from 'app/core/interfaces/country';
 import { CURRENCIES } from 'app/core/interfaces/currencies';
+import { decideClosure } from 'app/shared/utilities/functions';
 
 @Component({
   selector: 'b2b-availability',
@@ -121,6 +122,10 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
     // }
 
     this.context = '';
+  }
+
+  decideIfClose(event, datepicker) {
+    decideClosure(event, datepicker);
   }
 
   getDropdownOffset(position) {
@@ -215,20 +220,20 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
       .destinationSearcher(this.accessesToSearch[0], text)
       .valueChanges.map(res => {
         const searchResponse = [];
-        res.data.hotelX.destinationSearcher.map(res => {
-          if (res.code) {
+        res.data.hotelX.destinationSearcher.map(ds => {
+          if (ds.code) {
             searchResponse.push({
               destination: true,
-              value: res.code,
-              display: res.texts[0].text,
-              key: res.closestDestinations
+              value: ds.code,
+              display: ds.texts[0].text,
+              key: ds.closestDestinations
             });
-          } else if (res.hotelCode) {
+          } else if (ds.hotelCode) {
             searchResponse.push({
               destination: false,
-              value: res.hotelCode,
-              display: res.hotelName,
-              key: res.hotelCode
+              value: ds.hotelCode,
+              display: ds.hotelName,
+              key: ds.hotelCode
             });
           }
         });
@@ -309,13 +314,6 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
 
   saveAccessesToSearch(accessesToSearch) {
     this.accessesToSearch = [...accessesToSearch];
-  }
-
-  decideClosure(event, datepicker) {
-    const path = event.path.map(p => p.localName);
-    if (!path.includes('ngb-datepicker')) {
-      datepicker.close();
-    }
   }
 
   /**

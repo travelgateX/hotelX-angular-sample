@@ -35,14 +35,14 @@
           <div class="form-group">
             <label i18n="@@date-from">Date from:</label>
             <input type="text" class="form-control" placeholder="DD-MM-YYYY" [maxDate]="endDate" name="dp" [(ngModel)]="startDate" ngbDatepicker
-              #s="ngbDatepicker" (click)="s.toggle()">
+              #s="ngbDatepicker" (click)="s.toggle();$event.stopPropagation()" (document:click)="decideIfClose($event, s)">
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
             <label i18n="@@date-to">Date to:</label>
             <input type="text" class="form-control" placeholder="DD-MM-YYYY" [minDate]="startDate" name="dp" [(ngModel)]="endDate" ngbDatepicker
-              #e="ngbDatepicker" (click)="e.toggle()">
+              #e="ngbDatepicker" (click)="e.toggle();$event.stopPropagation()" (document:click)="decideIfClose($event, e)">
           </div>
         </div>
       </div>

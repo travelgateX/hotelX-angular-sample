@@ -149,3 +149,10 @@ export function loadResponse(dataType) {
   ];
   return response;
 }
+
+export function decideClosure(event, datepicker) {
+  const path = event.path.map(p => p.localName);
+  if (!path.includes('ngb-datepicker')) {
+    datepicker.close();
+  }
+}

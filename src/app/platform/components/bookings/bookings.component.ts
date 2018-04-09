@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { decideClosure } from 'app/shared/utilities/functions';
 
 @Component({
   selector: 'b2b-bookings',
@@ -12,4 +13,8 @@ export class BookingsComponent {
   public endDate: NgbDateStruct;
 
   constructor() {}
+
+  decideIfClose(event, datepicker) {
+    decideClosure(event, datepicker);
+  }
 }

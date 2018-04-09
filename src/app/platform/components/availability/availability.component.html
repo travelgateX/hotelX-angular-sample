@@ -35,7 +35,7 @@
           <label i18n="@@date-from">Date from:</label>
           <input style="background-color: white;" class="form-control" placeholder="YYYY-MM-DD" [minDate]="now" name="startDate" [(ngModel)]="criteria.checkIn"
             ngbDatepicker #sToggle="ngbDatepicker" (click)="sToggle.toggle(); eToggle.close();$event.stopPropagation()" (close)="eToggle.open()" (ngModelChange)="onChange(sToggle, eToggle)"
-            (document:click)="decideClosure($event, sToggle)"
+            (document:click)="decideIfClose($event, sToggle)"
             [disabled]="!accessesToSearch || accessesToSearch.length === 0" readonly>
         </div>
       </div>
@@ -45,7 +45,7 @@
           <div class="input-group">
             <input style="background-color: white;" class="form-control" placeholder="YYYY-MM-DD" [minDate]="minDateTo" name="endDate"
               [(ngModel)]="criteria.checkOut" ngbDatepicker #eToggle="ngbDatepicker" (click)="eToggle.toggle(); sToggle.close();$event.stopPropagation()"
-              (document:click)="decideClosure($event, eToggle)"
+              (document:click)="decideIfClose($event, eToggle)"
               [disabled]="!accessesToSearch || accessesToSearch.length === 0" readonly>
           </div>
         </div>

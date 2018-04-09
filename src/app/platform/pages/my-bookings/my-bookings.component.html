@@ -105,15 +105,16 @@
           <div class="form-group">
             <label i18n="@@by-dates">Start date:</label>
             <input style="background-color: white;" class="form-control" placeholder="YYYY-MM-DD" formControlName="start" ngbDatepicker
-              #sToggle="ngbDatepicker" (click)="sToggle.toggle(); eToggle.close();" (close)="eToggle.open()" (ngModelChange)="onChange(sToggle, eToggle)"
-              readonly>
+              #sToggle="ngbDatepicker" (click)="sToggle.toggle(); eToggle.close();$event.stopPropagation()" (close)="eToggle.open()"
+              (document:click)="decideIfClose($event, sToggle)" (ngModelChange)="onChange(sToggle, eToggle)" readonly>
           </div>
         </div>
         <div class="col-md-2">
           <div class="form-group">
             <label>End date:</label>
             <input style="background-color: white;" class="form-control" placeholder="YYYY-MM-DD" [minDate]="myBookingForm.controls['dates'].controls['start'].value"
-              formControlName="end" ngbDatepicker #eToggle="ngbDatepicker" (click)="eToggle.toggle(); sToggle.close()" readonly>
+              formControlName="end" ngbDatepicker #eToggle="ngbDatepicker" (document:click)="decideIfClose($event, eToggle)"
+              (click)="eToggle.toggle(); sToggle.close();$event.stopPropagation()" readonly>
           </div>
         </div>
         <div class="col-md-3">
@@ -182,12 +183,12 @@
                 </p>
               </td>
               <td>
-                  <div class="row">
-                      <div class="col-sm-12">
-                        <button class="btn btn-sm btn-info smy" [disabled]="booking.loading === undefined" (click)="showRequest(booking)">RQ</button>
-                        <button class="btn btn-sm btn-info smy ml-10" [disabled]="booking.loading !== false" (click)="showResponse(booking)">RS</button>
-                      </div>
-                    </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <button class="btn btn-sm btn-info smy" [disabled]="booking.loading === undefined" (click)="showRequest(booking)">RQ</button>
+                    <button class="btn btn-sm btn-info smy ml-10" [disabled]="booking.loading !== false" (click)="showResponse(booking)">RS</button>
+                  </div>
+                </div>
               </td>
             </tr>
           </tbody>

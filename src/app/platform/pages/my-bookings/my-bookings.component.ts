@@ -11,7 +11,8 @@ import {
   enumToArray,
   loadRequest,
   loadResponse,
-  storeResponse
+  storeResponse,
+  decideClosure
 } from '../../../shared/utilities/functions';
 import { CancelBooking } from '../../../core/interfaces/cancel-booking';
 import { NotificationService } from 'app/core/services/notification.service';
@@ -209,5 +210,9 @@ export class MyBookingsComponent implements OnInit {
         modalRef.componentInstance.book = loadResponse('myBookingsRS');
       }
     }
+  }
+
+  decideIfClose(event, datepicker) {
+    decideClosure(event, datepicker);
   }
 }
