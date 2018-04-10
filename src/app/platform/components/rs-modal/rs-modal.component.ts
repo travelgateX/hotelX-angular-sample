@@ -11,7 +11,7 @@ import { loadResponse } from 'app/shared/utilities/functions';
 export class RsModalComponent implements OnInit {
   @Input() book: HotelBookPayload;
   @ViewChild('pre') pre: ElementRef;
-  payload: any;
+  payload = 'Loading data...';
   isCopied = false;
 
   constructor(public activeModal: NgbActiveModal) {}
@@ -19,14 +19,7 @@ export class RsModalComponent implements OnInit {
   ngOnInit() {
     setTimeout(_ => {
       this.payload = loadResponse(this.book);
-      this.checkPreStatus();
     }, 0);
-  }
-
-  checkPreStatus() {
-    const interval = setInterval(_ => {
-      console.log(this.pre);
-    }, 1000);
   }
 
   copy() {

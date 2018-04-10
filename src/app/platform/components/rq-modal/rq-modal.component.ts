@@ -10,13 +10,15 @@ import { loadRequest } from '../../../shared/utilities/functions';
 export class RqModalComponent implements OnInit {
   @Input() input: any;
   @ViewChild('pre') pre: ElementRef;
-  payload: any;
+  payload = 'Loading data...';
   isCopied = false;
 
   constructor(public activeModal: NgbActiveModal) {}
 
   ngOnInit() {
-    this.payload = loadRequest(this.input);
+    setTimeout(_ => {
+      this.payload = loadRequest(this.input);
+    }, 0);
   }
 
   copy() {
