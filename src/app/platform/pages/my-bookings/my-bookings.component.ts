@@ -77,6 +77,7 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
         references: this.fb.group({ client: '', supplier: '' })
       })
     });
+    this.myBookingForm.disable();
 
     this.subscriptions$[
       'currency'
@@ -100,10 +101,11 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
 
   getMyBookings(criteriaBooking: CriteriaBooking) {
     this.loading = true;
+    this.bookings = null;
     this.hubService.getMyBookings(criteriaBooking).valueChanges.subscribe(
       res => {
-        this.bookings = [];
         this.loading = false;
+        this.bookings = [];
         storeResponse('myBookingsRS', res);
         if (
           res.data &&

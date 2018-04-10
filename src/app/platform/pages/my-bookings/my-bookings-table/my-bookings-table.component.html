@@ -17,46 +17,53 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let booking of bookings">
-            <td>{{booking.hotel.creationDate}}</td>
-            <td>
-              <p class="hotelname">{{booking.hotel.hotelName}}</p>
+          <ng-container *ngFor="let booking of bookings">
+            <tr>
+              <td>{{booking.hotel.creationDate}}</td>
+              <td>
+                <p class="hotelname">{{booking.hotel.hotelName}}</p>
+                <!-- TODO check and i18n -->
+                <p class="compo">Del {{booking.hotel.checkIn}} al {{booking.hotel.checkOut}}</p>
+              </td>
               <!-- TODO check and i18n -->
-              <p class="compo">Del {{booking.hotel.checkIn}} al {{booking.hotel.checkOut}}</p>
-            </td>
-            <!-- TODO check and i18n -->
-            <td style="white-space: nowrap;">{{booking.hotel.rooms.length}}
-              <span i18n="@@my-bookings-room-plural">{booking.hotel.rooms.length, plural, =0 {rooms} =1 {room} other {rooms}}</span>
-              <span class="tip" data-toggle="tooltip" data-placement="top" [title]="formatTitle(booking.hotel.rooms)">
-                <i class="fa fa-question-circle" aria-hidden="true"></i>
-              </span>
-            </td>
-            <td>{{booking.hotel.boardCode | mealplan : boards}}</td>
-            <td *ngIf="booking.cancelPolicy.cancelPenalties | getMax; else noOptions; let maxOption" (click)="openCancelPolicyModal(booking?.cancelPolicy?.cancelPenalties)">
-              <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" i18n-title="@@penalty-tooltip"
-                title="Click to see penalty list"></i>
-              {{(maxOption | mainPenalty : ngbDateMomentParserFormatter.parse(booking.hotel.checkIn)) | dateFormat:environment.organization.dateFormat}}
-              | {{maxOption.value | number : '1.2-2'}} {{maxOption.currency}}
-            </td>
-            <ng-template #noOptions>
-              <td></td>
-            </ng-template>
-            <td>
-              <span [class]="'iso-status ' + booking.status.toLowerCase()">{{booking.status}}</span>
-            </td>
-            <td class="price" style="white-space: nowrap;">
-              <a class="tip" data-toggle="tooltip" data-placement="top" title="">{{booking.price.net.toFixed(2)}} {{booking.price.currency}}</a>
-            </td>
-            <td>{{booking.reference.client}}</td>
-            <td>{{booking.reference.supplier}}</td>
-            <td class="text-right" style="white-space: nowrap;">
-              <p class="cancel">
-                <a *ngIf="booking.status.toLowerCase() !== 'cancelled'" i18n="@@cancel" (click)="onCancel(booking)">Cancel</a>
-              </p>
-              <button *ngIf="booking.showMoreOptions" class="btn btn-sm btn-info smy" (click)="showRequest(booking)">RQ</button>
-              <button *ngIf="booking.showMoreOptions" class="btn btn-sm btn-info smy ml-10 mt-10" (click)="showResponse(booking)">RS</button>
-            </td>
-          </tr>
+              <td style="white-space: nowrap;">{{booking.hotel.rooms.length}}
+                <span i18n="@@my-bookings-room-plural">{booking.hotel.rooms.length, plural, =0 {rooms} =1 {room} other {rooms}}</span>
+                <span class="tip" data-toggle="tooltip" data-placement="top" [title]="formatTitle(booking.hotel.rooms)">
+                  <i class="fa fa-question-circle" aria-hidden="true"></i>
+                </span>
+              </td>
+              <td>{{booking.hotel.boardCode | mealplan : boards}}</td>
+              <td *ngIf="booking?.cancelPolicy?.cancelPenalties | getMax; else noOptions; let maxOption" (click)="openCancelPolicyModal(booking?.cancelPolicy?.cancelPenalties)">
+                <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" i18n-title="@@penalty-tooltip"
+                  title="Click to see penalty list"></i>
+                {{(maxOption | mainPenalty : ngbDateMomentParserFormatter.parse(booking.hotel.checkIn)) | dateFormat:environment.organization.dateFormat}}
+                | {{maxOption.value | number : '1.2-2'}} {{maxOption.currency}}
+              </td>
+              <ng-template #noOptions>
+                <td></td>
+              </ng-template>
+              <td>
+                <span [class]="'iso-status ' + booking.status.toLowerCase()">{{booking.status}}</span>
+              </td>
+              <td class="price" style="white-space: nowrap;">
+                <a class="tip" data-toggle="tooltip" data-placement="top" title="">{{booking.price.net.toFixed(2)}} {{booking.price.currency}}</a>
+              </td>
+              <td>{{booking.reference.client}}</td>
+              <td>{{booking.reference.supplier}}</td>
+              <td class="text-right" style="white-space: nowrap;">
+                <p class="cancel">
+                  <a *ngIf="booking.status.toLowerCase() !== 'cancelled'" i18n="@@cancel" (click)="onCancel(booking)">Cancel</a>
+                </p>
+                <button *ngIf="booking.showMoreOptions" class="btn btn-sm btn-info smy" (click)="showRequest(booking)">RQ</button>
+                <button *ngIf="booking.showMoreOptions" class="btn btn-sm btn-info smy ml-10 mt-10" (click)="showResponse(booking)">RS</button>
+              </td>
+            </tr>
+            <tr>
+              <td [colSpan]="calcWidth()">
+                <xtg-simple-alert *ngIf="booking.cancelImport" [title]="'Cancel import'" [type]="'warning'" [message]="' ' + booking.cancelImport"></xtg-simple-alert>
+              </td>
+            </tr>
+          </ng-container>
         </tbody>
       </table>
     </div>

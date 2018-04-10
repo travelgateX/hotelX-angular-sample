@@ -79,8 +79,7 @@ export class MyBookingsTableComponent implements OnChanges {
 
     this.hubService.cancelBook(cancelBooking).subscribe(
       res => {
-        const bk = res.data.hotelX.cancel.cancellation.booking;
-        storeResponse("cancelBookingRS_" + bk.reference.supplier, res);
+        storeResponse("cancelBookingRS_" + booking.reference.supplier, res);
         booking.showMoreOptions = true;
         if (
           res.data &&
@@ -90,6 +89,9 @@ export class MyBookingsTableComponent implements OnChanges {
           res.data.hotelX.cancel.cancellation.status &&
           res.data.hotelX.cancel.cancellation.status === "CANCELLED"
         ) {
+          if (res.data.hotelX.cancel.cancellation.price && res.data.hotelX.cancel.cancellation.price.net) {
+            booking.cancelImport = res.data.hotelX.cancel.cancellation.price.net;
+          }
           booking.status = "CANCELLED";
           this.notificationService.success("Booking Cancelled");
         }
@@ -103,7 +105,7 @@ export class MyBookingsTableComponent implements OnChanges {
    */
   showRequest(booking = false) {
     if (sessionStorage.getItem("interceptedRequest")) {
-      const modalRef = this.modalService.open(RqModalCompconent, {
+      const modalRef = this.modalService.open(RqModalComponent, {
         size: "lg",
         keyboard: false,
         backdrop: "static"
@@ -167,5 +169,9 @@ export class MyBookingsTableComponent implements OnChanges {
       backdrop: "static"
     });
     modalRef.componentInstance.cancelPenalties = cancelPenalties;
+  }
+
+  calcWidth() {
+    return document.getElementsByTagName("th").length
   }
 }

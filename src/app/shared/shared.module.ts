@@ -21,6 +21,7 @@ import { CurrencySelectorService } from "./components/selectors/currency-selecto
 import { LanguageSelectorComponent } from './components/selectors/language-selector/language-selector.component';
 import { LanguageSelectorService } from "app/shared/components/selectors/language-selector/language-selector.service";
 import { ClipboardPipe } from './pipes/clipboard.pipe';
+import { SimpleAlertComponent } from "app/shared/simple-alert/simple-alert.component";
 @NgModule({
   imports: [
     CommonModule,
@@ -46,7 +47,8 @@ import { ClipboardPipe } from './pipes/clipboard.pipe';
     AmenitiesComponent,
     ClipboardPipe,
     CurrencySelectorComponent,
-    LanguageSelectorComponent
+    LanguageSelectorComponent,
+    SimpleAlertComponent
   ],
   exports: [
     CommonModule,
@@ -69,7 +71,8 @@ import { ClipboardPipe } from './pipes/clipboard.pipe';
     ClipboardPipe,
     NgbModule,
     CurrencySelectorComponent,
-    LanguageSelectorComponent
+    LanguageSelectorComponent,
+    SimpleAlertComponent
   ]
 })
 export class SharedModule {}
