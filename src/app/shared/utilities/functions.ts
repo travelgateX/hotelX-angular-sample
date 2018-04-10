@@ -68,6 +68,8 @@ export function enumToArray(enumerate: any) {
  */
 export function storeRequest(req) {
   // Filtrado GUARRO según las propiedades dentro de 'variables'
+  const request = JSON.parse(JSON.stringify(req));
+  request.bearer = 'Bearer ' + localStorage.getItem('token');
 
   const requestsToSave =
     JSON.parse(sessionStorage.getItem('interceptedRequest')) || {};
@@ -78,16 +80,16 @@ export function storeRequest(req) {
   const isCancelBooking = req.body.query.includes('cancelBooking');
 
   if (isHotelCriteria) {
-    requestsToSave['hotelRQ'] = req;
+    requestsToSave['hotelRQ'] = request;
   } else if (isQuoting) {
-    requestsToSave['quoteRQ'] = req;
+    requestsToSave['quoteRQ'] = request;
   } else if (isBooking) {
-    requestsToSave['bookRQ'] = req;
+    requestsToSave['bookRQ'] = request;
   } else if (isMyBookings) {
-    requestsToSave['myBookingsRQ'] = req;
+    requestsToSave['myBookingsRQ'] = request;
   } else if (isCancelBooking) {
-    const input = req.body.variables.input;
-    requestsToSave['cancelBookingRQ_' + input.reference.supplier] = req;
+    const input = request.body.variables.input;
+    requestsToSave['cancelBookingRQ_' + input.reference.supplier] = request;
   } else {
     return;
   }
