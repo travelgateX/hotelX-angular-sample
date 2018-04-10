@@ -388,8 +388,8 @@
         <target>Referencia reserva:</target>
       </trans-unit>
       <trans-unit id="supplier-reference" datatype="html">
-        <source>Supplier reference:</source>
-        <target>Referencia proveedor:</target>
+        <source>Supplier reference</source>
+        <target>Referencia proveedor</target>
       </trans-unit>
       <trans-unit id="by-dates" datatype="html">
         <source>By dates:</source>
@@ -500,8 +500,8 @@
         <target>Proporcione una referencia de cliente válida.</target>
       </trans-unit>
       <trans-unit id="client-reference" datatype="html">
-        <source>Client reference:</source>
-        <target>Referencia cliente:</target>
+        <source>Client reference</source>
+        <target>Referencia cliente</target>
       </trans-unit>
       <trans-unit id="client-example" datatype="html">
         <source>Ex: #FDSFDS2424</source>
@@ -840,8 +840,8 @@
         <target>Copiar al portapapeles</target>
       </trans-unit>
       <trans-unit id="my-bookings-room-plural" datatype="html">
-        <source>{bookingDetail.search.roomsNum, plural, =0 {rooms} =1 {room} other {rooms}}</source>
-        <target>{bookingDetail.search.roomsNum, plural, =0 {Habitaciones} =1 {Habitación} other {Habitaciones}}</target>
+        <source>{booking.hotel.rooms.length, plural, =0 {rooms} =1 {room} other {rooms}}</source>
+        <target>{booking.hotel.rooms.length, plural, =0 {Habitaciones} =1 {Habitación} other {Habitaciones}}</target>
       </trans-unit>
     </body>
   </file>

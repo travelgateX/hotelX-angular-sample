@@ -85,7 +85,7 @@
     <h3 class="tit" i18n="@@booking-details">Booking details</h3>
     <form class="fm-smy" [formGroup]="book">
       <div class="form-group row">
-        <label class="col-2 col-form-label" i18n="@@client-reference">Client reference:</label>
+        <label class="col-2 col-form-label" ><span i18n="@@client-reference">Client reference</span>:</label>
         <div class="col-4">
           <input class="form-control" [ngClass]="{'is-invalid': book['controls'].clientReference.touched && book['controls'].clientReference.errors}"
             type="text" placeholder="Ex: #FDSFDS2424" i18n-placeholder="@@client-example" name="name" formControlName="clientReference">
