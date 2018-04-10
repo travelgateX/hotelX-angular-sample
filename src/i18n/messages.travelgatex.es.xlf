@@ -315,6 +315,10 @@
         <source>Room</source>
         <target>Habitación</target>
       </trans-unit>
+      <trans-unit id="rooms" datatype="html">
+        <source>rooms</source>
+        <target>Habitaciones</target>
+      </trans-unit>
       <trans-unit id="add-room" datatype="html">
         <source>Add another room</source>
         <target>Añadir otra habitación</target>
@@ -834,6 +838,10 @@
       <trans-unit id="copy-to-clipboard" datatype="html">
         <source>Copy to clipboard</source>
         <target>Copiar al portapapeles</target>
+      </trans-unit>
+      <trans-unit id="my-bookings-room-plural" datatype="html">
+        <source>{bookingDetail.search.roomsNum, plural, =0 {rooms} =1 {room} other {rooms}}</source>
+        <target>{bookingDetail.search.roomsNum, plural, =0 {Habitaciones} =1 {Habitación} other {Habitaciones}}</target>
       </trans-unit>
     </body>
   </file>

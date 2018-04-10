@@ -316,6 +316,10 @@
         <source>Room</source>
         <target>Room</target>
       </trans-unit>
+      <trans-unit id="rooms" datatype="html">
+        <source>Rooms</source>
+        <target>Rooms</target>
+      </trans-unit>
       <trans-unit id="add-room" datatype="html">
         <source>Add another room</source>
         <target>Add another room</target>
@@ -835,6 +839,10 @@
       <trans-unit id="copy-to-clipboard" datatype="html">
         <source>Copy to clipboard</source>
         <target>Copy to clipboard</target>
+      </trans-unit>
+      <trans-unit id="my-bookings-room-plural" datatype="html">
+        <source>{bookingDetail.search.roomsNum, plural, =0 {rooms} =1 {room} other {rooms}}</source>
+        <target>{bookingDetail.search.roomsNum, plural, =0 {rooms} =1 {room} other {rooms}}</target>
       </trans-unit>
     </body>
   </file>
