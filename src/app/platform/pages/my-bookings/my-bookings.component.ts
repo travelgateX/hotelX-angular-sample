@@ -15,7 +15,7 @@ import {
 import { CancelBooking } from '../../../core/interfaces/cancel-booking';
 import { NotificationService } from 'app/core/services/notification.service';
 import { BookingCriteriaDateType } from 'app/core/enumerates/booking-criteria-date-type';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
   NgbInputDatepicker,
   NgbCalendar,
@@ -63,8 +63,8 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
     this.boards = [];
     this.subscriptions$ = [];
     this.myBookingForm = this.fb.group({
-      accessCode: '',
-      language: '',
+      accessCode: ['', Validators.required],
+      language: ['', Validators.required],
       typeSearch: BookingCriteriaType.REFERENCES,
       dates: this.fb.group({
         dateType: BookingCriteriaDateType.ARRIVAL,
@@ -87,6 +87,8 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
           'currency',
           res.iso_code
         );
+      } else {
+        this.myBookingForm.controls['references'].patchValue('currency', '');
       }
     });
 
@@ -95,6 +97,8 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
     ] = this.languageSelectorService.language$.subscribe(res => {
       if (res && res.iso_code) {
         this.myBookingForm.controls['language'].setValue(res.iso_code);
+      } else {
+        this.myBookingForm.controls['language'].setValue(null);
       }
     });
   }
