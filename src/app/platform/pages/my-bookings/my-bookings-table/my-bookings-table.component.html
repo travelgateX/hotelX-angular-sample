@@ -6,7 +6,9 @@
           <tr>
             <th i18n="@@booking-day">Booking day</th>
             <th i18n="@@hotel">Hotel</th>
+            <th i18n="@@rooms">Rooms</th>
             <th i18n="@@mealplan">Mealplan</th>
+            <th i18n="@@no-expenses-until">No expenses until</th>
             <th i18n="@@status">Status</th>
             <th i18n="@@price">Price</th>
             <th i18n="@@client-reference">Client reference</th>
@@ -20,19 +22,34 @@
             <td>
               <p class="hotelname">{{booking.hotel.hotelName}}</p>
               <!-- TODO check and i18n -->
-              <p class="compo">Del {{booking.hotel.checkIn}} al {{booking.hotel.checkOut}}, {{booking.hotel.rooms.length}} habitación</p>
+              <p class="compo">Del {{booking.hotel.checkIn}} al {{booking.hotel.checkOut}}</p>
             </td>
             <!-- TODO check and i18n -->
+            <td style="white-space: nowrap;">{{booking.hotel.rooms.length}}
+              <span i18n="@@my-bookings-room-plural">{booking.hotel.rooms.length, plural, =0 {rooms} =1 {room} other {rooms}}</span>
+              <span class="tip" data-toggle="tooltip" data-placement="top" [title]="formatTitle(booking.hotel.rooms)">
+                <i class="fa fa-question-circle" aria-hidden="true"></i>
+              </span>
+            </td>
             <td>{{booking.hotel.boardCode | mealplan : boards}}</td>
+            <td *ngIf="booking.cancelPolicy.cancelPenalties | getMax; else noOptions; let maxOption" (click)="openCancelPolicyModal(booking?.cancelPolicy?.cancelPenalties)">
+              <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" i18n-title="@@penalty-tooltip"
+                title="Click to see penalty list"></i>
+              {{(maxOption | mainPenalty : ngbDateMomentParserFormatter.parse(booking.hotel.checkIn)) | dateFormat:environment.organization.dateFormat}}
+              | {{maxOption.value | number : '1.2-2'}} {{maxOption.currency}}
+            </td>
+            <ng-template #noOptions>
+              <td></td>
+            </ng-template>
             <td>
               <span [class]="'iso-status ' + booking.status.toLowerCase()">{{booking.status}}</span>
             </td>
-            <td class="price">
-              <a class="tip" data-toggle="tooltip" data-placement="top" title="">{{booking.price.net}} {{booking.price.currency}}</a>
+            <td class="price" style="white-space: nowrap;">
+              <a class="tip" data-toggle="tooltip" data-placement="top" title="">{{booking.price.net.toFixed(2)}} {{booking.price.currency}}</a>
             </td>
             <td>{{booking.reference.client}}</td>
             <td>{{booking.reference.supplier}}</td>
-            <td class="text-right">
+            <td class="text-right" style="white-space: nowrap;">
               <p class="cancel">
                 <a *ngIf="booking.status.toLowerCase() !== 'cancelled'" i18n="@@cancel" (click)="onCancel(booking)">Cancel</a>
               </p>

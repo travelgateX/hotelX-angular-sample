@@ -44,7 +44,7 @@ export class HotelOptionComponent implements OnInit, OnDestroy, OnChanges {
   images: string[] = [];
   defaultImage: string;
   useDefaultImage: boolean;
-  environment: any;
+  environment = environment;
 
   constructor(
     private hubService: HubService,
@@ -68,7 +68,6 @@ export class HotelOptionComponent implements OnInit, OnDestroy, OnChanges {
     this.useDefaultImage = true;
     this.defaultImage =
       'http://cdn.roomdi.com/contenidosShared/fotos/agregadorHotelero/fotos_hotelv4/1/355/7.jpg?f=1612252115';
-    this.environment = environment;
   }
 
   ngOnChanges() {
