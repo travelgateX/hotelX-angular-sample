@@ -75,7 +75,7 @@
         <div class="col-md-2">
           <div class="form-group">
             <label></label>
-            <a class="btn btn-primary smy-bordered btn-block disabled" *ngIf="!accessesToSearch || accessesToSearch.length === 0; else searchReference"
+            <a class="btn btn-primary smy-bordered btn-block disabled" *ngIf="!accessesToSearch || accessesToSearch.length === 0 || !myBookingForm.valid; else searchReference"
               i18n="@@search">Search</a>
             <ng-template #searchReference>
               <a class="btn btn-primary smy-bordered btn-block" i18n="@@search" (click)="searchByReference(myBookingForm.value)">Search</a>
@@ -111,7 +111,7 @@
         <div class="col-md-3">
           <div class="form-group">
             <label></label>
-            <a class="btn btn-primary smy-bordered btn-block disabled" *ngIf="!accessesToSearch || accessesToSearch.length === 0; else searchDates"
+            <a class="btn btn-primary smy-bordered btn-block disabled" *ngIf="!accessesToSearch || accessesToSearch.length === 0 || !myBookingForm.valid; else searchDates"
               i18n="@@search">Search</a>
             <ng-template #searchDates>
               <a class="btn btn-primary smy-bordered btn-block" i18n="@@search" (click)="searchByDate(myBookingForm.value)">Search</a>
