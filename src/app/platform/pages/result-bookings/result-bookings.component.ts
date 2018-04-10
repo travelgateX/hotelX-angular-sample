@@ -23,9 +23,7 @@ import { WebConfigService } from '../../../core/services/web-config.service';
 import { RsModalComponent } from 'app/platform/components/rs-modal/rs-modal.component';
 import { RqModalComponent } from 'app/platform/components/rq-modal/rq-modal.component';
 import {
-  loadRequest,
-  storeResponse,
-  loadResponse
+  storeResponse
 } from 'app/shared/utilities/functions';
 
 @Component({
@@ -286,8 +284,7 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
         backdrop: 'static'
       });
 
-      const request = loadRequest('hotelRQ');
-      modalRef.componentInstance.input = request;
+      modalRef.componentInstance.input = 'hotelRQ';
     }
   }
 
@@ -302,8 +299,7 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
         backdrop: 'static'
       });
 
-      const response = loadResponse('hotelRS');
-      modalRef.componentInstance.book = response;
+      modalRef.componentInstance.book = 'hotelRS';
     }
   }
 

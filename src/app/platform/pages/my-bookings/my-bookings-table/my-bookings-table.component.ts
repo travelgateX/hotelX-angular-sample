@@ -10,8 +10,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RqModalComponent } from 'app/platform/components/rq-modal/rq-modal.component';
 import { RsModalComponent } from 'app/platform/components/rs-modal/rs-modal.component';
 import {
-  loadRequest,
-  loadResponse,
   storeResponse
 } from 'app/shared/utilities/functions';
 
@@ -103,9 +101,9 @@ export class MyBookingsTableComponent implements OnChanges {
       });
 
       if (booking) {
-        modalRef.componentInstance.input = loadRequest('cancelBookingRQ_' + booking['reference'].supplier);
+        modalRef.componentInstance.input = 'cancelBookingRQ_' + booking['reference'].supplier
       } else {
-        modalRef.componentInstance.input = loadRequest('myBookingsRQ');
+        modalRef.componentInstance.input = 'myBookingsRQ'
       }
     }
   }
@@ -122,9 +120,9 @@ export class MyBookingsTableComponent implements OnChanges {
       });
 
       if (booking) {
-        modalRef.componentInstance.book = loadResponse('cancelBookingRS_' + booking['reference'].supplier);
+        modalRef.componentInstance.book = 'cancelBookingRS_' + booking['reference'].supplier
       } else {
-        modalRef.componentInstance.book = loadResponse('myBookingsRS');
+        modalRef.componentInstance.book = 'myBookingsRS'
       }
     }
   }

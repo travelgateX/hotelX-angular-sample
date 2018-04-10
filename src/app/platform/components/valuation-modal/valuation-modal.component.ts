@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 import { SpinnerService } from 'app/core/services/spinner.service';
 import { Search } from 'app/core/interfaces/search';
 import { BookingService } from 'app/core/services/booking.service';
-import { formatHoursToDaysHours, loadRequest, loadResponse } from 'app/shared/utilities/functions';
+import { formatHoursToDaysHours } from 'app/shared/utilities/functions';
 import { environment } from 'environments/environment';
 import { HotelInfoDetail } from 'app/core/interfaces/hotel-info/hotel-info-detail';
 import { RsModalComponent } from 'app/platform/components/rs-modal/rs-modal.component';
@@ -205,9 +205,7 @@ export class ValuationModalComponent implements OnInit, OnDestroy {
         backdrop: 'static'
       });
 
-      const request = loadRequest('quoteRQ');
-
-      modalRef.componentInstance.input = request;
+      modalRef.componentInstance.input = 'quoteRQ';
       modalRef.result
       .then(res => {
         // https://github.com/ng-bootstrap/ng-bootstrap/issues/643#issuecomment-306256651
@@ -230,8 +228,7 @@ export class ValuationModalComponent implements OnInit, OnDestroy {
         backdrop: 'static'
       });
 
-      const response = loadResponse('quoteRS');
-      modalRef.componentInstance.book = response;
+      modalRef.componentInstance.book = 'quoteRS';
       modalRef.result
       .then(res => {
         // https://github.com/ng-bootstrap/ng-bootstrap/issues/643#issuecomment-306256651

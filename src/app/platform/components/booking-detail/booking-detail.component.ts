@@ -10,7 +10,7 @@ import { NotificationService } from 'app/core/services/notification.service';
 import { Criteria } from 'app/core/interfaces/criteria';
 import { SpinnerService } from 'app/core/services/spinner.service';
 import { environment } from 'environments/environment';
-import { loadRequest, loadResponse } from 'app/shared/utilities/functions';
+import {  } from 'app/shared/utilities/functions';
 
 @Component({
   selector: 'b2b-booking-detail',
@@ -64,9 +64,7 @@ export class BookingDetailComponent implements OnInit {
         backdrop: 'static'
       });
 
-      const request = loadRequest('bookRQ');
-
-      modalRef.componentInstance.input = request;
+      modalRef.componentInstance.input = 'bookRQ';
       modalRef.result
       .then(res => {
         // https://github.com/ng-bootstrap/ng-bootstrap/issues/643#issuecomment-306256651
@@ -89,8 +87,7 @@ export class BookingDetailComponent implements OnInit {
         backdrop: 'static'
       });
 
-      const response = loadResponse('bookRQ');
-      modalRef.componentInstance.book = response;
+      modalRef.componentInstance.book = 'bookRS';
       modalRef.result
       .then(res => {
         // https://github.com/ng-bootstrap/ng-bootstrap/issues/643#issuecomment-306256651

@@ -8,15 +8,10 @@
   </div>
   <div class="summary modal-body">
     <pre #pre style="max-height: 70vh; overflow-y:auto">
-        {{input | json}}
+        {{payload | json}}
     </pre>
   </div>
-  <!-- <div style="position: relative">
-      <input #hiddenInput style="position:relative; top:-200px">
-  </div> -->
-
   <div class="modal-footer">
-    <!-- <a class="btn smy" [ngClass]="!isCopied ? 'btn-info' : 'btn-success'" (click)="copy()" i18n="@@copy-to-clipboard">{{isCopied | clipboard}}</a> -->
     <div class="col-md-8">
       <p *ngIf="isCopied" class="text-success">Text copied to clipboard!</p>
     </div>
