@@ -9,7 +9,6 @@ import { Access } from 'app/core/interfaces/access';
 import {
   getDisabled,
   enumToArray,
-  storeResponse,
   decideClosure
 } from '../../../shared/utilities/functions';
 import { CancelBooking } from '../../../core/interfaces/cancel-booking';
@@ -28,6 +27,7 @@ import { CurrencySelectorService } from 'app/shared/components/selectors/currenc
 import { RqModalComponent } from 'app/platform/components/rq-modal/rq-modal.component';
 import { RsModalComponent } from 'app/platform/components/rs-modal/rs-modal.component';
 import { LanguageSelectorService } from '../../../shared/components/selectors/language-selector/language-selector.service';
+import { RequestStorageService } from 'app/core/services/request-storage.service';
 
 @Component({
   selector: 'b2b-my-bookings',
@@ -56,7 +56,8 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
     private dateFormatter: NgbDateParserFormatter,
     private currencySelectorService: CurrencySelectorService,
     private languageSelectorService: LanguageSelectorService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private requestStorageService: RequestStorageService
   ) {}
 
   ngOnInit() {
@@ -110,7 +111,7 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
       res => {
         this.loading = false;
         this.bookings = [];
-        storeResponse('myBookingsRS', res);
+        this.requestStorageService.storeResponse('myBookingsRS', res);
         if (
           res.data &&
           res.data.hotelX &&

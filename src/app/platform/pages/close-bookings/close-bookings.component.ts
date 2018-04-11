@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 import { SearchService } from 'app/core/services/search.service';
 import { WebConfigService } from '../../../core/services/web-config.service';
 import { Subscription } from 'apollo-client/util/Observable';
-import { storeResponse } from 'app/shared/utilities/functions';
+import { RequestStorageService } from 'app/core/services/request-storage.service';
 
 @Component({
   selector: 'b2b-close-bookings',
@@ -31,7 +31,8 @@ export class CloseBookingsComponent implements OnInit, OnDestroy {
     private router: Router,
     private searchService: SearchService,
     private langService: LangService,
-    private webConfigService: WebConfigService
+    private webConfigService: WebConfigService,
+    private requestStorageService: RequestStorageService
   ) {}
 
   ngOnInit() {
@@ -62,7 +63,7 @@ export class CloseBookingsComponent implements OnInit, OnDestroy {
         .getBook(this.bookingDetail.input, this.webConfigService.getContext())
         .subscribe(
           res => {
-            storeResponse('bookRS', res);
+            this.requestStorageService.storeResponse('bookRS', res);
             if (res.errors) {
               this.notificationService.handleIError(res.errors);
             }

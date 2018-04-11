@@ -1,6 +1,6 @@
 import { Component, Input, ViewChild, OnInit, ElementRef } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { loadRequest } from '../../../shared/utilities/functions';
+import { RequestStorageService } from 'app/core/services/request-storage.service';
 
 @Component({
   selector: 'b2b-rq-modal',
@@ -13,11 +13,14 @@ export class RqModalComponent implements OnInit {
   payload = 'Loading data...';
   isCopied = false;
 
-  constructor(public activeModal: NgbActiveModal) {}
+  constructor(
+    public activeModal: NgbActiveModal,
+    private requestStorageService: RequestStorageService
+  ) {}
 
   ngOnInit() {
     setTimeout(_ => {
-      this.payload = loadRequest(this.input);
+      this.payload = this.requestStorageService.loadRequest(this.input);
     }, 0);
   }
 

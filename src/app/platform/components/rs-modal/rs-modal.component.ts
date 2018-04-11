@@ -1,7 +1,7 @@
 import { Component, Input, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { HotelBookPayload } from 'app/core/interfaces/hotel-book-payload';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { loadResponse } from 'app/shared/utilities/functions';
+import { RequestStorageService } from 'app/core/services/request-storage.service';
 
 @Component({
   selector: 'b2b-rs-modal',
@@ -14,11 +14,14 @@ export class RsModalComponent implements OnInit {
   payload = 'Loading data...';
   isCopied = false;
 
-  constructor(public activeModal: NgbActiveModal) {}
+  constructor(
+    public activeModal: NgbActiveModal,
+    private requestStorageService: RequestStorageService
+  ) {}
 
   ngOnInit() {
     setTimeout(_ => {
-      this.payload = loadResponse(this.book);
+      this.payload = this.requestStorageService.loadResponse(this.book);
     }, 0);
   }
 

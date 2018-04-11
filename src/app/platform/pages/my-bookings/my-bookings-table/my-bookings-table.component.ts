@@ -9,11 +9,11 @@ import { WebConfigService } from 'app/core/services/web-config.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RqModalComponent } from 'app/platform/components/rq-modal/rq-modal.component';
 import { RsModalComponent } from 'app/platform/components/rs-modal/rs-modal.component';
-import { storeResponse } from 'app/shared/utilities/functions';
 import { Room } from '../../../../core/interfaces/room';
 import { CancelPolicyModalComponent } from 'app/platform/components/cancel-policy-modal/cancel-policy-modal.component';
 import { environment } from 'environments/environment';
 import { NgbDateMomentParserFormatter } from 'app/shared/utilities/ngbParserFormatter';
+import { RequestStorageService } from 'app/core/services/request-storage.service';
 
 @Component({
   selector: 'b2b-my-bookings-table',
@@ -30,7 +30,8 @@ export class MyBookingsTableComponent implements OnChanges {
     private hubService: HubService,
     private notificationService: NotificationService,
     private webConfigService: WebConfigService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private requestStorageService: RequestStorageService
   ) {
     this.ngbDateMomentParserFormatter = new NgbDateMomentParserFormatter();
   }
@@ -39,7 +40,6 @@ export class MyBookingsTableComponent implements OnChanges {
     if (this.bookings) {
       this.getBoards();
     }
-    // storeResponse('myBookingsRS', res);
   }
 
   getBoards() {
@@ -77,7 +77,7 @@ export class MyBookingsTableComponent implements OnChanges {
 
     this.hubService.cancelBook(cancelBooking).subscribe(
       res => {
-        storeResponse('cancelBookingRS_' + booking.reference.supplier, res);
+        this.requestStorageService.storeResponse('cancelBookingRS_' + booking.reference.supplier, res);
         booking.showMoreOptions = true;
         if (
           res.data &&

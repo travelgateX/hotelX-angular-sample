@@ -21,7 +21,7 @@ import { EditCriteriaModalComponent } from 'app/platform/components/edit-criteri
 import { CarouselModalComponent } from 'app/platform/components/carousel-modal/carousel-modal/carousel-modal.component';
 import { HotelInfoGeocode } from 'app/core/interfaces/hotel-info/geocode';
 import { Board } from 'app/core/interfaces/board';
-import { storeResponse } from '../../../shared/utilities/functions';
+import { RequestStorageService } from 'app/core/services/request-storage.service';
 
 @Component({
   selector: 'b2b-hotel-option',
@@ -52,7 +52,8 @@ export class HotelOptionComponent implements OnInit, OnDestroy, OnChanges {
     private notificationService: NotificationService,
     private spinnerService: SpinnerService,
     private bookingService: BookingService,
-    private langService: LangService
+    private langService: LangService,
+    private requestStorageService: RequestStorageService
   ) {}
 
   ngOnInit() {
@@ -127,7 +128,7 @@ export class HotelOptionComponent implements OnInit, OnDestroy, OnChanges {
       .valueChanges.subscribe(
         res => {
           const response = res.data.hotelX.quote;
-          storeResponse('quoteRS', response);
+          this.requestStorageService.storeResponse('quoteRS', response);
 
           if (response.warnings) {
             console.log(response.warnings);

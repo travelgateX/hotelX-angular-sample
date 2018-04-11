@@ -31,6 +31,7 @@ import { HttpHeadersInterceptor } from './httpHeaders.interceptor';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { fragmentTypes } from './fragmentTypes';
 import { WebConfigService } from './services/web-config.service';
+import { RequestStorageService } from 'app/core/services/request-storage.service';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, ApolloModule, HttpLinkModule],
@@ -78,7 +79,8 @@ export class CoreModule {
         BookingService,
         LoginGuard,
         LangService,
-        HttpLink
+        HttpLink,
+        RequestStorageService
       ]
     };
   }
@@ -94,7 +96,6 @@ export class CoreModule {
     apollo: Apollo,
     httpLink: HttpLink
   ) {
-    let test: any;
     if (parentModule) {
       throw new Error(
         'CoreModule is already loaded. Import it in the AppModule only'

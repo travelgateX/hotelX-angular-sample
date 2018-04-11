@@ -98,61 +98,10 @@ export function storeRequest(req) {
 }
 
 /**
- * Loads requests
- * @param dataType
+ * Function that catches click events. It's used to close a datepicker if the user clicks outside of it (or some other datepicker)
+ * @param event
+ * @param datepicker
  */
-export function loadRequest(dataType) {
-  const request = JSON.parse(sessionStorage.getItem('interceptedRequest'))[
-    dataType
-  ];
-  request.body.query = request.body.query.replace(/\n/gi, '');
-
-  // const formatRequest = function(obj) {
-  //   for (const key in obj) {
-  //     if (obj.hasOwnProperty(key)) {
-  //       stringifyArray(obj, key);
-  //     }
-  //   }
-  // };
-
-  // const stringifyArray = function(item, key) {
-  //   if (item[key] !== null && item[key].constructor === Array) {
-  //     item[key] = JSON.stringify(item[key]).replace(/\"/gi, "'");
-  //   } else if (item[key] !== null && typeof item[key] === 'object') {
-  //     formatRequest(item[key]);
-  //   }
-  // };
-
-  // formatRequest(request.body.variables);
-
-  return request;
-}
-
-/**
- * Stores responses
- * @param name
- * @param response
- */
-export function storeResponse(name, response) {
-  const responsesToSave =
-    JSON.parse(sessionStorage.getItem('storedResponses')) || {};
-
-  responsesToSave[name] = response;
-
-  sessionStorage.setItem('storedResponses', JSON.stringify(responsesToSave));
-}
-
-/**
- * Loads responses
- * @param dataType
- */
-export function loadResponse(dataType) {
-  const response = JSON.parse(sessionStorage.getItem('storedResponses'))[
-    dataType
-  ];
-  return response;
-}
-
 export function decideClosure(event, datepicker) {
   const path = event.path.map(p => p.localName);
   if (!path.includes('ngb-datepicker')) {

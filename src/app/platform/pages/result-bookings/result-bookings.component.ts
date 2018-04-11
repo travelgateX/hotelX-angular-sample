@@ -22,9 +22,7 @@ import { Category } from 'app/core/interfaces/category';
 import { WebConfigService } from '../../../core/services/web-config.service';
 import { RsModalComponent } from 'app/platform/components/rs-modal/rs-modal.component';
 import { RqModalComponent } from 'app/platform/components/rq-modal/rq-modal.component';
-import {
-  storeResponse
-} from 'app/shared/utilities/functions';
+import { RequestStorageService } from 'app/core/services/request-storage.service';
 
 @Component({
   selector: 'b2b-result-bookings',
@@ -65,7 +63,8 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
     private spinnerService: SpinnerService,
     private bookingService: BookingService,
     private langService: LangService,
-    private webConfigService: WebConfigService
+    private webConfigService: WebConfigService,
+    private requestStorageService: RequestStorageService
   ) {}
 
   ngOnInit() {
@@ -126,7 +125,7 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
           .valueChanges.subscribe(
             res => {
               const response = res.data.hotelX.search;
-              storeResponse('hotelRS', response);
+              this.requestStorageService.storeResponse('hotelRS', response);
 
               if (response) {
                 if (response.errors) {
