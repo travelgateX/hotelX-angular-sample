@@ -49,19 +49,6 @@ Here there is a list of the most common commands:
 "server-prod": "NODE_ENV=prod node server/server.js"
 ```
 
-## Built With
-
-### Firebase
-#### Google Functions
-[Google Cloud Functions](https://firebase.google.com/docs/functions/)
-
-To see functions log type `firebase functions:log`. Youo can see more at [https://firebase.google.com/docs/functions/writing-and-viewing-logs](https://firebase.google.com/docs/functions/writing-and-viewing-logs)
-
-
-
-* [Request](https://www.npmjs.com/package/request) - Dependency for making requests
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
 ## Authors
 
 * **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
