@@ -75,7 +75,7 @@
     </ng-template>
 
     <p class="desc">This option
-      <b *ngIf="quote?.cancelPolicy?.refundable; else noRefundable">is</b>
+      <b *ngIf="quote?.cancelPolicy?.refundable && !quote?.cancelPolicy?.cancelPenalties; else noRefundable">is</b>
       <ng-template #noRefundable>
         <b>isn't</b>
       </ng-template> refundable</p>
