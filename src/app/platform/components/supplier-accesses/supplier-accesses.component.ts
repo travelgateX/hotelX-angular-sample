@@ -1,13 +1,13 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
-import { HubService } from "app/core/services/hub.service";
-import { Supplier } from "app/core/interfaces/supplier";
-import { Access } from "app/core/interfaces/access";
-import { WebConfigService } from "../../../core/services/web-config.service";
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { HubService } from 'app/core/services/hub.service';
+import { Supplier } from 'app/core/interfaces/supplier';
+import { Access } from 'app/core/interfaces/access';
+import { WebConfigService } from '../../../core/services/web-config.service';
 
 @Component({
-  selector: "b2b-supplier-accesses",
-  templateUrl: "./supplier-accesses.component.html",
-  styleUrls: ["./supplier-accesses.component.css"]
+  selector: 'b2b-supplier-accesses',
+  templateUrl: './supplier-accesses.component.html',
+  styleUrls: ['./supplier-accesses.component.css']
 })
 export class SupplierAccessesComponent implements OnInit {
   @Output() accessesToSearchOutput = new EventEmitter();
@@ -36,7 +36,28 @@ export class SupplierAccessesComponent implements OnInit {
             this.suppliers.push(element.node.supplierData);
           }
         });
-        if (
+        if (this.webConfigService.getAccess()) {
+          for (
+            let i = 0;
+            i < this.suppliers.length && !this.supplierSelected;
+            i++
+          ) {
+            if (
+              this.suppliers[i].accesses['edges'].findIndex(element => {
+                return (
+                  element.node.accessData.code ===
+                  this.webConfigService.getAccess().code
+                );
+              }) !== -1
+            ) {
+              this.supplierSelected = this.suppliers[i].code;
+              this.onSupplierSelected();
+            }
+          }
+        } else if (this.suppliers.length === 1) {
+          this.supplierSelected = this.suppliers[0].code;
+          this.onSupplierSelected();
+        } else if (
           this.webConfigService.getSupplier() &&
           this.suppliers.findIndex(
             supplier =>
@@ -66,7 +87,7 @@ export class SupplierAccessesComponent implements OnInit {
     this.webConfigService.setSupplier(supplier);
     this.webConfigService.setContext(supplier.context);
     if (supplier && supplier.accesses) {
-      supplier.accesses["edges"].forEach(element => {
+      supplier.accesses['edges'].forEach(element => {
         const access = element.node.accessData;
         this.accesses.push(access);
       });
@@ -83,7 +104,7 @@ export class SupplierAccessesComponent implements OnInit {
         this.accessesSelected.push(this.webConfigService.getAccess().code);
         this.onAccessSelected(this.webConfigService.getAccess().code);
       } else {
-        this.onAccessSelected("");
+        this.onAccessSelected('');
       }
     }
   }
@@ -100,7 +121,7 @@ export class SupplierAccessesComponent implements OnInit {
     if (this.accessesToSearch.length !== 0) {
       this.webConfigService.setAccess(this.accessesToSearch[0]);
     } else {
-      this.webConfigService.setAccess({ code: "", name: "" });
+      this.webConfigService.setAccess({ code: '', name: '' });
     }
     this.accessesToSearchOutput.emit(this.accessesToSearch);
   }
