@@ -15,4 +15,5 @@ export interface HotelBookingDetail {
   payable: string;
   showMoreOptions: Boolean;
   cancelImport: number;
+  currencyImport: string;
 }

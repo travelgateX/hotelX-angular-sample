@@ -7,17 +7,20 @@
 
     <thead>
       <tr>
-        <th i18n="@@net">Net</th>
+        <th i18n="@@total-price">Total price</th>
+        <th i18n="@@commission">Commission</th>
         <th i18n="@@commission-percentage">Commission Percentage</th>
-        <th i18n="@@gross">Gross</th>
+        <th i18n="@@mandatory">Mandatory</th>
       </tr>
     </thead>
 
     <tbody>
       <tr>
-        <td>{{net}} {{option.price.currency}}</td>
-        <td>{{((gross - net) * 100) / gross | number : '1.2-2'}}%</td>
         <td>{{gross}} {{option.price.currency}}</td>
+        <td>{{gross - net | number : '1.2-2'}} {{option.price.currency}}</td>
+        <td>{{((gross - net) * 100) / gross | number : '1.2-2'}}%</td>
+        <td>{{option.price.binding}}</td>
+
     </tbody>
 
   </table>

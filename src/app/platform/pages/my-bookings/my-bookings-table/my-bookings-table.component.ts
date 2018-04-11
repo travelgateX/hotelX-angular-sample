@@ -94,6 +94,13 @@ export class MyBookingsTableComponent implements OnChanges {
             booking.cancelImport =
               res.data.hotelX.cancel.cancellation.price.net;
           }
+          if (
+            res.data.hotelX.cancel.cancellation.price &&
+            res.data.hotelX.cancel.cancellation.price.currency
+          ) {
+            booking.currencyImport =
+              res.data.hotelX.cancel.cancellation.price.currency;
+          }
           booking.status = 'CANCELLED';
           this.notificationService.success('Booking Cancelled');
         }

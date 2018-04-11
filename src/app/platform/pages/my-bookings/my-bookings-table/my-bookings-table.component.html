@@ -60,7 +60,7 @@
             </tr>
             <tr>
               <td [colSpan]="calcWidth()">
-                <xtg-simple-alert *ngIf="booking.cancelImport" [title]="'Cancel import'" [type]="'warning'" [message]="' ' + booking.cancelImport"></xtg-simple-alert>
+                <xtg-simple-alert *ngIf="booking.cancelImport" [title]="'Cancel import'" [type]="'warning'" [message]="' ' + booking.cancelImport + ' ' + booking.currencyImport"></xtg-simple-alert>
               </td>
             </tr>
           </ng-container>
