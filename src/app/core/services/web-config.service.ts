@@ -1,25 +1,25 @@
-import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
-import { Access } from "app/core/interfaces/access";
-import { Supplier } from "../interfaces/supplier";
-import { Currency } from "app/core/interfaces/currency";
-import { Language } from "app/core/interfaces/language";
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Access } from 'app/core/interfaces/access';
+import { Supplier } from '../interfaces/supplier';
+import { Currency } from 'app/core/interfaces/currency';
+import { Language } from 'app/core/interfaces/language';
+import { Market } from 'app/core/interfaces/market';
 
 @Injectable()
 export class WebConfigService {
-
-  constructor() { }
+  constructor() {}
 
   setAccess(access: Access) {
-    localStorage.setItem("access", JSON.stringify(access));
+    localStorage.setItem('access', JSON.stringify(access));
   }
 
   getAccess(): Access {
-    return JSON.parse(localStorage.getItem("access"));
+    return JSON.parse(localStorage.getItem('access'));
   }
 
   setSupplier(supplier: Supplier) {
-    localStorage.setItem("supplier", JSON.stringify(supplier));
+    localStorage.setItem('supplier', JSON.stringify(supplier));
   }
 
   getSupplier(): Supplier {
@@ -27,7 +27,7 @@ export class WebConfigService {
   }
 
   setLanguage(language: Language) {
-    localStorage.setItem("language", JSON.stringify(language));
+    localStorage.setItem('language', JSON.stringify(language));
   }
 
   getLanguage(): Language {
@@ -35,18 +35,26 @@ export class WebConfigService {
   }
 
   setContext(context: string) {
-    localStorage.setItem("context", JSON.stringify(context));
+    localStorage.setItem('context', JSON.stringify(context));
   }
 
   getContext(): string {
-    return JSON.parse(localStorage.getItem("context"));
+    return JSON.parse(localStorage.getItem('context'));
   }
 
   setCurrency(currency: Currency) {
-    localStorage.setItem("currency", JSON.stringify(currency));
+    localStorage.setItem('currency', JSON.stringify(currency));
   }
 
   getCurrency(): Currency {
-    return JSON.parse(localStorage.getItem("currency"));
+    return JSON.parse(localStorage.getItem('currency'));
+  }
+
+  setMarket(market: Market) {
+    localStorage.setItem('market', JSON.stringify(market));
+  }
+
+  getMarket(): Market {
+    return JSON.parse(localStorage.getItem('market'));
   }
 }

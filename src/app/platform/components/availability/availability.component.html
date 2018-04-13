@@ -52,14 +52,7 @@
       </div>
 
       <div class="col-md-4">
-        <div class="form-group">
-          <label i18n="@@market">Market:</label>
-          <div class="input-group">
-            <input type="text" class="form-control" [(ngModel)]="criteria.market" marketMatch [ngbTypeahead]="marketsFilter" name="markets"
-              [disabled]="!accessesToSearch || accessesToSearch.length === 0" [inputFormatter]="countryInputFormatter" [resultFormatter]="countryResultFormatter"
-              placeholder="Select Market" i18n-placeholder="@@market-placeholder" />
-          </div>
-        </div>
+        <b2b-market-selector [disabled]="!accessesToSearch || accessesToSearch.length === 0"></b2b-market-selector>
       </div>
     </div>
 
