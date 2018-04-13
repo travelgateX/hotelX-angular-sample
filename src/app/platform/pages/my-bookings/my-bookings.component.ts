@@ -28,6 +28,7 @@ import { RqModalComponent } from 'app/platform/components/rq-modal/rq-modal.comp
 import { RsModalComponent } from 'app/platform/components/rs-modal/rs-modal.component';
 import { LanguageSelectorService } from '../../../shared/components/selectors/language-selector/language-selector.service';
 import { RequestStorageService } from 'app/core/services/request-storage.service';
+import { AlertService } from 'app/shared/services/alert.service';
 
 @Component({
   selector: 'b2b-my-bookings',
@@ -46,6 +47,10 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
   bookings: any[];
   loading: boolean;
   subscriptions$: Subscription[];
+  errorSubscription: Subscription;
+  warningSubscription: Subscription;
+  errors: any[];
+  warnings: any[];
 
   constructor(
     private hubService: HubService,
@@ -57,7 +62,8 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
     private currencySelectorService: CurrencySelectorService,
     private languageSelectorService: LanguageSelectorService,
     private modalService: NgbModal,
-    private requestStorageService: RequestStorageService
+    private requestStorageService: RequestStorageService,
+    private alertService: AlertService
   ) {}
 
   ngOnInit() {
@@ -77,6 +83,13 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
         currency: '',
         references: this.fb.group({ client: '', supplier: '' })
       })
+    });
+    this.errorSubscription = this.alertService.error$.subscribe(err => {
+        this.errors = err.filter(e => e.name === 'MyBookings');
+    });
+
+    this.warningSubscription = this.alertService.warning$.subscribe(warning => {
+        this.warnings = warning.filter(w => w.name === 'MyBookings');
     });
     this.myBookingForm.disable();
 
@@ -112,18 +125,38 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
         this.loading = false;
         this.bookings = [];
         this.requestStorageService.storeResponse('myBookingsRS', res);
-        if (
-          res.data &&
-          res.data.hotelX &&
-          res.data.hotelX.booking &&
-          res.data.hotelX.booking.bookings
-        ) {
-          this.bookings = JSON.parse(
-            JSON.stringify(res.data.hotelX.booking.bookings)
-          );
+        if (res.data && res.data.hotelX && res.data.hotelX.booking) {
+          const booking = res.data.hotelX.booking;
+
+          if (booking.errors) {
+            this.alertService.setAlertMultiple(
+              'MyBookings',
+              'error',
+              booking.errors
+            );
+          }
+          if (booking.warnings) {
+            this.alertService.setAlertMultiple(
+              'MyBookings',
+              'warning',
+              booking.warnings
+            );
+          }
+
+          if (res.data.hotelX.booking.bookings) {
+            this.bookings = JSON.parse(
+              JSON.stringify(res.data.hotelX.booking.bookings)
+            );
+          }
         }
       },
       err => {
+        this.alertService.setAlert(
+          'MyBookings',
+          `Unhandled error`,
+          'error',
+          err
+        );
         this.notificationService.error(err);
         this.loading = false;
       }
@@ -162,6 +195,8 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
    */
   ngOnDestroy() {
     this.subscriptions$.map(i => i.unsubscribe());
+    this.errorSubscription.unsubscribe();
+    this.warningSubscription.unsubscribe();
   }
 
   /**

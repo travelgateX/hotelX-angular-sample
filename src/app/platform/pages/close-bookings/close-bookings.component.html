@@ -37,6 +37,16 @@
 
 <div class="container">
   <div class="row">
+    <div class="col-md-12">
+      <b2b-simple-alert *ngFor="let error of errors" [title]="error.title" [type]="error.type" [message]="error.message"></b2b-simple-alert>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <b2b-simple-alert *ngFor="let warning of warnings" [title]="warning.title" [type]="warning.type" [message]="warning.message"></b2b-simple-alert>
+    </div>
+  </div>
+  <div class="row">
     <div class="col">
       <b2b-booking-detail *ngIf="!(loading$ | async)" [bookingDetail]="bookingDetail" [book]="book"></b2b-booking-detail>
     </div>

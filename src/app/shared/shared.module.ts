@@ -24,6 +24,7 @@ import { ClipboardPipe } from './pipes/clipboard.pipe';
 import { SimpleAlertComponent } from 'app/shared/components/simple-alert/simple-alert.component';
 import { MarketSelectorComponent } from './components/selectors/market-selector/market-selector.component';
 import { MarketSelectorService } from 'app/shared/components/selectors/market-selector/market-selector.service';
+import { AlertService } from './services/alert.service';
 
 @NgModule({
   imports: [
@@ -38,7 +39,8 @@ import { MarketSelectorService } from 'app/shared/components/selectors/market-se
   providers: [
     CurrencySelectorService,
     LanguageSelectorService,
-    MarketSelectorService
+    MarketSelectorService,
+    AlertService
   ],
   declarations: [
     ScrollDirective,

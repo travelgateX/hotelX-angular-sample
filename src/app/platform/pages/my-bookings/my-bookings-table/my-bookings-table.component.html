@@ -58,9 +58,21 @@
                 <button *ngIf="booking.showMoreOptions" class="btn btn-sm btn-info smy ml-10 mt-10" (click)="showResponse(booking)">RS</button>
               </td>
             </tr>
+            <tr *ngFor="let error of booking['errors']">
+              <td [colSpan]="calcWidth()">
+                <b2b-simple-alert *ngFor="let error of booking['errors']" [title]="'Error (' + error.type + ') ' + error.code" [type]="'error'"
+                  [message]="error.description"></b2b-simple-alert>
+              </td>
+            </tr>
+            <tr *ngFor="let waring of booking['warnings']">
+              <td [colSpan]="calcWidth()">
+                <b2b-simple-alert *ngFor="let warning of booking['warnings']" [title]="'Warning (' + warning.type + ') ' + warning.code"
+                  [type]="'warning'" [message]="warning.description"></b2b-simple-alert>
+              </td>
+            </tr>
             <tr>
               <td [colSpan]="calcWidth()">
-                <xtg-simple-alert *ngIf="booking.cancelImport" [title]="'Cancel import'" [type]="'warning'" [message]="' ' + booking.cancelImport + ' ' + booking.currencyImport"></xtg-simple-alert>
+                <b2b-simple-alert *ngIf="booking.cancelImport" [title]="'Cancel import'" [type]="'primary'" [message]="' ' + booking.cancelImport"></b2b-simple-alert>
               </td>
             </tr>
           </ng-container>
