@@ -46,7 +46,7 @@
                 <span [class]="'iso-status ' + booking.status.toLowerCase()">{{booking.status}}</span>
               </td>
               <td class="price" style="white-space: nowrap;">
-                <a class="tip" data-toggle="tooltip" data-placement="top" title="">{{booking.price.net.toFixed(2)}} {{booking.price.currency}}</a>
+                <a (click)="openBindingModal(booking.price)" class="tip" data-toggle="tooltip" data-placement="top" title="">{{booking.price.net.toFixed(2)}} {{booking.price.currency}}</a>
               </td>
               <td>{{booking.reference.client}}</td>
               <td>{{booking.reference.supplier}}</td>

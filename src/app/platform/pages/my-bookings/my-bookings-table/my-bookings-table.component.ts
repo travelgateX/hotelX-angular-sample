@@ -14,6 +14,8 @@ import { CancelPolicyModalComponent } from 'app/platform/components/cancel-polic
 import { environment } from 'environments/environment';
 import { NgbDateMomentParserFormatter } from 'app/shared/utilities/ngbParserFormatter';
 import { RequestStorageService } from 'app/core/services/request-storage.service';
+import { Price } from 'app/core/interfaces/price';
+import { BindingModalComponent } from 'app/platform/components/binding-modal/binding-modal.component';
 
 @Component({
   selector: 'b2b-my-bookings-table',
@@ -180,6 +182,15 @@ export class MyBookingsTableComponent implements OnChanges {
       backdrop: 'static'
     });
     modalRef.componentInstance.cancelPenalties = cancelPenalties;
+  }
+
+  openBindingModal(price: Price) {
+    const modalRef = this.modalService.open(BindingModalComponent, {
+      size: 'lg',
+      keyboard: false,
+      backdrop: 'static'
+    });
+    modalRef.componentInstance.price = price;
   }
 
   calcWidth() {

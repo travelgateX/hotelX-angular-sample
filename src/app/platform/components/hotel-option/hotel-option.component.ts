@@ -22,6 +22,7 @@ import { CarouselModalComponent } from 'app/platform/components/carousel-modal/c
 import { HotelInfoGeocode } from 'app/core/interfaces/hotel-info/geocode';
 import { Board } from 'app/core/interfaces/board';
 import { RequestStorageService } from 'app/core/services/request-storage.service';
+import { Price } from '../../../core/interfaces/price';
 
 @Component({
   selector: 'b2b-hotel-option',
@@ -110,13 +111,13 @@ export class HotelOptionComponent implements OnInit, OnDestroy, OnChanges {
     modalRef.componentInstance.longitude = +hotelInfoGeocode.longitude;
   }
 
-  openBindingModal(option: Option) {
+  openBindingModal(price: Price) {
     const modalRef = this.modalService.open(BindingModalComponent, {
       size: 'lg',
       keyboard: false,
       backdrop: 'static'
     });
-    modalRef.componentInstance.option = option;
+    modalRef.componentInstance.price = price;
   }
 
   openModalValuation(option: Option, hotelInfo: HotelInfo) {
