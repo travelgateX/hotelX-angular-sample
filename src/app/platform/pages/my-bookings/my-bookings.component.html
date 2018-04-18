@@ -124,22 +124,14 @@
       </ng-container>
     </div>
   </form>
-  <div class="row">
-    <div class="col-md-12">
-      <b2b-simple-alert *ngFor="let error of errors" [title]="error.title" [type]="error.type" [message]="error.message"></b2b-simple-alert>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <b2b-simple-alert *ngFor="let warning of warnings" [title]="warning.title" [type]="warning.type" [message]="warning.message"></b2b-simple-alert>
-    </div>
-  </div>
   <div class="row" *ngIf="bookings">
-    <div class="col-md-2 offset-md-10">
-      <button class="btn btn-sm btn-info smy" (click)="showRequest()" i18n="@@show-request">Show RQ</button>
-      <button class="btn btn-sm btn-info smy ml-10" (click)="showResponse()" i18n="@@show-response">Show RS</button>
+      <div class="col-md-2 offset-md-10">
+        <button class="btn btn-sm btn-info smy" (click)="showRequest()" i18n="@@show-request">Show RQ</button>
+        <button class="btn btn-sm btn-info smy ml-10" (click)="showResponse()" i18n="@@show-response">Show RS</button>
+      </div>
     </div>
-  </div>
+  <b2b-alert-dropdown [errors]="errors" [warnings]="warnings"></b2b-alert-dropdown>
+
 
   <b2b-my-bookings-table [bookings]="bookings" [boards]="boards" [client]="client"></b2b-my-bookings-table>
   <div class="row">

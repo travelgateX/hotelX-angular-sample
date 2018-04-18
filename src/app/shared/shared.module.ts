@@ -32,6 +32,7 @@ import { RsModalComponent } from './components/rs-modal/rs-modal.component';
 import { RqModalComponent } from './components/rq-modal/rq-modal.component';
 import { ClientSelectorComponent } from './components/selectors/client-selector/client-selector.component';
 import { ClientSelectorService } from './components/selectors/client-selector/client-selector.service';
+import { AlertDropdownComponent } from './components/alert-dropdown/alert-dropdown.component';
 
 @NgModule({
   imports: [
@@ -72,7 +73,8 @@ import { ClientSelectorService } from './components/selectors/client-selector/cl
     MarketSelectorComponent,
     RsModalComponent,
     RqModalComponent,
-    ClientSelectorComponent
+    ClientSelectorComponent,
+    AlertDropdownComponent
   ],
   exports: [
     CommonModule,
@@ -100,7 +102,8 @@ import { ClientSelectorService } from './components/selectors/client-selector/cl
     SimpleAlertComponent,
     RsModalComponent,
     RqModalComponent,
-    ClientSelectorComponent
+    ClientSelectorComponent,
+    AlertDropdownComponent
   ]
 })
 export class SharedModule {}

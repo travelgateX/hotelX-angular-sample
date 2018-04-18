@@ -1,0 +1,11 @@
+<button *ngIf="errors.length" (click)="toggleItems('e')" class="btn btn-danger mb-3">
+  <i class="fa fa-exclamation-circle"></i> {{errors.length}}
+</button>
+<button *ngIf="warnings.length" (click)="toggleItems('w')" class="btn btn-warning mb-3">
+  <i class="fa fa-exclamation-triangle"></i> {{warnings.length}}
+</button>
+<div class="alert-dropdown mb-3">
+  <div [@seeItems]="seeItems">
+    <b2b-simple-alert *ngFor="let item of items" [title]="item.title" [type]="item.type" [message]="item.message"></b2b-simple-alert>
+  </div>
+</div>

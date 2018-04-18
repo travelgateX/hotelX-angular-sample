@@ -23,16 +23,15 @@ export class AlertService {
   }
 
   setAlertMultiple(name, type, alerts) {
-    const auxAlerts = alerts.map(a => {
-      if (a.type !== 'API_ERROR') {
+    let auxAlerts = alerts.map(a => {
         return {
           name: name,
           title: `${type} (${a.type}) ${a.code}`,
           type: type,
           message: JSON.stringify(a.description || 'Empty message')
         };
-      }
     });
+    auxAlerts = auxAlerts.filter( a => a !== undefined)
     this[type].next(auxAlerts);
   }
 }
