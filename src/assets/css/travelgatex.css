@@ -8274,3 +8274,8 @@ footer.mo-footer {
     padding: 5px 10px;
     border-radius: 3px;
     color: #fff; }
+  .iso-status.on_request {
+    background-color: #F6A623;
+    padding: 5px 10px;
+    border-radius: 3px;
+    color: #fff; }

@@ -80,4 +80,14 @@ export class AlertDropdownComponent implements OnInit {
     this.items = type === 'e' ? this.errors : this.warnings;
     this.shownItems = type;
   }
+
+  removeItems(item) {
+    if (item.type === 'warning') {
+      const index = this.warnings.findIndex(i => i.message === item.message);
+      this.warnings.splice(index, 1);
+    } else {
+      const index = this.errors.findIndex(i => i.message === item.message);
+      this.errors.splice(index, 1);
+    }
+  }
 }

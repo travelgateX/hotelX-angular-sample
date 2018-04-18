@@ -6,6 +6,6 @@
 </button>
 <div class="alert-dropdown mb-3">
   <div [@seeItems]="seeItems">
-    <b2b-simple-alert *ngFor="let item of items" [title]="item.title" [type]="item.type" [message]="item.message"></b2b-simple-alert>
+    <b2b-simple-alert *ngFor="let item of items" (indexRemoved)="removeItems(item)" [title]="item.title" [type]="item.type" [message]="item.message"></b2b-simple-alert>
   </div>
 </div>

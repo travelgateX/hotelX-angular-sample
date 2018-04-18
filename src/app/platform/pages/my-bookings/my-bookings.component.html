@@ -130,8 +130,7 @@
         <button class="btn btn-sm btn-info smy ml-10" (click)="showResponse()" i18n="@@show-response">Show RS</button>
       </div>
     </div>
-  <b2b-alert-dropdown [errors]="errors" [warnings]="warnings"></b2b-alert-dropdown>
-
+  <b2b-alert-dropdown *ngIf="!loading" [errors]="errors" [warnings]="warnings"></b2b-alert-dropdown>
 
   <b2b-my-bookings-table [bookings]="bookings" [boards]="boards" [client]="client"></b2b-my-bookings-table>
   <div class="row">

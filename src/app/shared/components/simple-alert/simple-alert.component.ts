@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'b2b-simple-alert',
@@ -9,8 +9,13 @@ export class SimpleAlertComponent implements OnChanges {
   @Input('message') message: string;
   @Input('type') type: string;
   typeString: string;
+  @Output() indexRemoved: EventEmitter<boolean> = new EventEmitter();
 
   constructor() {}
+
+  removeItem() {
+    this.indexRemoved.emit(true);
+  }
 
   ngOnChanges(event) {
     switch (this.type) {
