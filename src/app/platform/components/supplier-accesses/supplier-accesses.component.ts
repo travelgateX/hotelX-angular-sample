@@ -97,6 +97,7 @@ export class SupplierAccessesComponent implements OnInit {
       this.onAccessSelected(this.accesses[0].code);
     } else {
       if (
+        this.webConfigService.getAccess() &&
         this.accesses.findIndex(
           access => access.code === this.webConfigService.getAccess().code
         ) !== -1

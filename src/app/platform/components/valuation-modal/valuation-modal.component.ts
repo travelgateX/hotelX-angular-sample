@@ -10,16 +10,16 @@ import { FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
 import { HotelBookInput } from 'app/core/interfaces/hotel-book-input';
 import { BookingPaxes } from 'app/core/interfaces/booking-paxes';
 import { BookingRoom } from 'app/core/interfaces/booking-room';
-import { NotificationService } from 'app/core/services/notification.service';
 import { Router } from '@angular/router';
-import { SpinnerService } from 'app/core/services/spinner.service';
 import { Search } from 'app/core/interfaces/search';
 import { BookingService } from 'app/core/services/booking.service';
 import { formatHoursToDaysHours } from 'app/shared/utilities/functions';
 import { environment } from 'environments/environment';
 import { HotelInfoDetail } from 'app/core/interfaces/hotel-info/hotel-info-detail';
-import { RsModalComponent } from 'app/platform/components/rs-modal/rs-modal.component';
-import { RqModalComponent } from 'app/platform/components/rq-modal/rq-modal.component';
+import { RqModalComponent } from '../../../shared/components/rq-modal/rq-modal.component';
+import { RsModalComponent } from '../../../shared/components/rs-modal/rs-modal.component';
+import { NotificationService } from '../../../shared/services/notification.service';
+import { SpinnerService } from '../../../shared/services/spinner.service';
 
 @Component({
   selector: 'b2b-valuation-modal',
@@ -54,20 +54,18 @@ export class ValuationModalComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.rooms = [];
     this.subscriptions$ = [];
-    this.subscriptions$[0] = this.searchService.criteria$.subscribe(
-      res => {
-        this.criteria = JSON.parse(JSON.stringify(res));
-        this.book = new FormGroup({
-          clientReference: new FormControl('', Validators.required),
-          remarks: new FormControl(''),
-          holder: new FormGroup({
-            name: new FormControl('', Validators.required),
-            surname: new FormControl('', Validators.required)
-          }),
-          rooms: this.createRoom()
-        });
-      }
-    );
+    this.subscriptions$[0] = this.searchService.criteria$.subscribe(res => {
+      this.criteria = JSON.parse(JSON.stringify(res));
+      this.book = new FormGroup({
+        clientReference: new FormControl('', Validators.required),
+        remarks: new FormControl(''),
+        holder: new FormGroup({
+          name: new FormControl('', Validators.required),
+          surname: new FormControl('', Validators.required)
+        }),
+        rooms: this.createRoom()
+      });
+    });
     this.environment = environment;
   }
 
@@ -86,7 +84,7 @@ export class ValuationModalComponent implements OnInit, OnDestroy {
           return -1;
         }
         return 0;
-      })
+      });
       const paxes = new FormArray([]);
       if (room.paxes != null) {
         for (let i = 0; i < room.paxes.length; i++) {
@@ -207,13 +205,13 @@ export class ValuationModalComponent implements OnInit, OnDestroy {
 
       modalRef.componentInstance.input = 'quoteRQ';
       modalRef.result
-      .then(res => {
-        // https://github.com/ng-bootstrap/ng-bootstrap/issues/643#issuecomment-306256651
-        document.body.classList.add('modal-open');
-      })
-      .catch(err => {
-        document.body.classList.add('modal-open');
-      });
+        .then(res => {
+          // https://github.com/ng-bootstrap/ng-bootstrap/issues/643#issuecomment-306256651
+          document.body.classList.add('modal-open');
+        })
+        .catch(err => {
+          document.body.classList.add('modal-open');
+        });
     }
   }
 
@@ -230,13 +228,13 @@ export class ValuationModalComponent implements OnInit, OnDestroy {
 
       modalRef.componentInstance.book = 'quoteRS';
       modalRef.result
-      .then(res => {
-        // https://github.com/ng-bootstrap/ng-bootstrap/issues/643#issuecomment-306256651
-        document.body.classList.add('modal-open');
-      })
-      .catch(err => {
-        document.body.classList.add('modal-open');
-      });
+        .then(res => {
+          // https://github.com/ng-bootstrap/ng-bootstrap/issues/643#issuecomment-306256651
+          document.body.classList.add('modal-open');
+        })
+        .catch(err => {
+          document.body.classList.add('modal-open');
+        });
     }
   }
 

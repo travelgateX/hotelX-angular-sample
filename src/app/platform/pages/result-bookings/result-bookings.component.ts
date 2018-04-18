@@ -8,9 +8,7 @@ import { Option } from 'app/core/interfaces/option';
 import { Search } from 'app/core/interfaces/search';
 import { BookingService } from 'app/core/services/booking.service';
 import { HubService } from 'app/core/services/hub.service';
-import { NotificationService } from 'app/core/services/notification.service';
 import { SearchService } from 'app/core/services/search.service';
-import { SpinnerService } from 'app/core/services/spinner.service';
 import { Subscription } from 'rxjs/Subscription';
 import { environment } from 'environments/environment';
 import { LangService } from './../../../core/services/lang.service';
@@ -20,9 +18,13 @@ import { Access } from '../../../core/interfaces/access';
 import { Board } from 'app/core/interfaces/board';
 import { Category } from 'app/core/interfaces/category';
 import { WebConfigService } from '../../../core/services/web-config.service';
-import { RsModalComponent } from 'app/platform/components/rs-modal/rs-modal.component';
-import { RqModalComponent } from 'app/platform/components/rq-modal/rq-modal.component';
-import { RequestStorageService } from 'app/core/services/request-storage.service';
+import { RqModalComponent } from '../../../shared/components/rq-modal/rq-modal.component';
+import { RsModalComponent } from '../../../shared/components/rs-modal/rs-modal.component';
+import { AlertService } from '../../../shared/services/alert.service';
+import { NotificationService } from '../../../shared/services/notification.service';
+import { RequestStorageService } from '../../../shared/services/request-storage.service';
+import { SpinnerService } from '../../../shared/services/spinner.service';
+import { Client } from '../../../core/interfaces/client';
 
 @Component({
   selector: 'b2b-result-bookings',
@@ -31,6 +33,8 @@ import { RequestStorageService } from 'app/core/services/request-storage.service
 })
 export class ResultBookingsComponent implements OnInit, OnDestroy {
   subscriptions$: Subscription[];
+  errorSubscription: Subscription;
+  warningSubscription: Subscription;
   allAvailability: HotelAvail[];
   copyAvailability: HotelAvail[];
   availability: HotelAvail[];
@@ -45,6 +49,7 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
   criteria: Criteria;
   access: Access[];
   context: string;
+  client: Client;
   filter: {
     codeName: string | null;
     category: number | null;
@@ -54,6 +59,8 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
   };
   environment: any;
   test = '-';
+  errors: any[];
+  warnings: any[];
 
   constructor(
     private hubService: HubService,
@@ -64,7 +71,8 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
     private bookingService: BookingService,
     private langService: LangService,
     private webConfigService: WebConfigService,
-    private requestStorageService: RequestStorageService
+    private requestStorageService: RequestStorageService,
+    private alertService: AlertService
   ) {}
 
   ngOnInit() {
@@ -80,6 +88,21 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
       this.categories = [];
       this.getCategories();
     });
+    this.errorSubscription = this.alertService.error$.subscribe(err => {
+      // In this page, we should only display errors from search and quote
+      this.errors = err.filter(e => e.name === 'Hotel' || e.name === 'Quote');
+      console.log(this.errors);
+    });
+
+    this.warningSubscription = this.alertService.warning$.subscribe(warning => {
+      // In this page, we should only display warnings from search and quote
+      this.warnings = warning.filter(
+        w => w.name === 'Hotel' || w.name === 'Quote'
+      );
+    });
+
+    this.client = this.webConfigService.getClient();
+
     this.bookingService.booking$.subscribe(
       res => {
         if (!res || !res.hasOwnProperty('search')) {
@@ -121,23 +144,33 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
     this.searchService.transform(this.criteria).then(hotelCriteriaSearch => {
       if (this.criteria.items.length) {
         this.subscriptions$[1] = this.hubService
-          .getAvailability(hotelCriteriaSearch, this.access, this.context)
+          .getAvailability(
+            hotelCriteriaSearch,
+            this.access,
+            this.context,
+            this.client.name
+          )
           .valueChanges.subscribe(
             res => {
               const response = res.data.hotelX.search;
+
               this.requestStorageService.storeResponse('hotelRS', response);
 
               if (response) {
                 if (response.errors) {
-                  this.notificationService.error(
-                    res.data.hotelX.search.errors
-                      .map(x => x.description)
-                      .join('\n')
+                  this.alertService.setAlertMultiple(
+                    'Hotel',
+                    'error',
+                    response.errors
                   );
                 }
 
                 if (response.warnings) {
-                  console.log(response.warnings);
+                  this.alertService.setAlertMultiple(
+                    'Hotel',
+                    'warning',
+                    response.warnings
+                  );
                 }
 
                 if (!response.options || response.options.length === 0) {
@@ -156,6 +189,12 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
               this.resetAvailability();
               this.notificationService.error(err);
               this.spinnerService.stop();
+              this.alertService.setAlert(
+                'Hotel',
+                'Unexpected error',
+                'error',
+                err
+              );
             }
           );
       }
@@ -488,5 +527,7 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
    */
   ngOnDestroy() {
     this.subscriptions$.map(i => i.unsubscribe());
+    this.errorSubscription.unsubscribe();
+    this.warningSubscription.unsubscribe();
   }
 }

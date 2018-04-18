@@ -3,9 +3,9 @@ import { CurrencyPipe } from "@angular/common/src/pipes/number_pipe";
 import gql from "graphql-tag";
 
 export const book = gql`
-  mutation Mutation($input: HotelBookInput!, $context: String) {
+  mutation Mutation($input: HotelBookInput!, $context: String, $client: String) {
     hotelX {
-      book(input: $input, settings: { context: $context }) {
+      book(input: $input, settings: { context: $context, client: $client }) {
         auditData {
           transactions {
             request

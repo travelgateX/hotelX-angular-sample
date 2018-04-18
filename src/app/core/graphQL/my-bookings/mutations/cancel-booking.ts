@@ -1,16 +1,9 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
-export const cancel = gql`
-  mutation Mutation($hotel: String!, $reference: BookReferenceInput!) {
-    hotelCancel(
-      input: {
-        access: "access_1"
-        language: "es"
-        hotel: $hotel
-        reference: $reference
-      }
-      settings: { auditTransactions: true }
-    ) {
+export const cancelBooking = gql`
+mutation cancelBooking ($input: HotelCancelInput!, $client: String) {
+  hotelX {
+    cancel(input: $input, settings: { auditTransactions: true, client: $client }) {
       auditData {
         transactions {
           request
@@ -18,24 +11,37 @@ export const cancel = gql`
           timeStamp
         }
       }
+      errors {
+        type
+        code
+        description
+      }
+      warnings {
+        type
+        code
+        description
+      }
       cancellation {
         reference {
           client
-          provider
+          supplier
         }
         cancelReference
         status
         price {
           currency
           binding
-          commissionPercentage
           net
           gross
+          exchange {
+            currency
+            rate
+          }
         }
         booking {
           reference {
             client
-            provider
+            supplier
           }
           holder {
             name
@@ -44,9 +50,12 @@ export const cancel = gql`
           price {
             currency
             binding
-            commissionPercentage
             net
             gross
+            exchange {
+              currency
+              rate
+            }
           }
           hotel {
             creationDate
@@ -68,9 +77,12 @@ export const cancel = gql`
               price {
                 currency
                 binding
-                commissionPercentage
                 net
                 gross
+                exchange {
+                  currency
+                  rate
+                }
               }
             }
           }
@@ -78,4 +90,5 @@ export const cancel = gql`
       }
     }
   }
+}
 `;

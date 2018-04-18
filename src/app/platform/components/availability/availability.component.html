@@ -1,14 +1,21 @@
 <div #mo_main_search_element class="mo-main-search" [ngClass]="{'bordered': bordered}">
   <form #form="ngForm" class="fm-smy">
-    <b2b-supplier-accesses (accessesToSearchOutput)="saveAccessesToSearch($event)"></b2b-supplier-accesses>
+    <div class="row">
+      <div class="col-md-4">
+        <b2b-client-selector></b2b-client-selector>
+      </div>
+      <div class="col-md-8">
+        <b2b-supplier-accesses (accessesToSearchOutput)="saveAccessesToSearch($event)"></b2b-supplier-accesses>
+      </div>
+    </div>
     <div class="row">
       <div class="col-md-12">
         <div class="form-group">
           <label i18n="@@destination">Destination:</label>
 
           <tag-input name="auto" [onAdding]="onAdd" [maxItems]="maxItems" [theme]="'bootstrap'" [(ngModel)]="criteria.items" [placeholder]="'Hotel or Destination'"
-            [secondaryPlaceholder]="'...'" [onTextChangeDebounce]="500" [onlyFromAutocomplete]="true" [disable]="!accessesToSearch || accessesToSearch.length === 0"
-            [class]="getDisabled(accessesToSearch, 'autocompleter')" [clearOnBlur]="true" #searcher>
+            [secondaryPlaceholder]="'...'" [onTextChangeDebounce]="500" [onlyFromAutocomplete]="true" [disable]="!accessesToSearch || accessesToSearch.length === 0 || !client"
+            [class]="getDisabled((accessesToSearch && client), 'autocompleter')" [clearOnBlur]="true" #searcher>
 
             <ng-template let-item="item" let-index="index">
               <span (click)="onRemoveItem(item, index)" class="ng2-tag__remove-button">x</span>
@@ -35,7 +42,7 @@
           <label i18n="@@date-from">Date from:</label>
           <input style="background-color: white;" class="form-control" placeholder="YYYY-MM-DD" [minDate]="now" name="startDate" [(ngModel)]="criteria.checkIn"
             ngbDatepicker #sToggle="ngbDatepicker" (click)="sToggle.toggle(); eToggle.close();$event.stopPropagation()" (close)="eToggle.open()"
-            (ngModelChange)="onChange(sToggle, eToggle)" (document:click)="decideIfClose($event, sToggle)" [disabled]="!accessesToSearch || accessesToSearch.length === 0"
+            (ngModelChange)="onChange(sToggle, eToggle)" (document:click)="decideIfClose($event, sToggle)" [disabled]="!accessesToSearch || accessesToSearch.length === 0 || !client"
             readonly>
         </div>
       </div>
@@ -45,31 +52,24 @@
           <div class="input-group">
             <input style="background-color: white;" class="form-control" placeholder="YYYY-MM-DD" [minDate]="minDateTo" name="endDate"
               [(ngModel)]="criteria.checkOut" ngbDatepicker #eToggle="ngbDatepicker" (click)="eToggle.toggle(); sToggle.close();$event.stopPropagation()"
-              (document:click)="decideIfClose($event, eToggle)" [disabled]="!accessesToSearch || accessesToSearch.length === 0"
+              (document:click)="decideIfClose($event, eToggle)" [disabled]="!accessesToSearch || accessesToSearch.length === 0 || !client"
               readonly>
           </div>
         </div>
       </div>
 
       <div class="col-md-4">
-        <div class="form-group">
-          <label i18n="@@market">Market:</label>
-          <div class="input-group">
-            <input type="text" class="form-control" [(ngModel)]="criteria.market" marketMatch [ngbTypeahead]="marketsFilter" name="markets"
-              [disabled]="!accessesToSearch || accessesToSearch.length === 0" [inputFormatter]="countryInputFormatter" [resultFormatter]="countryResultFormatter"
-              placeholder="Select Market" i18n-placeholder="@@market-placeholder" />
-          </div>
-        </div>
+        <b2b-market-selector [disabled]="!accessesToSearch || accessesToSearch.length === 0 || !client"></b2b-market-selector>
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-4">
-        <b2b-language-selector [disabled]="!accessesToSearch || accessesToSearch.length === 0"></b2b-language-selector>
+        <b2b-language-selector [disabled]="!accessesToSearch || accessesToSearch.length === 0 || !client"></b2b-language-selector>
       </div>
 
       <div class="col-md-4">
-        <b2b-currency-selector [disabled]="!accessesToSearch || accessesToSearch.length === 0"></b2b-currency-selector>
+        <b2b-currency-selector [disabled]="!accessesToSearch || accessesToSearch.length === 0 || !client"></b2b-currency-selector>
       </div>
 
       <div class="col-md-4">
@@ -77,8 +77,9 @@
           <label i18n="@@nationality">Nationality:</label>
           <div class="input-group">
             <input type="text" class="form-control" [(ngModel)]="criteria.nationality" marketMatch [ngbTypeahead]="marketsFilter" name="nationality"
-              [disabled]="!accessesToSearch || accessesToSearch.length === 0" [inputFormatter]="countryInputFormatter" [resultFormatter]="countryResultFormatter"
-              placeholder="Select Nationality" i18n-placeholder="@@market-placeholder" />
+              [disabled]="!accessesToSearch || accessesToSearch.length === 0 || !client" [inputFormatter]="countryInputFormatter"
+              [resultFormatter]="countryResultFormatter" placeholder="Select Nationality" i18n-placeholder="@@market-placeholder"
+            />
           </div>
         </div>
       </div>
@@ -102,7 +103,7 @@
             <label>
               <span i18n="@@paxes">Paxes</span> ...</label>
             <select class="form-control" [(ngModel)]="room.paxes.length" (change)="setPaxes(room)" [ngModelOptions]="{standalone: true}"
-              [disabled]="!accessesToSearch || accessesToSearch.length === 0">
+              [disabled]="!accessesToSearch || accessesToSearch.length === 0 || !client">
               <option *ngFor="let pax of maxNumPaxes" [value]="pax">{{pax}}</option>
             </select>
           </div>
@@ -112,7 +113,7 @@
             <label>
               <span i18n="@@age">Age</span> (Pax {{i+1}})</label>
             <input name="num" class="form-control" [(ngModel)]="pax.age" [ngModelOptions]="{standalone: true}" type="number" min="1"
-              max="100" step="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57" [disabled]="!accessesToSearch || accessesToSearch.length === 0">
+              max="100" step="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57" [disabled]="!accessesToSearch || accessesToSearch.length === 0 || !client">
           </div>
         </div>
       </div>

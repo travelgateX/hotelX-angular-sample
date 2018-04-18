@@ -16,10 +16,10 @@
 
     <tbody>
       <tr>
-        <td>{{gross}} {{option.price.currency}}</td>
-        <td>{{gross - net | number : '1.2-2'}} {{option.price.currency}}</td>
+        <td>{{gross}} {{price.currency}}</td>
+        <td>{{gross - net | number : '1.2-2'}} {{price.currency}}</td>
         <td>{{((gross - net) * 100) / gross | number : '1.2-2'}}%</td>
-        <td>{{option.price.binding}}</td>
+        <td>{{price.binding}}</td>
 
     </tbody>
 

@@ -4,16 +4,21 @@ import { HotelBookingDetail } from '../../../../core/interfaces/hotel-booking-de
 import { Board } from '../../../../core/interfaces/board';
 import { CancelBooking } from 'app/core/interfaces/cancel-booking';
 import { HubService } from '../../../../core/services/hub.service';
-import { NotificationService } from '../../../../core/services/notification.service';
 import { WebConfigService } from 'app/core/services/web-config.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { RqModalComponent } from 'app/platform/components/rq-modal/rq-modal.component';
-import { RsModalComponent } from 'app/platform/components/rs-modal/rs-modal.component';
+import { RqModalComponent } from '../../../../shared/components/rq-modal/rq-modal.component';
+import { RsModalComponent } from '../../../../shared/components/rs-modal/rs-modal.component';
 import { Room } from '../../../../core/interfaces/room';
 import { CancelPolicyModalComponent } from 'app/platform/components/cancel-policy-modal/cancel-policy-modal.component';
 import { environment } from 'environments/environment';
 import { NgbDateMomentParserFormatter } from 'app/shared/utilities/ngbParserFormatter';
-import { RequestStorageService } from 'app/core/services/request-storage.service';
+import { Price } from 'app/core/interfaces/price';
+import { BindingModalComponent } from 'app/platform/components/binding-modal/binding-modal.component';
+import { Subscription } from 'rxjs/Subscription';
+import { AlertService } from '../../../../shared/services/alert.service';
+import { NotificationService } from '../../../../shared/services/notification.service';
+import { RequestStorageService } from '../../../../shared/services/request-storage.service';
+import { Client } from '../../../../core/interfaces/client';
 
 @Component({
   selector: 'b2b-my-bookings-table',
@@ -23,6 +28,7 @@ import { RequestStorageService } from 'app/core/services/request-storage.service
 export class MyBookingsTableComponent implements OnChanges {
   @Input() bookings: HotelBookingDetail[];
   @Input() boards: Board[];
+  @Input() client: Client;
   environment = environment;
   ngbDateMomentParserFormatter: NgbDateMomentParserFormatter;
 
@@ -31,7 +37,8 @@ export class MyBookingsTableComponent implements OnChanges {
     private notificationService: NotificationService,
     private webConfigService: WebConfigService,
     private modalService: NgbModal,
-    private requestStorageService: RequestStorageService
+    private requestStorageService: RequestStorageService,
+    private alertService: AlertService
   ) {
     this.ngbDateMomentParserFormatter = new NgbDateMomentParserFormatter();
   }
@@ -75,9 +82,16 @@ export class MyBookingsTableComponent implements OnChanges {
       cancelBooking.reference.client = booking.reference.client;
     }
 
-    this.hubService.cancelBook(cancelBooking).subscribe(
+    this.hubService.cancelBook(cancelBooking, this.client).subscribe(
       res => {
-        this.requestStorageService.storeResponse('cancelBookingRS_' + booking.reference.supplier, res);
+        this.requestStorageService.storeResponse(
+          'cancelBookingRS_' + booking.reference.supplier,
+          res
+        );
+        const cancel = res.data.hotelX.cancel;
+        booking.errors = cancel.errors || [];
+        booking.warnings = cancel.warnings || [];
+
         booking.showMoreOptions = true;
         if (
           res.data &&
@@ -154,23 +168,25 @@ export class MyBookingsTableComponent implements OnChanges {
    * @param rooms
    */
   formatTitle(rooms: Room[]) {
-    const typeRooms = [];
-    let result = '';
-    rooms.map(room => {
-      const index = typeRooms.findIndex(
-        roomAux => roomAux.typeRoom.code === room.code
-      );
-      if (index === -1) {
-        typeRooms.push({ typeRoom: room, count: 1 });
-      } else {
-        typeRooms[index].count++;
-      }
-    });
-    typeRooms.map(roomAux => {
-      result =
-        result + roomAux.typeRoom.description + ' x' + roomAux.count + '\n';
-    });
-    return result;
+    if (rooms) {
+      const typeRooms = [];
+      let result = '';
+      rooms.map(room => {
+        const index = typeRooms.findIndex(
+          roomAux => roomAux.typeRoom.code === room.code
+        );
+        if (index === -1) {
+          typeRooms.push({ typeRoom: room, count: 1 });
+        } else {
+          typeRooms[index].count++;
+        }
+      });
+      typeRooms.map(roomAux => {
+        result =
+          result + roomAux.typeRoom.description + ' x' + roomAux.count + '\n';
+      });
+      return result;
+    }
   }
 
   openCancelPolicyModal(cancelPenalties) {
@@ -180,6 +196,15 @@ export class MyBookingsTableComponent implements OnChanges {
       backdrop: 'static'
     });
     modalRef.componentInstance.cancelPenalties = cancelPenalties;
+  }
+
+  openBindingModal(price: Price) {
+    const modalRef = this.modalService.open(BindingModalComponent, {
+      size: 'lg',
+      keyboard: false,
+      backdrop: 'static'
+    });
+    modalRef.componentInstance.price = price;
   }
 
   calcWidth() {

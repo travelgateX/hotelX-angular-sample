@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs/Subscription';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { SpinnerService } from 'app/core/services/spinner.service';
 import { Observable } from 'rxjs/Observable';
+import { SpinnerService } from '../../services/spinner.service';
 
 /**
  * Spinner component for handling on loading

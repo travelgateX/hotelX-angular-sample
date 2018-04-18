@@ -1,9 +1,9 @@
 import { environment, auth0Config } from './../../../environments/environment';
-import { NotificationService } from './notification.service';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { IProfile } from 'app/core/interfaces/iprofile';
+import { NotificationService } from '../../shared/services/notification.service';
 
 declare var auth0: any;
 
@@ -23,7 +23,7 @@ export class AuthService {
 
   constructor(
     private router: Router,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
   ) {
     // Checks if there is already a user logged checking local storage
     if (localStorage.getItem('profile') !== null) {
@@ -37,6 +37,7 @@ export class AuthService {
    */
   handleAuthentication(): void {
     this.lock.on('authenticated', authResult => {
+      console.log(authResult);
       this.lock.getUserInfo(authResult.accessToken, (error, profile) => {
         if (error) {
           console.log(error);
@@ -50,6 +51,9 @@ export class AuthService {
         this.router.navigate(['/platform/search-bookings']);
       });
     });
+    this.lock.on('authorization_error', error => console.log(error));
+
+    this.lock.on('unrecoverable_error', error => console.log(error));
   }
 
   /**
@@ -97,11 +101,11 @@ export class AuthService {
 }
 
 // import { environment, auth0Config } from './../../../environments/environment';
-// import { NotificationService } from './notification.service';
 // import { Injectable } from '@angular/core';
 // import { Router } from '@angular/router';
 // import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 // import { IProfile } from 'app/core/interfaces/iprofile';
+// import { NotificationService } from '../../shared/services/notification.service';
 
 // declare var auth0: any;
 
@@ -159,7 +163,7 @@ export class AuthService {
 //       authResult.expiresIn * 1000 + new Date().getTime()
 //     );
 //     localStorage.setItem('access_token', authResult.accessToken);
-//     localStorage.setItem('id_token', authResult.idToken);
+//     localStorage.setItem('token', authResult.idToken);
 //     localStorage.setItem('expires_at', expiresAt);
 //     this.getProfile();
 //   }
@@ -210,5 +214,6 @@ export class AuthService {
 //    */
 //   authenticated(): boolean {
 //     const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
-//     return new Date() < new Date(expiresAt * 1000);
+//     return new Date() < new Date(expiresAt);
 //   }
+// }

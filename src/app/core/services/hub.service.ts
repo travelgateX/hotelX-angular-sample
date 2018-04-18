@@ -3,27 +3,29 @@ import { Injectable } from '@angular/core';
 import { Apollo, QueryRef } from 'apollo-angular';
 import gql from 'graphql-tag';
 
-import { avail } from 'app/core/graphQL/availability';
-import { quote } from 'app/core/graphQL/quote';
 import { CriteriaSearch } from 'app/core/interfaces/criteria-search';
 import { HotelInfo } from 'app/core/interfaces/hotel-info';
+import { hotelInfo } from '../graphQL/result-bookings/queries/hotel-info';
 import { HotelAvail } from 'app/core/interfaces/hotel-avail';
-import { book } from 'app/core/graphQL/book';
+import { avail } from '../graphQL/result-bookings/queries/availability'
 import { HotelBookInput } from 'app/core/interfaces/hotel-book-input';
 import { Observable } from 'rxjs/Observable';
 import { Subscriber } from 'rxjs/Subscriber';
 import { ApolloQueryResult } from 'apollo-client';
-import { hotelInfo } from '../graphQL/hotel-info';
-import { suppliersAccesses } from '../graphQL/suppliers-accesses';
 import { Access } from 'app/core/interfaces/access';
-import { destinationSearcher } from 'app/core/graphQL/destination-searcher';
-import { hotelCodesFromDestination } from 'app/core/graphQL/hotel-codes-from-destination';
-import { boards } from 'app/core/graphQL/boards';
-import { categories } from 'app/core/graphQL/categories';
-import { booking } from 'app/core/graphQL/booking';
 import { CriteriaBooking } from '../interfaces/criteria-booking';
-import { cancelBooking } from '../graphQL/cancelBooking';
 import { CancelBooking } from '../interfaces/cancel-booking';
+import { cancelBooking } from '../graphQL/my-bookings/mutations/cancel-booking';
+import { quote } from '../graphQL/result-bookings/queries/quote';
+import { booking } from '../graphQL/my-bookings/queries/booking';
+import { book } from '../graphQL/close-bookings/mutations/book';
+import { suppliersAccesses } from '../graphQL/shared/queries/suppliers-accesses';
+import { destinationSearcher } from '../graphQL/shared/queries/destination-searcher';
+import { boards } from '../graphQL/shared/queries/boards';
+import { categories } from '../graphQL/shared/queries/categories';
+import { hotelCodesFromDestination } from '../graphQL/shared/queries/hotel-codes-from-destination';
+import { clients } from '../graphQL/shared/queries/clients';
+import { Client } from '../interfaces/client';
 
 /**
  * Handles availability, quote and book requests to the Gateway
@@ -81,12 +83,13 @@ export class HubService {
   getAvailability(
     criteria: CriteriaSearch,
     access: Access[],
-    context: string
+    context: string,
+    client: string
   ): QueryRef<any> {
     const accessCodes = access.map(res => res.code);
     return this.apollo.watchQuery<any>({
       query: avail,
-      variables: { criteria: criteria, access: accessCodes, context: context }
+      variables: { criteria: criteria, access: accessCodes, context: context, client: client }
     });
   }
 
@@ -98,14 +101,16 @@ export class HubService {
   getQuote(
     optionRefId: string,
     language: string,
-    context: string
+    context: string,
+    client: Client
   ): QueryRef<any> {
     return this.apollo.watchQuery<any>({
       query: quote,
       variables: {
         optionRefId: optionRefId,
         language: language,
-        context: context
+        context: context,
+        client: client.name
       }
     });
   }
@@ -115,10 +120,10 @@ export class HubService {
    * @param input
    * @param context
    */
-  getBook(input: HotelBookInput, context: string): Observable<any> {
+  getBook(input: HotelBookInput, context: string, client: Client): Observable<any> {
     return this.apollo.mutate({
       mutation: book,
-      variables: { input: input, context: context }
+      variables: { input: input, context: context , client: client.name}
     });
   }
 
@@ -126,10 +131,10 @@ export class HubService {
    * get the current bookings of an user
    * @param criteriaBooking
    */
-  getMyBookings(criteriaBooking: CriteriaBooking) {
+  getMyBookings(criteriaBooking: CriteriaBooking, client: Client) {
     return this.apollo.watchQuery<any>({
       query: booking,
-      variables: { criteriaBooking: criteriaBooking },
+      variables: { criteriaBooking: criteriaBooking, client: client.name },
       fetchPolicy: 'network-only'
     });
   }
@@ -139,10 +144,10 @@ export class HubService {
    * @param input
    * @param context
    */
-  cancelBook(cancelBookingInput: CancelBooking) {
+  cancelBook(cancelBookingInput: CancelBooking, client: Client) {
     return this.apollo.mutate({
       mutation: cancelBooking,
-      variables: { input: cancelBookingInput }
+      variables: { input: cancelBookingInput, client: client.name }
     });
   }
 
@@ -170,6 +175,15 @@ export class HubService {
   getSuppliersAccesses(): QueryRef<any> {
     return this.apollo.watchQuery<any>({
       query: suppliersAccesses
+    });
+
+  }
+  /**
+   * Get the information of suppliers/accesses
+   */
+  getClients(): QueryRef<any> {
+    return this.apollo.watchQuery<any>({
+      query: clients
     });
   }
 

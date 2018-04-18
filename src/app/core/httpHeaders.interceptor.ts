@@ -7,9 +7,8 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../../environments/environment';
-import { storeRequest } from 'app/shared/utilities/functions';
-import { RequestStorageService } from 'app/core/services/request-storage.service';
 import { Injectable } from '@angular/core';
+import { RequestStorageService } from '../shared/services/request-storage.service';
 
 @Injectable()
 export class HttpHeadersInterceptor implements HttpInterceptor {

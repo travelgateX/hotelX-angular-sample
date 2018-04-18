@@ -1,5 +1,13 @@
 import { BindingModalComponent } from '../binding-modal/binding-modal.component';
-import { Component, Input, OnDestroy, OnInit, OnChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  OnChanges,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HotelAvail } from 'app/core/interfaces/hotel-avail';
 import { HotelInfo } from 'app/core/interfaces/hotel-info';
@@ -7,8 +15,6 @@ import { Option } from 'app/core/interfaces/option';
 import { Search } from 'app/core/interfaces/search';
 import { BookingService } from 'app/core/services/booking.service';
 import { HubService } from 'app/core/services/hub.service';
-import { NotificationService } from 'app/core/services/notification.service';
-import { SpinnerService } from 'app/core/services/spinner.service';
 import { GoogleMapsModalComponent } from 'app/platform/components/google-maps-modal/google-maps-modal.component';
 import { ValuationModalComponent } from 'app/platform/components/valuation-modal/valuation-modal.component';
 import { Subscription } from 'rxjs/Subscription';
@@ -21,7 +27,12 @@ import { EditCriteriaModalComponent } from 'app/platform/components/edit-criteri
 import { CarouselModalComponent } from 'app/platform/components/carousel-modal/carousel-modal/carousel-modal.component';
 import { HotelInfoGeocode } from 'app/core/interfaces/hotel-info/geocode';
 import { Board } from 'app/core/interfaces/board';
-import { RequestStorageService } from 'app/core/services/request-storage.service';
+import { Price } from '../../../core/interfaces/price';
+import { AlertService } from 'app/shared/services/alert.service';
+import { NotificationService } from '../../../shared/services/notification.service';
+import { RequestStorageService } from '../../../shared/services/request-storage.service';
+import { SpinnerService } from '../../../shared/services/spinner.service';
+import { WebConfigService } from '../../../core/services/web-config.service';
 
 @Component({
   selector: 'b2b-hotel-option',
@@ -53,7 +64,9 @@ export class HotelOptionComponent implements OnInit, OnDestroy, OnChanges {
     private spinnerService: SpinnerService,
     private bookingService: BookingService,
     private langService: LangService,
-    private requestStorageService: RequestStorageService
+    private requestStorageService: RequestStorageService,
+    private alertService: AlertService,
+    private webConfigService: WebConfigService
   ) {}
 
   ngOnInit() {
@@ -110,13 +123,13 @@ export class HotelOptionComponent implements OnInit, OnDestroy, OnChanges {
     modalRef.componentInstance.longitude = +hotelInfoGeocode.longitude;
   }
 
-  openBindingModal(option: Option) {
+  openBindingModal(price: Price) {
     const modalRef = this.modalService.open(BindingModalComponent, {
       size: 'lg',
       keyboard: false,
       backdrop: 'static'
     });
-    modalRef.componentInstance.option = option;
+    modalRef.componentInstance.price = price;
   }
 
   openModalValuation(option: Option, hotelInfo: HotelInfo) {
@@ -124,20 +137,47 @@ export class HotelOptionComponent implements OnInit, OnDestroy, OnChanges {
     const lang = this.langService.getLang();
 
     this.subscriptions$[0] = this.hubService
-      .getQuote(option.id, lang, this.context)
+      .getQuote(option.id, lang, this.context, this.webConfigService.getClient())
       .valueChanges.subscribe(
         res => {
           const response = res.data.hotelX.quote;
+          if (response.error) {
+            this.alertService.setAlert(
+              'Quote',
+              `Error ({${response.error.type}) ${response.error.code}`,
+              'error',
+              response.error.description
+            );
+          }
+          if (response.warning) {
+            this.alertService.setAlert(
+              'Quote',
+              `Warning ({${response.warning.type}) ${response.warning.code}`,
+              'warning',
+              response.warning.description
+            );
+          }
           this.requestStorageService.storeResponse('quoteRS', response);
 
           if (response.warnings) {
-            console.log(response.warnings);
+            this.alertService.setAlertMultiple(
+              'Quote',
+              'warning',
+              response.warnings
+            );
           }
 
           if (response.errors) {
+            this.alertService.setAlertMultiple(
+              'Quote',
+              'error',
+              response.errors
+            );
             this.notificationService.error(
               response.errors.map(x => x.description).join('\n')
             );
+            this.spinnerService.stop();
+            return;
           }
 
           this.bookingService.setHotelInfo(hotelInfo);
@@ -147,6 +187,7 @@ export class HotelOptionComponent implements OnInit, OnDestroy, OnChanges {
             keyboard: false,
             backdrop: 'static'
           });
+
           modalRef.componentInstance.option = option;
           modalRef.componentInstance.hotelInfo = hotelInfo;
           modalRef.componentInstance.quote = response.optionQuote;
@@ -157,6 +198,7 @@ export class HotelOptionComponent implements OnInit, OnDestroy, OnChanges {
         err => {
           this.spinnerService.stop();
           this.notificationService.error(err);
+          this.alertService.setAlert('Quote', `Unhandled error`, 'error', err);
         }
       );
   }

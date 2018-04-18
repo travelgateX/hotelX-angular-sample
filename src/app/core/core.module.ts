@@ -11,10 +11,8 @@ import { CommonModule } from '@angular/common';
 
 import { LoginGuard } from './guard/login.guard';
 import { SearchService } from 'app/core/services/search.service';
-import { SpinnerService } from 'app/core/services/spinner.service';
 import { HttpService } from 'app/core/services/http.service';
 import { AuthService } from 'app/core/services/auth.service';
-import { NotificationService } from 'app/core/services/notification.service';
 import { HubService } from 'app/core/services/hub.service';
 import { BookingService } from 'app/core/services/booking.service';
 import {
@@ -31,7 +29,6 @@ import { HttpHeadersInterceptor } from './httpHeaders.interceptor';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { fragmentTypes } from './fragmentTypes';
 import { WebConfigService } from './services/web-config.service';
-import { RequestStorageService } from 'app/core/services/request-storage.service';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, ApolloModule, HttpLinkModule],
@@ -44,10 +41,8 @@ import { RequestStorageService } from 'app/core/services/request-storage.service
     HttpService,
     AuthService,
     WebConfigService,
-    NotificationService,
     SearchService,
     HubService,
-    SpinnerService,
     BookingService,
     LoginGuard,
     LangService,
@@ -73,14 +68,11 @@ export class CoreModule {
         AuthService,
         WebConfigService,
         HubService,
-        NotificationService,
         SearchService,
-        SpinnerService,
         BookingService,
         LoginGuard,
         LangService,
-        HttpLink,
-        RequestStorageService
+        HttpLink
       ]
     };
   }
