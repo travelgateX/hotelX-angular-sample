@@ -5,7 +5,7 @@ import gql from "graphql-tag";
 export const book = gql`
   mutation Mutation($input: HotelBookInput!, $context: String, $client: String) {
     hotelX {
-      book(input: $input, settings: { context: $context, client: $client }) {
+      book(input: $input, settings: { auditTransactions: true, context: $context, client: $client }) {
         auditData {
           transactions {
             request

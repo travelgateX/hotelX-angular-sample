@@ -5,7 +5,7 @@ export const quote = gql`
     hotelX {
       quote(
         criteria: { optionRefId: $optionRefId, language: $language }
-        settings: { context: $context, client: $client }
+        settings: { auditTransactions: true, context: $context, client: $client }
       ) {
         optionQuote {
           optionRefId
@@ -77,6 +77,13 @@ export const quote = gql`
           code
           type
           description
+        }
+        auditData {
+          transactions {
+            request
+            response
+            timeStamp
+          }
         }
       }
     }
