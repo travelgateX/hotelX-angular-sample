@@ -23,7 +23,6 @@ import { WebConfigService } from '../../../core/services/web-config.service';
 import { RsModalComponent } from 'app/platform/components/rs-modal/rs-modal.component';
 import { RqModalComponent } from 'app/platform/components/rq-modal/rq-modal.component';
 import { RequestStorageService } from 'app/core/services/request-storage.service';
-import { AlertService } from '../../../shared/services/alert.service';
 
 @Component({
   selector: 'b2b-result-bookings',
@@ -32,8 +31,6 @@ import { AlertService } from '../../../shared/services/alert.service';
 })
 export class ResultBookingsComponent implements OnInit, OnDestroy {
   subscriptions$: Subscription[];
-  errorSubscription: Subscription;
-  warningSubscription: Subscription;
   allAvailability: HotelAvail[];
   copyAvailability: HotelAvail[];
   availability: HotelAvail[];
@@ -57,8 +54,6 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
   };
   environment: any;
   test = '-';
-  errors: any[];
-  warnings: any[];
 
   constructor(
     private hubService: HubService,
@@ -69,8 +64,7 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
     private bookingService: BookingService,
     private langService: LangService,
     private webConfigService: WebConfigService,
-    private requestStorageService: RequestStorageService,
-    private alertService: AlertService
+    private requestStorageService: RequestStorageService
   ) {}
 
   ngOnInit() {
@@ -86,17 +80,6 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
       this.categories = [];
       this.getCategories();
     });
-    this.errorSubscription = this.alertService.error$.subscribe(err => {
-      // In this page, we should only display errors from search and quote
-      this.errors = err.filter( e => e.name === 'Hotel' || e.name === 'Quote');
-      console.log(this.errors);
-    });
-
-    this.warningSubscription = this.alertService.warning$.subscribe(warning => {
-      // In this page, we should only display warnings from search and quote
-        this.warnings = warning.filter( w => w.name === 'Hotel' || w.name === 'Quote');
-    });
-
     this.bookingService.booking$.subscribe(
       res => {
         if (!res || !res.hasOwnProperty('search')) {
@@ -142,33 +125,14 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
           .valueChanges.subscribe(
             res => {
               const response = res.data.hotelX.search;
-
-              if (response.error) {
-                this.alertService.setAlert(
-                  'Hotel',
-                  `Error ({${response.error.type}) ${response.error.code}`,
-                  'error',
-                  response.error.description
-                );
-              }
-
-              if (response.warning) {
-                this.alertService.setAlert(
-                  'Hotel',
-                  `Warning ({${response.waring.type}) ${response.waring.code}`,
-                  'warning',
-                  response.warning.description
-                );
-              }
-
               this.requestStorageService.storeResponse('hotelRS', response);
 
               if (response) {
                 if (response.errors) {
-                  this.alertService.setAlertMultiple(
-                    'Hotel',
-                    'error',
-                   response.errors
+                  this.notificationService.error(
+                    res.data.hotelX.search.errors
+                      .map(x => x.description)
+                      .join('\n')
                   );
                 }
 
@@ -192,12 +156,6 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
               this.resetAvailability();
               this.notificationService.error(err);
               this.spinnerService.stop();
-              this.alertService.setAlert(
-                'Hotel',
-                'Unexpected error',
-                'error',
-                err
-              );
             }
           );
       }
@@ -530,7 +488,5 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
    */
   ngOnDestroy() {
     this.subscriptions$.map(i => i.unsubscribe());
-    this.errorSubscription.unsubscribe();
-    this.warningSubscription.unsubscribe();
   }
 }

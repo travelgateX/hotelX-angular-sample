@@ -78,7 +78,7 @@
               <div style="white-space: nowrap;" (click)="openBindingModal(option)" href="javascript:void(0)" *ngFor="let room of option.rooms">{{room.roomPrice.price.gross | number : '1.2-2'}} {{room.roomPrice.price.currency}}</div>
             </td>
             <td class="price">
-                <a (click)="openBindingModal(option.price)" href="javascript:void(0)">{{option.price.gross | number : '1.2-2'}} {{option.price.currency}}</a>
+                <a (click)="openBindingModal(option)" href="javascript:void(0)">{{option.price.gross | number : '1.2-2'}} {{option.price.currency}}</a>
             </td>
 
             <td align="right">

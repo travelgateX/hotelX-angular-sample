@@ -1,6 +1,6 @@
+import { Option } from '../../../core/interfaces/option';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Component, Input, OnInit } from '@angular/core';
-import { Price } from 'app/core/interfaces/price';
 
 @Component({
   selector: 'b2b-binding-modal',
@@ -8,13 +8,13 @@ import { Price } from 'app/core/interfaces/price';
   styleUrls: ['./binding-modal.component.css']
 })
 export class BindingModalComponent implements OnInit {
-  @Input() price: Price;
+  @Input() option: Option;
   gross: number;
   net: number;
   constructor(public activeModal: NgbActiveModal) {}
 
   ngOnInit() {
-    this.gross = Math.round(this.price.gross * 100) / 100;
-    this.net = Math.round(this.price.net * 100) / 100;
+    this.gross = Math.round(this.option.price.gross * 100) / 100;
+    this.net = Math.round(this.option.price.net * 100) / 100;
   }
 }

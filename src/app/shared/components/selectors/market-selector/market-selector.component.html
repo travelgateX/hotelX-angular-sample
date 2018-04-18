@@ -1,8 +1,0 @@
-<div class="form-group">
-  <label i18n="@@market">Market:</label>
-  <div class="input-group">
-    <input type="text" class="form-control" [(ngModel)]="market" name="market" [ngbTypeahead]="marketFilter" [disabled]="disabled"
-      placeholder="Select Market" i18n-placeholder="@@market-placeholder" [resultFormatter]="marketResultFormatter" [inputFormatter]="marketInputFormatter"
-      [focusFirst]="true" (keyup)="valuate($event.target.value)">
-  </div>
-</div>

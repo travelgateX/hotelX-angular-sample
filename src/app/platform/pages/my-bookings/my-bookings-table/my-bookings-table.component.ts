@@ -14,10 +14,6 @@ import { CancelPolicyModalComponent } from 'app/platform/components/cancel-polic
 import { environment } from 'environments/environment';
 import { NgbDateMomentParserFormatter } from 'app/shared/utilities/ngbParserFormatter';
 import { RequestStorageService } from 'app/core/services/request-storage.service';
-import { Price } from 'app/core/interfaces/price';
-import { BindingModalComponent } from 'app/platform/components/binding-modal/binding-modal.component';
-import { Subscription } from 'rxjs/Subscription';
-import { AlertService } from '../../../../shared/services/alert.service';
 
 @Component({
   selector: 'b2b-my-bookings-table',
@@ -35,8 +31,7 @@ export class MyBookingsTableComponent implements OnChanges {
     private notificationService: NotificationService,
     private webConfigService: WebConfigService,
     private modalService: NgbModal,
-    private requestStorageService: RequestStorageService,
-    private alertService: AlertService
+    private requestStorageService: RequestStorageService
   ) {
     this.ngbDateMomentParserFormatter = new NgbDateMomentParserFormatter();
   }
@@ -82,14 +77,7 @@ export class MyBookingsTableComponent implements OnChanges {
 
     this.hubService.cancelBook(cancelBooking).subscribe(
       res => {
-        this.requestStorageService.storeResponse(
-          'cancelBookingRS_' + booking.reference.supplier,
-          res
-        );
-        const cancel = res.data.hotelX.cancel;
-        booking.errors = cancel.errors || [];
-        booking.warnings = cancel.warnings || [];
-
+        this.requestStorageService.storeResponse('cancelBookingRS_' + booking.reference.supplier, res);
         booking.showMoreOptions = true;
         if (
           res.data &&
@@ -194,17 +182,7 @@ export class MyBookingsTableComponent implements OnChanges {
     modalRef.componentInstance.cancelPenalties = cancelPenalties;
   }
 
-  openBindingModal(price: Price) {
-    const modalRef = this.modalService.open(BindingModalComponent, {
-      size: 'lg',
-      keyboard: false,
-      backdrop: 'static'
-    });
-    modalRef.componentInstance.price = price;
-  }
-
   calcWidth() {
     return document.getElementsByTagName('th').length;
   }
-
 }

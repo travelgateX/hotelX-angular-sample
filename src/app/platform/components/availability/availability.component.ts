@@ -39,9 +39,8 @@ import { Access } from '../../../core/interfaces/access';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Country } from 'app/core/interfaces/country';
 import { decideClosure } from 'app/shared/utilities/functions';
-import { CurrencySelectorService } from '../../../shared/components/selectors/currency-selector/currency-selector.service';
-import { LanguageSelectorService } from '../../../shared/components/selectors/language-selector/language-selector.service';
-import { MarketSelectorService } from '../../../shared/components/selectors/market-selector/market-selector.service';
+import { CurrencySelectorService } from "../../../shared/components/selectors/currency-selector/currency-selector.service";
+import { LanguageSelectorService } from "../../../shared/components/selectors/language-selector/language-selector.service";
 
 @Component({
   selector: 'b2b-availability',
@@ -90,8 +89,7 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
     private config: NgbTypeaheadConfig,
     private hubService: HubService,
     private currencySelectorService: CurrencySelectorService,
-    private languageSelectorService: LanguageSelectorService,
-    private marketSelectorService: MarketSelectorService
+    private languageSelectorService: LanguageSelectorService
   ) {
     this.config.focusFirst = false;
   }
@@ -102,7 +100,7 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
     this.subscriptions$ = [];
-    this.subscriptions$['criteria'] = this.searchService.criteria$.subscribe(
+    this.subscriptions$["criteria"] = this.searchService.criteria$.subscribe(
       res => {
         this.criteria_copy = res;
         this.criteria = JSON.parse(JSON.stringify(res));
@@ -116,22 +114,15 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
     this.minDateTo = this.calendar.getToday();
 
     this.subscriptions$[
-      'currency'
+      "currency"
     ] = this.currencySelectorService.currency$.subscribe(res => {
       this.criteria.currency = res;
     });
 
     this.subscriptions$[
-      'language'
+      "language"
     ] = this.languageSelectorService.language$.subscribe(res => {
       this.criteria.language = res;
-    });
-
-    this.subscriptions$[
-      'market'
-    ] = this.marketSelectorService.market$.subscribe(res => {
-      this.criteria.market = res;
-      this.criteria.nationality = res;
     });
     // this.criteria = JSON.parse(JSON.stringify(this.criteria_copy));
     // if (this.criteria.items.length > 0) {

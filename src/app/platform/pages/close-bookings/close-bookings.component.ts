@@ -11,7 +11,6 @@ import { SearchService } from 'app/core/services/search.service';
 import { WebConfigService } from '../../../core/services/web-config.service';
 import { Subscription } from 'apollo-client/util/Observable';
 import { RequestStorageService } from 'app/core/services/request-storage.service';
-import { AlertService } from '../../../shared/services/alert.service';
 
 @Component({
   selector: 'b2b-close-bookings',
@@ -22,12 +21,7 @@ export class CloseBookingsComponent implements OnInit, OnDestroy {
   book: HotelBookPayload;
   bookingDetail: BookingDetail;
   bookingSubscription: Subscription;
-
-  errorSubscription: Subscription;
-  warningSubscription: Subscription;
   loading$;
-  errors: any[];
-  warnings: any[];
 
   constructor(
     private spinnerService: SpinnerService,
@@ -38,11 +32,11 @@ export class CloseBookingsComponent implements OnInit, OnDestroy {
     private searchService: SearchService,
     private langService: LangService,
     private webConfigService: WebConfigService,
-    private requestStorageService: RequestStorageService,
-    private alertService: AlertService
+    private requestStorageService: RequestStorageService
   ) {}
 
   ngOnInit() {
+    console.log('On init close-bookings');
     this.spinnerService.start();
     this.loading$ = this.spinnerService.loading$;
     this.bookingSubscription = this.bookingService.booking$.subscribe(
@@ -55,13 +49,6 @@ export class CloseBookingsComponent implements OnInit, OnDestroy {
         this.spinnerService.stop();
       }
     );
-    this.errorSubscription = this.alertService.error$.subscribe(err => {
-        this.errors = err.filter( e => e.name === 'Book');
-    });
-
-    this.warningSubscription = this.alertService.warning$.subscribe(warning => {
-      this.warnings = warning.filter( w => w.name === 'Book');
-    });
   }
 
   /**
@@ -71,53 +58,25 @@ export class CloseBookingsComponent implements OnInit, OnDestroy {
     if (this.bookingDetail && this.bookingDetail.input) {
       const lang = this.langService.getLang();
       this.bookingDetail.input.language = lang;
+
       this.hubService
         .getBook(this.bookingDetail.input, this.webConfigService.getContext())
         .subscribe(
           res => {
-            console.log(res);
             this.requestStorageService.storeResponse('bookRS', res);
             if (res.errors) {
               this.notificationService.handleIError(res.errors);
-              this.alertService.setAlert(
-                'Book',
-                `Error ({${res.errors.type}) ${res.errors.code}`,
-                'error',
-                res.error.description
-              );
             }
 
             if (res.warnings) {
               this.notificationService.handlIWarning(res.warnings);
-              this.alertService.setAlert(
-                'Book',
-                `Warning ({${res.warnings.type}) ${res.warnings.code}`,
-                'warning',
-                res.warning.description
-              );
             }
             this.book = res.data.hotelX.book;
-            if (this.book && this.book.errors) {
-              this.alertService.setAlertMultiple(
-                'Book',
-                'error',
-                this.book.errors
-              );
-            }
-            if (this.book && this.book.warnings) {
-              this.alertService.setAlertMultiple(
-                'Book',
-                'warning',
-                this.book.warnings
-              );
-            }
             this.spinnerService.stop();
           },
           err => {
-            console.log(err);
             this.spinnerService.stop();
             this.notificationService.error(err);
-            this.alertService.setAlert('Book', `Unhandled error`, 'error', err);
           }
         );
     } else {
@@ -138,7 +97,5 @@ export class CloseBookingsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.bookingSubscription.unsubscribe();
-    this.errorSubscription.unsubscribe();
-    this.warningSubscription.unsubscribe();
   }
 }
