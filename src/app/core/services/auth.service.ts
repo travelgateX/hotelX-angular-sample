@@ -37,7 +37,6 @@ export class AuthService {
    */
   handleAuthentication(): void {
     this.lock.on('authenticated', authResult => {
-      console.log(authResult);
       this.lock.getUserInfo(authResult.accessToken, (error, profile) => {
         if (error) {
           console.log(error);

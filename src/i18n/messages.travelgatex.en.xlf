@@ -808,6 +808,10 @@
         <source>There aren't suppliers available</source>
         <target>There aren't suppliers available</target>
       </trans-unit>
+      <trans-unit id="no-clients" datatype="html">
+        <source>There aren't clients available</source>
+        <target>There aren't clients available</target>
+      </trans-unit>
       <trans-unit id="accesses" datatype="html">
         <source>Accesses</source>
         <target>Accesses</target>

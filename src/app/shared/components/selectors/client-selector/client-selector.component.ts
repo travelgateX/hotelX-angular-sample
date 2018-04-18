@@ -11,9 +11,9 @@ import { ClientSelectorService } from './client-selector.service';
 })
 export class ClientSelectorComponent implements OnInit {
   // @Output() accessesToSearchOutput = new EventEmitter();
-  showErrorSuppliers: boolean;
   clients: Client[];
   clientSelected: string;
+  showErrorClients: boolean;
   constructor(
     private hubService: HubService,
     private webConfigService: WebConfigService,
@@ -21,6 +21,7 @@ export class ClientSelectorComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.showErrorClients = false;
     this.hubService.getClients().valueChanges.subscribe(
       res => {
         this.clients = [];
@@ -42,6 +43,9 @@ export class ClientSelectorComponent implements OnInit {
         } else if (this.clients.length === 1) {
           this.clientSelected = this.clients[0].code;
           this.onClientSelected();
+        }
+        if (this.clients.length === 0) {
+          this.showErrorClients = true;
         }
       },
       err => {

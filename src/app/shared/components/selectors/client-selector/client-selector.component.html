@@ -4,5 +4,5 @@
   <select class="form-control" [(ngModel)]="clientSelected" name="clientSelected" (change)=onClientSelected() [disabled]="!clients || clients.length === 0">
     <option *ngFor="let client of clients" [value]="client.code">{{client.name}}</option>
   </select>
-  <p *ngIf="showErrorSuppliers" i18n="@@no-suppliers">There aren't suppliers available</p>
+  <p *ngIf="showErrorClients" i18n="@@no-clients">There aren't clients available</p>
 </div>

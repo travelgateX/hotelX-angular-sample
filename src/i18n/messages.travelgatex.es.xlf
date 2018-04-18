@@ -807,6 +807,10 @@
         <source>There aren't suppliers available</source>
         <target>No hay proveedores disponibles</target>
       </trans-unit>
+      <trans-unit id="no-clients" datatype="html">
+        <source>There aren't clients available</source>
+        <target>No hay clientes disponibles</target>
+      </trans-unit>
       <trans-unit id="accesses" datatype="html">
         <source>Accesses</source>
         <target>Accesos</target>
