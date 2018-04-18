@@ -137,7 +137,12 @@ export class HotelOptionComponent implements OnInit, OnDestroy, OnChanges {
     const lang = this.langService.getLang();
 
     this.subscriptions$[0] = this.hubService
-      .getQuote(option.id, lang, this.context, this.webConfigService.getClient())
+      .getQuote(
+        option.id,
+        lang,
+        this.context,
+        this.webConfigService.getClient()
+      )
       .valueChanges.subscribe(
         res => {
           const response = res.data.hotelX.quote;
@@ -239,13 +244,15 @@ export class HotelOptionComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   addImagesAvailable() {
-    this.hotelDetailInfo.medias.forEach(media => {
-      if (media.url) {
-        this.images.push(media.url);
+    if (this.hotelDetailInfo && this.hotelDetailInfo.medias) {
+      this.hotelDetailInfo.medias.map(media => {
+        if (media.url) {
+          this.images.push(media.url);
+        }
+      });
+      if (!this.images || this.images.length === 0) {
+        this.images.push(this.defaultImage);
       }
-    });
-    if (!this.images || this.images.length === 0) {
-      this.images.push(this.defaultImage);
     }
   }
 }

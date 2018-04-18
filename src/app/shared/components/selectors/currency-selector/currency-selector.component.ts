@@ -1,18 +1,18 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { CURRENCIES } from "app/core/interfaces/currencies";
-import { Observable } from "rxjs/Observable";
-import { Currency } from "app/core/interfaces/currency";
-import { CurrencySelectorService } from "./currency-selector.service";
-import { WebConfigService } from "../../../../core/services/web-config.service";
+import { Component, Input, OnInit } from '@angular/core';
+import { CURRENCIES } from 'app/core/interfaces/currencies';
+import { Observable } from 'rxjs/Observable';
+import { Currency } from 'app/core/interfaces/currency';
+import { CurrencySelectorService } from './currency-selector.service';
+import { WebConfigService } from '../../../../core/services/web-config.service';
 
 @Component({
-  selector: "b2b-currency-selector",
-  templateUrl: "./currency-selector.component.html",
-  styleUrls: ["./currency-selector.component.css"]
+  selector: 'b2b-currency-selector',
+  templateUrl: './currency-selector.component.html',
+  styleUrls: ['./currency-selector.component.css']
 })
 export class CurrencySelectorComponent implements OnInit {
   @Input() disabled: Boolean;
-  currency: Currency;
+  currency: Currency = { currency_name: 'Euro', iso_code: 'EUR' };
   currencies = CURRENCIES;
   currencyResultFormatter = (result: any) =>
     `${result.iso_code.toUpperCase()} - ${result.currency_name}`;
@@ -39,7 +39,7 @@ export class CurrencySelectorComponent implements OnInit {
       .distinctUntilChanged()
       .map(
         term =>
-          term === ""
+          term === ''
             ? []
             : this.currencies.filter(item => {
                 const name =

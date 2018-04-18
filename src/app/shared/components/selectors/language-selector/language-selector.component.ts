@@ -1,18 +1,21 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { LANGUAGES } from "app/core/interfaces/languages";
-import { Observable } from "rxjs/Observable";
-import { Language } from "app/core/interfaces/language";
-import { LanguageSelectorService } from "./language-selector.service";
-import { WebConfigService } from "../../../../core/services/web-config.service";
+import { Component, Input, OnInit } from '@angular/core';
+import { LANGUAGES } from 'app/core/interfaces/languages';
+import { Observable } from 'rxjs/Observable';
+import { Language } from 'app/core/interfaces/language';
+import { LanguageSelectorService } from './language-selector.service';
+import { WebConfigService } from '../../../../core/services/web-config.service';
 
 @Component({
-  selector: "b2b-language-selector",
-  templateUrl: "./language-selector.component.html",
-  styleUrls: ["./language-selector.component.css"]
+  selector: 'b2b-language-selector',
+  templateUrl: './language-selector.component.html',
+  styleUrls: ['./language-selector.component.css']
 })
 export class LanguageSelectorComponent implements OnInit {
   @Input() disabled: Boolean;
-  language: Language;
+  language: Language = {
+    iso_code: 'en',
+    language_name: 'English'
+  };
   languages = LANGUAGES;
   languageResultFormatter = (result: any) =>
     `${result.iso_code.toUpperCase()} - ${result.language_name}`;
@@ -39,7 +42,7 @@ export class LanguageSelectorComponent implements OnInit {
       .distinctUntilChanged()
       .map(
         term =>
-          term === ""
+          term === ''
             ? []
             : this.languages.filter(item => {
                 const name =

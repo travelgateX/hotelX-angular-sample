@@ -12,7 +12,10 @@ import { WebConfigService } from '../../../../core/services/web-config.service';
 })
 export class MarketSelectorComponent implements OnInit {
   @Input() disabled: Boolean;
-  market: Market;
+  market: Market = {
+    iso_code: 'es',
+    country_name: 'Spain'
+  };
   markets = MARKETS;
   marketResultFormatter = (result: any) =>
     `${result.iso_code.toUpperCase()} - ${result.country_name}`;
@@ -43,8 +46,9 @@ export class MarketSelectorComponent implements OnInit {
             ? []
             : this.markets.filter(item => {
                 const name =
-                  item.country_name.toLowerCase().indexOf(term.toLowerCase()) !==
-                  -1;
+                  item.country_name
+                    .toLowerCase()
+                    .indexOf(term.toLowerCase()) !== -1;
 
                 return (
                   item.iso_code.toLowerCase().indexOf(term.toLowerCase()) !==

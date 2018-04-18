@@ -78,7 +78,7 @@
           <div class="input-group">
             <input type="text" class="form-control" [(ngModel)]="criteria.nationality" marketMatch [ngbTypeahead]="marketsFilter" name="nationality"
               [disabled]="!accessesToSearch || accessesToSearch.length === 0 || !client" [inputFormatter]="countryInputFormatter"
-              [resultFormatter]="countryResultFormatter" placeholder="Select Nationality" i18n-placeholder="@@market-placeholder"
+              [resultFormatter]="countryResultFormatter" placeholder="Select Nationality" i18n-placeholder="@@nationality-placeholder"
             />
           </div>
         </div>

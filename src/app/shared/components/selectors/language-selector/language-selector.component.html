@@ -2,7 +2,7 @@
   <label i18n="@@language">Language:</label>
   <div class="input-group">
     <input type="text" class="form-control" [(ngModel)]="language" name="language" [ngbTypeahead]="languageFilter" [disabled]="disabled"
-      placeholder="Select Language" i18n-placeholder="@@market-placeholder" [resultFormatter]="languageResultFormatter" [inputFormatter]="languageInputFormatter"
+      placeholder="Select Language" i18n-placeholder="@@language-placeholder" [resultFormatter]="languageResultFormatter" [inputFormatter]="languageInputFormatter"
       [focusFirst]="true" (keyup)="valuate($event.target.value)">
   </div>
 </div>

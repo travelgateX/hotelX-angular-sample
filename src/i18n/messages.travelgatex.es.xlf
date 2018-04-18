@@ -671,6 +671,18 @@
         <source>Select Market</source>
         <target>Seleccionar Mercado</target>
       </trans-unit>
+      <trans-unit id="currency-placeholder" datatype="html">
+        <source>Select Currency</source>
+        <target>Seleccionar Moneda</target>
+      </trans-unit>
+      <trans-unit id="language-placeholder" datatype="html">
+        <source>Select Language</source>
+        <target>Seleccionar Idioma</target>
+      </trans-unit>
+      <trans-unit id="nationality-placeholder" datatype="html">
+        <source>Select Nationality</source>
+        <target>Seleccionar Nacionalidad</target>
+      </trans-unit>
       <trans-unit id="show-entries" datatype="html">
         <source>Show entries:</source>
         <target>Mostrar resultados:</target>

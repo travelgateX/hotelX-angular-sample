@@ -2,7 +2,7 @@
   <label i18n="@@currency">Currency:</label>
   <div class="input-group">
     <input type="text" class="form-control" [(ngModel)]="currency" name="currency" [ngbTypeahead]="currencyFilter" [disabled]="disabled"
-      placeholder="Select Currency" i18n-placeholder="@@market-placeholder" [resultFormatter]="currencyResultFormatter" [inputFormatter]="currencyInputFormatter"
+      placeholder="Select Currency" i18n-placeholder="@@currency-placeholder" [resultFormatter]="currencyResultFormatter" [inputFormatter]="currencyInputFormatter"
       [focusFirst]="true" (keyup)="valuate($event.target.value)">
   </div>
 </div>
