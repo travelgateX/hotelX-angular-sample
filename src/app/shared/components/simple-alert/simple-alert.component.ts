@@ -19,12 +19,6 @@ export class SimpleAlertComponent implements OnChanges {
 
   ngOnChanges(event) {
     switch (this.type) {
-      case 'primary':
-        this.typeString = 'primary'; // Blue
-        break;
-      case 'secondary':
-        this.typeString = 'secondary'; // Dark grey
-        break;
       case 'success':
         this.typeString = 'success'; // Green
         break;

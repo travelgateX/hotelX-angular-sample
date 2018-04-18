@@ -164,20 +164,14 @@ export class HotelOptionComponent implements OnInit, OnDestroy, OnChanges {
           }
           this.requestStorageService.storeResponse('quoteRS', response);
 
-          if (response.warnings) {
-            this.alertService.setAlertMultiple(
-              'Quote',
-              'warning',
-              response.warnings
-            );
-          }
+          this.alertService.setAlertMultiple(
+            'Quote',
+            'warning',
+            response.warnings
+          );
 
+          this.alertService.setAlertMultiple('Quote', 'error', response.errors);
           if (response.errors) {
-            this.alertService.setAlertMultiple(
-              'Quote',
-              'error',
-              response.errors
-            );
             this.notificationService.error(
               response.errors.map(x => x.description).join('\n')
             );

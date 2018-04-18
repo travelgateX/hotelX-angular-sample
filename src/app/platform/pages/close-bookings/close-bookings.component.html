@@ -38,12 +38,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <b2b-simple-alert *ngFor="let error of errors" [title]="error.title" [type]="error.type" [message]="error.message"></b2b-simple-alert>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <b2b-simple-alert *ngFor="let warning of warnings" [title]="warning.title" [type]="warning.type" [message]="warning.message"></b2b-simple-alert>
+      <b2b-alert-dropdown *ngIf="!loading" [errors]="errors" [warnings]="warnings"></b2b-alert-dropdown>
     </div>
   </div>
   <div class="row">

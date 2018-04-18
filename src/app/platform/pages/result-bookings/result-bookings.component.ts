@@ -157,21 +157,17 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
               this.requestStorageService.storeResponse('hotelRS', response);
 
               if (response) {
-                if (response.errors) {
-                  this.alertService.setAlertMultiple(
-                    'Hotel',
-                    'error',
-                    response.errors
-                  );
-                }
+                this.alertService.setAlertMultiple(
+                  'Hotel',
+                  'error',
+                  response.errors
+                );
 
-                if (response.warnings) {
-                  this.alertService.setAlertMultiple(
-                    'Hotel',
-                    'warning',
-                    response.warnings
-                  );
-                }
+                this.alertService.setAlertMultiple(
+                  'Hotel',
+                  'warning',
+                  response.warnings
+                );
 
                 if (!response.options || response.options.length === 0) {
                   this.resetAvailability();

@@ -97,7 +97,7 @@
         </div>
       </form>
     </div>
-    <div class="mo-search-filter-entries mo-search-filter-hotel row" >
+    <div class="mo-search-filter-entries mo-search-filter-hotel row">
       <div class="col-md-9">
         <form class="fm-smy form-inline" *ngIf="availability.length">
           <label for="inlineFormInput" class="mr-3" i18n="@@show-entries">Show entries:</label>
@@ -117,15 +117,10 @@
     </div>
   </div>
   <div class="row">
-      <div class="col-md-12">
-        <b2b-simple-alert *ngFor="let error of errors" [title]="error.title" [type]="error.type" [message]="error.message"></b2b-simple-alert>
-      </div>
+    <div class="col-md-12">
+      <b2b-alert-dropdown *ngIf="!loading" [errors]="errors" [warnings]="warnings"></b2b-alert-dropdown>
     </div>
-    <div class="row">
-      <div class="col-md-12">
-        <b2b-simple-alert *ngFor="let warning of warnings"[title]="warning.title" [type]="warning.type" [message]="warning.message"></b2b-simple-alert>
-      </div>
-    </div>
+  </div>
   <div class="row">
     <div class="col">
       <div *ngIf="availability.length; then results else noResults"></div>

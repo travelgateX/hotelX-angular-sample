@@ -74,8 +74,8 @@
               </td>
             </tr>
             <tr>
-              <td [colSpan]="calcWidth()">
-                <b2b-simple-alert *ngIf="booking.cancelImport" [title]="'Cancel import'" [type]="'primary'" [message]="' ' + booking.cancelImport"></b2b-simple-alert>
+              <td [colSpan]="calcWidth()" class="cancelImportAlert">
+                <b2b-simple-alert *ngIf="booking.cancelImport" [title]="'Cancel import'" [type]="'info'" [message]="' ' + booking.cancelImport"></b2b-simple-alert>
               </td>
             </tr>
           </ng-container>

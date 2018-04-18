@@ -11,27 +11,30 @@ export class AlertService {
 
   constructor() {}
 
-  setAlert(name, title, type, alert) {
+  setAlert(name, title, type, message) {
     this[type].next([
       {
         name: name,
         title: title,
         type: type,
-        message: JSON.stringify(alert || 'Empty message')
+        message: JSON.stringify(message || 'Empty message')
       }
     ]);
   }
 
   setAlertMultiple(name, type, alerts) {
-    let auxAlerts = alerts.map(a => {
+    let auxAlerts = [];
+    if (alerts) {
+      auxAlerts = alerts.map(a => {
         return {
           name: name,
           title: `${type} (${a.type}) ${a.code}`,
           type: type,
           message: JSON.stringify(a.description || 'Empty message')
         };
-    });
-    auxAlerts = auxAlerts.filter( a => a !== undefined)
+      });
+    }
+    auxAlerts = auxAlerts.filter(a => a !== undefined);
     this[type].next(auxAlerts);
   }
 }

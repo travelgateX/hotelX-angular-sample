@@ -119,7 +119,14 @@ export class MyBookingsTableComponent implements OnChanges {
           this.notificationService.success('Booking Cancelled');
         }
       },
-      err => this.notificationService.error(err)
+      err => {
+        this.requestStorageService.storeResponse(
+          'cancelBookingRS_' + booking.reference.supplier,
+          err
+        );
+        booking.showMoreOptions = true;
+        this.notificationService.error(err);
+      }
     );
   }
 

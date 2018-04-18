@@ -89,11 +89,11 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
       })
     });
     this.errorSubscription = this.alertService.error$.subscribe(err => {
-        this.errors = err.filter(e => e.name === 'MyBookings');
+      this.errors = err.filter(e => e.name === 'MyBookings');
     });
 
     this.warningSubscription = this.alertService.warning$.subscribe(warning => {
-        this.warnings = warning.filter(w => w.name === 'MyBookings');
+      this.warnings = warning.filter(w => w.name === 'MyBookings');
     });
     this.myBookingForm.disable();
 
@@ -130,47 +130,46 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
   getMyBookings(criteriaBooking: CriteriaBooking) {
     this.loading = true;
     this.bookings = null;
-    this.hubService.getMyBookings(criteriaBooking, this.client).valueChanges.subscribe(
-      res => {
-        this.loading = false;
-        this.bookings = [];
-        this.requestStorageService.storeResponse('myBookingsRS', res);
-        if (res.data && res.data.hotelX && res.data.hotelX.booking) {
-          const booking = res.data.hotelX.booking;
+    this.hubService
+      .getMyBookings(criteriaBooking, this.client)
+      .valueChanges.subscribe(
+        res => {
+          this.loading = false;
+          this.bookings = [];
+          this.requestStorageService.storeResponse('myBookingsRS', res);
+          if (res.data && res.data.hotelX && res.data.hotelX.booking) {
+            const booking = res.data.hotelX.booking;
 
-          if (booking.errors) {
             this.alertService.setAlertMultiple(
               'MyBookings',
               'error',
               booking.errors
             );
-          }
-          if (booking.warnings) {
+
             this.alertService.setAlertMultiple(
               'MyBookings',
               'warning',
               booking.warnings
             );
-          }
 
-          if (res.data.hotelX.booking.bookings) {
-            this.bookings = JSON.parse(
-              JSON.stringify(res.data.hotelX.booking.bookings)
-            );
+            if (res.data.hotelX.booking.bookings) {
+              this.bookings = JSON.parse(
+                JSON.stringify(res.data.hotelX.booking.bookings)
+              );
+            }
           }
+        },
+        err => {
+          this.alertService.setAlert(
+            'MyBookings',
+            `Unhandled error`,
+            'error',
+            err
+          );
+          this.notificationService.error(err);
+          this.loading = false;
         }
-      },
-      err => {
-        this.alertService.setAlert(
-          'MyBookings',
-          `Unhandled error`,
-          'error',
-          err
-        );
-        this.notificationService.error(err);
-        this.loading = false;
-      }
-    );
+      );
   }
 
   searchByDate(value) {
