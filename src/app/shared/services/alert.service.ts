@@ -12,31 +12,30 @@ export class AlertService {
   constructor() {}
 
   setAlert(name, title, type, alert) {
-    console.log('simple')
-    this[type].next([{
-      name: name,
-      title: title,
-      type: type,
-      message: JSON.stringify(alert || 'Empty message')
-    }])
+    this[type].next([
+      {
+        name: name,
+        title: title,
+        type: type,
+        message: JSON.stringify(alert || 'Empty message')
+      }
+    ]);
   }
 
   setAlertMultiple(name, type, alerts) {
-    console.log('multiple')
-    const auxAlerts = alerts.map( a => {
-      return {
-        name: name,
-        title: `${type} (${a.type}) ${a.code}`,
-        type: type,
-        message: JSON.stringify(a.description || 'Empty message')
+    const auxAlerts = alerts.map(a => {
+      if (a.type !== 'API_ERROR') {
+        return {
+          name: name,
+          title: `${type} (${a.type}) ${a.code}`,
+          type: type,
+          message: JSON.stringify(a.description || 'Empty message')
+        };
       }
-    }
-
-    );
+    });
     this[type].next(auxAlerts);
   }
 }
-
 
 // response.errors
 // .map(x => x.description)

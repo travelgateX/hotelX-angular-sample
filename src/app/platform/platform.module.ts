@@ -19,8 +19,6 @@ import { AgmCoreModule } from "@agm/core";
 import { CloseBookingsComponent } from "app/platform/pages/close-bookings/close-bookings.component";
 import { HotelOptionComponent } from "app/platform/components/hotel-option/hotel-option.component";
 import { BookingDetailComponent } from "./components/booking-detail/booking-detail.component";
-import { RsModalComponent } from "./components/rs-modal/rs-modal.component";
-import { RqModalComponent } from "./components/rq-modal/rq-modal.component";
 import { JoinPipe } from "./pipes/join.pipe";
 import { CancelPolicyPipe } from "./pipes/cancel-policy.pipe";
 import { CapitalizePipe } from "./pipes/capitalize.pipe";
@@ -35,6 +33,8 @@ import { MultiSelectModule } from "primeng/multiselect";
 import { MyBookingsComponent } from "./pages/my-bookings/my-bookings.component";
 import { SupplierAccessesComponent } from "app/platform/components/supplier-accesses/supplier-accesses.component";
 import { MyBookingsTableComponent } from './pages/my-bookings/my-bookings-table/my-bookings-table.component';
+import { RsModalComponent } from "../shared/components/rs-modal/rs-modal.component";
+import { RqModalComponent } from "../shared/components/rq-modal/rq-modal.component";
 
 @NgModule({
   imports: [
@@ -57,8 +57,6 @@ import { MyBookingsTableComponent } from './pages/my-bookings/my-bookings-table/
     GoogleMapsModalComponent,
     HotelOptionComponent,
     BookingDetailComponent,
-    RsModalComponent,
-    RqModalComponent,
     JoinPipe,
     CancelPolicyPipe,
     CapitalizePipe,
@@ -76,11 +74,11 @@ import { MyBookingsTableComponent } from './pages/my-bookings/my-bookings-table/
     EditCriteriaModalComponent,
     ValuationModalComponent,
     GoogleMapsModalComponent,
-    RsModalComponent,
-    RqModalComponent,
     CancelPolicyModalComponent,
     BindingModalComponent,
-    CarouselModalComponent
+    CarouselModalComponent,
+    RsModalComponent,
+    RqModalComponent
   ],
   providers: [LoginGuard]
 })

@@ -1,17 +1,17 @@
 import { LangService } from './../../../core/services/lang.service';
 import { HotelBookPayload } from 'app/core/interfaces/hotel-book-payload';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { SpinnerService } from 'app/core/services/spinner.service';
 import { HubService } from 'app/core/services/hub.service';
-import { NotificationService } from 'app/core/services/notification.service';
 import { BookingService } from 'app/core/services/booking.service';
 import { BookingDetail } from 'app/core/interfaces/booking-detail';
 import { Router } from '@angular/router';
 import { SearchService } from 'app/core/services/search.service';
 import { WebConfigService } from '../../../core/services/web-config.service';
 import { Subscription } from 'apollo-client/util/Observable';
-import { RequestStorageService } from 'app/core/services/request-storage.service';
 import { AlertService } from '../../../shared/services/alert.service';
+import { NotificationService } from '../../../shared/services/notification.service';
+import { RequestStorageService } from '../../../shared/services/request-storage.service';
+import { SpinnerService } from '../../../shared/services/spinner.service';
 
 @Component({
   selector: 'b2b-close-bookings',
@@ -39,7 +39,7 @@ export class CloseBookingsComponent implements OnInit, OnDestroy {
     private langService: LangService,
     private webConfigService: WebConfigService,
     private requestStorageService: RequestStorageService,
-    private alertService: AlertService
+    private alertService: AlertService,
   ) {}
 
   ngOnInit() {
@@ -72,7 +72,7 @@ export class CloseBookingsComponent implements OnInit, OnDestroy {
       const lang = this.langService.getLang();
       this.bookingDetail.input.language = lang;
       this.hubService
-        .getBook(this.bookingDetail.input, this.webConfigService.getContext())
+        .getBook(this.bookingDetail.input, this.webConfigService.getContext(), this.webConfigService.getClient())
         .subscribe(
           res => {
             console.log(res);

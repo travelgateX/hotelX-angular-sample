@@ -12,7 +12,6 @@ import {
   decideClosure
 } from '../../../shared/utilities/functions';
 import { CancelBooking } from '../../../core/interfaces/cancel-booking';
-import { NotificationService } from 'app/core/services/notification.service';
 import { BookingCriteriaDateType } from 'app/core/enumerates/booking-criteria-date-type';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
@@ -24,11 +23,14 @@ import {
 import { Board } from 'app/core/interfaces/board';
 import { Subscription } from 'rxjs/Subscription';
 import { CurrencySelectorService } from 'app/shared/components/selectors/currency-selector/currency-selector.service';
-import { RqModalComponent } from 'app/platform/components/rq-modal/rq-modal.component';
-import { RsModalComponent } from 'app/platform/components/rs-modal/rs-modal.component';
+import { RqModalComponent } from '../../../shared/components/rq-modal/rq-modal.component';
+import { RsModalComponent } from '../../../shared/components/rs-modal/rs-modal.component';
 import { LanguageSelectorService } from '../../../shared/components/selectors/language-selector/language-selector.service';
-import { RequestStorageService } from 'app/core/services/request-storage.service';
 import { AlertService } from 'app/shared/services/alert.service';
+import { NotificationService } from '../../../shared/services/notification.service';
+import { RequestStorageService } from '../../../shared/services/request-storage.service';
+import { Client } from '../../../core/interfaces/client';
+import { ClientSelectorService } from '../../../shared/components/selectors/client-selector/client-selector.service';
 
 @Component({
   selector: 'b2b-my-bookings',
@@ -45,6 +47,7 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
   bookingCriteriaDateType = BookingCriteriaDateType;
   bookingCriteriaDateTypeArray = enumToArray(BookingCriteriaDateType);
   bookings: any[];
+  client: Client;
   loading: boolean;
   subscriptions$: Subscription[];
   errorSubscription: Subscription;
@@ -63,7 +66,8 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
     private languageSelectorService: LanguageSelectorService,
     private modalService: NgbModal,
     private requestStorageService: RequestStorageService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private clientSelectorService: ClientSelectorService
   ) {}
 
   ngOnInit() {
@@ -115,12 +119,18 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
         this.myBookingForm.controls['language'].setValue(null);
       }
     });
+
+    this.subscriptions$[
+      'client'
+    ] = this.clientSelectorService.client$.subscribe(res => {
+      this.client = res;
+    });
   }
 
   getMyBookings(criteriaBooking: CriteriaBooking) {
     this.loading = true;
     this.bookings = null;
-    this.hubService.getMyBookings(criteriaBooking).valueChanges.subscribe(
+    this.hubService.getMyBookings(criteriaBooking, this.client).valueChanges.subscribe(
       res => {
         this.loading = false;
         this.bookings = [];

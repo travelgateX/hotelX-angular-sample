@@ -1,11 +1,11 @@
 import gql from 'graphql-tag';
 
 export const avail = gql`
-query Query($criteria: HotelCriteriaSearchInput, $access: [ID!], $context: String) {
+query Query($criteria: HotelCriteriaSearchInput, $access: [ID!], $context: String, $client: String) {
   hotelX {
     search(criteria: $criteria
       settings: {
-        context: $context
+        context: $context, client: $client
       }
       filter: { access: {includes: $access} }) {
         options {

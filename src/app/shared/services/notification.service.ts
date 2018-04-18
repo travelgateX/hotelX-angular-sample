@@ -1,8 +1,8 @@
-import { NotificationType } from './../interfaces/notification-type.enum';
 import { Injectable } from '@angular/core';
 import { ToastyService, ToastyConfig, ToastOptions } from 'ng2-toasty';
 import { IError } from 'app/core/interfaces/error';
 import { IWarning } from 'app/core/interfaces/warning';
+import { NotificationType } from '../../core/interfaces/notification-type.enum';
 
 /**
  * Implements Toasty methods for notifications in the SPA

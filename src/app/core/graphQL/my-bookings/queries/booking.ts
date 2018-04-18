@@ -1,11 +1,11 @@
 import gql from "graphql-tag";
 
 export const booking = gql`
-  query booking($criteriaBooking: HotelCriteriaBookingInput!) {
+  query booking($criteriaBooking: HotelCriteriaBookingInput!, $client: String) {
     hotelX {
       booking(
         criteria: $criteriaBooking
-        settings: { auditTransactions: true }
+        settings: { auditTransactions: true, client: $client }
       ) {
         auditData {
           transactions {

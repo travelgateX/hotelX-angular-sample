@@ -22,7 +22,6 @@ import { Criteria } from 'app/core/interfaces/criteria';
 import { Distribution } from 'app/core/interfaces/distribution';
 import { Pax } from 'app/core/interfaces/pax';
 import { BookingService } from 'app/core/services/booking.service';
-import { NotificationService } from 'app/core/services/notification.service';
 import { SearchService } from 'app/core/services/search.service';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
@@ -42,6 +41,9 @@ import { decideClosure } from 'app/shared/utilities/functions';
 import { CurrencySelectorService } from '../../../shared/components/selectors/currency-selector/currency-selector.service';
 import { LanguageSelectorService } from '../../../shared/components/selectors/language-selector/language-selector.service';
 import { MarketSelectorService } from '../../../shared/components/selectors/market-selector/market-selector.service';
+import { NotificationService } from '../../../shared/services/notification.service';
+import { ClientSelectorService } from '../../../shared/components/selectors/client-selector/client-selector.service';
+import { Client } from '../../../core/interfaces/client';
 
 @Component({
   selector: 'b2b-availability',
@@ -64,6 +66,7 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
   accessesToSearch: Access[];
   adultAge = 33;
   autocompleteSearch;
+  client: Client;
   criteria: Criteria;
   criteria_copy: Criteria;
   context: string;
@@ -91,7 +94,8 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
     private hubService: HubService,
     private currencySelectorService: CurrencySelectorService,
     private languageSelectorService: LanguageSelectorService,
-    private marketSelectorService: MarketSelectorService
+    private marketSelectorService: MarketSelectorService,
+    private clientSelectorService: ClientSelectorService
   ) {
     this.config.focusFirst = false;
   }
@@ -132,6 +136,12 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
     ] = this.marketSelectorService.market$.subscribe(res => {
       this.criteria.market = res;
       this.criteria.nationality = res;
+    });
+
+    this.subscriptions$[
+      'client'
+    ] = this.clientSelectorService.client$.subscribe(res => {
+      this.client = res;
     });
     // this.criteria = JSON.parse(JSON.stringify(this.criteria_copy));
     // if (this.criteria.items.length > 0) {

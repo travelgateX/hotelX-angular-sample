@@ -5,6 +5,7 @@ import { Supplier } from '../interfaces/supplier';
 import { Currency } from 'app/core/interfaces/currency';
 import { Language } from 'app/core/interfaces/language';
 import { Market } from 'app/core/interfaces/market';
+import { Client } from '../interfaces/client';
 
 @Injectable()
 export class WebConfigService {
@@ -56,5 +57,13 @@ export class WebConfigService {
 
   getMarket(): Market {
     return JSON.parse(localStorage.getItem('market'));
+  }
+
+  setClient(client: Client) {
+    localStorage.setItem('client', JSON.stringify(client));
+  }
+
+  getClient(): Client {
+    return JSON.parse(localStorage.getItem('client'));
   }
 }

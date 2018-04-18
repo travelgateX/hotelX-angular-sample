@@ -19,20 +19,23 @@
         <tbody>
           <ng-container *ngFor="let booking of bookings">
             <tr>
-              <td>{{booking.hotel.creationDate}}</td>
+              <td>{{booking?.hotel?.creationDate}}</td>
               <td>
-                <p class="hotelname">{{booking.hotel.hotelName}}</p>
+                <p class="hotelname">{{booking?.hotel?.hotelName}}</p>
                 <!-- TODO check and i18n -->
-                <p class="compo">Del {{booking.hotel.checkIn}} al {{booking.hotel.checkOut}}</p>
+                <p class="compo">Del {{booking?.hotel?.checkIn}} al {{booking?.hotel?.checkOut}}</p>
               </td>
               <!-- TODO check and i18n -->
-              <td style="white-space: nowrap;">{{booking.hotel.rooms.length}}
-                <span i18n="@@my-bookings-room-plural">{booking.hotel.rooms.length, plural, =0 {rooms} =1 {room} other {rooms}}</span>
+              <td *ngIf="booking.hotel.rooms; else noRooms" style="white-space: nowrap;">{{booking?.hotel?.rooms?.length}}
+                <span i18n="@@my-bookings-room-plural">room</span>
                 <span class="tip" data-toggle="tooltip" data-placement="top" [title]="formatTitle(booking.hotel.rooms)">
                   <i class="fa fa-question-circle" aria-hidden="true"></i>
                 </span>
               </td>
-              <td>{{booking.hotel.boardCode | mealplan : boards}}</td>
+              <ng-template #noRooms>
+                <td></td>
+              </ng-template>
+              <td>{{booking?.hotel?.boardCode | mealplan : boards}}</td>
               <td *ngIf="booking?.cancelPolicy?.cancelPenalties | getMax; else noOptions; let maxOption" (click)="openCancelPolicyModal(booking?.cancelPolicy?.cancelPenalties)">
                 <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" i18n-title="@@penalty-tooltip"
                   title="Click to see penalty list"></i>

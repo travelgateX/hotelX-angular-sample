@@ -25,6 +25,13 @@ import { SimpleAlertComponent } from 'app/shared/components/simple-alert/simple-
 import { MarketSelectorComponent } from './components/selectors/market-selector/market-selector.component';
 import { MarketSelectorService } from 'app/shared/components/selectors/market-selector/market-selector.service';
 import { AlertService } from './services/alert.service';
+import { NotificationService } from './services/notification.service';
+import { RequestStorageService } from './services/request-storage.service';
+import { SpinnerService } from './services/spinner.service';
+import { RsModalComponent } from './components/rs-modal/rs-modal.component';
+import { RqModalComponent } from './components/rq-modal/rq-modal.component';
+import { ClientSelectorComponent } from './components/selectors/client-selector/client-selector.component';
+import { ClientSelectorService } from './components/selectors/client-selector/client-selector.service';
 
 @NgModule({
   imports: [
@@ -40,7 +47,11 @@ import { AlertService } from './services/alert.service';
     CurrencySelectorService,
     LanguageSelectorService,
     MarketSelectorService,
-    AlertService
+    ClientSelectorService,
+    AlertService,
+    NotificationService,
+    RequestStorageService,
+    SpinnerService
   ],
   declarations: [
     ScrollDirective,
@@ -58,7 +69,10 @@ import { AlertService } from './services/alert.service';
     CurrencySelectorComponent,
     LanguageSelectorComponent,
     SimpleAlertComponent,
-    MarketSelectorComponent
+    MarketSelectorComponent,
+    RsModalComponent,
+    RqModalComponent,
+    ClientSelectorComponent
   ],
   exports: [
     CommonModule,
@@ -83,7 +97,10 @@ import { AlertService } from './services/alert.service';
     CurrencySelectorComponent,
     LanguageSelectorComponent,
     MarketSelectorComponent,
-    SimpleAlertComponent
+    SimpleAlertComponent,
+    RsModalComponent,
+    RqModalComponent,
+    ClientSelectorComponent
   ]
 })
 export class SharedModule {}

@@ -42,7 +42,7 @@ export function formatHoursToDaysHours(hoursBefore: number): string {
  * @param actualClass Actual classes from the element tag "Class"
  */
 export function getDisabled(
-  variableToTest: any[],
+  variableToTest: any,
   actualClass: string
 ): string {
   return !variableToTest || variableToTest.length === 0
@@ -60,41 +60,6 @@ export function enumToArray(enumerate: any) {
     enumMaped[i] = { name: enumerate[e], value: e };
   });
   return enumMaped;
-}
-
-/**
- * Stores requests
- * @param req
- */
-export function storeRequest(req) {
-  // Filtrado GUARRO según las propiedades dentro de 'variables'
-  const request = JSON.parse(JSON.stringify(req));
-  request.bearer = 'Bearer ' + localStorage.getItem('token');
-
-  const requestsToSave =
-    JSON.parse(sessionStorage.getItem('interceptedRequest')) || {};
-  const isHotelCriteria = req.body.query.includes('HotelCriteriaSearchInput');
-  const isQuoting = req.body.query.includes('optionRefId');
-  const isBooking = req.body.query.includes('Mutation($input: HotelBookInput!');
-  const isMyBookings = req.body.query.includes('booking($criteriaBooking');
-  const isCancelBooking = req.body.query.includes('cancelBooking');
-
-  if (isHotelCriteria) {
-    requestsToSave['hotelRQ'] = request;
-  } else if (isQuoting) {
-    requestsToSave['quoteRQ'] = request;
-  } else if (isBooking) {
-    requestsToSave['bookRQ'] = request;
-  } else if (isMyBookings) {
-    requestsToSave['myBookingsRQ'] = request;
-  } else if (isCancelBooking) {
-    const input = request.body.variables.input;
-    requestsToSave['cancelBookingRQ_' + input.reference.supplier] = request;
-  } else {
-    return;
-  }
-
-  sessionStorage.setItem('interceptedRequest', JSON.stringify(requestsToSave));
 }
 
 /**

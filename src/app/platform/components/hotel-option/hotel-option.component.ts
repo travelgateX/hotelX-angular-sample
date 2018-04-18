@@ -15,8 +15,6 @@ import { Option } from 'app/core/interfaces/option';
 import { Search } from 'app/core/interfaces/search';
 import { BookingService } from 'app/core/services/booking.service';
 import { HubService } from 'app/core/services/hub.service';
-import { NotificationService } from 'app/core/services/notification.service';
-import { SpinnerService } from 'app/core/services/spinner.service';
 import { GoogleMapsModalComponent } from 'app/platform/components/google-maps-modal/google-maps-modal.component';
 import { ValuationModalComponent } from 'app/platform/components/valuation-modal/valuation-modal.component';
 import { Subscription } from 'rxjs/Subscription';
@@ -29,9 +27,12 @@ import { EditCriteriaModalComponent } from 'app/platform/components/edit-criteri
 import { CarouselModalComponent } from 'app/platform/components/carousel-modal/carousel-modal/carousel-modal.component';
 import { HotelInfoGeocode } from 'app/core/interfaces/hotel-info/geocode';
 import { Board } from 'app/core/interfaces/board';
-import { RequestStorageService } from 'app/core/services/request-storage.service';
 import { Price } from '../../../core/interfaces/price';
 import { AlertService } from 'app/shared/services/alert.service';
+import { NotificationService } from '../../../shared/services/notification.service';
+import { RequestStorageService } from '../../../shared/services/request-storage.service';
+import { SpinnerService } from '../../../shared/services/spinner.service';
+import { WebConfigService } from '../../../core/services/web-config.service';
 
 @Component({
   selector: 'b2b-hotel-option',
@@ -64,7 +65,8 @@ export class HotelOptionComponent implements OnInit, OnDestroy, OnChanges {
     private bookingService: BookingService,
     private langService: LangService,
     private requestStorageService: RequestStorageService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private webConfigService: WebConfigService
   ) {}
 
   ngOnInit() {
@@ -135,7 +137,7 @@ export class HotelOptionComponent implements OnInit, OnDestroy, OnChanges {
     const lang = this.langService.getLang();
 
     this.subscriptions$[0] = this.hubService
-      .getQuote(option.id, lang, this.context)
+      .getQuote(option.id, lang, this.context, this.webConfigService.getClient())
       .valueChanges.subscribe(
         res => {
           const response = res.data.hotelX.quote;

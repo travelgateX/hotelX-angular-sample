@@ -97,16 +97,6 @@
         </div>
       </form>
     </div>
-    <div class="row">
-      <div class="col-md-12">
-        <b2b-simple-alert *ngFor="let error of errors" [title]="error.title" [type]="error.type" [message]="error.message"></b2b-simple-alert>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <b2b-simple-alert *ngFor="let warning of warnings"[title]="warning.title" [type]="warning.type" [message]="warning.message"></b2b-simple-alert>
-      </div>
-    </div>
     <div class="mo-search-filter-entries mo-search-filter-hotel row" >
       <div class="col-md-9">
         <form class="fm-smy form-inline" *ngIf="availability.length">

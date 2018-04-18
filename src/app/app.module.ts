@@ -2,7 +2,6 @@ import { RouterModule } from '@angular/router';
 import { PlatformModule } from './platform/platform.module';
 import { environment } from './../environments/environment';
 import { SharedModule } from './shared/shared.module';
-import { NotificationService } from './core/services/notification.service';
 import { AuthService } from './core/services/auth.service';
 import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app.routing';

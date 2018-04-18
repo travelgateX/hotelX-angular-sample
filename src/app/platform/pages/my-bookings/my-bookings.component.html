@@ -22,15 +22,18 @@
       <div class="col-md-6">
         <b2b-supplier-accesses (accessesToSearchOutput)="saveAccessesToSearch($event)"></b2b-supplier-accesses>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-2">
+        <b2b-client-selector></b2b-client-selector>
+      </div>
+      <div class="col-md-2">
         <label>
           <span i18n="@@supplier">Search type</span>:</label>
         <select class="form-control" formControlName="typeSearch">
           <option *ngFor="let type of bookingCriteriaTypeArray" [value]="type.value">{{type.name}}</option>
         </select>
       </div>
-      <div class="col-md-3">
-        <b2b-language-selector [disabled]="!accessesToSearch || accessesToSearch.length === 0"></b2b-language-selector>
+      <div class="col-md-2">
+        <b2b-language-selector [disabled]="!accessesToSearch || accessesToSearch.length === 0 || !client"></b2b-language-selector>
       </div>
       <ng-container class="align-items-end" *ngIf="myBookingForm.controls['typeSearch'].value === bookingCriteriaType.REFERENCES"
         formGroupName="references">
@@ -70,12 +73,12 @@
           </div>
         </div>
         <div class="col-md-2">
-          <b2b-currency-selector [disabled]="!accessesToSearch || accessesToSearch.length === 0"></b2b-currency-selector>
+          <b2b-currency-selector [disabled]="!accessesToSearch || accessesToSearch.length === 0 || !client"></b2b-currency-selector>
         </div>
         <div class="col-md-2">
           <div class="form-group">
             <label></label>
-            <a class="btn btn-primary smy-bordered btn-block disabled" *ngIf="!accessesToSearch || accessesToSearch.length === 0 || !myBookingForm.valid; else searchReference"
+            <a class="btn btn-primary smy-bordered btn-block disabled" *ngIf="!accessesToSearch || accessesToSearch.length === 0 || !client || !myBookingForm.valid; else searchReference"
               i18n="@@search">Search</a>
             <ng-template #searchReference>
               <a class="btn btn-primary smy-bordered btn-block" i18n="@@search" (click)="searchByReference(myBookingForm.value)">Search</a>
@@ -111,7 +114,7 @@
         <div class="col-md-3">
           <div class="form-group">
             <label></label>
-            <a class="btn btn-primary smy-bordered btn-block disabled" *ngIf="!accessesToSearch || accessesToSearch.length === 0 || !myBookingForm.valid; else searchDates"
+            <a class="btn btn-primary smy-bordered btn-block disabled" *ngIf="!accessesToSearch || accessesToSearch.length === 0 || !client || !myBookingForm.valid; else searchDates"
               i18n="@@search">Search</a>
             <ng-template #searchDates>
               <a class="btn btn-primary smy-bordered btn-block" i18n="@@search" (click)="searchByDate(myBookingForm.value)">Search</a>
@@ -138,7 +141,7 @@
     </div>
   </div>
 
-  <b2b-my-bookings-table [bookings]="bookings" [boards]="boards"></b2b-my-bookings-table>
+  <b2b-my-bookings-table [bookings]="bookings" [boards]="boards" [client]="client"></b2b-my-bookings-table>
   <div class="row">
     <div class="col-md-1 col-centered">
       <i class="fa fa-spinner fa-spin" style="font-size:36px;" *ngIf="loading"></i>
