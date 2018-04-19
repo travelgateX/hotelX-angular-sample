@@ -194,7 +194,7 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
       accessCode:
         this.accessesToSearch.length !== 0 ? this.accessesToSearch[0].code : ''
     });
-    this.accessesToSearch.length !== 0
+    this.accessesToSearch.length !== 0 && this.client
       ? this.myBookingForm.enable()
       : this.myBookingForm.disable();
   }

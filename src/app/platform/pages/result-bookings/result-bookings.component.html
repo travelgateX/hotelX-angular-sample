@@ -45,17 +45,17 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="mo-search-filter-hotel">
-      <form class="fm-smy">
 
-        <div class="form-group">
+  <div class="mo-search-filter-hotel">
+    <form class="fm-smy">
+      <div class="row">
+        <div class="col-md-2">
           <label for="inlineFormInput" class="mr-3" i18n="@@search-hotel">Hotel</label>
           <input type="text" class="bordered form-control" i18n-placeholder="@@hotel-name-placeholder" placeholder="Hotel name..."
             [(ngModel)]="filter.codeName" name="codeName" (keyup.enter)="filterAvailability()">
         </div>
 
-        <div class="form-group">
+        <div class="col-md-2">
           <label i18n="@@category">Category</label>
           <select class="bordered form-control" [(ngModel)]="filter.category" name="category">
             <option [ngValue]="null" i18n="@@select-category">Select Category</option>
@@ -63,7 +63,7 @@
           </select>
         </div>
 
-        <div class="form-group">
+        <div class="col-md-2">
           <label i18n="@@mealplan">Mealplan</label>
           <select class="bordered form-control" [(ngModel)]="filter.boardCode" name="boardCode">
             <option [ngValue]="null" i18n="@@select-mealplan">Select Mealplan</option>
@@ -71,7 +71,7 @@
           </select>
         </div>
 
-        <div class="form-group">
+        <div class="col-md-2">
           <label i18n="@@rate">Rate</label>
           <select class="bordered form-control" [(ngModel)]="filter.rate" name="rate">
             <option [ngValue]="null" i18n="@@select-rate">Select Rate</option>
@@ -82,7 +82,7 @@
           </select>
         </div>
 
-        <div class="form-group">
+        <div class="col-md-2">
           <label i18n="@@price">Price</label>
           <select class="bordered form-control" [(ngModel)]="filter.price" name="price">
             <option [ngValue]="null" i18n="@@select-price">Select Price</option>
@@ -91,12 +91,14 @@
           </select>
         </div>
 
-        <div class="form-group">
-          <a class="btn btn-secondary smy" (click)="filterAvailability()" i18n="@@search">Search</a>
-          <a class="btn btn-warning smy" (click)="clearFilter()" i18n="@@clear">Clear</a>
+        <div class="col-md-2">
+          <a class="btn btn-secondary smy col-md-6" (click)="filterAvailability()" i18n="@@search">Search</a>
+          <a class="btn btn-warning smy col-md-6" (click)="clearFilter()" i18n="@@clear">Clear</a>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
+  </div>
+  <div class="row">
     <div class="mo-search-filter-entries mo-search-filter-hotel row">
       <div class="col-md-9">
         <form class="fm-smy form-inline" *ngIf="availability.length">
@@ -118,7 +120,7 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <b2b-alert-dropdown *ngIf="!loading" [errors]="errors" [warnings]="warnings"></b2b-alert-dropdown>
+      <b2b-alert-dropdown [errors]="errors" [warnings]="warnings"></b2b-alert-dropdown>
     </div>
   </div>
   <div class="row">

@@ -1,4 +1,4 @@
 export enum BookingCriteriaType {
-  REFERENCES = "REFERENCES",
-  DATES = "DATES"
+  DATES = "DATES",
+  REFERENCES = "REFERENCES"
 }
