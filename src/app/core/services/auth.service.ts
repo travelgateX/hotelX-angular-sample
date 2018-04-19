@@ -23,7 +23,7 @@ export class AuthService {
 
   constructor(
     private router: Router,
-    private notificationService: NotificationService,
+    private notificationService: NotificationService
   ) {
     // Checks if there is already a user logged checking local storage
     if (localStorage.getItem('profile') !== null) {
@@ -53,6 +53,10 @@ export class AuthService {
     this.lock.on('authorization_error', error => console.log(error));
 
     this.lock.on('unrecoverable_error', error => console.log(error));
+
+    if (!this.authenticated() && localStorage.getItem('expires_at')) {
+      this.logout();
+    }
   }
 
   /**

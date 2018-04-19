@@ -11,7 +11,7 @@ import { MyBookingsComponent } from './platform/pages/my-bookings/my-bookings.co
 const routes: Routes = [
   {
     path: 'home',
-    component: HomeComponent,
+    component: HomeComponent
   },
   {
     path: 'platform',
@@ -19,45 +19,45 @@ const routes: Routes = [
     children: [
       {
         path: 'search-bookings',
-        component: SearchBookingsComponent,
+        component: SearchBookingsComponent
       },
       {
         path: 'results-bookings',
-        component: ResultBookingsComponent,
+        component: ResultBookingsComponent
       },
       {
         path: 'close-bookings',
-        component: CloseBookingsComponent,
+        component: CloseBookingsComponent
       },
       {
         path: 'my-bookings',
-        component: MyBookingsComponent,
+        component: MyBookingsComponent
       },
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'search-bookings',
-      },
-    ],
+        redirectTo: 'search-bookings'
+      }
+    ]
   },
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'home',
+    redirectTo: 'home'
   },
   {
     path: '404',
-    component: NotFoundComponent,
+    component: NotFoundComponent
   },
   {
     path: '**',
-    redirectTo: '404',
-  },
+    redirectTo: '404'
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [],
+  providers: []
 })
 export class AppRoutingModule {}
