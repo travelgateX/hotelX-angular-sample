@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { IProfile } from 'app/core/interfaces/iprofile';
 import { NotificationService } from '../../shared/services/notification.service';
+import { ClientSelectorService } from '../../shared/components/selectors/client-selector/client-selector.service';
 
 declare var auth0: any;
 
@@ -23,7 +24,8 @@ export class AuthService {
 
   constructor(
     private router: Router,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private clientSelectorService: ClientSelectorService
   ) {
     // Checks if there is already a user logged checking local storage
     if (localStorage.getItem('profile') !== null) {

@@ -7,6 +7,10 @@ query Query ($text: String!, $access: ID!) {
       ... on HotelData {
         hotelCode
         hotelName
+        location {
+          country
+          city
+        }
       }
       ... on DestinationData {
         code

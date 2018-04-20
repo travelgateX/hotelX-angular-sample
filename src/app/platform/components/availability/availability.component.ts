@@ -44,6 +44,8 @@ import { MarketSelectorService } from '../../../shared/components/selectors/mark
 import { NotificationService } from '../../../shared/services/notification.service';
 import { ClientSelectorService } from '../../../shared/components/selectors/client-selector/client-selector.service';
 import { Client } from '../../../core/interfaces/client';
+import { SupplierAccessesService } from '../supplier-accesses/supplier-accesses.service';
+import { SpinnerService } from '../../../shared/services/spinner.service';
 
 @Component({
   selector: 'b2b-availability',
@@ -75,6 +77,8 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
   maxItems = 5;
   maxNumPaxes = getArrayUses(12, false);
   minDateTo;
+  clientSP: number;
+  supplierSP: number;
   now: NgbDateStruct;
   subscriptions$: Subscription[];
   subscriptionsSearch$: Subscription;
@@ -95,7 +99,9 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
     private currencySelectorService: CurrencySelectorService,
     private languageSelectorService: LanguageSelectorService,
     private marketSelectorService: MarketSelectorService,
-    private clientSelectorService: ClientSelectorService
+    private clientSelectorService: ClientSelectorService,
+    private supplierAccessesService: SupplierAccessesService,
+    private spinnerService: SpinnerService
   ) {
     this.config.focusFirst = false;
   }
@@ -105,6 +111,7 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
    * it will appear unchanged
    */
   ngOnInit() {
+    this.spinnerService.start();
     this.subscriptions$ = [];
     this.subscriptions$['criteria'] = this.searchService.criteria$.subscribe(
       res => {
@@ -140,9 +147,22 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
 
     this.subscriptions$[
       'client'
-    ] = this.clientSelectorService.client$.subscribe(res => {
+    ] = this.clientSelectorService.clientSelected$.subscribe(res => {
       this.client = res;
     });
+    this.subscriptions$[
+      'clientSpinner'
+    ] = this.clientSelectorService.clientSpinner.subscribe(res => {
+      this.clientSP = res;
+      this.checkLength();
+    });
+    this.subscriptions$[
+      'supplierSpinner'
+    ] = this.supplierAccessesService.supplierSpinner.subscribe(res => {
+      this.supplierSP = res;
+      this.checkLength();
+    });
+
     // this.criteria = JSON.parse(JSON.stringify(this.criteria_copy));
     // if (this.criteria.items.length > 0) {
     //   this.onAdd(this.criteria.items[0], true);
@@ -151,6 +171,20 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
     // }
 
     this.context = '';
+  }
+
+  checkLength() {
+    if (this.clientSP > 1 || this.supplierSP > 1) {
+      this.spinnerService.stop();
+      return false;
+    } else if (this.clientSP && this.supplierSP) {
+      this.spinnerService.stop();
+      return true
+    } else if (this.clientSP === 0 || this.supplierSP === 0) {
+      this.spinnerService.stop();
+      return true
+    }
+    return true;
   }
 
   decideIfClose(event, datepicker) {
@@ -230,7 +264,8 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
               destination: false,
               value: ds.hotelCode,
               display: ds.hotelName,
-              key: ds.hotelCode
+              key: ds.hotelCode,
+              location: ds.location
             });
           }
         });

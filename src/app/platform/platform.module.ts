@@ -35,6 +35,7 @@ import { SupplierAccessesComponent } from "app/platform/components/supplier-acce
 import { MyBookingsTableComponent } from './pages/my-bookings/my-bookings-table/my-bookings-table.component';
 import { RsModalComponent } from "../shared/components/rs-modal/rs-modal.component";
 import { RqModalComponent } from "../shared/components/rq-modal/rq-modal.component";
+import { SupplierAccessesService } from "./components/supplier-accesses/supplier-accesses.service";
 
 @NgModule({
   imports: [
@@ -80,6 +81,6 @@ import { RqModalComponent } from "../shared/components/rq-modal/rq-modal.compone
     RsModalComponent,
     RqModalComponent
   ],
-  providers: [LoginGuard]
+  providers: [LoginGuard, SupplierAccessesService]
 })
 export class PlatformModule {}

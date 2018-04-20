@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Client } from '../../../../core/interfaces/client';
 import { HubService } from '../../../../core/services/hub.service';
 import { WebConfigService } from '../../../../core/services/web-config.service';
@@ -22,15 +22,10 @@ export class ClientSelectorComponent implements OnInit {
 
   ngOnInit() {
     this.showErrorClients = false;
-    this.hubService.getClients().valueChanges.subscribe(
+    this.clientSelectorService.getClients();
+    this.clientSelectorService.clients$.subscribe(
       res => {
-        this.clients = [];
-        if (res.data.admin.clients.edges.length > 0)
-          res.data.admin.clients.edges.map(edge => {
-            if (edge.node && edge.node.clientData) {
-              this.clients.push(edge.node.clientData);
-            }
-          });
+        this.clients = res;
         let storedClient = this.webConfigService.getClient();
         if (
           storedClient &&
@@ -61,7 +56,7 @@ export class ClientSelectorComponent implements OnInit {
     );
     if (client) {
       this.webConfigService.setClient(client);
-      this.clientSelectorService.client$.next(client);
+      this.clientSelectorService.clientSelected$.next(client);
     }
   }
 }

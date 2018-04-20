@@ -3,6 +3,7 @@ import { HubService } from 'app/core/services/hub.service';
 import { Supplier } from 'app/core/interfaces/supplier';
 import { Access } from 'app/core/interfaces/access';
 import { WebConfigService } from '../../../core/services/web-config.service';
+import { SupplierAccessesService } from './supplier-accesses.service';
 
 @Component({
   selector: 'b2b-supplier-accesses',
@@ -19,24 +20,21 @@ export class SupplierAccessesComponent implements OnInit {
   supplierSelected: string;
   constructor(
     private hubService: HubService,
-    private webConfigService: WebConfigService
+    private webConfigService: WebConfigService,
+    private supplierAccessesService: SupplierAccessesService,
   ) {}
 
   ngOnInit() {
     this.showErrorSuppliers = false;
     this.suppliers = [];
-    this.hubService.getSuppliersAccesses().valueChanges.subscribe(
+    this.supplierAccessesService.getSuppliersAccesses();
+    this.supplierAccessesService.suppliersAccesses$.subscribe(
       res => {
-        res.data.admin.suppliers.edges.forEach(element => {
-          if (
-            element.node &&
-            element.node.supplierData &&
-            element.node.supplierData.accesses
-          ) {
-            this.suppliers.push(element.node.supplierData);
-          }
-        });
-        if (this.webConfigService.getAccess()) {
+        this.suppliers = res;
+        if (
+          this.webConfigService.getAccess() &&
+          this.webConfigService.getAccess().code
+        ) {
           for (
             let i = 0;
             i < this.suppliers.length && !this.supplierSelected;

@@ -75,7 +75,6 @@ export class CloseBookingsComponent implements OnInit, OnDestroy {
         .getBook(this.bookingDetail.input, this.webConfigService.getContext(), this.webConfigService.getClient())
         .subscribe(
           res => {
-            console.log(res);
             this.requestStorageService.storeResponse('bookRS', res);
             if (res.errors) {
               this.notificationService.handleIError(res.errors);

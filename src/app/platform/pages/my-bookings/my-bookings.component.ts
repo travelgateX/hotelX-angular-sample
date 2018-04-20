@@ -31,6 +31,8 @@ import { NotificationService } from '../../../shared/services/notification.servi
 import { RequestStorageService } from '../../../shared/services/request-storage.service';
 import { Client } from '../../../core/interfaces/client';
 import { ClientSelectorService } from '../../../shared/components/selectors/client-selector/client-selector.service';
+import { SpinnerService } from '../../../shared/services/spinner.service';
+import { SupplierAccessesService } from '../../components/supplier-accesses/supplier-accesses.service';
 
 @Component({
   selector: 'b2b-my-bookings',
@@ -54,6 +56,8 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
   warningSubscription: Subscription;
   errors: any[];
   warnings: any[];
+  clientSP: number;
+  supplierSP: number;
 
   constructor(
     private hubService: HubService,
@@ -67,7 +71,9 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private requestStorageService: RequestStorageService,
     private alertService: AlertService,
-    private clientSelectorService: ClientSelectorService
+    private clientSelectorService: ClientSelectorService,
+    private supplierAccessesService: SupplierAccessesService,
+    private spinnerService: SpinnerService
   ) {}
 
   ngOnInit() {
@@ -122,9 +128,36 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
 
     this.subscriptions$[
       'client'
-    ] = this.clientSelectorService.client$.subscribe(res => {
+    ] = this.clientSelectorService.clientSelected$.subscribe(res => {
       this.client = res;
     });
+
+    this.subscriptions$[
+      'clientSpinner'
+    ] = this.clientSelectorService.clientSpinner.subscribe(res => {
+      this.clientSP = res;
+      this.checkLength();
+    });
+    this.subscriptions$[
+      'supplierSpinner'
+    ] = this.supplierAccessesService.supplierSpinner.subscribe(res => {
+      this.supplierSP = res;
+      this.checkLength();
+    });
+  }
+
+  checkLength() {
+    if (this.clientSP > 1 || this.supplierSP > 1) {
+      this.spinnerService.stop();
+      return false;
+    } else if (this.clientSP && this.supplierSP) {
+      this.spinnerService.stop();
+      return true;
+    } else if (this.clientSP === 0 || this.supplierSP === 0) {
+      this.spinnerService.stop();
+      return true;
+    }
+    return true;
   }
 
   getMyBookings(criteriaBooking: CriteriaBooking) {
@@ -241,4 +274,8 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
   decideIfClose(event, datepicker) {
     decideClosure(event, datepicker);
   }
+
+  testHideSelectors = () => {
+    return this.clientSelectorService;
+  };
 }

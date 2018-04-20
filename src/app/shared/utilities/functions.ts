@@ -41,13 +41,8 @@ export function formatHoursToDaysHours(hoursBefore: number): string {
  * @param variableToTest Test if the variable contains something
  * @param actualClass Actual classes from the element tag "Class"
  */
-export function getDisabled(
-  variableToTest: any,
-  actualClass: string
-): string {
-  return !variableToTest || variableToTest.length === 0
-    ? 'disabled ' + actualClass
-    : actualClass;
+export function getDisabled(variableToTest: any, actualClass: string): string {
+  return !variableToTest ? 'disabled ' + actualClass : actualClass;
 }
 
 /**

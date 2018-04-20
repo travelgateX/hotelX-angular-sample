@@ -1,6 +1,6 @@
 <div #mo_main_search_element class="mo-main-search" [ngClass]="{'bordered': bordered}">
   <form #form="ngForm" class="fm-smy">
-    <div class="row">
+    <div class="row" [hidden]="checkLength()">
       <div class="col-md-4">
         <b2b-client-selector></b2b-client-selector>
       </div>
@@ -15,19 +15,20 @@
 
           <tag-input name="auto" [onAdding]="onAdd" [maxItems]="maxItems" [theme]="'bootstrap'" [(ngModel)]="criteria.items" [placeholder]="'Hotel or Destination'"
             [secondaryPlaceholder]="'...'" [onTextChangeDebounce]="500" [onlyFromAutocomplete]="true" [disable]="!accessesToSearch || accessesToSearch.length === 0 || !client"
-            [class]="getDisabled((accessesToSearch && client), 'autocompleter')" [clearOnBlur]="true" #searcher>
+            [class]="getDisabled((accessesToSearch && accessesToSearch.length !== 0 && client), 'autocompleter')" [clearOnBlur]="true"
+            #searcher>
 
             <ng-template let-item="item" let-index="index">
               <span (click)="onRemoveItem(item, index)" class="ng2-tag__remove-button">x</span>
               <span *ngIf="item.destination">[D] - {{item.display}} - ({{item.value}})</span>
-              <span *ngIf="!item.destination">[H] - {{item.display}} - ({{item.value}})</span>
+              <span *ngIf="!item.destination">[H] - {{item.display}} - [hotel in {{item.location.city}} - ({{item.location.country}}) - ({{item.value}})]</span>
             </ng-template>
 
             <tag-input-dropdown [dynamicUpdate]="false" [offset]="getDropdownOffset(mo_main_search_element.getBoundingClientRect()) || '44 6'"
               [minimumTextLength]="3" [autocompleteObservable]="requestAutocompleteItems" [appendToBody]="true">
               <ng-template let-item="item" let-index="index">
                 <span *ngIf="item.destination">[D] - {{item.display}} - ({{item.value}})</span>
-                <span *ngIf="!item.destination">[H] - {{item.display}} - ({{item.value}})</span>
+                <span *ngIf="!item.destination">[H] - {{item.display}} - [hotel in {{item.location.city}} - ({{item.location.country}}) - ({{item.value}})]</span>
               </ng-template>
             </tag-input-dropdown>
           </tag-input>
