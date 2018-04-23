@@ -36,25 +36,53 @@
     </div>
     <div class="cancellation" *ngIf="quote.remarks">
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
           <h3 class="tit" i18n="@@remarks">Remarks</h3>
         </div>
       </div>
 
       <p class="desc" [innerHTML]="quote.remarks"></p>
     </div>
+    <div class="cancellation">
+      <div class="row">
+        <div class="col-md-12">
+          <h3 class="tit" i18n="@@price">Price</h3>
+        </div>
+      </div>
+
+      <table class="tb-cancel-penalties table table-hover">
+
+        <thead>
+          <tr>
+            <th i18n="@@total-price">Total price</th>
+            <th i18n="@@commission">Commission</th>
+            <th i18n="@@commission-percentage">Commission Percentage</th>
+            <th i18n="@@mandatory">Mandatory</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>{{option.price.gross}} {{option.price.currency}}</td>
+            <td>{{option.price.gross - option.price.net | number : '1.2-2'}} {{option.price.currency}}</td>
+            <td>{{((option.price.gross - option.price.net) * 100) / option.price.gross | number : '1.2-2'}}%</td>
+            <td>{{option.price.binding}}</td>
+
+        </tbody>
+
+      </table>
+    </div>
   </div>
 
   <div class="cancellation">
     <h3 class="tit" i18n="@@cancellation-policies">Cancellation polices</h3>
     <h6 class="subtit" i18n="@@cancellation-rules">Cancellation rules</h6>
-    <table class="tb-cancellation table table-hover" *ngIf="quote?.cancelPolicy?.cancelPenalties; else noCancelPolicy">
+    <table class="tb-cancellation table table-hover" *ngIf="quote?.cancelPolicy?.cancelPenalties">
       <thead>
         <tr>
           <th i18n="@@penalty-type">Penalty type</th>
           <th i18n="@@total-price">Total price</th>
           <th i18n="@@hours-before">Hours before</th>
-          <th i18n="@@applied-over">Applied over</th>
         </tr>
       </thead>
       <tbody>
@@ -65,27 +93,33 @@
           </td>
           <!-- <td>{{formatHoursToDaysHours(policy.hoursBefore)}}</td> -->
           <td>{{policy.hoursBefore}}</td>
-          <td>{{policy.appliedOver}}</td>
         </tr>
       </tbody>
     </table>
 
-    <ng-template #noCancelPolicy>
+    <div *ngIf="quote?.cancelPolicy?.refundable && !quote?.cancelPolicy?.cancelPenalties; else noRefundable">
       <p class="desc" i18n="@@no-cancellation-policies">Seems there are no cancellation policies.</p>
+      <p class="desc">This option is
+        <b>refundable</b>
+      </p>
+    </div>
+
+    <ng-template #noRefundable>
+      <p class="desc">This option is
+        <b>non refundable</b>
+      </p>
     </ng-template>
 
-    <p class="desc">This option
-      <b *ngIf="quote?.cancelPolicy?.refundable && !quote?.cancelPolicy?.cancelPenalties; else noRefundable">is</b>
-      <ng-template #noRefundable>
-        <b>isn't</b>
-      </ng-template> refundable</p>
+
+
 
   </div>
   <div class="booking">
     <h3 class="tit" i18n="@@booking-details">Booking details</h3>
     <form class="fm-smy" [formGroup]="book">
       <div class="form-group row">
-        <label class="col-2 col-form-label" ><span i18n="@@client-reference">Client reference</span>:</label>
+        <label class="col-2 col-form-label">
+          <span i18n="@@client-reference">Client reference</span>:</label>
         <div class="col-4">
           <input class="form-control" [ngClass]="{'is-invalid': book['controls'].clientReference.touched && book['controls'].clientReference.errors}"
             type="text" placeholder="Ex: #FDSFDS2424" i18n-placeholder="@@client-example" name="name" formControlName="clientReference">
