@@ -284,8 +284,6 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
       this.maxItems = 5;
       this.criteria.city = false;
     }
-
-    this.criteria.items.push(item);
   };
 
   /**

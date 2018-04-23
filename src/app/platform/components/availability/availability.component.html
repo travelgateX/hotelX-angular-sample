@@ -13,7 +13,7 @@
         <div class="form-group">
           <label i18n="@@destination">Destination:</label>
 
-          <tag-input name="auto" (onAdd)="onAdd()" [maxItems]="maxItems" [theme]="'bootstrap'" [(ngModel)]="criteria.items" [placeholder]="'Hotel or Destination'"
+          <tag-input name="auto" (onAdd)="onAdd($event)" [maxItems]="maxItems" [theme]="'bootstrap'" [(ngModel)]="criteria.items" [placeholder]="'Hotel or Destination'"
             [secondaryPlaceholder]="'...'" [onTextChangeDebounce]="500" [onlyFromAutocomplete]="true" [disable]="!accessesToSearch || accessesToSearch.length === 0 || !client"
             [class]="getDisabled((accessesToSearch && accessesToSearch.length !== 0 && client), 'autocompleter')" [clearOnBlur]="true"
             #searcher>
