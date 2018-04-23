@@ -179,10 +179,10 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
       return false;
     } else if (this.clientSP && this.supplierSP) {
       this.spinnerService.stop();
-      return true
+      return true;
     } else if (this.clientSP === 0 || this.supplierSP === 0) {
       this.spinnerService.stop();
-      return true
+      return true;
     }
     return true;
   }
@@ -286,8 +286,6 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
     }
 
     this.criteria.items.push(item);
-
-    return Observable.of(item).filter(() => true);
   };
 
   /**
