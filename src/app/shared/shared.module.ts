@@ -33,6 +33,7 @@ import { RqModalComponent } from './components/rq-modal/rq-modal.component';
 import { ClientSelectorComponent } from './components/selectors/client-selector/client-selector.component';
 import { ClientSelectorService } from './components/selectors/client-selector/client-selector.service';
 import { AlertDropdownComponent } from './components/alert-dropdown/alert-dropdown.component';
+import { SearchGlobalComponent } from './components/search-global/search-global.component';
 
 @NgModule({
   imports: [
@@ -74,7 +75,8 @@ import { AlertDropdownComponent } from './components/alert-dropdown/alert-dropdo
     RsModalComponent,
     RqModalComponent,
     ClientSelectorComponent,
-    AlertDropdownComponent
+    AlertDropdownComponent,
+    SearchGlobalComponent
   ],
   exports: [
     CommonModule,
@@ -103,7 +105,8 @@ import { AlertDropdownComponent } from './components/alert-dropdown/alert-dropdo
     RsModalComponent,
     RqModalComponent,
     ClientSelectorComponent,
-    AlertDropdownComponent
+    AlertDropdownComponent,
+    SearchGlobalComponent
   ]
 })
 export class SharedModule {}

@@ -1,0 +1,26 @@
+div.selected-item {
+  padding: .6rem;
+  display: inline-block;
+  background-color: #0275d8;
+  border-radius: .25rem;
+  color: white;
+  margin: .25rem;
+  transition: background-color .25s
+}
+
+div.selected-item:hover {
+  background-color: #4554d2;
+}
+
+div.tb-removed {
+  background-color: #d83636 !important;
+}
+
+div.tb-removed:hover {
+  background-color: #ab2121 !important;
+}
+
+input#inputSearch {
+  padding: .9rem;
+  border: none;
+}

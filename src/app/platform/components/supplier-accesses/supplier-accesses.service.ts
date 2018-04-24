@@ -11,7 +11,7 @@ export class SupplierAccessesService {
   constructor(private hubService: HubService) {}
 
   getSuppliersAccesses() {
-    let suppliers = [];
+    const suppliers = [];
     this.hubService.getSuppliersAccesses().valueChanges.subscribe(res => {
       if (res) {
         res.data.admin.suppliers.edges.map(element => {

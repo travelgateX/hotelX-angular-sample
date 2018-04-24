@@ -38,6 +38,13 @@
     </div>
 
     <div class="row">
+      <div class="form-group" style="width: 100%; margin: 0 15px 0 15px;">
+        <label i18n="@@destination">Destination:</label>
+        <b2b-search-global [items]="availabilities" (keyUpEvent)="autocompleteObservable($event)"></b2b-search-global>
+      </div>
+    </div>
+
+    <div class="row">
       <div class="col-md-4">
         <div class="form-group">
           <label i18n="@@date-from">Date from:</label>

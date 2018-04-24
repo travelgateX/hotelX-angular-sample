@@ -88,6 +88,7 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
   languageResultFormatter = (result: any) =>
     `${result.iso_code.toUpperCase()} - ${result.language_name}`;
   languageInputFormatter = (result: any) => result.language_name;
+  availabilities = [];
 
   constructor(
     private searchService: SearchService,
@@ -274,9 +275,44 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
   };
 
   /**
+   * Makes a request to get a list of hotels and destinations
+   * Fills the search component
+   */
+  public autocompleteObservable = (text: string) => {
+    if (this.accessesToSearch && this.accessesToSearch.length) {
+      const availabilitiesSubscription = this.hubService
+        .destinationSearcher(this.accessesToSearch[0], text)
+        .valueChanges.subscribe(res => {
+          const searchResponse = [];
+          res.data.hotelX.destinationSearcher.map(ds => {
+            if (ds.code) {
+              searchResponse.push({
+                destination: true,
+                value: ds.code,
+                display: ds.texts[0].text,
+                key: ds.closestDestinations
+              });
+            } else if (ds.hotelCode) {
+              searchResponse.push({
+                destination: false,
+                value: ds.hotelCode,
+                display: ds.hotelName,
+                key: ds.hotelCode,
+                location: ds.location
+              });
+            }
+          });
+          availabilitiesSubscription.unsubscribe();
+          this.availabilities = searchResponse;
+        });
+    }
+  };
+
+  /**
    * Sets max items to 5 in case we are selecting hotels and 1 in case it's a city
    */
   onAdd = item => {
+    console.log(item)
     if (item.destination) {
       this.maxItems = 1;
       this.criteria.city = true;
