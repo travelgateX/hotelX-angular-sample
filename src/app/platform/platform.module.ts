@@ -36,6 +36,7 @@ import { MyBookingsTableComponent } from './pages/my-bookings/my-bookings-table/
 import { RsModalComponent } from '../shared/components/rs-modal/rs-modal.component';
 import { RqModalComponent } from '../shared/components/rq-modal/rq-modal.component';
 import { SupplierAccessesService } from './components/supplier-accesses/supplier-accesses.service';
+import { MyBookingsDetailComponent } from './pages/my-bookings/my-bookings-detail/my-bookings-detail.component';
 
 @NgModule({
   imports: [
@@ -69,7 +70,8 @@ import { SupplierAccessesService } from './components/supplier-accesses/supplier
     BindingModalComponent,
     CarouselModalComponent,
     SupplierAccessesComponent,
-    MyBookingsTableComponent
+    MyBookingsTableComponent,
+    MyBookingsDetailComponent
   ],
   entryComponents: [
     EditCriteriaModalComponent,
@@ -79,7 +81,8 @@ import { SupplierAccessesService } from './components/supplier-accesses/supplier
     BindingModalComponent,
     CarouselModalComponent,
     RsModalComponent,
-    RqModalComponent
+    RqModalComponent,
+    MyBookingsDetailComponent
   ],
   providers: [LoginGuard, SupplierAccessesService]
 })

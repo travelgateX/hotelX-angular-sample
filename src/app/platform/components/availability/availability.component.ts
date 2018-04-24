@@ -311,16 +311,21 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
   /**
    * Sets max items to 5 in case we are selecting hotels and 1 in case it's a city
    */
-  onAdd = item => {
-    console.log(item)
-    if (item.destination) {
-      this.maxItems = 1;
-      this.criteria.city = true;
-    } else {
-      this.maxItems = 5;
-      this.criteria.city = false;
-    }
-  };
+  // onAdd = item => {
+  //   console.log(item)
+  //   if (item.destination) {
+  //     this.maxItems = 1;
+  //     this.criteria.city = true;
+  //   } else {
+  //     this.maxItems = 5;
+  //     this.criteria.city = false;
+  //   }
+  // };
+
+  setCriteriaItems(items) {
+    console.log(items)
+    this.criteria.items = items;
+  }
 
   /**
    * Removes the item from the selected items and checks if there are more,
@@ -328,13 +333,13 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
    * @param item removed item
    * @param index index from the removed item
    */
-  onRemoveItem(item, index) {
-    if (this.criteria.items.length - 1 === 0) {
-      this.maxItems = 5;
-      this.criteria.city = true;
-    }
-    this.criteria.items.splice(index, 1);
-  }
+  // onRemoveItem(item, index) {
+  //   if (this.criteria.items.length - 1 === 0) {
+  //     this.maxItems = 5;
+  //     this.criteria.city = true;
+  //   }
+  //   this.criteria.items.splice(index, 1);
+  // }
 
   /**
    * Adds a new room with a default configuration

@@ -1,4 +1,4 @@
-<div class="mo-showcase-com-search input-group" style="width: 100%">
+<div style="width: 100%" (document:click)="decideClosure($event)" class="dropdown-root">
   <div style="background: white; width: 100%">
     <div *ngFor="let item of selectedItems; let i = index" class="selected-item" [ngClass]="{'tb-removed': item.toBeRemoved}">
       <span class="mr-2" (click)="removeItem(i)">
@@ -7,11 +7,11 @@
       <span>{{item.display}}</span>
     </div>
 
-    <input type="text" id="inputSearch" [(ngModel)]="searchValue" #inputSearch (keyup)="onKeyupFilter(inputSearch.value)"
-      (keydown)="startRemoving($event)" class="form-control dropdown-toggle w-100" data-toggle="dropdown" aria-haspopup="true"
-      aria-expanded="false" placeholder="" [disabled]="!items">
-    <div class="dropdown-menu dropdown-constructor mt-0" aria-labelledby="navbarDropdownMenuLink"
-    [hidden]="!searchValue || searchValue.length < 3 || hiddenDropdown">
+    <input type="text" id="inputSearch" [(ngModel)]="searchValue" #inputSearch (keyup)="onKeyupFilter(inputSearch.value, $event)" (keydown)="selectActionByKey($event)"
+      class="form-control w-100" placeholder="..." [disabled]="!items">
+  </div>
+  <div style="background: white; width: 100%;">
+    <div #dropdownElem class="custom-dropdown hidden" [@dropdown]="hiddenDropdown">
       <div class="dropdown-item tit pb-1">
         <div class="media d-flex align-items-center pb-2">
           <div class="media-left d-flex align-items-center">
@@ -22,11 +22,10 @@
           </div>
         </div>
       </div>
-      <ng-container *ngFor="let hotel of hotels | slice:0:5">
-        <span class="dropdown-item d-flex" (click)="addItem(hotel)">{{hotel.display}}</span>
+      <ng-container *ngFor="let hotel of hotels">
+        <span (click)="addItem(hotel)" (keydown)="addItem(hotel)" [ngClass]="{'focused': hotel.focused}" class="dropdown-item d-flex custom-dropdown-item">{{hotel.display}}</span>
       </ng-container>
       <span class="dropdown-item d-flex ml-auto text-help" *ngIf="hotels?.length === 0">No results</span>
-      <span class="dropdown-item d-flex ml-auto text-help" *ngIf="hotels?.length > 5">- More results, especify the search -</span>
       <div class="dropdown-item tit pb-1">
         <div class="media d-flex align-items-center pb-2">
           <div class="media-left d-flex align-items-center">
@@ -37,11 +36,10 @@
           </div>
         </div>
       </div>
-      <ng-container *ngFor="let destination of destinations | slice:0:5">
-        <span (click)="addItem(destination)" class="dropdown-item d-flex">{{destination.display}}</span>
+      <ng-container *ngFor="let destination of destinations">
+        <span (click)="addItem(destination)" [ngClass]="{'focused': destination.focused}" class="dropdown-item d-flex custom-dropdown-item">{{destination.display}}</span>
       </ng-container>
       <span class="dropdown-item d-flex ml-auto text-help" *ngIf="destinations?.length === 0">No results</span>
-      <span class="dropdown-item d-flex ml-auto text-help" *ngIf="destinations?.length > 5">- More results, especify the search -</span>
     </div>
   </div>
 </div>

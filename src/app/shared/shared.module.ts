@@ -34,6 +34,7 @@ import { ClientSelectorComponent } from './components/selectors/client-selector/
 import { ClientSelectorService } from './components/selectors/client-selector/client-selector.service';
 import { AlertDropdownComponent } from './components/alert-dropdown/alert-dropdown.component';
 import { SearchGlobalComponent } from './components/search-global/search-global.component';
+import { StatusPipe } from './pipes/status.pipe';
 
 @NgModule({
   imports: [
@@ -76,7 +77,8 @@ import { SearchGlobalComponent } from './components/search-global/search-global.
     RqModalComponent,
     ClientSelectorComponent,
     AlertDropdownComponent,
-    SearchGlobalComponent
+    SearchGlobalComponent,
+    StatusPipe
   ],
   exports: [
     CommonModule,
@@ -106,7 +108,8 @@ import { SearchGlobalComponent } from './components/search-global/search-global.
     RqModalComponent,
     ClientSelectorComponent,
     AlertDropdownComponent,
-    SearchGlobalComponent
+    SearchGlobalComponent,
+    StatusPipe
   ]
 })
 export class SharedModule {}

@@ -1,11 +1,22 @@
 div.selected-item {
-  padding: .6rem;
+  padding: 0.6rem;
   display: inline-block;
   background-color: #0275d8;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   color: white;
-  margin: .25rem;
-  transition: background-color .25s
+  margin: 0.25rem;
+  transition: background-color 0.25s;
+}
+
+.custom-dropdown {
+  position: absolute;
+  z-index: 9999999;
+  background: white;
+  border-radius: 0.15rem;
+  box-shadow: -1px -1px #eee;
+  width: 100%;
+  max-height: 40vh;
+  overflow-y: auto;
 }
 
 div.selected-item:hover {
@@ -21,6 +32,23 @@ div.tb-removed:hover {
 }
 
 input#inputSearch {
-  padding: .9rem;
+  padding: 0.9rem;
   border: none;
+}
+input#inputSearch:focus {
+  border-bottom: 2px solid #0275d8;
+  border-radius: 0;
+}
+
+.custom-dropdown-item {
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  transition: background-color 0.25s;
+}
+
+.custom-dropdown-item:hover {
+  background-color: #c7ced8;
+}
+
+.custom-dropdown-item.focused {
+  background-color: #c7ced8;
 }
