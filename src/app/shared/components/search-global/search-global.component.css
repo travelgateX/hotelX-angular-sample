@@ -6,6 +6,7 @@ div.selected-item {
   color: white;
   margin: 0.25rem;
   transition: background-color 0.25s;
+  cursor: pointer
 }
 
 .custom-dropdown {
@@ -17,6 +18,7 @@ div.selected-item {
   width: 100%;
   max-height: 40vh;
   overflow-y: auto;
+
 }
 
 div.selected-item:hover {
@@ -43,6 +45,7 @@ input#inputSearch:focus {
 .custom-dropdown-item {
   padding: 0.75rem 1rem 0.75rem 2.5rem;
   transition: background-color 0.25s;
+  cursor: pointer;
 }
 
 .custom-dropdown-item:hover {

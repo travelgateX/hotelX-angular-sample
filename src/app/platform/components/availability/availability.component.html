@@ -40,7 +40,8 @@
     <div class="row">
       <div class="form-group" style="width: 100%; margin: 0 15px 0 15px;">
         <label i18n="@@destination">Destination:</label>
-        <b2b-search-global [items]="availabilities" (keyUpEvent)="autocompleteObservable($event)" (criteriaItems)="setCriteriaItems($event)"></b2b-search-global>
+        <b2b-search-global [items]="availabilities" [config]="{add:['clear','close']}" (keyUpEvent)="autocompleteObservable($event)"
+          (criteriaItems)="setCriteriaItems($event)"></b2b-search-global>
       </div>
     </div>
 

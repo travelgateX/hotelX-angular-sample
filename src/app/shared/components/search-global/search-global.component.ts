@@ -128,16 +128,29 @@ export class SearchGlobalComponent implements OnChanges, OnInit {
   @ViewChild('dropdownElem') dropdownElem: ElementRef;
 
   // Component configurations
-  @Input() closeOnSelect = false;
+  @Input() config: { add: any };
+
+  private configurations = {
+    closeOnAdd: true,
+    clearOnAdd: true
+  };
 
   backspace = false;
 
   constructor() {}
 
   ngOnInit() {
-    // this.keyUpEvent.emit(this.searchValue);
-    // console.log(this.inputSearch);
-    // console.log(this.inputSearch.nativeElement.getBoundingClientRect());
+    this.configureComponent();
+  }
+
+  configureComponent() {
+    if (!this.config) {
+      return;
+    }
+    if (this.config.add) {
+      this.configurations.closeOnAdd = !this.config.add.includes('open');
+      this.configurations.clearOnAdd = !this.config.add.includes('keeptext');
+    }
   }
 
   decideClosure(event) {
@@ -147,10 +160,6 @@ export class SearchGlobalComponent implements OnChanges, OnInit {
         this.closeDropdown();
       }
     }
-    // console.log(event.path[0]);
-    // if (!event.path.find(p => p.className.includes('dropdown-root'))) {
-    //   this.closeDropdown();
-    // }
   }
 
   ngOnChanges(changes) {
@@ -168,6 +177,14 @@ export class SearchGlobalComponent implements OnChanges, OnInit {
       event.key !== 'Enter'
     ) {
       this.keyUpEvent.emit(searchValue);
+    } else if (
+      !searchValue ||
+      (searchValue &&
+        searchValue.length < 3 &&
+        event.key === 'Backspace' &&
+        event.key !== 'Enter')
+    ) {
+      this.closeDropdown();
     }
   }
 
@@ -179,6 +196,7 @@ export class SearchGlobalComponent implements OnChanges, OnInit {
       ) {
         this.availableItems = [];
         this.closeDropdown();
+        return;
       } else {
         const selectedKeys = this.selectedItems.map(si => si.key);
         this.availableItems = [
@@ -191,11 +209,13 @@ export class SearchGlobalComponent implements OnChanges, OnInit {
 
     if (
       (!!this.searchValue && this.searchValue.length > 2) ||
-      this.availableItems.length > 0
+      (!!this.searchValue && this.availableItems.length > 0)
     ) {
       this.hotels = this.availableItems.filter(item => !item.destination);
       this.destinations = this.availableItems.filter(item => item.destination);
       this.openDropdown();
+    } else if (!this.searchValue) {
+      this.closeDropdown();
     }
   }
 
@@ -216,13 +236,15 @@ export class SearchGlobalComponent implements OnChanges, OnInit {
     const clone = JSON.parse(JSON.stringify(item));
     this.selectedItems.push(clone);
     this.filterItems();
-    if (this.closeOnSelect) {
+    if (this.configurations.closeOnAdd) {
       this.closeDropdown();
       this.dropdownElem.nativeElement.scrollTop = 0;
     }
-    this.searchValue = '';
+    if (this.configurations.clearOnAdd) {
+      this.searchValue = '';
+    }
+
     this.inputSearch.nativeElement.focus();
-    console.log(this.selectedItems);
     this.criteriaItems.emit(this.selectedItems);
   }
 
@@ -291,6 +313,8 @@ export class SearchGlobalComponent implements OnChanges, OnInit {
     const auxArray = [].concat(this.hotels, this.destinations);
     if (this.hiddenDropdown === 'no') {
       const focusedIndex = auxArray.findIndex(aux => aux.focused);
+      // If a node is already focused, it selects the apropiate one depending on key pressed.
+      // Otherwise it starts focusing items from the start or the end of the list
       if (focusedIndex !== -1) {
         if (param === 'next') {
           auxArray[focusedIndex].focused = false;
@@ -306,6 +330,7 @@ export class SearchGlobalComponent implements OnChanges, OnInit {
             auxArray[focusedIndex - 1].focused = true;
           } else {
             auxArray[auxArray.length - 1].focused = true;
+            this.dropdownElem.nativeElement.scrollTop = auxArray.length * 100;
           }
         }
       } else if (param === 'next') {
