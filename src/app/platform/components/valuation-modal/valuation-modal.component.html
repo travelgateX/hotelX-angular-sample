@@ -89,7 +89,7 @@
         <tr *ngFor="let policy of quote.cancelPolicy.cancelPenalties">
           <td>{{policy.penaltyType.toUpperCase() === 'IMPORT' ? "Amount" : policy.penaltyType}}</td>
           <td>
-            <a class="tip" data-toggle="tooltip" data-placement="top" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua">{{policy.value | number : '1.2-2'}} {{policy.currency}}</a>
+            <a class="tip" data-toggle="tooltip" data-placement="top">{{policy.value | number : '1.2-2'}} {{policy.currency}}</a>
           </td>
           <!-- <td>{{formatHoursToDaysHours(policy.hoursBefore)}}</td> -->
           <td>{{policy.hoursBefore}}</td>
@@ -99,13 +99,10 @@
 
     <div *ngIf="quote?.cancelPolicy?.refundable && !quote?.cancelPolicy?.cancelPenalties; else noRefundable">
       <p class="desc" i18n="@@no-cancellation-policies">Seems there are no cancellation policies.</p>
-      <p class="desc">This option is
-        <b>refundable</b>
-      </p>
     </div>
 
     <ng-template #noRefundable>
-      <p class="desc">This option is
+      <p class="desc" *ngIf="!quote?.cancelPolicy?.refundable && !quote?.cancelPolicy?.cancelPenalties">This option is
         <b>non refundable</b>
       </p>
     </ng-template>
