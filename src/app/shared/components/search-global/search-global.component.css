@@ -55,3 +55,8 @@ input#inputSearch:focus {
 .custom-dropdown-item.focused {
   background-color: #c7ced8;
 }
+
+.tit {
+  background-color: #dfdfdf;
+  padding-top: 12px;
+}

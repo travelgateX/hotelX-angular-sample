@@ -4,7 +4,9 @@
       <span class="mr-2" (click)="removeItem(i)">
         <i class="fa fa-times"></i>
       </span>
-      <span>{{item.display}}</span>
+      <span *ngIf="item.destination; else hotel">{{item.display}} - ({{item.value}})</span>
+      <ng-template #hotel><span>{{item.display}} - [hotel in {{item.location.city}} - ({{item.location.country}}) - ({{item.value}})]</span></ng-template>
+
     </div>
 
     <input type="text" id="inputSearch" [(ngModel)]="searchValue" #inputSearch (keyup)="onKeyupFilter(inputSearch.value, $event)" (keydown)="selectActionByKey($event)"
@@ -23,7 +25,7 @@
         </div>
       </div>
       <ng-container *ngFor="let hotel of hotels">
-        <span (click)="addItem(hotel)" (keydown)="addItem(hotel)" [ngClass]="{'focused': hotel.focused}" class="dropdown-item d-flex custom-dropdown-item">{{hotel.display}}</span>
+        <span (click)="addItem(hotel)" (keydown)="addItem(hotel)" [ngClass]="{'focused': hotel.focused}" class="dropdown-item d-flex custom-dropdown-item">{{hotel.display}} - [hotel in {{hotel.location.city}} - ({{hotel.location.country}}) - ({{hotel.value}})]</span>
       </ng-container>
       <span class="dropdown-item d-flex ml-auto text-help" *ngIf="hotels?.length === 0">No results</span>
       <div class="dropdown-item tit pb-1">
@@ -37,7 +39,7 @@
         </div>
       </div>
       <ng-container *ngFor="let destination of destinations">
-        <span (click)="addItem(destination)" [ngClass]="{'focused': destination.focused}" class="dropdown-item d-flex custom-dropdown-item">{{destination.display}}</span>
+        <span (click)="addItem(destination)" [ngClass]="{'focused': destination.focused}" class="dropdown-item d-flex custom-dropdown-item">{{destination.display}} - ({{destination.value}})</span>
       </ng-container>
       <span class="dropdown-item d-flex ml-auto text-help" *ngIf="destinations?.length === 0">No results</span>
     </div>

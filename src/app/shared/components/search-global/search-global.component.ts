@@ -29,7 +29,7 @@ import {
       state(
         'yes',
         style({
-          transform: 'translate(-50px)',
+          transform: 'translateY(-50px)',
           opacity: 0,
           display: 'none',
           pointerEvents: 'none'
@@ -38,7 +38,7 @@ import {
       state(
         'no',
         style({
-          transform: 'translate(0)',
+          transform: 'translateY(0)',
           opacity: 1,
           display: 'block',
           pointerEvents: 'all'
@@ -50,23 +50,23 @@ import {
           150,
           keyframes([
             style({
-              transform: 'translate(0px)',
+              transform: 'translateY(0px)',
               opacity: 1,
               offset: 0,
               pointerEvents: 'none'
             }),
             style({
-              transform: 'translate(-10px)',
+              transform: 'translateY(-10px)',
               opacity: 0.75,
               offset: 0.3
             }),
             style({
-              transform: 'translate(-30px)',
+              transform: 'translateY(-30px)',
               opacity: 0.1,
               offset: 0.8
             }),
             style({
-              transform: 'translate(-50px)',
+              transform: 'translateY(-50px)',
               opacity: 0,
               offset: 1
             })
@@ -79,22 +79,22 @@ import {
           150,
           keyframes([
             style({
-              transform: 'translate(-50px)',
+              transform: 'translateY(-50px)',
               opacity: 0,
               offset: 0
             }),
             style({
-              transform: 'translate(-30px)',
+              transform: 'translateY(-30px)',
               opacity: 0.5,
               offset: 0.3
             }),
             style({
-              transform: 'translate(-10px)',
+              transform: 'translateY(-10px)',
               opacity: 1,
               offset: 0.8
             }),
             style({
-              transform: 'translate(0px)',
+              transform: 'translateY(0px)',
               opacity: 1,
               offset: 1,
               pointerEvents: 'all'
