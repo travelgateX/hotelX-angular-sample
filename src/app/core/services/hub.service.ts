@@ -89,7 +89,8 @@ export class HubService {
     const accessCodes = access.map(res => res.code);
     return this.apollo.watchQuery<any>({
       query: avail,
-      variables: { criteria: criteria, access: accessCodes, context: context, client: client }
+      variables: { criteria: criteria, access: accessCodes, context: context, client: client },
+      fetchPolicy: 'network-only'
     });
   }
 
