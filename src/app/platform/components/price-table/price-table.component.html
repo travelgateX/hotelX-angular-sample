@@ -1,0 +1,30 @@
+<table class="tb-cancel-penalties table table-hover">
+
+  <thead>
+    <tr>
+      <th i18n="@@total-price">Total price</th>
+      <th i18n="@@net-price">Net price</th>
+      <th i18n="@@commission">Commission</th>
+      <th i18n="@@commission-percentage">Commission Percentage</th>
+      <th i18n="@@binding">Binding
+        <span *ngIf="price.binding">*</span>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>{{gross}} {{price.currency}}</td>
+      <td>{{net}} {{price.currency}}</td>
+      <td>{{gross - net | number : '1.2-2'}} {{price.currency}}</td>
+      <td>{{((gross - net) * 100) / gross | number : '1.2-2'}}%</td>
+      <td>{{price.binding}}</td>
+    </tr>
+    <tr *ngIf="price.binding">
+      <td [colSpan]="calcWidth()" class="noHover">
+        <b2b-simple-alert [type]="'warning'" [title]="'*'" [message]="'This option has a minimium selling price restriction, must not be sold under the total price'"></b2b-simple-alert>
+      </td>
+    </tr>
+  </tbody>
+
+</table>

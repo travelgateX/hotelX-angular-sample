@@ -3,25 +3,5 @@
     <span aria-hidden="true">×</span>
   </button>
 
-  <table class="tb-cancel-penalties table table-hover">
-
-    <thead>
-      <tr>
-        <th i18n="@@total-price">Total price</th>
-        <th i18n="@@commission">Commission</th>
-        <th i18n="@@commission-percentage">Commission Percentage</th>
-        <th i18n="@@mandatory">Mandatory</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td>{{gross}} {{price.currency}}</td>
-        <td>{{gross - net | number : '1.2-2'}} {{price.currency}}</td>
-        <td>{{((gross - net) * 100) / gross | number : '1.2-2'}}%</td>
-        <td>{{price.binding}}</td>
-
-    </tbody>
-
-  </table>
+  <b2b-price-table [price]="price"></b2b-price-table>
 </div>

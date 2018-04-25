@@ -1,5 +1,5 @@
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Price } from 'app/core/interfaces/price';
 
 @Component({
@@ -7,14 +7,8 @@ import { Price } from 'app/core/interfaces/price';
   templateUrl: './binding-modal.component.html',
   styleUrls: ['./binding-modal.component.css']
 })
-export class BindingModalComponent implements OnInit {
+export class BindingModalComponent {
   @Input() price: Price;
-  gross: number;
-  net: number;
-  constructor(public activeModal: NgbActiveModal) {}
 
-  ngOnInit() {
-    this.gross = Math.round(this.price.gross * 100) / 100;
-    this.net = Math.round(this.price.net * 100) / 100;
-  }
+  constructor(public activeModal: NgbActiveModal) {}
 }

@@ -50,27 +50,7 @@
         </div>
       </div>
 
-      <table class="tb-cancel-penalties table table-hover">
-
-        <thead>
-          <tr>
-            <th i18n="@@total-price">Total price</th>
-            <th i18n="@@commission">Commission</th>
-            <th i18n="@@commission-percentage">Commission Percentage</th>
-            <th i18n="@@mandatory">Mandatory</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr>
-            <td>{{option.price.gross}} {{option.price.currency}}</td>
-            <td>{{option.price.gross - option.price.net | number : '1.2-2'}} {{option.price.currency}}</td>
-            <td>{{((option.price.gross - option.price.net) * 100) / option.price.gross | number : '1.2-2'}}%</td>
-            <td>{{option.price.binding}}</td>
-
-        </tbody>
-
-      </table>
+      <b2b-price-table [price]="option.price"></b2b-price-table>
     </div>
   </div>
 

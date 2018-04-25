@@ -37,6 +37,7 @@ import { RsModalComponent } from '../shared/components/rs-modal/rs-modal.compone
 import { RqModalComponent } from '../shared/components/rq-modal/rq-modal.component';
 import { SupplierAccessesService } from './components/supplier-accesses/supplier-accesses.service';
 import { MyBookingsDetailComponent } from './pages/my-bookings/my-bookings-detail/my-bookings-detail.component';
+import { PriceTableComponent } from './components/price-table/price-table.component';
 
 @NgModule({
   imports: [
@@ -71,7 +72,8 @@ import { MyBookingsDetailComponent } from './pages/my-bookings/my-bookings-detai
     CarouselModalComponent,
     SupplierAccessesComponent,
     MyBookingsTableComponent,
-    MyBookingsDetailComponent
+    MyBookingsDetailComponent,
+    PriceTableComponent
   ],
   entryComponents: [
     EditCriteriaModalComponent,

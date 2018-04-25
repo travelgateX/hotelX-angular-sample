@@ -860,6 +860,10 @@
         <source>{booking.hotel.rooms.length, plural, =0 {rooms} =1 {room} other {rooms}}</source>
         <target>{booking.hotel.rooms.length, plural, =0 {rooms} =1 {room} other {rooms}}</target>
       </trans-unit>
+      <trans-unit id="binding" datatype="html">
+        <source>Binding</source>
+        <target>Binding</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
