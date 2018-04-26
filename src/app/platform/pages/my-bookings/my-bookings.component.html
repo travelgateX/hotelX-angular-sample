@@ -19,10 +19,10 @@
 <div class="container">
   <form class="fm-smy my-book" [formGroup]="myBookingForm">
     <div class="row" style="margin-top: 30px;">
-      <div class="col-md-4" [hidden]="checkLength()">
+      <div class="col-md-4" [hidden]="configInputsHidden">
         <b2b-client-selector></b2b-client-selector>
       </div>
-      <div class="col-md-8" [hidden]="checkLength()">
+      <div class="col-md-8" [hidden]="configInputsHidden">
         <b2b-supplier-accesses (accessesToSearchOutput)="saveAccessesToSearch($event)"></b2b-supplier-accesses>
       </div>
       <div class="col-md-2">
@@ -41,23 +41,23 @@
           <div class="col-md-2">
             <div class="form-group">
               <label>
-                <span i18n="@@client-reference">Client reference</span>:
-                <a class="tip" data-toggle="tooltip" data-placement="top">
-                  <i class="fa fa-question-circle" aria-hidden="true"></i>
-                </a>
-              </label>
-              <input type="text" class="bordered form-control" placeholder="Ej: 213832WC212K" formControlName="client">
-            </div>
-          </div>
-          <div class="col-md-2">
-            <div class="form-group">
-              <label>
                 <span i18n="@@supplier-reference">Supplier reference</span>:
                 <a class="tip" data-toggle="tooltip" data-placement="top">
                   <i class="fa fa-question-circle" aria-hidden="true"></i>
                 </a>
               </label>
               <input type="text" class="bordered form-control" placeholder="Ej: 213832WC212K" formControlName="supplier">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <label>
+                <span i18n="@@client-reference">Client reference</span>:
+                <a class="tip" data-toggle="tooltip" data-placement="top">
+                  <i class="fa fa-question-circle" aria-hidden="true"></i>
+                </a>
+              </label>
+              <input type="text" class="bordered form-control" placeholder="Ej: 213832WC212K" formControlName="client">
             </div>
           </div>
         </ng-container>
@@ -136,7 +136,7 @@
   </div>
   <b2b-alert-dropdown *ngIf="!loading" [errors]="errors" [warnings]="warnings"></b2b-alert-dropdown>
 
-  <b2b-my-bookings-table [bookings]="bookings" [boards]="boards" [client]="client"></b2b-my-bookings-table>
+  <b2b-my-bookings-table (spinnerStart)="test($event)" [bookings]="bookings" [boards]="boards" [client]="client" [criteriaBooking]="criteriaBooking"></b2b-my-bookings-table>
   <div class="row">
     <div class="col-md-1 col-centered">
       <i class="fa fa-spinner fa-spin" style="font-size:36px;" *ngIf="loading"></i>

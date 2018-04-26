@@ -36,8 +36,9 @@ import { MyBookingsTableComponent } from './pages/my-bookings/my-bookings-table/
 import { RsModalComponent } from '../shared/components/rs-modal/rs-modal.component';
 import { RqModalComponent } from '../shared/components/rq-modal/rq-modal.component';
 import { SupplierAccessesService } from './components/supplier-accesses/supplier-accesses.service';
-import { MyBookingsDetailComponent } from './pages/my-bookings/my-bookings-detail/my-bookings-detail.component';
+import { MyBookingsDetailModalComponent } from './pages/my-bookings/my-bookings-detail/my-bookings-detail-modal.component';
 import { PriceTableComponent } from './components/price-table/price-table.component';
+import { CancelPoliciesTableComponent } from './components/cancel-policies-table/cancel-policies-table.component';
 
 @NgModule({
   imports: [
@@ -72,8 +73,9 @@ import { PriceTableComponent } from './components/price-table/price-table.compon
     CarouselModalComponent,
     SupplierAccessesComponent,
     MyBookingsTableComponent,
-    MyBookingsDetailComponent,
-    PriceTableComponent
+    MyBookingsDetailModalComponent,
+    PriceTableComponent,
+    CancelPoliciesTableComponent
   ],
   entryComponents: [
     EditCriteriaModalComponent,
@@ -84,7 +86,7 @@ import { PriceTableComponent } from './components/price-table/price-table.compon
     CarouselModalComponent,
     RsModalComponent,
     RqModalComponent,
-    MyBookingsDetailComponent
+    MyBookingsDetailModalComponent
   ],
   providers: [LoginGuard, SupplierAccessesService]
 })

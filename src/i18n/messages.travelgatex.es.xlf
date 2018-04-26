@@ -319,6 +319,14 @@
         <source>rooms</source>
         <target>Habitaciones</target>
       </trans-unit>
+      <trans-unit id="room-info" datatype="html">
+        <source>Room Info</source>
+        <target>Información de las habitaciones</target>
+      </trans-unit>
+      <trans-unit id="room-number" datatype="html">
+        <source>Room Number</source>
+        <target>Numero de habitaciones</target>
+      </trans-unit>
       <trans-unit id="add-room" datatype="html">
         <source>Add another room</source>
         <target>Añadir otra habitación</target>
@@ -339,9 +347,9 @@
         <source>Child</source>
         <target>Niño</target>
       </trans-unit>
-      <trans-unit id="ages" datatype="html">
+      <trans-unit id="age" datatype="html">
         <source>Age</source>
-        <target>Edade</target>
+        <target>Edad</target>
       </trans-unit>
       <trans-unit id="search" datatype="html">
         <source>Search</source>
@@ -399,8 +407,8 @@
         <source>Hotel</source>
         <target>Hotel</target>
       </trans-unit>
-      <trans-unit id="booking-day" datatype="html">
-        <source>Booking day</source>
+      <trans-unit id="booking-date" datatype="html">
+        <source>Booking date</source>
         <target>Día reserva</target>
       </trans-unit>
       <trans-unit id="status" datatype="html">
@@ -507,6 +515,10 @@
         <source>Ex: #FDSFDS2424</source>
         <target>Ej: #FDSFDS2424</target>
       </trans-unit>
+      <trans-unit id="booking-detail" datatype="html">
+        <source>Booking detail</source>
+        <target>Detalle de la reserva</target>
+      </trans-unit>
       <trans-unit id="booking-details" datatype="html">
         <source>Booking details</source>
         <target>Detalles reserva</target>
@@ -542,6 +554,10 @@
       <trans-unit id="hotel-code" datatype="html">
         <source>Hotel code</source>
         <target>Código hotel</target>
+      </trans-unit>
+      <trans-unit id="hotel-name" datatype="html">
+        <source>Hotel name</source>
+        <target>Nombre hotel</target>
       </trans-unit>
       <trans-unit id="view-map" datatype="html">
         <source>View map</source>
@@ -635,7 +651,7 @@
         <source>{book.bookDetail.status, select, OK {OK} PENDING {PENDIENTE} other {PENDING}}</source>
         <target>{book.bookDetail.status, select, OK {OK} PENDING {PENDIENTE} other {PENDIENTE}}</target>
       </trans-unit>
-      <trans-unit id="select-lang" datatype="html">
+      <trans-unit id="language" datatype="html">
         <source>Language</source>
         <target>Idioma</target>
       </trans-unit>
@@ -679,6 +695,10 @@
         <source>Select Language</source>
         <target>Seleccionar Idioma</target>
       </trans-unit>
+      <trans-unit id="nationality" datatype="html">
+        <source>Nationality</source>
+        <target>Nacionalidad</target>
+      </trans-unit>
       <trans-unit id="nationality-placeholder" datatype="html">
         <source>Select Nationality</source>
         <target>Seleccionar Nacionalidad</target>
@@ -690,6 +710,14 @@
       <trans-unit id="net" datatype="html">
         <source>Net</source>
         <target>Neto</target>
+      </trans-unit>
+      <trans-unit id="mandatory" datatype="html">
+        <source>Mandatory</source>
+        <target>Obligatorio</target>
+      </trans-unit>
+      <trans-unit id="commission" datatype="html">
+        <source>Commission</source>
+        <target>Comisión</target>
       </trans-unit>
       <trans-unit id="commission-percentage" datatype="html">
         <source>Commission Percentage</source>

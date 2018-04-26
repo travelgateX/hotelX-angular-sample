@@ -54,7 +54,7 @@ export class SearchService {
       item => (item.iso_code = language['iso_code'])
     ).language_name;
     const defaultCriteria: Criteria = {
-      rooms: [{ paxes: [{ age: 30 }, { age: 31 }] }],
+      rooms: [{ paxes: [{ age: 30 }, { age: 30 }] }],
       checkIn: today,
       checkOut: tomorrow,
       city: false,

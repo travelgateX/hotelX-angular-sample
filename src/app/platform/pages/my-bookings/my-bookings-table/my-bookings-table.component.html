@@ -4,56 +4,40 @@
       <table class="tb-rooms table table-hover">
         <thead>
           <tr>
-            <th i18n="@@booking-day">Booking day</th>
-            <th i18n="@@hotel">Hotel</th>
-            <th i18n="@@rooms">Rooms</th>
-            <th i18n="@@mealplan">Mealplan</th>
-            <th i18n="@@no-expenses-until">No expenses until</th>
+            <th i18n="@@hotel-code">Hotel code</th>
+            <th i18n="@@hotel-name">Hotel name</th>
+            <th>Check in</th>
+            <th>Check out</th>
+            <th i18n="@@booking-date">Booking date</th>
             <th i18n="@@status">Status</th>
-            <th i18n="@@price">Price</th>
-            <th i18n="@@client-reference">Client reference</th>
             <th i18n="@@supplier-reference">Supplier reference</th>
+            <th i18n="@@client-reference">Client reference</th>
+            <th i18n="@@rooms">Rooms</th>
+            <th i18n="@@price">Price</th>
             <th class="text-right" i18n="@@options">Options</th>
           </tr>
         </thead>
         <tbody>
           <ng-container *ngFor="let booking of bookings">
             <tr>
+              <td>{{booking?.hotel?.hotelCode}}</td>
+              <td>{{booking?.hotel?.hotelName}}</td>
+              <td>{{booking?.hotel?.checkIn}}</td>
+              <td>{{booking?.hotel?.checkOut}}</td>
               <td>{{booking?.hotel?.creationDate}}</td>
               <td>
-                <p class="hotelname">{{booking?.hotel?.hotelName}}</p>
-                <!-- TODO check and i18n -->
-                <p class="compo">Del {{booking?.hotel?.checkIn}} al {{booking?.hotel?.checkOut}}</p>
+                <span [class]="'iso-status ' + booking.status.toLowerCase()">{{booking.status | status}}</span>
               </td>
-              <!-- TODO check and i18n -->
-              <td *ngIf="booking.hotel.rooms; else noRooms" style="white-space: nowrap;">{{booking?.hotel?.rooms?.length}}
-                <span i18n="@@my-bookings-room-plural">room</span>
-                <span class="tip" data-toggle="tooltip" data-placement="top" [title]="formatTitle(booking.hotel.rooms)">
-                  <i class="fa fa-question-circle" aria-hidden="true"></i>
-                </span>
-              </td>
-              <ng-template #noRooms>
-                <td></td>
-              </ng-template>
-              <td>{{booking?.hotel?.boardCode | mealplan : boards}}</td>
-              <td *ngIf="booking?.cancelPolicy?.cancelPenalties | getMax; else noOptions; let maxOption" (click)="openCancelPolicyModal(booking?.cancelPolicy?.cancelPenalties)">
-                <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" i18n-title="@@penalty-tooltip"
-                  title="Click to see penalty list"></i>
-                {{(maxOption | mainPenalty : ngbDateMomentParserFormatter.parse(booking.hotel.checkIn)) | dateFormat:environment.organization.dateFormat}}
-                | {{maxOption.value | number : '1.2-2'}} {{maxOption.currency}}
-              </td>
-              <ng-template #noOptions>
-                <td></td>
-              </ng-template>
-              <td>
-                <span [class]="'iso-status ' + booking.status.toLowerCase()">{{booking.status}}</span>
-              </td>
+              <td>{{booking?.reference?.supplier}}</td>
+              <td>{{booking?.reference?.client}}</td>
+              <td>{{booking?.hotel?.rooms?.length}}</td>
               <td class="price" style="white-space: nowrap;">
                 <a (click)="openBindingModal(booking.price)" class="tip" data-toggle="tooltip" data-placement="top" title="">{{booking.price.net.toFixed(2)}} {{booking.price.currency}}</a>
               </td>
-              <td>{{booking.reference.client}}</td>
-              <td>{{booking.reference.supplier}}</td>
               <td class="text-right" style="white-space: nowrap;">
+                <p class="detail">
+                  <a i18n="@@detail" (click)="openDetailModal(booking)">Detail</a>
+                </p>
                 <p class="cancel">
                   <a *ngIf="booking.status.toLowerCase() !== 'cancelled'" i18n="@@cancel" (click)="onCancel(booking)">Cancel</a>
                 </p>
@@ -74,7 +58,7 @@
               </td>
             </tr>
             <tr>
-              <td [colSpan]="calcWidth()" class="noHover">
+              <td class="noHover">
                 <b2b-simple-alert *ngIf="booking.cancelImport" [title]="'Cancel import'" [type]="'info'" [message]="' ' + booking.cancelImport"></b2b-simple-alert>
               </td>
             </tr>

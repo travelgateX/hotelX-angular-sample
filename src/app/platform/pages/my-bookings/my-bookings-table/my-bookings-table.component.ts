@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { BookingHotel } from '../../../../core/interfaces/booking-hotel';
 import { HotelBookingDetail } from '../../../../core/interfaces/hotel-booking-detail';
 import { Board } from '../../../../core/interfaces/board';
@@ -19,6 +19,10 @@ import { AlertService } from '../../../../shared/services/alert.service';
 import { NotificationService } from '../../../../shared/services/notification.service';
 import { RequestStorageService } from '../../../../shared/services/request-storage.service';
 import { Client } from '../../../../core/interfaces/client';
+import { MyBookingsDetailModalComponent } from '../my-bookings-detail/my-bookings-detail-modal.component';
+import { CriteriaBooking } from '../../../../core/interfaces/criteria-booking';
+import { BookingCriteriaType } from '../../../../core/enumerates/booking-criteria-type';
+import { SpinnerService } from '../../../../shared/services/spinner.service';
 
 @Component({
   selector: 'b2b-my-bookings-table',
@@ -29,8 +33,11 @@ export class MyBookingsTableComponent implements OnChanges {
   @Input() bookings: HotelBookingDetail[];
   @Input() boards: Board[];
   @Input() client: Client;
+  @Input() criteriaBooking: CriteriaBooking;
+  @Output() spinnerStart: EventEmitter<boolean> = new EventEmitter();
   environment = environment;
   ngbDateMomentParserFormatter: NgbDateMomentParserFormatter;
+  bookingCriteriaType = BookingCriteriaType;
 
   constructor(
     private hubService: HubService,
@@ -38,7 +45,8 @@ export class MyBookingsTableComponent implements OnChanges {
     private webConfigService: WebConfigService,
     private modalService: NgbModal,
     private requestStorageService: RequestStorageService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private spinnerService: SpinnerService
   ) {
     this.ngbDateMomentParserFormatter = new NgbDateMomentParserFormatter();
   }
@@ -170,32 +178,6 @@ export class MyBookingsTableComponent implements OnChanges {
     }
   }
 
-  /**
-   * Returns the title with the room descriptions of a selected booking
-   * @param rooms
-   */
-  formatTitle(rooms: Room[]) {
-    if (rooms) {
-      const typeRooms = [];
-      let result = '';
-      rooms.map(room => {
-        const index = typeRooms.findIndex(
-          roomAux => roomAux.typeRoom.code === room.code
-        );
-        if (index === -1) {
-          typeRooms.push({ typeRoom: room, count: 1 });
-        } else {
-          typeRooms[index].count++;
-        }
-      });
-      typeRooms.map(roomAux => {
-        result =
-          result + roomAux.typeRoom.description + ' x' + roomAux.count + '\n';
-      });
-      return result;
-    }
-  }
-
   openCancelPolicyModal(cancelPenalties) {
     const modalRef = this.modalService.open(CancelPolicyModalComponent, {
       size: 'lg',
@@ -212,6 +194,52 @@ export class MyBookingsTableComponent implements OnChanges {
       backdrop: 'static'
     });
     modalRef.componentInstance.price = price;
+  }
+
+  openDetailModal(booking: HotelBookingDetail) {
+    let criteriaBooking: CriteriaBooking = { ...this.criteriaBooking };
+    delete criteriaBooking.dates;
+    criteriaBooking.typeSearch = this.bookingCriteriaType.REFERENCES;
+    criteriaBooking.references = {
+      references: [
+        {
+          client: booking.reference.client,
+          supplier: booking.reference.supplier
+        }
+      ],
+      hotelCode: '',
+      currency: this.webConfigService.getCurrency().iso_code
+      // hotelCode: booking.hotel.hotelCode
+    };
+
+    this.spinnerStart.emit(true);
+    let subscription = this.hubService
+      .getMyBookings(criteriaBooking, this.webConfigService.getClient())
+      .valueChanges.subscribe(
+        res => {
+          this.spinnerService.stop();
+          if (res.data.hotelX.booking.bookings) {
+            const modalRef = this.modalService.open(
+              MyBookingsDetailModalComponent,
+              {
+                size: 'lg',
+                keyboard: false,
+                backdrop: 'static'
+              }
+            );
+            modalRef.componentInstance.booking =
+              res.data.hotelX.booking.bookings[0];
+            modalRef.componentInstance.boards = this.boards;
+            modalRef.result.then(res => {
+              subscription.unsubscribe();
+            });
+          }
+        },
+        err => {
+          this.spinnerService.stop();
+          this.notificationService.error(err);
+        }
+      );
   }
 
   calcWidth() {

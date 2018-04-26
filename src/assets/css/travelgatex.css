@@ -8250,6 +8250,9 @@ footer.mo-footer {
   .mo-my-bookings .tb-rooms .cancel a {
     color: #cc0033;
     font-weight: 600; }
+  .mo-my-bookings .tb-rooms .detail a {
+    color: #31b0d5;
+    font-weight: 600; }
   .mo-my-bookings .tb-rooms .xml {
     font-size: 12px; }
   .mo-my-bookings .tb-rooms p {
@@ -8282,6 +8285,11 @@ footer.mo-footer {
     color: #fff; }
   .iso-status.on_request {
     background-color: #F6A623;
+    padding: 5px 10px;
+    border-radius: 3px;
+    color: #fff; }
+  .iso-status.unknown {
+    background-color: rgb(163, 163, 163);
     padding: 5px 10px;
     border-radius: 3px;
     color: #fff; }

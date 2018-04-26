@@ -264,7 +264,7 @@ export class SearchGlobalComponent implements OnChanges, OnInit {
             title: groupConfig.title || 'Not defined',
             list: this.availableItems.filter(ai => {
               if (ai[this.itemData.groupBy] === setArray[i]) {
-                ai['display'] = groupConfig.display(ai);
+                ai['disp'] = groupConfig.display(ai);
                 return true;
               }
             })

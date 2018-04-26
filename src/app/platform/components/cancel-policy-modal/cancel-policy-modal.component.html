@@ -3,23 +3,5 @@
     <span aria-hidden="true">×</span>
   </button>
 
-  <table class="tb-cancel-penalties table table-hover">
-
-    <thead>
-      <tr>
-        <th i18n="@@penalty-type">Penalty type</th>
-        <th i18n="@@value">Value</th>
-        <th i18n="@@hours-before">Hours before checkin</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr *ngFor="let cancelPenalty of cancelPenalties">
-        <td>{{cancelPenalty.penaltyType.toUpperCase() === 'IMPORT' ? "Amount" : cancelPenalty.penaltyType}}</td>
-        <td>{{cancelPenalty.value | number : '1.2-2'}} {{cancelPenalty.currency}}</td>
-        <!-- <td>{{formatHoursToDaysHours(cancelPenalty.hoursBefore)}}</td> -->
-        <td>{{cancelPenalty.hoursBefore}}</td>
-    </tbody>
-
-  </table>
+  <b2b-cancel-policies-table [cancelPenalties]="cancelPenalties"></b2b-cancel-policies-table>
 </div>

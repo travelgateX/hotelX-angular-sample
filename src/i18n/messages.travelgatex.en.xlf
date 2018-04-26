@@ -320,6 +320,14 @@
         <source>Rooms</source>
         <target>Rooms</target>
       </trans-unit>
+      <trans-unit id="room-info" datatype="html">
+        <source>Room Info</source>
+        <target>Room Info</target>
+      </trans-unit>
+      <trans-unit id="room-number" datatype="html">
+        <source>Room Number</source>
+        <target>Room Number</target>
+      </trans-unit>
       <trans-unit id="add-room" datatype="html">
         <source>Add another room</source>
         <target>Add another room</target>
@@ -400,9 +408,9 @@
         <source>Hotel</source>
         <target>Hotel</target>
       </trans-unit>
-      <trans-unit id="booking-day" datatype="html">
-        <source>Booking day</source>
-        <target>Booking day</target>
+      <trans-unit id="booking-date" datatype="html">
+        <source>Booking date</source>
+        <target>Booking date</target>
       </trans-unit>
       <trans-unit id="status" datatype="html">
         <source>Status</source>
@@ -508,6 +516,10 @@
         <source>Ex: #FDSFDS2424</source>
         <target>Ex: #FDSFDS2424</target>
       </trans-unit>
+      <trans-unit id="booking-detail" datatype="html">
+        <source>Booking detail</source>
+        <target>Booking detail</target>
+      </trans-unit>
       <trans-unit id="booking-details" datatype="html">
         <source>Booking details</source>
         <target>Booking details</target>
@@ -539,6 +551,10 @@
       <trans-unit id="cancellation-rules" datatype="html">
         <source>Cancellation rules</source>
         <target>Cancellation rules</target>
+      </trans-unit>
+      <trans-unit id="hotel-name" datatype="html">
+        <source>Hotel name</source>
+        <target>Hotel name</target>
       </trans-unit>
       <trans-unit id="hotel-code" datatype="html">
         <source>Hotel code</source>
@@ -636,7 +652,7 @@
         <source>{book.bookDetail.status, select, OK {OK} PENDING {PENDING} other {PENDING}}</source>
         <target>{book.bookDetail.status, select, OK {OK} PENDING {PENDING} other {PENDING}}</target>
       </trans-unit>
-      <trans-unit id="select-lang" datatype="html">
+      <trans-unit id="language" datatype="html">
         <source>Language</source>
         <target>Language</target>
       </trans-unit>
@@ -684,6 +700,10 @@
         <source>Select Nationality</source>
         <target>Select Nationality</target>
       </trans-unit>
+      <trans-unit id="nationality" datatype="html">
+        <source>Nationality</source>
+        <target>Nationality</target>
+      </trans-unit>
       <trans-unit id="show-entries" datatype="html">
         <source>Show entries:</source>
         <target>Show entries:</target>
@@ -691,6 +711,14 @@
       <trans-unit id="net" datatype="html">
         <source>Net</source>
         <target>Net</target>
+      </trans-unit>
+      <trans-unit id="mandatory" datatype="html">
+        <source>Mandatory</source>
+        <target>Mandatory</target>
+      </trans-unit>
+      <trans-unit id="commission" datatype="html">
+        <source>Commission</source>
+        <target>Commission</target>
       </trans-unit>
       <trans-unit id="commission-percentage" datatype="html">
         <source>Commission Percentage</source>

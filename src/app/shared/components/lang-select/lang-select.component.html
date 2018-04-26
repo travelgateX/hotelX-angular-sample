@@ -1,7 +1,7 @@
 <div class="dropdown">
   <button class="btn dropdown-toggle" type="button" id="lang-navbar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-    i18n="@@select-lang">
-    Lang
+    i18n="@@language">
+    Language
   </button>
   <div class="dropdown-menu" aria-labelledby="lang-navbar">
     <a *ngFor="let language of languages" class="dropdown-item" href="{{language | langUrl}}" i18n="@@lang-{{lang}}">{{language}}</a>

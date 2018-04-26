@@ -41,6 +41,8 @@ import { SupplierAccessesService } from '../../components/supplier-accesses/supp
 })
 export class MyBookingsComponent implements OnInit, OnDestroy {
   accessesToSearch: Access[];
+  configInputsHidden: boolean;
+  criteriaBooking: CriteriaBooking;
   myBookingForm: FormGroup;
   getDisabled = getDisabled;
   boards: Board[];
@@ -82,7 +84,7 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
     this.myBookingForm = this.fb.group({
       accessCode: ['', Validators.required],
       language: ['', Validators.required],
-      typeSearch: BookingCriteriaType.REFERENCES,
+      typeSearch: BookingCriteriaType.DATES,
       dates: this.fb.group({
         dateType: BookingCriteriaDateType.ARRIVAL,
         start: this.calendar.getToday(),
@@ -107,12 +109,13 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
       'currency'
     ] = this.currencySelectorService.currency$.subscribe(res => {
       if (res && res.iso_code) {
-        this.myBookingForm.controls['references'].patchValue(
-          'currency',
-          res.iso_code
-        );
+        this.myBookingForm.controls['references']['controls'][
+          'currency'
+        ].setValue(res.iso_code);
       } else {
-        this.myBookingForm.controls['references'].patchValue('currency', '');
+        this.myBookingForm.controls['references']['controls'][
+          'currency'
+        ].setValue(null);
       }
     });
 
@@ -130,6 +133,7 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
       'client'
     ] = this.clientSelectorService.clientSelected$.subscribe(res => {
       this.client = res;
+      this.enableForm();
     });
 
     this.subscriptions$[
@@ -149,18 +153,19 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
   checkLength() {
     if (this.clientSP > 1 || this.supplierSP > 1) {
       this.spinnerService.stop();
-      return false;
+      this.configInputsHidden = false;
     } else if (this.clientSP && this.supplierSP) {
       this.spinnerService.stop();
-      return true;
+      this.configInputsHidden = true;
     } else if (this.clientSP === 0 || this.supplierSP === 0) {
       this.spinnerService.stop();
-      return true;
+      this.configInputsHidden = true;
     }
-    return true;
+    this.configInputsHidden = true;
   }
 
   getMyBookings(criteriaBooking: CriteriaBooking) {
+    this.criteriaBooking = criteriaBooking;
     this.loading = true;
     this.bookings = null;
     this.hubService
@@ -227,7 +232,11 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
       accessCode:
         this.accessesToSearch.length !== 0 ? this.accessesToSearch[0].code : ''
     });
-    this.accessesToSearch.length !== 0 && this.client
+    this.enableForm();
+  }
+
+  enableForm() {
+    this.accessesToSearch && this.accessesToSearch.length !== 0 && this.client
       ? this.myBookingForm.enable()
       : this.myBookingForm.disable();
   }
@@ -278,4 +287,8 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
   testHideSelectors = () => {
     return this.clientSelectorService;
   };
+
+  test(melapela) {
+    this.spinnerService.start();
+  }
 }
