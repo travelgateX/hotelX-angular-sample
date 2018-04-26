@@ -89,6 +89,28 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
     `${result.iso_code.toUpperCase()} - ${result.language_name}`;
   languageInputFormatter = (result: any) => result.language_name;
   availabilities = [];
+  groupConfig = new Map([
+    [
+      false,
+      {
+        title: 'Hotels',
+        display: function(item) {
+          return `${item.display} - [hotel in ${item.location.city} - (${
+            item.location.country
+          }) - (${item.value})]`;
+        }
+      }
+    ],
+    [
+      true,
+      {
+        title: 'Destinations',
+        display: function(item) {
+          return `${item.display} - (${item.value})`;
+        }
+      }
+    ]
+  ]);
 
   constructor(
     private searchService: SearchService,
@@ -323,7 +345,7 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
   // };
 
   setCriteriaItems(items) {
-    console.log(items)
+    console.log(items);
     this.criteria.items = items;
   }
 

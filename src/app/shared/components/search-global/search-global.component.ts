@@ -19,6 +19,8 @@ import {
   transition,
   keyframes
 } from '@angular/animations';
+import { SearchGlobalData } from './interfaces/search-global-data';
+import { SearchGlobalConfig } from './interfaces/search-global-config';
 
 @Component({
   selector: 'b2b-search-global',
@@ -108,11 +110,12 @@ import {
 export class SearchGlobalComponent implements OnChanges, OnInit {
   // Data variables
   searchValue: string;
-  @Input() items: any[];
+  @Input() itemData: SearchGlobalData;
   hotels: any[];
   destinations: any[];
   selectedItems = [];
   availableItems = [];
+  collections = [];
 
   // Animation switches
   hiddenDropdown = 'yes';
@@ -128,11 +131,13 @@ export class SearchGlobalComponent implements OnChanges, OnInit {
   @ViewChild('dropdownElem') dropdownElem: ElementRef;
 
   // Component configurations
-  @Input() config: { add: any };
+  @Input() config: SearchGlobalConfig;
 
   private configurations = {
     closeOnAdd: true,
-    clearOnAdd: true
+    clearOnAdd: true,
+    clearOnBlur: true,
+    searchOnFocus: true
   };
 
   backspace = false;
@@ -147,9 +152,16 @@ export class SearchGlobalComponent implements OnChanges, OnInit {
     if (!this.config) {
       return;
     }
-    if (this.config.add) {
-      this.configurations.closeOnAdd = !this.config.add.includes('open');
-      this.configurations.clearOnAdd = !this.config.add.includes('keeptext');
+    if (this.config.onadd) {
+      this.configurations.closeOnAdd = !this.config.onadd.includes('open');
+      this.configurations.clearOnAdd = !this.config.onadd.includes('keeptext');
+    }
+
+    if (this.config.onblur) {
+      this.configurations.clearOnBlur = this.config.onblur === 'clear';
+    }
+    if (this.config.onfocus) {
+      this.configurations.searchOnFocus = this.config.onfocus === 'search';
     }
   }
 
@@ -158,13 +170,23 @@ export class SearchGlobalComponent implements OnChanges, OnInit {
       const classes = event.path.map(p => p.className || '');
       if (!classes.includes('dropdown-root')) {
         this.closeDropdown();
+        if (this.configurations.clearOnBlur) {
+          this.searchValue = '';
+        }
+      } else if (
+        event.target.id === 'inputSearch' &&
+        this.configurations.searchOnFocus &&
+        this.searchValue &&
+        this.searchValue.length > 2
+      ) {
+        this.keyUpEvent.emit(this.searchValue);
       }
     }
   }
 
   ngOnChanges(changes) {
-    if ('items' in changes) {
-      this.filterItems();
+    if ('itemData' in changes) {
+      this.displayItems();
     }
   }
 
@@ -188,7 +210,10 @@ export class SearchGlobalComponent implements OnChanges, OnInit {
     }
   }
 
-  filterItems() {
+  // /**
+  //  * Filters
+  //  */
+  displayItems() {
     if (this.selectedItems.length) {
       if (
         this.selectedItems.find(si => si.destination) ||
@@ -198,24 +223,57 @@ export class SearchGlobalComponent implements OnChanges, OnInit {
         this.closeDropdown();
         return;
       } else {
-        const selectedKeys = this.selectedItems.map(si => si.key);
+        const selectedValues = this.selectedItems.map(si => si.value);
         this.availableItems = [
-          ...this.items.filter(item => !selectedKeys.includes(item.key))
+          ...this.itemData.items.filter(
+            item => !selectedValues.includes(item.value)
+          )
         ];
       }
     } else {
-      this.availableItems = [...this.items];
+      this.availableItems = [...this.itemData.items];
     }
 
     if (
       (!!this.searchValue && this.searchValue.length > 2) ||
       (!!this.searchValue && this.availableItems.length > 0)
     ) {
-      this.hotels = this.availableItems.filter(item => !item.destination);
-      this.destinations = this.availableItems.filter(item => item.destination);
+      if (this.itemData.grouping) {
+        this.filterItems();
+      } else {
+        this.collections = [{ title: false, list: this.availableItems }];
+      }
       this.openDropdown();
     } else if (!this.searchValue) {
       this.closeDropdown();
+    }
+  }
+
+  /**
+   * Filters items if grouping parameter is set to true
+   */
+  filterItems() {
+    const collections = [];
+    const setArray = Array.from(this.itemData.groupConfig.keys());
+    if (setArray.length) {
+      for (let i = 0; i < setArray.length; i++) {
+        const groupConfig = this.itemData.groupConfig.get(setArray[i]);
+
+        if (groupConfig) {
+          const collection = {
+            title: groupConfig.title || 'Not defined',
+            list: this.availableItems.filter(ai => {
+              if (ai[this.itemData.groupBy] === setArray[i]) {
+                ai['display'] = groupConfig.display(ai);
+                return true;
+              }
+            })
+          };
+          collections.push(collection);
+        }
+      }
+
+      this.collections = collections;
     }
   }
 
@@ -235,7 +293,7 @@ export class SearchGlobalComponent implements OnChanges, OnInit {
     item.focused = false;
     const clone = JSON.parse(JSON.stringify(item));
     this.selectedItems.push(clone);
-    this.filterItems();
+    this.displayItems();
     if (this.configurations.closeOnAdd) {
       this.closeDropdown();
       this.dropdownElem.nativeElement.scrollTop = 0;
@@ -258,7 +316,7 @@ export class SearchGlobalComponent implements OnChanges, OnInit {
 
   removeItem(index) {
     this.selectedItems.splice(index, 1);
-    this.filterItems();
+    this.displayItems();
   }
 
   /**
@@ -348,10 +406,6 @@ export class SearchGlobalComponent implements OnChanges, OnInit {
     const children = this.dropdownElem.nativeElement.querySelectorAll(
       'span.custom-dropdown-item'
     );
-    // console.log('currentScrollHeight');
-    // console.log(currentScrollHeight);
-    // console.log('dropdownHeight');
-    // console.log(dropdownHeight);
 
     let itemIndex;
     let focused;
@@ -377,10 +431,8 @@ export class SearchGlobalComponent implements OnChanges, OnInit {
         } else {
           trueFocused = focused.previousElementSibling;
         }
-      }
-      // console.log(trueFocused);
+      };
       const focusedHeight = trueFocused.offsetTop - currentScrollHeight;
-      // console.log(focusedHeight);
       if (focusedHeight > dropdownHeight - Math.floor(dropdownHeight * 0.2)) {
         this.dropdownElem.nativeElement.scrollTop =
           currentScrollHeight + Math.floor(dropdownHeight * 0.8);
