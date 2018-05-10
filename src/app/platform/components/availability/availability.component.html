@@ -1,6 +1,6 @@
 <div #mo_main_search_element class="mo-main-search" [ngClass]="{'bordered': bordered}">
   <form #form="ngForm" class="fm-smy">
-    <div class="row" [hidden]="checkLength()">
+    <div class="row" [hidden]="configInputsHidden">
       <div class="col-md-4">
         <b2b-client-selector></b2b-client-selector>
       </div>
@@ -38,10 +38,13 @@
     </div> -->
 
     <div class="row">
-      <div class="form-group" style="width: 100%; margin: 0 15px 0 15px;">
-        <label i18n="@@destination">Destination:</label>
-        <b2b-search-global [itemData]="{items: availabilities, grouping: true, groupBy: 'destination', identifyBy:'value', groupConfig:groupConfig}" [config]="{onadd:['clear','close'], onblur:'clear', onfocus:'search'}" (keyUpEvent)="autocompleteObservable($event)"
-          (criteriaItems)="setCriteriaItems($event)"></b2b-search-global>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label i18n="@@destination" (click)="test()">Destination:</label>
+          <b2b-search-global [itemData]="{items: availabilities, grouping: true, groupBy: 'destination', identifyBy:'value', groupConfig:groupConfig}"
+            [config]="{onadd:['clear','close'], onblur:'clear', onfocus:'search'}" [disabled]="!accessesToSearch || accessesToSearch.length === 0 || !client"
+            (keyUpEvent)="autocompleteObservable($event)" (criteriaItems)="setCriteriaItems($event)"></b2b-search-global>
+        </div>
       </div>
     </div>
 

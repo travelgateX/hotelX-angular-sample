@@ -1,4 +1,10 @@
-import { Component, Input, OnChanges, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import { BookingHotel } from '../../../../core/interfaces/booking-hotel';
 import { HotelBookingDetail } from '../../../../core/interfaces/hotel-booking-detail';
 import { Board } from '../../../../core/interfaces/board';

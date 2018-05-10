@@ -136,7 +136,7 @@
   </div>
   <b2b-alert-dropdown *ngIf="!loading" [errors]="errors" [warnings]="warnings"></b2b-alert-dropdown>
 
-  <b2b-my-bookings-table (spinnerStart)="test($event)" [bookings]="bookings" [boards]="boards" [client]="client" [criteriaBooking]="criteriaBooking"></b2b-my-bookings-table>
+  <b2b-my-bookings-table [bookings]="bookings" [boards]="boards" [client]="client" [criteriaBooking]="criteriaBooking"></b2b-my-bookings-table>
   <div class="row">
     <div class="col-md-1 col-centered">
       <i class="fa fa-spinner fa-spin" style="font-size:36px;" *ngIf="loading"></i>

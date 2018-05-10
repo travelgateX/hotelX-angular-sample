@@ -1,14 +1,14 @@
 <div style="width: 100%" (document:click)="decideClosure($event)" class="dropdown-root">
-  <div style="background: white; width: 100%">
+  <div [ngClass]="{'whiteBackground' : !disabled}" style="width: 100%">
     <div *ngFor="let item of selectedItems; let i = index" class="selected-item" [ngClass]="{'tb-removed': item.toBeRemoved}">
       <span class="mr-2" (click)="removeItem(i)">
         <i class="fa fa-times"></i>
       </span>
-      <span *ngIf="item.destination; else hotel">{{item.disp}} - ({{item.value}})</span>
-      <ng-template #hotel><span>{{item.disp}} - [hotel in {{item.location.city}} - ({{item.location.country}}) - ({{item.value}})]</span></ng-template>
+      <span *ngIf="item.destination; else hotel">{{item.disp}}</span>
+      <ng-template #hotel><span>{{item.disp}}</span></ng-template>
     </div>
     <input type="text" id="inputSearch" [(ngModel)]="searchValue" #inputSearch (keyup)="onKeyupFilter(inputSearch.value, $event)"
-      (keydown)="selectActionByKey($event)" class="form-control w-100" placeholder="..." [disabled]="!itemData">
+      (keydown)="selectActionByKey($event)" class="form-control w-100" placeholder="..." [disabled]="!itemData || disabled">
   </div>
   <div style="background: white; width: 100%;">
     <div #dropdownElem class="custom-dropdown hidden" [@dropdown]="hiddenDropdown">

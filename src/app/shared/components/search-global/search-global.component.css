@@ -60,3 +60,7 @@ input#inputSearch:focus {
   background-color: #dfdfdf;
   padding-top: 12px;
 }
+
+.whiteBackground {
+  background-color: white;
+}

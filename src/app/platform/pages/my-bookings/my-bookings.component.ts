@@ -41,7 +41,7 @@ import { SupplierAccessesService } from '../../components/supplier-accesses/supp
 })
 export class MyBookingsComponent implements OnInit, OnDestroy {
   accessesToSearch: Access[];
-  configInputsHidden: boolean;
+  configInputsHidden: boolean = true;
   criteriaBooking: CriteriaBooking;
   myBookingForm: FormGroup;
   getDisabled = getDisabled;
@@ -79,6 +79,7 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.spinnerService.start();
     this.boards = [];
     this.subscriptions$ = [];
     this.myBookingForm = this.fb.group({
@@ -152,16 +153,16 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
 
   checkLength() {
     if (this.clientSP > 1 || this.supplierSP > 1) {
-      this.spinnerService.stop();
       this.configInputsHidden = false;
-    } else if (this.clientSP && this.supplierSP) {
-      this.spinnerService.stop();
-      this.configInputsHidden = true;
-    } else if (this.clientSP === 0 || this.supplierSP === 0) {
-      this.spinnerService.stop();
-      this.configInputsHidden = true;
     }
-    this.configInputsHidden = true;
+
+    if (
+      this.clientSP !== null &&
+      this.clientSP !== undefined &&
+      (this.supplierSP !== null && this.supplierSP !== undefined)
+    ) {
+      this.spinnerService.stop();
+    }
   }
 
   getMyBookings(criteriaBooking: CriteriaBooking) {
@@ -287,8 +288,4 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
   testHideSelectors = () => {
     return this.clientSelectorService;
   };
-
-  test(melapela) {
-    this.spinnerService.start();
-  }
 }

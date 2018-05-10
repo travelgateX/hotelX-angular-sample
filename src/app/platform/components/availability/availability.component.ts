@@ -27,10 +27,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
 import { MARKETS } from './../../../core/interfaces/markets';
-import {
-  getArrayUses,
-  getDisabled
-} from './../../../shared/utilities/functions';
+import { getArrayUses } from './../../../shared/utilities/functions';
 import { NgbDateMomentParserFormatter } from 'app/shared/utilities/ngbParserFormatter';
 import { HubService } from 'app/core/services/hub.service';
 import { Supplier } from 'app/core/interfaces/supplier';
@@ -72,16 +69,16 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
   criteria: Criteria;
   criteria_copy: Criteria;
   context: string;
-  getDisabled = getDisabled;
   markets = MARKETS;
   maxItems = 5;
   maxNumPaxes = getArrayUses(12, false);
   minDateTo;
-  clientSP: number;
-  supplierSP: number;
+  clientSP: any;
+  supplierSP: any;
   now: NgbDateStruct;
   subscriptions$: Subscription[];
   subscriptionsSearch$: Subscription;
+  configInputsHidden: boolean = true;
   countryResultFormatter = (result: any) =>
     `${result.iso_code.toUpperCase()} - ${result.country_name}`;
   countryInputFormatter = (result: any) => result.country_name;
@@ -196,18 +193,23 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
     this.context = '';
   }
 
+  test() {
+    console.log(this.client);
+    console.log(this.accessesToSearch);
+  }
+
   checkLength() {
     if (this.clientSP > 1 || this.supplierSP > 1) {
-      this.spinnerService.stop();
-      return false;
-    } else if (this.clientSP && this.supplierSP) {
-      this.spinnerService.stop();
-      return true;
-    } else if (this.clientSP === 0 || this.supplierSP === 0) {
-      this.spinnerService.stop();
-      return true;
+      this.configInputsHidden = false;
     }
-    return true;
+
+    if (
+      this.clientSP !== null &&
+      this.clientSP !== undefined &&
+      (this.supplierSP !== null && this.supplierSP !== undefined)
+    ) {
+      this.spinnerService.stop();
+    }
   }
 
   decideIfClose(event, datepicker) {

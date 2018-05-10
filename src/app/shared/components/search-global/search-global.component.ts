@@ -21,6 +21,7 @@ import {
 } from '@angular/animations';
 import { SearchGlobalData } from './interfaces/search-global-data';
 import { SearchGlobalConfig } from './interfaces/search-global-config';
+import { getDisabled } from '../../utilities/functions';
 
 @Component({
   selector: 'b2b-search-global',
@@ -111,11 +112,13 @@ export class SearchGlobalComponent implements OnChanges, OnInit {
   // Data variables
   searchValue: string;
   @Input() itemData: SearchGlobalData;
+  @Input() disabled: boolean;
   hotels: any[];
   destinations: any[];
   selectedItems = [];
   availableItems = [];
   collections = [];
+  getDisabled = getDisabled;
 
   // Animation switches
   hiddenDropdown = 'yes';
@@ -431,7 +434,7 @@ export class SearchGlobalComponent implements OnChanges, OnInit {
         } else {
           trueFocused = focused.previousElementSibling;
         }
-      };
+      }
       const focusedHeight = trueFocused.offsetTop - currentScrollHeight;
       if (focusedHeight > dropdownHeight - Math.floor(dropdownHeight * 0.2)) {
         this.dropdownElem.nativeElement.scrollTop =
