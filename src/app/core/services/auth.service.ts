@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { IProfile } from 'app/core/interfaces/iprofile';
 import { NotificationService } from '../../shared/services/notification.service';
 import { ClientSelectorService } from '../../shared/components/selectors/client-selector/client-selector.service';
+import { IndexedDbService } from '../../shared/services/indexed-db.service';
 
 declare var auth0: any;
 
@@ -25,19 +26,15 @@ export class AuthService {
   constructor(
     private router: Router,
     private notificationService: NotificationService,
-    private clientSelectorService: ClientSelectorService
+    private clientSelectorService: ClientSelectorService,
+    private indexedDBService: IndexedDbService
   ) {
     // Checks if there is already a user logged checking local storage
     if (localStorage.getItem('profile') !== null) {
       this.userProfile = JSON.parse(localStorage.getItem('profile'));
       this.profile$.next(this.userProfile);
     }
-  }
 
-  /**
-   * Handle user authentication
-   */
-  handleAuthentication(): void {
     this.lock.on('authenticated', authResult => {
       this.lock.getUserInfo(authResult.accessToken, (error, profile) => {
         if (error) {
@@ -55,7 +52,12 @@ export class AuthService {
     this.lock.on('authorization_error', error => console.log(error));
 
     this.lock.on('unrecoverable_error', error => console.log(error));
+  }
 
+  /**
+   * Handle user authentication
+   */
+  handleAuthentication(): void {
     if (!this.authenticated() && localStorage.getItem('expires_at')) {
       this.logout();
     }
@@ -75,6 +77,7 @@ export class AuthService {
     this.userProfile = profile;
     this.profile$.next(this.userProfile);
     localStorage.setItem('profile', JSON.stringify(this.userProfile));
+    this.indexedDBService.openDB(['interceptedRequest', 'storedResponses']);
   }
 
   /**
@@ -93,6 +96,7 @@ export class AuthService {
     this.userProfile = null;
     this.profile$.next(this.userProfile);
     localStorage.clear();
+    this.indexedDBService.closeDB();
     this.router.navigate(['/home']);
   }
 

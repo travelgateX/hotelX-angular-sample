@@ -193,11 +193,6 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
     this.context = '';
   }
 
-  test() {
-    console.log(this.client);
-    console.log(this.accessesToSearch);
-  }
-
   checkLength() {
     if (this.clientSP > 1 || this.supplierSP > 1) {
       this.configInputsHidden = false;

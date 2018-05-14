@@ -311,30 +311,26 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
    * Opens modal to show last request made of hotel type
    */
   showRequest() {
-    if (sessionStorage.getItem('interceptedRequest')) {
-      const modalRef = this.modalService.open(RqModalComponent, {
-        size: 'lg',
-        keyboard: false,
-        backdrop: 'static'
-      });
+    const modalRef = this.modalService.open(RqModalComponent, {
+      size: 'lg',
+      keyboard: false,
+      backdrop: 'static'
+    });
 
-      modalRef.componentInstance.input = 'hotelRQ';
-    }
+    modalRef.componentInstance.input = 'hotelRQ';
   }
 
   /**
    * Opens modal to show last response got form hotel request
    */
   showResponse() {
-    if (sessionStorage.getItem('storedResponses')) {
-      const modalRef = this.modalService.open(RsModalComponent, {
-        size: 'lg',
-        keyboard: false,
-        backdrop: 'static'
-      });
+    const modalRef = this.modalService.open(RsModalComponent, {
+      size: 'lg',
+      keyboard: false,
+      backdrop: 'static'
+    });
 
-      modalRef.componentInstance.book = 'hotelRS';
-    }
+    modalRef.componentInstance.book = 'hotelRS';
   }
 
   /**

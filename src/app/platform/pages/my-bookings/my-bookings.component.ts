@@ -33,6 +33,7 @@ import { Client } from '../../../core/interfaces/client';
 import { ClientSelectorService } from '../../../shared/components/selectors/client-selector/client-selector.service';
 import { SpinnerService } from '../../../shared/services/spinner.service';
 import { SupplierAccessesService } from '../../components/supplier-accesses/supplier-accesses.service';
+import { IndexedDbService } from '../../../shared/services/indexed-db.service';
 
 @Component({
   selector: 'b2b-my-bookings',
@@ -75,7 +76,8 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
     private alertService: AlertService,
     private clientSelectorService: ClientSelectorService,
     private supplierAccessesService: SupplierAccessesService,
-    private spinnerService: SpinnerService
+    private spinnerService: SpinnerService,
+    private indexedDBService: IndexedDbService,
   ) {}
 
   ngOnInit() {

@@ -40,7 +40,7 @@
     <div class="row">
       <div class="col-md-12">
         <div class="form-group">
-          <label i18n="@@destination" (click)="test()">Destination:</label>
+          <label i18n="@@destination">Destination:</label>
           <b2b-search-global [itemData]="{items: availabilities, grouping: true, groupBy: 'destination', identifyBy:'value', groupConfig:groupConfig}"
             [config]="{onadd:['clear','close'], onblur:'clear', onfocus:'search'}" [disabled]="!accessesToSearch || accessesToSearch.length === 0 || !client"
             (keyUpEvent)="autocompleteObservable($event)" (criteriaItems)="setCriteriaItems($event)"></b2b-search-global>
