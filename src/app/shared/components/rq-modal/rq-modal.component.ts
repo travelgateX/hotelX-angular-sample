@@ -19,8 +19,11 @@ export class RqModalComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log(this.input);
     setTimeout(_ => {
-      this.payload = this.requestStorageService.loadRequest(this.input);
+      this.requestStorageService
+        .loadData('rq', this.input)
+        .then(p => (this.payload = p));
     }, 0);
   }
 

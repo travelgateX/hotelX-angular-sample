@@ -68,6 +68,7 @@ export class CloseBookingsComponent implements OnInit, OnDestroy {
    * Gets an hotel book
    */
   getBook() {
+    this.requestStorageService.setCurrentType('book');
     if (this.bookingDetail && this.bookingDetail.input) {
       const lang = this.langService.getLang();
       this.bookingDetail.input.language = lang;
@@ -75,7 +76,7 @@ export class CloseBookingsComponent implements OnInit, OnDestroy {
         .getBook(this.bookingDetail.input, this.webConfigService.getContext(), this.webConfigService.getClient())
         .subscribe(
           res => {
-            this.requestStorageService.storeResponse('bookRS', res);
+            this.requestStorageService.storeRequestResponse(false, res);
             if (res.errors) {
               this.notificationService.handleIError(res.errors);
               this.alertService.setAlert(

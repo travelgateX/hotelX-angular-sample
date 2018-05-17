@@ -14,7 +14,7 @@ export class ClientSelectorService {
   constructor(private hubService: HubService) {}
 
   getClients() {
-    let clients = [];
+    const clients = [];
     this.hubService.getClients().valueChanges.subscribe(res => {
       if (res) {
         res.data.admin.clients.edges.map(edge => {

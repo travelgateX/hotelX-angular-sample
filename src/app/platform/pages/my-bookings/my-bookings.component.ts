@@ -42,7 +42,7 @@ import { IndexedDbService } from '../../../shared/services/indexed-db.service';
 })
 export class MyBookingsComponent implements OnInit, OnDestroy {
   accessesToSearch: Access[];
-  configInputsHidden: boolean = true;
+  configInputsHidden = true;
   criteriaBooking: CriteriaBooking;
   myBookingForm: FormGroup;
   getDisabled = getDisabled;
@@ -168,6 +168,7 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
   }
 
   getMyBookings(criteriaBooking: CriteriaBooking) {
+    this.requestStorageService.setCurrentType('myBookings');
     this.criteriaBooking = criteriaBooking;
     this.loading = true;
     this.bookings = null;
@@ -175,9 +176,9 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
       .getMyBookings(criteriaBooking, this.client)
       .valueChanges.subscribe(
         res => {
+          this.requestStorageService.storeRequestResponse(false, res);
           this.loading = false;
           this.bookings = [];
-          this.requestStorageService.storeResponse('myBookingsRS', res);
           if (res.data && res.data.hotelX && res.data.hotelX.booking) {
             const booking = res.data.hotelX.booking;
 
@@ -264,7 +265,7 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
         backdrop: 'static'
       });
 
-      modalRef.componentInstance.input = 'myBookingsRQ';
+      modalRef.componentInstance.input = 'myBookings';
     }
   }
 
@@ -279,7 +280,7 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
         backdrop: 'static'
       });
 
-      modalRef.componentInstance.book = 'myBookingsRS';
+      modalRef.componentInstance.book = 'myBookings';
     }
   }
 

@@ -22,11 +22,9 @@ export class HttpHeadersInterceptor implements HttpInterceptor {
       Authorization: 'Bearer ' + localStorage.getItem('token'),
       'Content-Type': 'application/json'
     });
-
-    this.requestStorageService.storeRequest(req);
-
     const cloneReq = req.clone({ headers });
-
+    const requestToStore = {rq: cloneReq, headers: headers}
+    this.requestStorageService.storeRequestResponse(requestToStore, false);
     return next.handle(cloneReq);
   }
 }

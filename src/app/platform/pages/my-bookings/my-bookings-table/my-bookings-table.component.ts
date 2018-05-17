@@ -90,6 +90,9 @@ export class MyBookingsTableComponent implements OnChanges {
       reference: {}
     };
     if (booking && booking.reference && booking.reference.supplier) {
+      this.requestStorageService.setCurrentType(
+        'cancelBooking_' + booking.reference.supplier
+      );
       cancelBooking.reference.supplier = booking.reference.supplier;
     }
     if (booking && booking.reference && booking.reference.client) {
@@ -98,22 +101,15 @@ export class MyBookingsTableComponent implements OnChanges {
 
     this.hubService.cancelBook(cancelBooking, this.client).subscribe(
       res => {
-        this.requestStorageService.storeResponse(
-          'cancelBookingRS_' + booking.reference.supplier,
-          res
-        );
+        this.requestStorageService.storeRequestResponse(false, res);
         const cancel = res.data.hotelX.cancel;
         booking.errors = cancel.errors || [];
         booking.warnings = cancel.warnings || [];
 
         booking.showMoreOptions = true;
         if (
-          res.data &&
-          res.data.hotelX &&
-          res.data.hotelX.cancel &&
-          res.data.hotelX.cancel.cancellation &&
-          res.data.hotelX.cancel.cancellation.status &&
-          res.data.hotelX.cancel.cancellation.status === 'CANCELLED'
+          (((((res.data || {}).hotelX || {}).cancel || {}).cancellation || {})
+            .status || '') === 'CANCELLED'
         ) {
           if (
             res.data.hotelX.cancel.cancellation.price &&
@@ -134,10 +130,6 @@ export class MyBookingsTableComponent implements OnChanges {
         }
       },
       err => {
-        this.requestStorageService.storeResponse(
-          'cancelBookingRS_' + booking.reference.supplier,
-          err
-        );
         booking.showMoreOptions = true;
         this.notificationService.error(err);
       }
@@ -157,9 +149,9 @@ export class MyBookingsTableComponent implements OnChanges {
 
       if (booking) {
         modalRef.componentInstance.input =
-          'cancelBookingRQ_' + booking['reference'].supplier;
+          'cancelBooking_' + booking['reference'].supplier;
       } else {
-        modalRef.componentInstance.input = 'myBookingsRQ';
+        modalRef.componentInstance.input = 'myBookings';
       }
     }
   }
@@ -177,9 +169,9 @@ export class MyBookingsTableComponent implements OnChanges {
 
       if (booking) {
         modalRef.componentInstance.book =
-          'cancelBookingRS_' + booking['reference'].supplier;
+          'cancelBooking_' + booking['reference'].supplier;
       } else {
-        modalRef.componentInstance.book = 'myBookingsRS';
+        modalRef.componentInstance.book = 'myBookings';
       }
     }
   }
@@ -203,7 +195,7 @@ export class MyBookingsTableComponent implements OnChanges {
   }
 
   openDetailModal(booking: HotelBookingDetail) {
-    let criteriaBooking: CriteriaBooking = { ...this.criteriaBooking };
+    const criteriaBooking: CriteriaBooking = { ...this.criteriaBooking };
     delete criteriaBooking.dates;
     criteriaBooking.typeSearch = this.bookingCriteriaType.REFERENCES;
     criteriaBooking.references = {
@@ -219,7 +211,7 @@ export class MyBookingsTableComponent implements OnChanges {
     };
 
     this.spinnerStart.emit(true);
-    let subscription = this.hubService
+    const subscription = this.hubService
       .getMyBookings(criteriaBooking, this.webConfigService.getClient())
       .valueChanges.subscribe(
         res => {
@@ -236,7 +228,7 @@ export class MyBookingsTableComponent implements OnChanges {
             modalRef.componentInstance.booking =
               res.data.hotelX.booking.bookings[0];
             modalRef.componentInstance.boards = this.boards;
-            modalRef.result.then(res => {
+            modalRef.result.then(_ => {
               subscription.unsubscribe();
             });
           }

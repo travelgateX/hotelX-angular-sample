@@ -40,62 +40,44 @@ export class BookingDetailComponent implements OnInit {
   }
 
   /**
-   * Open response modal
-   */
-  // onOpenRS() {
-  //   const modalRef = this.modalService.open(RsModalComponent);
-  //   modalRef.componentInstance.book = this.book;
-  // }
-
-  // TODO show request
-  // onOpenRQ() {
-  //   const modalRef = this.modalService.open(RqModalComponent);
-  //   // modalRef.componentInstance.input = this.input;
-  // }
-
-  /**
    * Opens modal to show last request made of booking type
    */
   showRequest() {
-    if (sessionStorage.getItem('interceptedRequest')) {
-      const modalRef = this.modalService.open(RqModalComponent, {
-        size: 'lg',
-        keyboard: false,
-        backdrop: 'static'
-      });
+    const modalRef = this.modalService.open(RqModalComponent, {
+      size: 'lg',
+      keyboard: false,
+      backdrop: 'static'
+    });
 
-      modalRef.componentInstance.input = 'bookRQ';
-      modalRef.result
-        .then(res => {
-          // https://github.com/ng-bootstrap/ng-bootstrap/issues/643#issuecomment-306256651
-          document.body.classList.add('modal-open');
-        })
-        .catch(err => {
-          document.body.classList.add('modal-open');
-        });
-    }
+    modalRef.componentInstance.input = 'book';
+    modalRef.result
+      .then(res => {
+        // https://github.com/ng-bootstrap/ng-bootstrap/issues/643#issuecomment-306256651
+        document.body.classList.add('modal-open');
+      })
+      .catch(err => {
+        document.body.classList.add('modal-open');
+      });
   }
 
   /**
    * Opens modal to show last response got form booking request
    */
   showResponse() {
-    if (sessionStorage.getItem('storedResponses')) {
-      const modalRef = this.modalService.open(RsModalComponent, {
-        size: 'lg',
-        keyboard: false,
-        backdrop: 'static'
-      });
+    const modalRef = this.modalService.open(RsModalComponent, {
+      size: 'lg',
+      keyboard: false,
+      backdrop: 'static'
+    });
 
-      modalRef.componentInstance.book = 'bookRS';
-      modalRef.result
-        .then(res => {
-          // https://github.com/ng-bootstrap/ng-bootstrap/issues/643#issuecomment-306256651
-          document.body.classList.add('modal-open');
-        })
-        .catch(err => {
-          document.body.classList.add('modal-open');
-        });
-    }
+    modalRef.componentInstance.book = 'book';
+    modalRef.result
+      .then(res => {
+        // https://github.com/ng-bootstrap/ng-bootstrap/issues/643#issuecomment-306256651
+        document.body.classList.add('modal-open');
+      })
+      .catch(err => {
+        document.body.classList.add('modal-open');
+      });
   }
 }

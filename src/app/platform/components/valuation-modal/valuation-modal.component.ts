@@ -196,46 +196,42 @@ export class ValuationModalComponent implements OnInit, OnDestroy {
    * Opens modal to show last request made of hotel type
    */
   showRequest() {
-    if (sessionStorage.getItem('interceptedRequest')) {
-      const modalRef = this.modalService.open(RqModalComponent, {
-        size: 'lg',
-        keyboard: false,
-        backdrop: 'static'
-      });
+    const modalRef = this.modalService.open(RqModalComponent, {
+      size: 'lg',
+      keyboard: false,
+      backdrop: 'static'
+    });
 
-      modalRef.componentInstance.input = 'quoteRQ';
-      modalRef.result
-        .then(res => {
-          // https://github.com/ng-bootstrap/ng-bootstrap/issues/643#issuecomment-306256651
-          document.body.classList.add('modal-open');
-        })
-        .catch(err => {
-          document.body.classList.add('modal-open');
-        });
-    }
+    modalRef.componentInstance.input = 'quote';
+    modalRef.result
+      .then(res => {
+        // https://github.com/ng-bootstrap/ng-bootstrap/issues/643#issuecomment-306256651
+        document.body.classList.add('modal-open');
+      })
+      .catch(err => {
+        document.body.classList.add('modal-open');
+      });
   }
 
   /**
    * Opens modal to show last response got form hotel request
    */
   showResponse() {
-    if (sessionStorage.getItem('storedResponses')) {
-      const modalRef = this.modalService.open(RsModalComponent, {
-        size: 'lg',
-        keyboard: false,
-        backdrop: 'static'
-      });
+    const modalRef = this.modalService.open(RsModalComponent, {
+      size: 'lg',
+      keyboard: false,
+      backdrop: 'static'
+    });
 
-      modalRef.componentInstance.book = 'quoteRS';
-      modalRef.result
-        .then(res => {
-          // https://github.com/ng-bootstrap/ng-bootstrap/issues/643#issuecomment-306256651
-          document.body.classList.add('modal-open');
-        })
-        .catch(err => {
-          document.body.classList.add('modal-open');
-        });
-    }
+    modalRef.componentInstance.book = 'quote';
+    modalRef.result
+      .then(res => {
+        // https://github.com/ng-bootstrap/ng-bootstrap/issues/643#issuecomment-306256651
+        document.body.classList.add('modal-open');
+      })
+      .catch(err => {
+        document.body.classList.add('modal-open');
+      });
   }
 
   /**

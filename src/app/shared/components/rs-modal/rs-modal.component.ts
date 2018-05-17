@@ -11,7 +11,7 @@ import { HotelBookPayload } from '../../../core/interfaces/hotel-book-payload';
 export class RsModalComponent implements OnInit {
   @Input() book: HotelBookPayload;
   @ViewChild('pre') pre: ElementRef;
-  payload = 'Loading data...';
+  payload: any = 'Loading data...';
   isCopied = false;
 
   constructor(
@@ -21,7 +21,9 @@ export class RsModalComponent implements OnInit {
 
   ngOnInit() {
     setTimeout(_ => {
-      this.payload = this.requestStorageService.loadResponse(this.book);
+      this.requestStorageService
+        .loadData('rs', this.book)
+        .then(p => (this.payload = p));
     }, 0);
   }
 

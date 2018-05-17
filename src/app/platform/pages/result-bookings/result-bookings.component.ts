@@ -139,6 +139,7 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
    * Check that criteria has hotels and in case it has, executes an availability request
    */
   getAvailability() {
+    this.requestStorageService.setCurrentType('hotel');
     this.clearFilter();
     const lang = this.langService.getLang();
     this.searchService.transform(this.criteria).then(hotelCriteriaSearch => {
@@ -152,10 +153,8 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
           )
           .valueChanges.subscribe(
             res => {
+              this.requestStorageService.storeRequestResponse(false, res);
               const response = res.data.hotelX.search;
-
-              this.requestStorageService.storeResponse('hotelRS', response);
-
               if (response) {
                 this.alertService.setAlertMultiple(
                   'Hotel',
@@ -317,7 +316,7 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
       backdrop: 'static'
     });
 
-    modalRef.componentInstance.input = 'hotelRQ';
+    modalRef.componentInstance.input = 'hotel';
   }
 
   /**
@@ -330,7 +329,7 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
       backdrop: 'static'
     });
 
-    modalRef.componentInstance.book = 'hotelRS';
+    modalRef.componentInstance.book = 'hotel';
   }
 
   /**

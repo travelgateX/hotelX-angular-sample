@@ -133,6 +133,7 @@ export class HotelOptionComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   openModalValuation(option: Option, hotelInfo: HotelInfo) {
+    this.requestStorageService.setCurrentType('quote');
     this.spinnerService.start();
     const lang = this.langService.getLang();
 
@@ -145,7 +146,9 @@ export class HotelOptionComponent implements OnInit, OnDestroy, OnChanges {
       )
       .valueChanges.subscribe(
         res => {
+          this.requestStorageService.storeRequestResponse(false, res);
           const response = res.data.hotelX.quote;
+
           if (response.error) {
             this.alertService.setAlert(
               'Quote',
@@ -162,7 +165,6 @@ export class HotelOptionComponent implements OnInit, OnDestroy, OnChanges {
               response.warning.description
             );
           }
-          this.requestStorageService.storeResponse('quoteRS', response);
 
           this.alertService.setAlertMultiple(
             'Quote',
