@@ -15,19 +15,10 @@ export class SearchBookingsComponent implements OnInit {
     private router: Router,
     public authService: AuthService,
     private searchService: SearchService,
-    private route: ActivatedRoute,
     private webConfigService: WebConfigService
   ) {}
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      if (params['access']) {
-        this.webConfigService.setAccess({
-          code: params['access'],
-          name: 'UrlAccess'
-        });
-      }
-    });
   }
 
   /**

@@ -6,6 +6,7 @@ import { IProfile } from 'app/core/interfaces/iprofile';
 import { NotificationService } from '../../shared/services/notification.service';
 import { ClientSelectorService } from '../../shared/components/selectors/client-selector/client-selector.service';
 import { IndexedDbService } from '../../shared/services/indexed-db.service';
+import { WebConfigService } from './web-config.service';
 
 declare var auth0: any;
 
@@ -27,7 +28,8 @@ export class AuthService {
     private router: Router,
     private notificationService: NotificationService,
     private clientSelectorService: ClientSelectorService,
-    private indexedDBService: IndexedDbService
+    private indexedDBService: IndexedDbService,
+    private webConfigService: WebConfigService
   ) {
     // Checks if there is already a user logged checking local storage
     if (localStorage.getItem('profile') !== null) {
@@ -92,12 +94,21 @@ export class AuthService {
   /**
    * Remove profile and token from localStorage
    */
-  logout(): void {
+  logout(savedAccess?: string): void {
     this.userProfile = null;
     this.profile$.next(this.userProfile);
     localStorage.clear();
+    this.webConfigService.setAccess({
+      code: savedAccess,
+      name: 'UrlAccess'
+    });
     this.indexedDBService.closeDB();
-    this.router.navigate(['/home']);
+    if (savedAccess) {
+      this.router.navigate(['/home', { popLogin: true }]);
+    } else {
+      this.router.navigate(['/home']);
+    }
+
   }
 
   /**

@@ -3,6 +3,7 @@ import { AuthService } from './../../../core/services/auth.service';
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'environments/environment';
+import { ActivatedRoute } from '@angular/router';
 
 /**
  * Landing page
@@ -10,14 +11,18 @@ import { environment } from 'environments/environment';
 @Component({
   selector: 'b2b-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   private subscriptions$: Subscription[];
   profile: any;
   environment: any;
 
-  constructor(private authService: AuthService, private modalRef: NgbModal) {}
+  constructor(
+    private authService: AuthService,
+    private modalRef: NgbModal,
+    private route: ActivatedRoute
+  ) {}
 
   /**
    * Handles user login due to home is the callback for Auth0
@@ -31,6 +36,12 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     );
     this.environment = environment;
+    console.log(this.route);
+    if (
+      (((this.route || {})['snapshot'] || {})['params'] || {})['popLogin']
+    ) {
+      this.authService.login();
+    }
   }
 
   /**
@@ -48,19 +59,19 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     $('.parallax-window-mainpage').parallax({
-      imageSrc: './assets/img/mainpage.jpg',
+      imageSrc: './assets/img/mainpage.jpg'
     });
     $('.parallax-window-transition-why-travelgatex').parallax({
-      imageSrc: './assets/img/transition-why-travelgatex.jpg',
+      imageSrc: './assets/img/transition-why-travelgatex.jpg'
     });
     $('.parallax-window-transition-products').parallax({
-      imageSrc: './assets/img/transition-products.jpg',
+      imageSrc: './assets/img/transition-products.jpg'
     });
     $('.parallax-window-transition-knowmore').parallax({
-      imageSrc: './assets/img/transition-knowmore.jpg',
+      imageSrc: './assets/img/transition-knowmore.jpg'
     });
     $('.parallax-window-transition-getconnected').parallax({
-      imageSrc: './assets/img/transition-getconnected.jpg',
+      imageSrc: './assets/img/transition-getconnected.jpg'
     });
   }
 
