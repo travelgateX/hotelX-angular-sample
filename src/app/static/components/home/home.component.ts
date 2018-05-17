@@ -36,7 +36,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     );
     this.environment = environment;
-    console.log(this.route);
     if (
       (((this.route || {})['snapshot'] || {})['params'] || {})['popLogin']
     ) {
