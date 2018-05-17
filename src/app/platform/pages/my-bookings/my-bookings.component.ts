@@ -77,7 +77,7 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
     private clientSelectorService: ClientSelectorService,
     private supplierAccessesService: SupplierAccessesService,
     private spinnerService: SpinnerService,
-    private indexedDBService: IndexedDbService,
+    private indexedDBService: IndexedDbService
   ) {}
 
   ngOnInit() {
@@ -258,30 +258,26 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
    * Opens modal to show last request made of myBookings type
    */
   showRequest(booking = false) {
-    if (sessionStorage.getItem('interceptedRequest')) {
-      const modalRef = this.modalService.open(RqModalComponent, {
-        size: 'lg',
-        keyboard: false,
-        backdrop: 'static'
-      });
+    const modalRef = this.modalService.open(RqModalComponent, {
+      size: 'lg',
+      keyboard: false,
+      backdrop: 'static'
+    });
 
-      modalRef.componentInstance.input = 'myBookings';
-    }
+    modalRef.componentInstance.input = 'myBookings';
   }
 
   /**
    * Opens modal to show last response got form myBookings request
    */
   showResponse(booking = false) {
-    if (sessionStorage.getItem('storedResponses')) {
-      const modalRef = this.modalService.open(RsModalComponent, {
-        size: 'lg',
-        keyboard: false,
-        backdrop: 'static'
-      });
+    const modalRef = this.modalService.open(RsModalComponent, {
+      size: 'lg',
+      keyboard: false,
+      backdrop: 'static'
+    });
 
-      modalRef.componentInstance.book = 'myBookings';
-    }
+    modalRef.componentInstance.book = 'myBookings';
   }
 
   decideIfClose(event, datepicker) {

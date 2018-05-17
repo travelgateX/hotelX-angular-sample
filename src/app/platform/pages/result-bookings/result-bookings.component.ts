@@ -91,7 +91,6 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
     this.errorSubscription = this.alertService.error$.subscribe(err => {
       // In this page, we should only display errors from search and quote
       this.errors = err.filter(e => e.name === 'Hotel' || e.name === 'Quote');
-      console.log(this.errors);
     });
 
     this.warningSubscription = this.alertService.warning$.subscribe(warning => {
