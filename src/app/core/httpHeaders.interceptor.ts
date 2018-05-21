@@ -23,7 +23,7 @@ export class HttpHeadersInterceptor implements HttpInterceptor {
       'Content-Type': 'application/json'
     });
     const cloneReq = req.clone({ headers });
-    const requestToStore = {rq: cloneReq, headers: headers}
+    const requestToStore = {bearer: 'Bearer ' + localStorage.getItem('token'), rq: cloneReq}
     this.requestStorageService.storeRequestResponse(requestToStore, false);
     return next.handle(cloneReq);
   }
