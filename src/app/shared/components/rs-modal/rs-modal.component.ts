@@ -23,7 +23,7 @@ export class RsModalComponent implements OnInit {
     setTimeout(_ => {
       this.requestStorageService
         .loadData('rs', this.book)
-        .then(p => (this.payload = p));
+        .then(p => this.payload = p);
     }, 0);
   }
 
