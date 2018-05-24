@@ -7,6 +7,7 @@ import { NotificationService } from '../../shared/services/notification.service'
 import { ClientSelectorService } from '../../shared/components/selectors/client-selector/client-selector.service';
 import { IndexedDbService } from '../../shared/services/indexed-db.service';
 import { WebConfigService } from './web-config.service';
+import { CookieService } from 'ngx-cookie-service';
 
 declare var auth0: any;
 
@@ -29,31 +30,54 @@ export class AuthService {
     private notificationService: NotificationService,
     private clientSelectorService: ClientSelectorService,
     private indexedDBService: IndexedDbService,
-    private webConfigService: WebConfigService
+    private webConfigService: WebConfigService,
+    private cookieService: CookieService
   ) {
     // Checks if there is already a user logged checking local storage
     if (localStorage.getItem('profile') !== null) {
       this.userProfile = JSON.parse(localStorage.getItem('profile'));
       this.profile$.next(this.userProfile);
     }
+    if (!this.userProfile && this.cookieService.get('loggedin')) {
+      let login = JSON.parse(this.cookieService.get('loggedin'));
+      this.getUserInfo(login, login.expiresAt, false);
+    }
 
     this.lock.on('authenticated', authResult => {
-      this.lock.getUserInfo(authResult.accessToken, (error, profile) => {
-        if (error) {
-          console.log(error);
-          this.notificationService.error(error);
-          this.router.navigate(['/home']);
-          return;
-        }
-
-        window.location.hash = '';
-        this.setSession(authResult, profile);
-        this.router.navigate(['/platform/search-bookings']);
-      });
+      const expiresAt = JSON.stringify(
+        authResult.expiresIn * 1000 + new Date().getTime()
+      );
+      this.getUserInfo(authResult, expiresAt, true);
+      this.cookieService.set(
+        'loggedin',
+        JSON.stringify({
+          accessToken: authResult.accessToken,
+          idToken: authResult.idToken,
+          expiresAt: expiresAt
+        }),
+        0,
+        '/',
+        'travelgatex.com'
+      );
     });
     this.lock.on('authorization_error', error => console.log(error));
 
     this.lock.on('unrecoverable_error', error => console.log(error));
+  }
+
+  getUserInfo(authResult, expiresAt, redirect) {
+    this.lock.getUserInfo(authResult.accessToken, (error, profile) => {
+      if (error) {
+        console.log(error);
+        this.notificationService.error(error);
+        this.router.navigate(['/home']);
+        return;
+      }
+
+      window.location.hash = '';
+      this.setSession(authResult, profile, expiresAt);
+      this.router.navigate(['/platform/search-bookings']);
+    });
   }
 
   /**
@@ -69,10 +93,7 @@ export class AuthService {
    * Set the time that the access token will expire at,
    * also calls getProfile to save profile info
    */
-  private setSession(authResult, profile): void {
-    const expiresAt = JSON.stringify(
-      authResult.expiresIn * 1000 + new Date().getTime()
-    );
+  private setSession(authResult, profile, expiresAt): void {
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
@@ -103,12 +124,19 @@ export class AuthService {
       name: 'UrlAccess'
     });
     this.indexedDBService.closeDB();
+    for (
+      let count = 0;
+      this.cookieService.check('loggedin') && count < 100;
+      count++
+    ) {
+      this.cookieService.delete('loggedin', '/', 'travelgatex.com');
+    }
+
     if (savedAccess) {
       this.router.navigate(['/home', { popLogin: true }]);
     } else {
       this.router.navigate(['/home']);
     }
-
   }
 
   /**

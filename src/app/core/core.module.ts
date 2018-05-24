@@ -29,6 +29,7 @@ import { HttpHeadersInterceptor } from './httpHeaders.interceptor';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { fragmentTypes } from './fragmentTypes';
 import { WebConfigService } from './services/web-config.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, ApolloModule, HttpLinkModule],
@@ -46,7 +47,8 @@ import { WebConfigService } from './services/web-config.service';
     BookingService,
     LoginGuard,
     LangService,
-    HttpLink
+    HttpLink,
+    CookieService
   ],
   declarations: []
 })
@@ -72,7 +74,8 @@ export class CoreModule {
         BookingService,
         LoginGuard,
         LangService,
-        HttpLink
+        HttpLink,
+        CookieService
       ]
     };
   }
