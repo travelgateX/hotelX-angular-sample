@@ -19,12 +19,10 @@ import { cancelBooking } from '../graphQL/my-bookings/mutations/cancel-booking';
 import { quote } from '../graphQL/result-bookings/queries/quote';
 import { booking } from '../graphQL/my-bookings/queries/booking';
 import { book } from '../graphQL/close-bookings/mutations/book';
-import { suppliersAccesses } from '../graphQL/shared/queries/suppliers-accesses';
 import { destinationSearcher } from '../graphQL/shared/queries/destination-searcher';
 import { boards } from '../graphQL/shared/queries/boards';
 import { categories } from '../graphQL/shared/queries/categories';
 import { hotelCodesFromDestination } from '../graphQL/shared/queries/hotel-codes-from-destination';
-import { clients } from '../graphQL/shared/queries/clients';
 import { Client } from '../interfaces/client';
 
 /**
@@ -170,23 +168,6 @@ export class HubService {
     });
   }
 
-  /**
-   * Get the information of suppliers/accesses
-   */
-  getSuppliersAccesses(): QueryRef<any> {
-    return this.apollo.watchQuery<any>({
-      query: suppliersAccesses
-    });
-
-  }
-  /**
-   * Get the information of suppliers/accesses
-   */
-  getClients(): QueryRef<any> {
-    return this.apollo.watchQuery<any>({
-      query: clients
-    });
-  }
 
   /**
    * Get the information of suppliers/accesses

@@ -66,4 +66,12 @@ export class WebConfigService {
   getClient(): Client {
     return JSON.parse(localStorage.getItem('client'));
   }
+
+  setOrganization(organization: string) {
+    localStorage.setItem('organization', JSON.stringify(organization));
+  }
+
+  getOrganization(): string {
+    return JSON.parse(localStorage.getItem('organization'));
+  }
 }

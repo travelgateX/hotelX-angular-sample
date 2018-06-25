@@ -3,6 +3,7 @@ import { Client } from '../../../../core/interfaces/client';
 import { HubService } from '../../../../core/services/hub.service';
 import { WebConfigService } from '../../../../core/services/web-config.service';
 import { ClientSelectorService } from './client-selector.service';
+import { OrganizationSelectorService } from '../organization-selector/organization-selector.service';
 
 @Component({
   selector: 'b2b-client-selector',
@@ -17,12 +18,15 @@ export class ClientSelectorComponent implements OnInit {
   constructor(
     private hubService: HubService,
     private webConfigService: WebConfigService,
-    private clientSelectorService: ClientSelectorService
+    private clientSelectorService: ClientSelectorService,
+    private organizationSelectorService: OrganizationSelectorService
   ) {}
 
   ngOnInit() {
     this.showErrorClients = false;
-    this.clientSelectorService.getClients();
+    this.organizationSelectorService.organizationSelected$.subscribe(res => {
+      this.clientSelectorService.getClients(res);
+    });
     this.clientSelectorService.clients$.subscribe(
       res => {
         this.clients = res;

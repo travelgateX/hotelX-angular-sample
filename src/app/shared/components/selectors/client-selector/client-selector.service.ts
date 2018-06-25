@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Client } from '../../../../core/interfaces/client';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { HubService } from '../../../../core/services/hub.service';
 import { Subject } from 'rxjs/Subject';
+import { CoreAdminService } from '../../../../core/services/core-admin.service';
+import { WebConfigService } from '../../../../core/services/web-config.service';
 
 @Injectable()
 export class ClientSelectorService {
@@ -11,11 +12,11 @@ export class ClientSelectorService {
 
   clientSpinner = new Subject<number>();
 
-  constructor(private hubService: HubService) {}
+  constructor(private coreAdminService: CoreAdminService, private webConfigService: WebConfigService) {}
 
-  getClients() {
+  getClients(organization) {
     const clients = [];
-    this.hubService.getClients().valueChanges.subscribe(res => {
+    this.coreAdminService.getClients(organization).valueChanges.subscribe(res => {
       if (res) {
         res.data.admin.clients.edges.map(edge => {
           if (edge.node && edge.node.clientData) {

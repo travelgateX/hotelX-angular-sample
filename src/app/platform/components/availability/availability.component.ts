@@ -194,7 +194,7 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
   }
 
   checkLength() {
-    if (this.clientSP > 1 || this.supplierSP > 1) {
+    if (this.clientSP > 1 || this.supplierSP > 1 || this.clientSP < 1 || this.supplierSP < 1) {
       this.configInputsHidden = false;
     }
 

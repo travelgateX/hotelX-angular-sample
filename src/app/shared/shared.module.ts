@@ -36,6 +36,9 @@ import { AlertDropdownComponent } from './components/alert-dropdown/alert-dropdo
 import { SearchGlobalComponent } from './components/search-global/search-global.component';
 import { StatusPipe } from './pipes/status.pipe';
 import { IndexedDbService } from './services/indexed-db.service';
+import { OrganizationSelectorComponent } from './components/selectors/organization-selector/organization-selector.component';
+import { OrganizationSelectorService } from './components/selectors/organization-selector/organization-selector.service';
+import { HighlightPipe } from './pipes/highlight.pipe';
 
 @NgModule({
   imports: [
@@ -56,7 +59,8 @@ import { IndexedDbService } from './services/indexed-db.service';
     NotificationService,
     RequestStorageService,
     SpinnerService,
-    IndexedDbService
+    IndexedDbService,
+    OrganizationSelectorService
   ],
   declarations: [
     ScrollDirective,
@@ -80,7 +84,9 @@ import { IndexedDbService } from './services/indexed-db.service';
     ClientSelectorComponent,
     AlertDropdownComponent,
     SearchGlobalComponent,
-    StatusPipe
+    StatusPipe,
+    OrganizationSelectorComponent,
+    HighlightPipe
   ],
   exports: [
     CommonModule,
@@ -111,7 +117,8 @@ import { IndexedDbService } from './services/indexed-db.service';
     ClientSelectorComponent,
     AlertDropdownComponent,
     SearchGlobalComponent,
-    StatusPipe
+    StatusPipe,
+    OrganizationSelectorComponent
   ]
 })
 export class SharedModule {}
