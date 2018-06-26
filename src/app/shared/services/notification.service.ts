@@ -23,7 +23,6 @@ export class NotificationService {
       timeOut: 3000,
       closeButton: true
     }
-    console.log(this.toastrConfig);
   }
 
   /**
@@ -50,7 +49,6 @@ export class NotificationService {
    * @param message message
    */
   error(message: string, title: string = 'ERROR') {
-    console.log("jejea");
     this.toastr.error(message, title, this.toastrConfig);
   }
 

@@ -18,7 +18,6 @@ export class IndexedDbService {
         request.onerror = function(event) {
           reject();
           console.log('error');
-          console.log(event);
         };
         request.onupgradeneeded = function(event) {
           tables.map(table => {
@@ -76,10 +75,8 @@ export class IndexedDbService {
         const objectStore = transaction.objectStore(table);
         const request = objectStore.get(key);
         request.onerror = function(event) {
-          console.log(event);
         };
         request.onsuccess = function(event) {
-          console.log(event);
           resolve(event.target['result']);
         };
       });
@@ -95,7 +92,6 @@ export class IndexedDbService {
     }
     const request = window.indexedDB.deleteDatabase(this.database);
     request.onblocked = function(event) {
-      console.log(event);
       console.log('Error message: Database in blocked state. ');
     };
     request.onerror = function(event) {
@@ -104,8 +100,6 @@ export class IndexedDbService {
 
     request.onsuccess = function(event) {
       console.log('Database deleted successfully');
-
-      console.log(event); // should be undefined
     };
   }
 }

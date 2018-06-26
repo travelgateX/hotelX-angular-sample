@@ -341,7 +341,6 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
   // };
 
   setCriteriaItems(items) {
-    console.log(items);
     this.criteria.items = items;
   }
 
