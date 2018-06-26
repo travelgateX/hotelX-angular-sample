@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { IndexedDbService } from './indexed-db.service';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class RequestStorageService {

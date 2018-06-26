@@ -1,7 +1,7 @@
-import { environment, auth0Config } from './../../../environments/environment';
+import { auth0Config } from './../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs';
 import { IProfile } from 'app/core/interfaces/iprofile';
 import { NotificationService } from '../../shared/services/notification.service';
 import { ClientSelectorService } from '../../shared/components/selectors/client-selector/client-selector.service';

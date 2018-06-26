@@ -9,7 +9,7 @@ import { Search } from 'app/core/interfaces/search';
 import { BookingService } from 'app/core/services/booking.service';
 import { HubService } from 'app/core/services/hub.service';
 import { SearchService } from 'app/core/services/search.service';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 import { environment } from 'environments/environment';
 import { LangService } from './../../../core/services/lang.service';
 import { EditCriteriaModalComponent } from './../../components/edit-criteria-modal/edit-criteria-modal.component';

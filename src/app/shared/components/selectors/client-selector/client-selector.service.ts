@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Client } from '../../../../core/interfaces/client';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { BehaviorSubject ,  Subject } from 'rxjs';
 import { HubService } from '../../../../core/services/hub.service';
-import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class ClientSelectorService {

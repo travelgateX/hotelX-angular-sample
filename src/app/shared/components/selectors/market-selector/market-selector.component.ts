@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MARKETS } from 'app/core/interfaces/markets';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Market } from 'app/core/interfaces/market';
 import { MarketSelectorService } from './market-selector.service';
 import { WebConfigService } from '../../../../core/services/web-config.service';
@@ -38,23 +39,25 @@ export class MarketSelectorComponent implements OnInit {
 
   marketFilter = (text$: Observable<string>) =>
     text$
-      .debounceTime(250)
-      .distinctUntilChanged()
-      .map(
-        term =>
-          term === ''
-            ? []
-            : this.markets.filter(item => {
-                const name =
-                  item.country_name
-                    .toLowerCase()
-                    .indexOf(term.toLowerCase()) !== -1;
+      .pipe(debounceTime(250))
+      .pipe(distinctUntilChanged())
+      .pipe(
+        map(
+          term =>
+            term === ''
+              ? []
+              : this.markets.filter(item => {
+                  const name =
+                    item.country_name
+                      .toLowerCase()
+                      .indexOf(term.toLowerCase()) !== -1;
 
-                return (
-                  item.iso_code.toLowerCase().indexOf(term.toLowerCase()) !==
-                    -1 || name
-                );
-              })
+                  return (
+                    item.iso_code.toLowerCase().indexOf(term.toLowerCase()) !==
+                      -1 || name
+                  );
+                })
+        )
       );
 
   /**

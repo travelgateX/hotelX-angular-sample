@@ -1,7 +1,3 @@
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/map';
-
 import {
   Component,
   EventEmitter,
@@ -10,7 +6,6 @@ import {
   OnInit,
   Output
 } from '@angular/core';
-import { Response } from '@angular/http';
 import {
   NgbCalendar,
   NgbDateStruct,
@@ -23,16 +18,14 @@ import { Distribution } from 'app/core/interfaces/distribution';
 import { Pax } from 'app/core/interfaces/pax';
 import { BookingService } from 'app/core/services/booking.service';
 import { SearchService } from 'app/core/services/search.service';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
+import { Observable, Subscription } from 'rxjs';
+import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 import { MARKETS } from './../../../core/interfaces/markets';
 import { getArrayUses } from './../../../shared/utilities/functions';
 import { NgbDateMomentParserFormatter } from 'app/shared/utilities/ngbParserFormatter';
 import { HubService } from 'app/core/services/hub.service';
-import { Supplier } from 'app/core/interfaces/supplier';
 import { Access } from '../../../core/interfaces/access';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Country } from 'app/core/interfaces/country';
 import { decideClosure } from 'app/shared/utilities/functions';
 import { CurrencySelectorService } from '../../../shared/components/selectors/currency-selector/currency-selector.service';
@@ -228,18 +221,22 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
 
   marketsFilter = (text$: Observable<string>) =>
     text$
-      .debounceTime(250)
-      .distinctUntilChanged()
-      .map(
-        term =>
-          term === ''
-            ? []
-            : this.markets.filter((item: Country) => {
-                const name =
-                  item.country_name.toLowerCase().indexOf(term) !== -1;
+      .pipe(debounceTime(250))
+      .pipe(distinctUntilChanged())
+      .pipe(
+        map(
+          term =>
+            term === ''
+              ? []
+              : this.markets.filter((item: Country) => {
+                  const name =
+                    item.country_name.toLowerCase().indexOf(term) !== -1;
 
-                return item.iso_code.toLowerCase().indexOf(term) !== -1 || name;
-              })
+                  return (
+                    item.iso_code.toLowerCase().indexOf(term) !== -1 || name
+                  );
+                })
+        )
       );
 
   /**
@@ -269,28 +266,30 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
   public requestAutocompleteItems = (text: string) => {
     return this.hubService
       .destinationSearcher(this.accessesToSearch[0], text)
-      .valueChanges.map(res => {
-        const searchResponse = [];
-        res.data.hotelX.destinationSearcher.map(ds => {
-          if (ds.code) {
-            searchResponse.push({
-              destination: true,
-              value: ds.code,
-              display: ds.texts[0].text,
-              key: ds.closestDestinations
-            });
-          } else if (ds.hotelCode) {
-            searchResponse.push({
-              destination: false,
-              value: ds.hotelCode,
-              display: ds.hotelName,
-              key: ds.hotelCode,
-              location: ds.location
-            });
-          }
-        });
-        return searchResponse;
-      });
+      .valueChanges.pipe(
+        map(res => {
+          const searchResponse = [];
+          res.data.hotelX.destinationSearcher.map(ds => {
+            if (ds.code) {
+              searchResponse.push({
+                destination: true,
+                value: ds.code,
+                display: ds.texts[0].text,
+                key: ds.closestDestinations
+              });
+            } else if (ds.hotelCode) {
+              searchResponse.push({
+                destination: false,
+                value: ds.hotelCode,
+                display: ds.hotelName,
+                key: ds.hotelCode,
+                location: ds.location
+              });
+            }
+          });
+          return searchResponse;
+        })
+      );
   };
 
   /**

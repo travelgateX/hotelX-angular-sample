@@ -6,7 +6,7 @@ import {
   RouterStateSnapshot,
   CanActivateChild
 } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { WebConfigService } from '../services/web-config.service';
 
 /**

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ToastyService, ToastyConfig, ToastOptions } from 'ng2-toasty';
+import { ToastrService, IndividualConfig } from 'ngx-toastr';
 import { IError } from 'app/core/interfaces/error';
 import { IWarning } from 'app/core/interfaces/warning';
 import { NotificationType } from '../../core/interfaces/notification-type.enum';
@@ -9,32 +9,21 @@ import { NotificationType } from '../../core/interfaces/notification-type.enum';
  */
 @Injectable()
 export class NotificationService {
+  toastrConfig: IndividualConfig;
   /**
    * Init default toasty configuration
    * @param toastyService toasty service
    * @param toastyConfig toasty basic configuration
    */
   constructor(
-    private toastyService: ToastyService,
-    private toastyConfig: ToastyConfig
+    private toastr: ToastrService,
   ) {
-    this.toastyConfig.position = 'bottom-right';
-    this.toastyConfig.theme = 'bootstrap';
-    this.toastyConfig.showClose = true;
-    this.toastyConfig.timeout = 3000;
-  }
-
-  /**
-   * Create a default toasty
-   * @param title title
-   * @param message message
-   */
-  default(message: string, title: string = 'DEFAULT') {
-    const toastOptions = {
-      title: title,
-      msg: message,
-    };
-    this.toastyService.default(toastOptions);
+    this.toastrConfig = <IndividualConfig> {
+      positionClass: 'toast-bottom-right',
+      timeOut: 3000,
+      closeButton: true
+    }
+    console.log(this.toastrConfig);
   }
 
   /**
@@ -43,11 +32,7 @@ export class NotificationService {
    * @param message message
    */
   info(message: string, title: string = 'INFO') {
-    const toastOptions = {
-      title: title,
-      msg: message,
-    };
-    this.toastyService.info(toastOptions);
+    this.toastr.info(message, title, this.toastrConfig);
   }
 
   /**
@@ -56,24 +41,7 @@ export class NotificationService {
    * @param message message
    */
   success(message: string, title: string = 'SUCCESS') {
-    const toastOptions = {
-      title: title,
-      msg: message,
-    };
-    this.toastyService.success(toastOptions);
-  }
-
-  /**
-   * Create a wait toasty
-   * @param title title
-   * @param message message
-   */
-  wait(message: string, title: string = 'WAIT') {
-    const toastOptions = {
-      title: title,
-      msg: message,
-    };
-    this.toastyService.wait(toastOptions);
+    this.toastr.success(message, title, this.toastrConfig);
   }
 
   /**
@@ -82,11 +50,8 @@ export class NotificationService {
    * @param message message
    */
   error(message: string, title: string = 'ERROR') {
-    const toastOptions = {
-      title: title,
-      msg: message,
-    };
-    this.toastyService.error(toastOptions);
+    console.log("jejea");
+    this.toastr.error(message, title, this.toastrConfig);
   }
 
   /**
@@ -95,11 +60,16 @@ export class NotificationService {
    * @param message message
    */
   warning(message: string, title: string = 'WARNING') {
-    const toastOptions = {
-      title: title,
-      msg: message,
-    };
-    this.toastyService.warning(toastOptions);
+    this.toastr.warning(message, title, this.toastrConfig);
+  }
+
+  /**
+   * Create a show toasty
+   * @param title title
+   * @param message message
+   */
+  show(message: string, title: string = 'SHOW') {
+    this.toastr.show(message, title, this.toastrConfig);
   }
 
   /**
@@ -108,30 +78,22 @@ export class NotificationService {
    * @param msg message
    * @param type notification type
    */
-  toast(title: string, msg: string, type: NotificationType) {
-    const toastOptions = {
-      title: title,
-      msg: msg,
-    };
-
+  toast(title: string, message: string, type: NotificationType) {
     switch (type) {
-      case NotificationType.DEFAULT:
-        this.toastyService.default(toastOptions);
-        break;
       case NotificationType.INFO:
-        this.toastyService.info(toastOptions);
+        this.toastr.info(message, title, this.toastrConfig);
         break;
       case NotificationType.SUCCESS:
-        this.toastyService.success(toastOptions);
+        this.toastr.success(message, title, this.toastrConfig);
         break;
-      case NotificationType.WAIT:
-        this.toastyService.wait(toastOptions);
+      case NotificationType.SHOW:
+        this.toastr.show(message, title, this.toastrConfig);
         break;
       case NotificationType.ERROR:
-        this.toastyService.error(toastOptions);
+        this.toastr.error(message, title, this.toastrConfig);
         break;
       case NotificationType.WARNING:
-        this.toastyService.warning(toastOptions);
+        this.toastr.warning(message, title, this.toastrConfig);
         break;
     }
   }

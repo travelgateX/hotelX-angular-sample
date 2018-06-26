@@ -1,4 +1,3 @@
-import { timestamp } from "rxjs/operator/timestamp";
 import { CurrencyPipe } from "@angular/common/src/pipes/number_pipe";
 import gql from "graphql-tag";
 

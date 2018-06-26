@@ -1,17 +1,11 @@
-import { Subject } from 'rxjs/Subject';
 import { Injectable } from '@angular/core';
 import { Apollo, QueryRef } from 'apollo-angular';
-import gql from 'graphql-tag';
-
 import { CriteriaSearch } from 'app/core/interfaces/criteria-search';
-import { HotelInfo } from 'app/core/interfaces/hotel-info';
 import { hotelInfo } from '../graphQL/result-bookings/queries/hotel-info';
 import { HotelAvail } from 'app/core/interfaces/hotel-avail';
 import { avail } from '../graphQL/result-bookings/queries/availability'
 import { HotelBookInput } from 'app/core/interfaces/hotel-book-input';
-import { Observable } from 'rxjs/Observable';
-import { Subscriber } from 'rxjs/Subscriber';
-import { ApolloQueryResult } from 'apollo-client';
+import { Observable } from 'rxjs';
 import { Access } from 'app/core/interfaces/access';
 import { CriteriaBooking } from '../interfaces/criteria-booking';
 import { CancelBooking } from '../interfaces/cancel-booking';

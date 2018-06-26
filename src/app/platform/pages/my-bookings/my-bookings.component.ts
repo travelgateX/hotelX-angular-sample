@@ -11,17 +11,15 @@ import {
   enumToArray,
   decideClosure
 } from '../../../shared/utilities/functions';
-import { CancelBooking } from '../../../core/interfaces/cancel-booking';
 import { BookingCriteriaDateType } from 'app/core/enumerates/booking-criteria-date-type';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
-  NgbInputDatepicker,
   NgbCalendar,
   NgbDateParserFormatter,
   NgbModal
 } from '@ng-bootstrap/ng-bootstrap';
 import { Board } from 'app/core/interfaces/board';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 import { CurrencySelectorService } from 'app/shared/components/selectors/currency-selector/currency-selector.service';
 import { RqModalComponent } from '../../../shared/components/rq-modal/rq-modal.component';
 import { RsModalComponent } from '../../../shared/components/rs-modal/rs-modal.component';

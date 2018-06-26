@@ -1,8 +1,8 @@
 <div class="mo-summary-thanks" *ngIf="book && book.booking && criteria && bookingDetail; else noBooking">
   <div class="row">
     <div class="col-md-4 pb-4">
-      <a class="btn btn-sm btn-info smy" (click)="showRequest()" i18n="@@show-request">Show RQ</a>
-      <a class="btn btn-sm btn-info smy ml-10" (click)="showResponse()" i18n="@@show-response">Show RS</a>
+      <button class="btn btn-sm btn-info smy" (click)="showRequest()" i18n="@@show-request">Show RQ</button>
+      <button class="btn btn-sm btn-info smy ml-10" (click)="showResponse()" i18n="@@show-response" style="margin-left: 10px">Show RS</button>
     </div>
   </div>
   <div class="media">

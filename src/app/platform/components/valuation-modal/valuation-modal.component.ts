@@ -5,7 +5,7 @@ import { Option } from 'app/core/interfaces/option';
 import { SearchService } from 'app/core/services/search.service';
 import { Criteria } from 'app/core/interfaces/criteria';
 import { HubService } from 'app/core/services/hub.service';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 import { FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
 import { HotelBookInput } from 'app/core/interfaces/hotel-book-input';
 import { BookingPaxes } from 'app/core/interfaces/booking-paxes';

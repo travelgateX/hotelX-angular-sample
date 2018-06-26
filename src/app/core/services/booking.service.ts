@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs';
 import { BookingDetail } from 'app/core/interfaces/booking-detail';
-import { HotelInfo } from 'app/core/interfaces/hotel-info';
 import { Option } from 'app/core/interfaces/option';
 import { Search } from 'app/core/interfaces/search';
 import { HotelBookInput } from 'app/core/interfaces/hotel-book-input';
@@ -42,7 +41,7 @@ export class BookingService {
       hotelInfo: hotelInfo,
       option: this.booking.getValue() ? this.booking.getValue().option : null,
       search: this.booking.getValue() ? this.booking.getValue().search : null,
-      input: this.booking.getValue() ? this.booking.getValue().input : null,
+      input: this.booking.getValue() ? this.booking.getValue().input : null
     };
 
     this.booking.next(booking);
@@ -59,7 +58,7 @@ export class BookingService {
         ? this.booking.getValue().hotelInfo
         : null,
       search: this.booking.getValue() ? this.booking.getValue().search : null,
-      input: this.booking.getValue() ? this.booking.getValue().input : null,
+      input: this.booking.getValue() ? this.booking.getValue().input : null
     };
 
     this.booking.next(booking);
@@ -83,7 +82,7 @@ export class BookingService {
         ? this.booking.getValue().hotelInfo
         : null,
       search: search,
-      input: this.booking.getValue() ? this.booking.getValue().input : null,
+      input: this.booking.getValue() ? this.booking.getValue().input : null
     };
 
     this.booking.next(booking);
@@ -103,7 +102,7 @@ export class BookingService {
     this.search = {
       roomsNum: 0,
       adultsNum: 0,
-      childsNum: 0,
+      childsNum: 0
     };
   }
 
@@ -120,16 +119,16 @@ export class BookingService {
         } else {
           this.search.childsNum++;
         }
-      })
+      });
     });
 
     this.setSearch(this.search);
   }
 
   /**
- * Updates the hotel book input from the current booking
- * @param input new hotel book input
- */
+   * Updates the hotel book input from the current booking
+   * @param input new hotel book input
+   */
   setInput(input: HotelBookInput) {
     const booking: BookingDetail = {
       option: this.booking.getValue() ? this.booking.getValue().option : null,
@@ -137,7 +136,7 @@ export class BookingService {
         ? this.booking.getValue().hotelInfo
         : null,
       search: this.booking.getValue() ? this.booking.getValue().search : null,
-      input: input,
+      input: input
     };
     this.booking.next(booking);
   }

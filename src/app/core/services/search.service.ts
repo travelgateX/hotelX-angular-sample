@@ -1,18 +1,14 @@
 import { NgbCalendar } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker.module';
-import { Injectable, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { Criteria } from 'app/core/interfaces/criteria';
-import { Room } from 'app/core/interfaces/room';
 import { Occupancy } from 'app/core/interfaces/occupancy';
 import { HotelInfo } from 'app/core/interfaces/hotel-info';
 import { Distribution } from 'app/core/interfaces/distribution';
 import { CriteriaSearch } from 'app/core/interfaces/criteria-search';
-import { environment } from 'environments/environment';
-import { Access } from '../interfaces/access';
 import { HubService } from './hub.service';
 import { WebConfigService } from './web-config.service';
-import { Country } from 'app/core/interfaces/country';
 import { LangService } from 'app/core/services/lang.service';
 import { LANGUAGES } from 'app/core/interfaces/languages';
 

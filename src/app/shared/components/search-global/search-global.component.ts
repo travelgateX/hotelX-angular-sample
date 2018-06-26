@@ -8,9 +8,7 @@ import {
   EventEmitter,
   Output
 } from '@angular/core';
-import { SlicePipe } from '@angular/common';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromPromise';
+
 import {
   trigger,
   state,

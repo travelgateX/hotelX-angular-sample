@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Access } from 'app/core/interfaces/access';
 import { Supplier } from '../interfaces/supplier';
 import { Currency } from 'app/core/interfaces/currency';

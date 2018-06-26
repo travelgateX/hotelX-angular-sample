@@ -20,10 +20,8 @@ import {
   IntrospectionFragmentMatcher
 } from 'apollo-cache-inmemory';
 import {
-  HttpClient,
   HttpClientModule,
-  HTTP_INTERCEPTORS,
-  HttpHeaders
+  HTTP_INTERCEPTORS
 } from '@angular/common/http';
 import { HttpHeadersInterceptor } from './httpHeaders.interceptor';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';

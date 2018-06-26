@@ -8,19 +8,13 @@ import { AppRoutingModule } from './app.routing';
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ToastyModule } from 'ng2-toasty';
+import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AgmCoreModule } from '@agm/core';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './static/components/home/home.component';
 import { NotFoundComponent } from './static/components/not-found/not-found.component';
-
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/first';
-import 'rxjs/add/observable/of';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, NotFoundComponent],
@@ -31,13 +25,13 @@ import 'rxjs/add/observable/of';
     PlatformModule,
     SharedModule,
     AppRoutingModule,
-    ToastyModule.forRoot(),
+    ToastrModule.forRoot(),
     NgbModule.forRoot(),
     AgmCoreModule.forRoot({
-      apiKey: environment.googleMapsKey,
-    }),
+      apiKey: environment.googleMapsKey
+    })
   ],
   providers: [NgbActiveModal],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
