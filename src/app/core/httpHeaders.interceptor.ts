@@ -6,7 +6,6 @@ import {
   HttpHeaders
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
 import { Injectable } from '@angular/core';
 import { RequestStorageService } from '../shared/services/request-storage.service';
 
@@ -23,7 +22,10 @@ export class HttpHeadersInterceptor implements HttpInterceptor {
       'Content-Type': 'application/json'
     });
     const cloneReq = req.clone({ headers });
-    const requestToStore = {bearer: 'Bearer ' + localStorage.getItem('token'), rq: cloneReq}
+    const requestToStore = {
+      bearer: 'Bearer ' + localStorage.getItem('token'),
+      rq: cloneReq
+    };
     this.requestStorageService.storeRequestResponse(requestToStore, false);
     return next.handle(cloneReq);
   }

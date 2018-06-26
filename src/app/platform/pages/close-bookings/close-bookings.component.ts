@@ -1,9 +1,8 @@
 import { LangService } from './../../../core/services/lang.service';
-import { HotelBookPayload } from 'app/core/interfaces/hotel-book-payload';
+import { HotelBookPayload, BookingDetail } from 'app/core/interfaces';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HubService } from 'app/core/services/hub.service';
 import { BookingService } from 'app/core/services/booking.service';
-import { BookingDetail } from 'app/core/interfaces/booking-detail';
 import { Router } from '@angular/router';
 import { SearchService } from 'app/core/services/search.service';
 import { WebConfigService } from '../../../core/services/web-config.service';

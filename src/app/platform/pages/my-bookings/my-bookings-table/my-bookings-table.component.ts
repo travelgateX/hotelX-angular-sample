@@ -5,10 +5,7 @@ import {
   Output,
   EventEmitter
 } from '@angular/core';
-import { BookingHotel } from '../../../../core/interfaces/booking-hotel';
-import { HotelBookingDetail } from '../../../../core/interfaces/hotel-booking-detail';
-import { Board } from '../../../../core/interfaces/board';
-import { CancelBooking } from 'app/core/interfaces/cancel-booking';
+import { CancelBooking, Board, HotelBookingDetail, Price, Client, CriteriaBooking } from 'app/core/interfaces';
 import { HubService } from '../../../../core/services/hub.service';
 import { WebConfigService } from 'app/core/services/web-config.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -17,14 +14,10 @@ import { RsModalComponent } from '../../../../shared/components/rs-modal/rs-moda
 import { CancelPolicyModalComponent } from 'app/platform/components/cancel-policy-modal/cancel-policy-modal.component';
 import { environment } from 'environments/environment';
 import { NgbDateMomentParserFormatter } from 'app/shared/utilities/ngbParserFormatter';
-import { Price } from 'app/core/interfaces/price';
 import { BindingModalComponent } from 'app/platform/components/binding-modal/binding-modal.component';
-import { AlertService } from '../../../../shared/services/alert.service';
 import { NotificationService } from '../../../../shared/services/notification.service';
 import { RequestStorageService } from '../../../../shared/services/request-storage.service';
-import { Client } from '../../../../core/interfaces/client';
 import { MyBookingsDetailModalComponent } from '../my-bookings-detail/my-bookings-detail-modal.component';
-import { CriteriaBooking } from '../../../../core/interfaces/criteria-booking';
 import { BookingCriteriaType } from '../../../../core/enumerates/booking-criteria-type';
 import { SpinnerService } from '../../../../shared/services/spinner.service';
 
@@ -49,7 +42,6 @@ export class MyBookingsTableComponent implements OnChanges {
     private webConfigService: WebConfigService,
     private modalService: NgbModal,
     private requestStorageService: RequestStorageService,
-    private alertService: AlertService,
     private spinnerService: SpinnerService
   ) {
     this.ngbDateMomentParserFormatter = new NgbDateMomentParserFormatter();

@@ -1,11 +1,6 @@
-import { HotelAvail } from './../../../core/interfaces/hotel-avail';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Criteria } from 'app/core/interfaces/criteria';
-import { CriteriaSearch } from 'app/core/interfaces/criteria-search';
-import { HotelInfo } from 'app/core/interfaces/hotel-info';
-import { Option } from 'app/core/interfaces/option';
-import { Search } from 'app/core/interfaces/search';
+import { Criteria, HotelAvail, CriteriaSearch, HotelInfo, Option, Search, Access, Board, Category, Client } from 'app/core/interfaces';
 import { BookingService } from 'app/core/services/booking.service';
 import { HubService } from 'app/core/services/hub.service';
 import { SearchService } from 'app/core/services/search.service';
@@ -14,9 +9,6 @@ import { environment } from 'environments/environment';
 import { LangService } from './../../../core/services/lang.service';
 import { EditCriteriaModalComponent } from './../../components/edit-criteria-modal/edit-criteria-modal.component';
 import { HotelInfoDetail } from 'app/core/interfaces/hotel-info/hotel-info-detail';
-import { Access } from '../../../core/interfaces/access';
-import { Board } from 'app/core/interfaces/board';
-import { Category } from 'app/core/interfaces/category';
 import { WebConfigService } from '../../../core/services/web-config.service';
 import { RqModalComponent } from '../../../shared/components/rq-modal/rq-modal.component';
 import { RsModalComponent } from '../../../shared/components/rs-modal/rs-modal.component';
@@ -24,7 +16,6 @@ import { AlertService } from '../../../shared/services/alert.service';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { RequestStorageService } from '../../../shared/services/request-storage.service';
 import { SpinnerService } from '../../../shared/services/spinner.service';
-import { Client } from '../../../core/interfaces/client';
 
 @Component({
   selector: 'b2b-result-bookings',
@@ -140,7 +131,6 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
   getAvailability() {
     this.requestStorageService.setCurrentType('hotel');
     this.clearFilter();
-    const lang = this.langService.getLang();
     this.searchService.transform(this.criteria).then(hotelCriteriaSearch => {
       if (this.criteria.items.length) {
         this.subscriptions$[1] = this.hubService

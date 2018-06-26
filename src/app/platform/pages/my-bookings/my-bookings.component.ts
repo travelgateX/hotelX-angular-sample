@@ -1,11 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HubService } from 'app/core/services/hub.service';
-import { CriteriaBooking } from 'app/core/interfaces/criteria-booking';
-import { LangService } from '../../../core/services/lang.service';
+import { CriteriaBooking, Access, Board, Client } from 'app/core/interfaces';
 import { BookingCriteriaType } from '../../../core/enumerates/booking-criteria-type';
-import { CriteriaBookingReference } from 'app/core/interfaces/criteria-booking-reference';
-import { CriteriaBookingDates } from 'app/core/interfaces/criteria-booking-dates';
-import { Access } from 'app/core/interfaces/access';
 import {
   getDisabled,
   enumToArray,
@@ -18,7 +14,6 @@ import {
   NgbDateParserFormatter,
   NgbModal
 } from '@ng-bootstrap/ng-bootstrap';
-import { Board } from 'app/core/interfaces/board';
 import { Subscription } from 'rxjs';
 import { CurrencySelectorService } from 'app/shared/components/selectors/currency-selector/currency-selector.service';
 import { RqModalComponent } from '../../../shared/components/rq-modal/rq-modal.component';
@@ -27,11 +22,9 @@ import { LanguageSelectorService } from '../../../shared/components/selectors/la
 import { AlertService } from 'app/shared/services/alert.service';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { RequestStorageService } from '../../../shared/services/request-storage.service';
-import { Client } from '../../../core/interfaces/client';
 import { ClientSelectorService } from '../../../shared/components/selectors/client-selector/client-selector.service';
 import { SpinnerService } from '../../../shared/services/spinner.service';
 import { SupplierAccessesService } from '../../components/supplier-accesses/supplier-accesses.service';
-import { IndexedDbService } from '../../../shared/services/indexed-db.service';
 
 @Component({
   selector: 'b2b-my-bookings',
@@ -62,7 +55,6 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
 
   constructor(
     private hubService: HubService,
-    private langService: LangService,
     private notificationService: NotificationService,
     private fb: FormBuilder,
     public calendar: NgbCalendar,
@@ -75,7 +67,6 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
     private clientSelectorService: ClientSelectorService,
     private supplierAccessesService: SupplierAccessesService,
     private spinnerService: SpinnerService,
-    private indexedDBService: IndexedDbService
   ) {}
 
   ngOnInit() {

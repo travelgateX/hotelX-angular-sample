@@ -1,14 +1,9 @@
-import { HotelBookPayload } from 'app/core/interfaces/hotel-book-payload';
-import { HotelBookingDetail } from './../../../core/interfaces/hotel-booking-detail';
+import { HotelBookPayload, BookingDetail, Criteria } from 'app/core/interfaces';
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { BookingDetail } from 'app/core/interfaces/booking-detail';
 import { SearchService } from 'app/core/services/search.service';
-import { Criteria } from 'app/core/interfaces/criteria';
 import { environment } from 'environments/environment';
-import {} from 'app/shared/utilities/functions';
 import { NotificationService } from '../../../shared/services/notification.service';
-import { SpinnerService } from '../../../shared/services/spinner.service';
 import { RqModalComponent } from '../../../shared/components/rq-modal/rq-modal.component';
 import { RsModalComponent } from '../../../shared/components/rs-modal/rs-modal.component';
 
@@ -27,7 +22,6 @@ export class BookingDetailComponent implements OnInit {
     private modalService: NgbModal,
     private searchService: SearchService,
     private notificationService: NotificationService,
-    private spinnerService: SpinnerService
   ) {}
 
   ngOnInit() {

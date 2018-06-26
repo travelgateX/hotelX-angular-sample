@@ -1,6 +1,5 @@
 import { LangService } from './services/lang.service';
 import { ApolloModule, Apollo } from 'apollo-angular';
-import { RequestOptions } from '@angular/http';
 import {
   NgModule,
   ModuleWithProviders,
@@ -8,7 +7,6 @@ import {
   SkipSelf
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { LoginGuard } from './guard/login.guard';
 import { SearchService } from 'app/core/services/search.service';
 import { HttpService } from 'app/core/services/http.service';
@@ -19,10 +17,7 @@ import {
   InMemoryCache,
   IntrospectionFragmentMatcher
 } from 'apollo-cache-inmemory';
-import {
-  HttpClientModule,
-  HTTP_INTERCEPTORS
-} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpHeadersInterceptor } from './httpHeaders.interceptor';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { fragmentTypes } from './fragmentTypes';

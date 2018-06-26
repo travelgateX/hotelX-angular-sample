@@ -13,27 +13,21 @@ import {
   NgbTypeaheadConfig,
   NgbDateParserFormatter
 } from '@ng-bootstrap/ng-bootstrap';
-import { Criteria } from 'app/core/interfaces/criteria';
-import { Distribution } from 'app/core/interfaces/distribution';
-import { Pax } from 'app/core/interfaces/pax';
+import { Criteria, Distribution, Pax, Access, Country, Client } from 'app/core/interfaces';
 import { BookingService } from 'app/core/services/booking.service';
 import { SearchService } from 'app/core/services/search.service';
 import { Observable, Subscription } from 'rxjs';
 import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
-
 import { MARKETS } from './../../../core/interfaces/markets';
 import { getArrayUses } from './../../../shared/utilities/functions';
 import { NgbDateMomentParserFormatter } from 'app/shared/utilities/ngbParserFormatter';
 import { HubService } from 'app/core/services/hub.service';
-import { Access } from '../../../core/interfaces/access';
-import { Country } from 'app/core/interfaces/country';
 import { decideClosure } from 'app/shared/utilities/functions';
 import { CurrencySelectorService } from '../../../shared/components/selectors/currency-selector/currency-selector.service';
 import { LanguageSelectorService } from '../../../shared/components/selectors/language-selector/language-selector.service';
 import { MarketSelectorService } from '../../../shared/components/selectors/market-selector/market-selector.service';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { ClientSelectorService } from '../../../shared/components/selectors/client-selector/client-selector.service';
-import { Client } from '../../../core/interfaces/client';
 import { SupplierAccessesService } from '../supplier-accesses/supplier-accesses.service';
 import { SpinnerService } from '../../../shared/services/spinner.service';
 

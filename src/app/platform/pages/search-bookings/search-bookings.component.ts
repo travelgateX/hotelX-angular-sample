@@ -1,25 +1,20 @@
-import { Router, ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 import { SearchService } from 'app/core/services/search.service';
 import { AuthService } from 'app/core/services/auth.service';
-import { WebConfigService } from 'app/core/services/web-config.service';
+
 
 @Component({
   selector: 'b2b-search-bookings',
   templateUrl: './search-bookings.component.html',
   styleUrls: ['./search-bookings.component.css']
 })
-export class SearchBookingsComponent implements OnInit {
+export class SearchBookingsComponent {
   constructor(
     private router: Router,
     public authService: AuthService,
     private searchService: SearchService,
-    private webConfigService: WebConfigService
   ) {}
-
-  ngOnInit() {
-  }
 
   /**
    * Search a new criteria

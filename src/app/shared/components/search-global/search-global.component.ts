@@ -370,7 +370,6 @@ export class SearchGlobalComponent implements OnChanges, OnInit {
    */
   focusItemFromList(param) {
     const auxArray = [].concat(this.availableItems);
-    console.log(auxArray)
     if (this.hiddenDropdown === 'no') {
       const focusedIndex = auxArray.findIndex(aux => aux.focused);
       // If a node is already focused, it selects the apropiate one depending on key pressed.

@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { BookingDetail } from 'app/core/interfaces/booking-detail';
-import { Option } from 'app/core/interfaces/option';
-import { Search } from 'app/core/interfaces/search';
-import { HotelBookInput } from 'app/core/interfaces/hotel-book-input';
-import { Criteria } from 'app/core/interfaces/criteria';
+import { Search, Option, HotelBookInput, BookingDetail, Criteria } from '../interfaces';
 
 /**
  * Handles book information

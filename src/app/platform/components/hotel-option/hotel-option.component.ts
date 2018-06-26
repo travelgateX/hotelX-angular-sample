@@ -1,32 +1,17 @@
 import { BindingModalComponent } from '../binding-modal/binding-modal.component';
-import {
-  Component,
-  Input,
-  OnDestroy,
-  OnInit,
-  OnChanges,
-  Output,
-  EventEmitter
-} from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, OnChanges } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { HotelAvail } from 'app/core/interfaces/hotel-avail';
-import { HotelInfo } from 'app/core/interfaces/hotel-info';
-import { Option } from 'app/core/interfaces/option';
-import { Search } from 'app/core/interfaces/search';
+import { HotelAvail, HotelInfo, Option, Search, Criteria, Board, Price } from 'app/core/interfaces';
 import { BookingService } from 'app/core/services/booking.service';
 import { HubService } from 'app/core/services/hub.service';
 import { GoogleMapsModalComponent } from 'app/platform/components/google-maps-modal/google-maps-modal.component';
 import { ValuationModalComponent } from 'app/platform/components/valuation-modal/valuation-modal.component';
 import { Subscription } from 'rxjs';
 import { environment } from 'environments/environment';
-import { Criteria } from './../../../core/interfaces/criteria';
 import { LangService } from './../../../core/services/lang.service';
 import { CancelPolicyModalComponent } from './../cancel-policy-modal/cancel-policy-modal.component';
-import { HotelInfoDetail } from 'app/core/interfaces/hotel-info/hotel-info-detail';
+import { HotelInfoDetail, HotelInfoGeocode } from 'app/core/interfaces/hotel-info/';
 import { CarouselModalComponent } from 'app/platform/components/carousel-modal/carousel-modal/carousel-modal.component';
-import { HotelInfoGeocode } from 'app/core/interfaces/hotel-info/geocode';
-import { Board } from 'app/core/interfaces/board';
-import { Price } from '../../../core/interfaces/price';
 import { AlertService } from 'app/shared/services/alert.service';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { RequestStorageService } from '../../../shared/services/request-storage.service';

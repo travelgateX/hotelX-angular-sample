@@ -4,12 +4,9 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { IProfile } from 'app/core/interfaces/iprofile';
 import { NotificationService } from '../../shared/services/notification.service';
-import { ClientSelectorService } from '../../shared/components/selectors/client-selector/client-selector.service';
 import { IndexedDbService } from '../../shared/services/indexed-db.service';
 import { WebConfigService } from './web-config.service';
 import { CookieService } from 'ngx-cookie-service';
-
-declare var auth0: any;
 
 /**
  * Auth0 service which handles user access, information, etc
@@ -28,7 +25,6 @@ export class AuthService {
   constructor(
     private router: Router,
     private notificationService: NotificationService,
-    private clientSelectorService: ClientSelectorService,
     private indexedDBService: IndexedDbService,
     private webConfigService: WebConfigService,
     private cookieService: CookieService
