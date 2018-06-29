@@ -523,6 +523,10 @@
         <source>Booking details</source>
         <target>Detalles reserva</target>
       </trans-unit>
+      <trans-unit id="detail" datatype="html">
+        <source>Detail</source>
+        <target>Detalle</target>
+      </trans-unit>
       <trans-unit id="applied-over" datatype="html">
         <source>Applied Over</source>
         <target>Aplicado</target>
@@ -710,6 +714,10 @@
       <trans-unit id="net" datatype="html">
         <source>Net</source>
         <target>Neto</target>
+      </trans-unit>
+      <trans-unit id="net-price" datatype="html">
+        <source>Net price</source>
+        <target>Precio neto</target>
       </trans-unit>
       <trans-unit id="mandatory" datatype="html">
         <source>Mandatory</source>
