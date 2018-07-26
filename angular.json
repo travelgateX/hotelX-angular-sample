@@ -50,6 +50,20 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ]
+            },
+            "es": {
+              "aot": true,
+              "outputPath": "dist/es",
+              "i18nFile": "src/i18n/messages.travelgatex.es.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "es"
+            },
+            "en": {
+              "aot": true,
+              "outputPath": "dist/en",
+              "i18nFile": "src/i18n/messages.travelgatex.en.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "en"
             }
           }
         },
@@ -61,6 +75,12 @@
           "configurations": {
             "production": {
               "browserTarget": "travelgatex-b2b:build:production"
+            },
+            "es": {
+              "browserTarget": "travelgatex-b2b:build:es"
+            },
+            "en": {
+              "browserTarget": "travelgatex-b2b:build:en"
             }
           }
         },
