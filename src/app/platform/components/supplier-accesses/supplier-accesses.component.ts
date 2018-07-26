@@ -1,7 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { HubService } from 'app/core/services/hub.service';
-import { Supplier } from 'app/core/interfaces/supplier';
-import { Access } from 'app/core/interfaces/access';
+import { Supplier, Access } from 'app/core/interfaces';
 import { WebConfigService } from '../../../core/services/web-config.service';
 import { SupplierAccessesService } from './supplier-accesses.service';
 
@@ -19,7 +17,6 @@ export class SupplierAccessesComponent implements OnInit {
   suppliers: Supplier[];
   supplierSelected: string;
   constructor(
-    private hubService: HubService,
     private webConfigService: WebConfigService,
     private supplierAccessesService: SupplierAccessesService,
   ) {}

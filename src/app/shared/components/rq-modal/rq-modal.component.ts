@@ -10,7 +10,7 @@ import { RequestStorageService } from '../../../shared/services/request-storage.
 export class RqModalComponent implements OnInit {
   @Input() input: any;
   @ViewChild('pre') pre: ElementRef;
-  payload = 'Loading data...';
+  payload: any = 'Loading data...';
   isCopied = false;
 
   constructor(
@@ -20,7 +20,9 @@ export class RqModalComponent implements OnInit {
 
   ngOnInit() {
     setTimeout(_ => {
-      this.payload = this.requestStorageService.loadRequest(this.input);
+      this.requestStorageService
+        .loadData('rq', this.input)
+        .then((p: any) => this.payload = {token: p.bearer, query: p.rq.body.query, variables: p.rq.body.variables})
     }, 0);
   }
 

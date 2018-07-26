@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CURRENCIES } from 'app/core/interfaces/currencies';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Currency } from 'app/core/interfaces/currency';
 import { CurrencySelectorService } from './currency-selector.service';
 import { WebConfigService } from '../../../../core/services/web-config.service';
@@ -35,23 +36,25 @@ export class CurrencySelectorComponent implements OnInit {
 
   currencyFilter = (text$: Observable<string>) =>
     text$
-      .debounceTime(250)
-      .distinctUntilChanged()
-      .map(
-        term =>
-          term === ''
-            ? []
-            : this.currencies.filter(item => {
-                const name =
-                  item.currency_name
-                    .toLowerCase()
-                    .indexOf(term.toLowerCase()) !== -1;
+      .pipe(debounceTime(250))
+      .pipe(distinctUntilChanged())
+      .pipe(
+        map(
+          term =>
+            term === ''
+              ? []
+              : this.currencies.filter(item => {
+                  const name =
+                    item.currency_name
+                      .toLowerCase()
+                      .indexOf(term.toLowerCase()) !== -1;
 
-                return (
-                  item.iso_code.toLowerCase().indexOf(term.toLowerCase()) !==
-                    -1 || name
-                );
-              })
+                  return (
+                    item.iso_code.toLowerCase().indexOf(term.toLowerCase()) !==
+                      -1 || name
+                  );
+                })
+        )
       );
 
   /**

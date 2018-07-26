@@ -1,14 +1,9 @@
-import { HotelBookPayload } from 'app/core/interfaces/hotel-book-payload';
-import { HotelBookingDetail } from './../../../core/interfaces/hotel-booking-detail';
+import { HotelBookPayload, BookingDetail, Criteria } from 'app/core/interfaces';
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { BookingDetail } from 'app/core/interfaces/booking-detail';
 import { SearchService } from 'app/core/services/search.service';
-import { Criteria } from 'app/core/interfaces/criteria';
 import { environment } from 'environments/environment';
-import {} from 'app/shared/utilities/functions';
 import { NotificationService } from '../../../shared/services/notification.service';
-import { SpinnerService } from '../../../shared/services/spinner.service';
 import { RqModalComponent } from '../../../shared/components/rq-modal/rq-modal.component';
 import { RsModalComponent } from '../../../shared/components/rs-modal/rs-modal.component';
 
@@ -27,7 +22,6 @@ export class BookingDetailComponent implements OnInit {
     private modalService: NgbModal,
     private searchService: SearchService,
     private notificationService: NotificationService,
-    private spinnerService: SpinnerService
   ) {}
 
   ngOnInit() {
@@ -40,62 +34,44 @@ export class BookingDetailComponent implements OnInit {
   }
 
   /**
-   * Open response modal
-   */
-  // onOpenRS() {
-  //   const modalRef = this.modalService.open(RsModalComponent);
-  //   modalRef.componentInstance.book = this.book;
-  // }
-
-  // TODO show request
-  // onOpenRQ() {
-  //   const modalRef = this.modalService.open(RqModalComponent);
-  //   // modalRef.componentInstance.input = this.input;
-  // }
-
-  /**
    * Opens modal to show last request made of booking type
    */
   showRequest() {
-    if (sessionStorage.getItem('interceptedRequest')) {
-      const modalRef = this.modalService.open(RqModalComponent, {
-        size: 'lg',
-        keyboard: false,
-        backdrop: 'static'
-      });
+    const modalRef = this.modalService.open(RqModalComponent, {
+      size: 'lg',
+      keyboard: false,
+      backdrop: 'static'
+    });
 
-      modalRef.componentInstance.input = 'bookRQ';
-      modalRef.result
-        .then(res => {
-          // https://github.com/ng-bootstrap/ng-bootstrap/issues/643#issuecomment-306256651
-          document.body.classList.add('modal-open');
-        })
-        .catch(err => {
-          document.body.classList.add('modal-open');
-        });
-    }
+    modalRef.componentInstance.input = 'book';
+    modalRef.result
+      .then(res => {
+        // https://github.com/ng-bootstrap/ng-bootstrap/issues/643#issuecomment-306256651
+        document.body.classList.add('modal-open');
+      })
+      .catch(err => {
+        document.body.classList.add('modal-open');
+      });
   }
 
   /**
    * Opens modal to show last response got form booking request
    */
   showResponse() {
-    if (sessionStorage.getItem('storedResponses')) {
-      const modalRef = this.modalService.open(RsModalComponent, {
-        size: 'lg',
-        keyboard: false,
-        backdrop: 'static'
-      });
+    const modalRef = this.modalService.open(RsModalComponent, {
+      size: 'lg',
+      keyboard: false,
+      backdrop: 'static'
+    });
 
-      modalRef.componentInstance.book = 'bookRS';
-      modalRef.result
-        .then(res => {
-          // https://github.com/ng-bootstrap/ng-bootstrap/issues/643#issuecomment-306256651
-          document.body.classList.add('modal-open');
-        })
-        .catch(err => {
-          document.body.classList.add('modal-open');
-        });
-    }
+    modalRef.componentInstance.book = 'book';
+    modalRef.result
+      .then(res => {
+        // https://github.com/ng-bootstrap/ng-bootstrap/issues/643#issuecomment-306256651
+        document.body.classList.add('modal-open');
+      })
+      .catch(err => {
+        document.body.classList.add('modal-open');
+      });
   }
 }

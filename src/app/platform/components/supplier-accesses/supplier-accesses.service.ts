@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HubService } from '../../../core/services/hub.service';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class SupplierAccessesService {

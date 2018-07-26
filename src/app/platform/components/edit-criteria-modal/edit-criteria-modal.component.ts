@@ -1,9 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { CriteriaSearch } from 'app/core/interfaces/criteria-search';
-import { Criteria } from 'app/core/interfaces/criteria';
-
 @Component({
   selector: 'b2b-edit-criteria-modal',
   templateUrl: './edit-criteria-modal.component.html',

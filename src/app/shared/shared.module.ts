@@ -35,6 +35,7 @@ import { ClientSelectorService } from './components/selectors/client-selector/cl
 import { AlertDropdownComponent } from './components/alert-dropdown/alert-dropdown.component';
 import { SearchGlobalComponent } from './components/search-global/search-global.component';
 import { StatusPipe } from './pipes/status.pipe';
+import { IndexedDbService } from './services/indexed-db.service';
 
 @NgModule({
   imports: [
@@ -54,7 +55,8 @@ import { StatusPipe } from './pipes/status.pipe';
     AlertService,
     NotificationService,
     RequestStorageService,
-    SpinnerService
+    SpinnerService,
+    IndexedDbService
   ],
   declarations: [
     ScrollDirective,

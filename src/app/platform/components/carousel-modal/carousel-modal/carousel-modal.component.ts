@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -6,9 +6,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './carousel-modal.component.html',
   styleUrls: ['./carousel-modal.component.css']
 })
-export class CarouselModalComponent implements OnInit {
+export class CarouselModalComponent {
   @Input() images: string[];
   constructor(public activeModal: NgbActiveModal) {}
 
-  ngOnInit() {}
 }

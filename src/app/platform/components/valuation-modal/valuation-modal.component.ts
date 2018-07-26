@@ -1,25 +1,16 @@
-import { HotelOptionQuote } from './../../../core/interfaces/hotel-option-quote';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Option } from 'app/core/interfaces/option';
+import { Option, HotelOptionQuote, Criteria, HotelBookInput, BookingPaxes, BookingRoom, Search } from 'app/core/interfaces';
 import { SearchService } from 'app/core/services/search.service';
-import { Criteria } from 'app/core/interfaces/criteria';
-import { HubService } from 'app/core/services/hub.service';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 import { FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
-import { HotelBookInput } from 'app/core/interfaces/hotel-book-input';
-import { BookingPaxes } from 'app/core/interfaces/booking-paxes';
-import { BookingRoom } from 'app/core/interfaces/booking-room';
 import { Router } from '@angular/router';
-import { Search } from 'app/core/interfaces/search';
 import { BookingService } from 'app/core/services/booking.service';
 import { formatHoursToDaysHours } from 'app/shared/utilities/functions';
 import { environment } from 'environments/environment';
 import { HotelInfoDetail } from 'app/core/interfaces/hotel-info/hotel-info-detail';
 import { RqModalComponent } from '../../../shared/components/rq-modal/rq-modal.component';
 import { RsModalComponent } from '../../../shared/components/rs-modal/rs-modal.component';
-import { NotificationService } from '../../../shared/services/notification.service';
-import { SpinnerService } from '../../../shared/services/spinner.service';
 
 @Component({
   selector: 'b2b-valuation-modal',
@@ -43,11 +34,8 @@ export class ValuationModalComponent implements OnInit, OnDestroy {
   constructor(
     public activeModal: NgbActiveModal,
     private modalService: NgbModal,
-    private hubService: HubService,
     private searchService: SearchService,
-    private notificationService: NotificationService,
     private router: Router,
-    private spinnerService: SpinnerService,
     private bookingService: BookingService
   ) {}
 
@@ -196,46 +184,42 @@ export class ValuationModalComponent implements OnInit, OnDestroy {
    * Opens modal to show last request made of hotel type
    */
   showRequest() {
-    if (sessionStorage.getItem('interceptedRequest')) {
-      const modalRef = this.modalService.open(RqModalComponent, {
-        size: 'lg',
-        keyboard: false,
-        backdrop: 'static'
-      });
+    const modalRef = this.modalService.open(RqModalComponent, {
+      size: 'lg',
+      keyboard: false,
+      backdrop: 'static'
+    });
 
-      modalRef.componentInstance.input = 'quoteRQ';
-      modalRef.result
-        .then(res => {
-          // https://github.com/ng-bootstrap/ng-bootstrap/issues/643#issuecomment-306256651
-          document.body.classList.add('modal-open');
-        })
-        .catch(err => {
-          document.body.classList.add('modal-open');
-        });
-    }
+    modalRef.componentInstance.input = 'quote';
+    modalRef.result
+      .then(res => {
+        // https://github.com/ng-bootstrap/ng-bootstrap/issues/643#issuecomment-306256651
+        document.body.classList.add('modal-open');
+      })
+      .catch(err => {
+        document.body.classList.add('modal-open');
+      });
   }
 
   /**
    * Opens modal to show last response got form hotel request
    */
   showResponse() {
-    if (sessionStorage.getItem('storedResponses')) {
-      const modalRef = this.modalService.open(RsModalComponent, {
-        size: 'lg',
-        keyboard: false,
-        backdrop: 'static'
-      });
+    const modalRef = this.modalService.open(RsModalComponent, {
+      size: 'lg',
+      keyboard: false,
+      backdrop: 'static'
+    });
 
-      modalRef.componentInstance.book = 'quoteRS';
-      modalRef.result
-        .then(res => {
-          // https://github.com/ng-bootstrap/ng-bootstrap/issues/643#issuecomment-306256651
-          document.body.classList.add('modal-open');
-        })
-        .catch(err => {
-          document.body.classList.add('modal-open');
-        });
-    }
+    modalRef.componentInstance.book = 'quote';
+    modalRef.result
+      .then(res => {
+        // https://github.com/ng-bootstrap/ng-bootstrap/issues/643#issuecomment-306256651
+        document.body.classList.add('modal-open');
+      })
+      .catch(err => {
+        document.body.classList.add('modal-open');
+      });
   }
 
   /**

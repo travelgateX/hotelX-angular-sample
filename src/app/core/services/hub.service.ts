@@ -1,31 +1,12 @@
-import { Subject } from 'rxjs/Subject';
 import { Injectable } from '@angular/core';
 import { Apollo, QueryRef } from 'apollo-angular';
-import gql from 'graphql-tag';
-
-import { CriteriaSearch } from 'app/core/interfaces/criteria-search';
-import { HotelInfo } from 'app/core/interfaces/hotel-info';
-import { hotelInfo } from '../graphQL/result-bookings/queries/hotel-info';
-import { HotelAvail } from 'app/core/interfaces/hotel-avail';
-import { avail } from '../graphQL/result-bookings/queries/availability'
-import { HotelBookInput } from 'app/core/interfaces/hotel-book-input';
-import { Observable } from 'rxjs/Observable';
-import { Subscriber } from 'rxjs/Subscriber';
-import { ApolloQueryResult } from 'apollo-client';
-import { Access } from 'app/core/interfaces/access';
-import { CriteriaBooking } from '../interfaces/criteria-booking';
-import { CancelBooking } from '../interfaces/cancel-booking';
+import { hotelInfo, avail, quote } from '../graphQL/result-bookings/queries';
+import { Observable } from 'rxjs';
 import { cancelBooking } from '../graphQL/my-bookings/mutations/cancel-booking';
-import { quote } from '../graphQL/result-bookings/queries/quote';
 import { booking } from '../graphQL/my-bookings/queries/booking';
 import { book } from '../graphQL/close-bookings/mutations/book';
-import { suppliersAccesses } from '../graphQL/shared/queries/suppliers-accesses';
-import { destinationSearcher } from '../graphQL/shared/queries/destination-searcher';
-import { boards } from '../graphQL/shared/queries/boards';
-import { categories } from '../graphQL/shared/queries/categories';
-import { hotelCodesFromDestination } from '../graphQL/shared/queries/hotel-codes-from-destination';
-import { clients } from '../graphQL/shared/queries/clients';
-import { Client } from '../interfaces/client';
+import { suppliersAccesses, destinationSearcher, boards, categories, hotelCodesFromDestination, clients } from '../graphQL/shared/queries';
+import { Access, Client, CriteriaBooking, CancelBooking, HotelBookInput, HotelAvail, CriteriaSearch } from '../interfaces';
 
 /**
  * Handles availability, quote and book requests to the Gateway
@@ -89,7 +70,7 @@ export class HubService {
     const accessCodes = access.map(res => res.code);
     return this.apollo.watchQuery<any>({
       query: avail,
-      variables: { criteria: criteria, access: accessCodes, context: context, client: client },
+      variables: { criteria: criteria, settings: { context: context, client: client }, access: accessCodes },
       fetchPolicy: 'network-only'
     });
   }

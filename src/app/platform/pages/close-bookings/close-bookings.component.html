@@ -5,7 +5,7 @@
         <div class="mo-tit-section">
 
           <div *ngIf="!(loading$ | async); else noLoading">
-            <h4 [ngSwitch]="book.booking?.status">
+            <h4 [ngSwitch]="book?.booking?.status">
               <div *ngSwitchCase="'OK'">
                 <span class="lnr lnr-checkmark-circle"></span>
                 <strong i18n="@@book-success">Booking success!</strong>

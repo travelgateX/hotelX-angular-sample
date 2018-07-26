@@ -1,11 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Access } from 'app/core/interfaces/access';
-import { Supplier } from '../interfaces/supplier';
-import { Currency } from 'app/core/interfaces/currency';
-import { Language } from 'app/core/interfaces/language';
-import { Market } from 'app/core/interfaces/market';
-import { Client } from '../interfaces/client';
+import { Access, Supplier, Currency, Language, Market, Client } from 'app/core/interfaces';
 
 @Injectable()
 export class WebConfigService {

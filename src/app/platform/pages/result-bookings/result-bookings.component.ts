@@ -1,22 +1,14 @@
-import { HotelAvail } from './../../../core/interfaces/hotel-avail';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Criteria } from 'app/core/interfaces/criteria';
-import { CriteriaSearch } from 'app/core/interfaces/criteria-search';
-import { HotelInfo } from 'app/core/interfaces/hotel-info';
-import { Option } from 'app/core/interfaces/option';
-import { Search } from 'app/core/interfaces/search';
+import { Criteria, HotelAvail, CriteriaSearch, HotelInfo, Option, Search, Access, Board, Category, Client } from 'app/core/interfaces';
 import { BookingService } from 'app/core/services/booking.service';
 import { HubService } from 'app/core/services/hub.service';
 import { SearchService } from 'app/core/services/search.service';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 import { environment } from 'environments/environment';
 import { LangService } from './../../../core/services/lang.service';
 import { EditCriteriaModalComponent } from './../../components/edit-criteria-modal/edit-criteria-modal.component';
 import { HotelInfoDetail } from 'app/core/interfaces/hotel-info/hotel-info-detail';
-import { Access } from '../../../core/interfaces/access';
-import { Board } from 'app/core/interfaces/board';
-import { Category } from 'app/core/interfaces/category';
 import { WebConfigService } from '../../../core/services/web-config.service';
 import { RqModalComponent } from '../../../shared/components/rq-modal/rq-modal.component';
 import { RsModalComponent } from '../../../shared/components/rs-modal/rs-modal.component';
@@ -24,7 +16,6 @@ import { AlertService } from '../../../shared/services/alert.service';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { RequestStorageService } from '../../../shared/services/request-storage.service';
 import { SpinnerService } from '../../../shared/services/spinner.service';
-import { Client } from '../../../core/interfaces/client';
 
 @Component({
   selector: 'b2b-result-bookings',
@@ -91,7 +82,6 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
     this.errorSubscription = this.alertService.error$.subscribe(err => {
       // In this page, we should only display errors from search and quote
       this.errors = err.filter(e => e.name === 'Hotel' || e.name === 'Quote');
-      console.log(this.errors);
     });
 
     this.warningSubscription = this.alertService.warning$.subscribe(warning => {
@@ -139,8 +129,8 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
    * Check that criteria has hotels and in case it has, executes an availability request
    */
   getAvailability() {
+    this.requestStorageService.setCurrentType('hotel');
     this.clearFilter();
-    const lang = this.langService.getLang();
     this.searchService.transform(this.criteria).then(hotelCriteriaSearch => {
       if (this.criteria.items.length) {
         this.subscriptions$[1] = this.hubService
@@ -152,10 +142,8 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
           )
           .valueChanges.subscribe(
             res => {
+              this.requestStorageService.storeRequestResponse(false, res);
               const response = res.data.hotelX.search;
-
-              this.requestStorageService.storeResponse('hotelRS', response);
-
               if (response) {
                 this.alertService.setAlertMultiple(
                   'Hotel',
@@ -311,30 +299,26 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
    * Opens modal to show last request made of hotel type
    */
   showRequest() {
-    if (sessionStorage.getItem('interceptedRequest')) {
-      const modalRef = this.modalService.open(RqModalComponent, {
-        size: 'lg',
-        keyboard: false,
-        backdrop: 'static'
-      });
+    const modalRef = this.modalService.open(RqModalComponent, {
+      size: 'lg',
+      keyboard: false,
+      backdrop: 'static'
+    });
 
-      modalRef.componentInstance.input = 'hotelRQ';
-    }
+    modalRef.componentInstance.input = 'hotel';
   }
 
   /**
    * Opens modal to show last response got form hotel request
    */
   showResponse() {
-    if (sessionStorage.getItem('storedResponses')) {
-      const modalRef = this.modalService.open(RsModalComponent, {
-        size: 'lg',
-        keyboard: false,
-        backdrop: 'static'
-      });
+    const modalRef = this.modalService.open(RsModalComponent, {
+      size: 'lg',
+      keyboard: false,
+      backdrop: 'static'
+    });
 
-      modalRef.componentInstance.book = 'hotelRS';
-    }
+    modalRef.componentInstance.book = 'hotel';
   }
 
   /**

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Currency } from 'app/core/interfaces/currency';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class CurrencySelectorService {

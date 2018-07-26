@@ -1,6 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Client } from '../../../../core/interfaces/client';
-import { HubService } from '../../../../core/services/hub.service';
 import { WebConfigService } from '../../../../core/services/web-config.service';
 import { ClientSelectorService } from './client-selector.service';
 
@@ -15,7 +14,6 @@ export class ClientSelectorComponent implements OnInit {
   clientSelected: string;
   showErrorClients: boolean;
   constructor(
-    private hubService: HubService,
     private webConfigService: WebConfigService,
     private clientSelectorService: ClientSelectorService
   ) {}

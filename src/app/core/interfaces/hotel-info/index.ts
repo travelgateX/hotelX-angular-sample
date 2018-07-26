@@ -1,0 +1,9 @@
+export { HotelInfoAmenity } from "./amenity";
+export { HotelInfoContact } from "./contact";
+export { HotelInfoDescription } from "./description";
+export { HotelInfoDestination } from "./destination";
+export { HotelInfoGeocode } from "./geocode";
+export { HotelInfoDetail } from "./hotel-info-detail";
+export { HotelInfoInformation } from "./information";
+export { HotelInfoLocation } from "./location";
+export { HotelInfoMedia } from "./media";

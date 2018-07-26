@@ -1,27 +1,20 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HubService } from 'app/core/services/hub.service';
-import { CriteriaBooking } from 'app/core/interfaces/criteria-booking';
-import { LangService } from '../../../core/services/lang.service';
+import { CriteriaBooking, Access, Board, Client } from 'app/core/interfaces';
 import { BookingCriteriaType } from '../../../core/enumerates/booking-criteria-type';
-import { CriteriaBookingReference } from 'app/core/interfaces/criteria-booking-reference';
-import { CriteriaBookingDates } from 'app/core/interfaces/criteria-booking-dates';
-import { Access } from 'app/core/interfaces/access';
 import {
   getDisabled,
   enumToArray,
   decideClosure
 } from '../../../shared/utilities/functions';
-import { CancelBooking } from '../../../core/interfaces/cancel-booking';
 import { BookingCriteriaDateType } from 'app/core/enumerates/booking-criteria-date-type';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
-  NgbInputDatepicker,
   NgbCalendar,
   NgbDateParserFormatter,
   NgbModal
 } from '@ng-bootstrap/ng-bootstrap';
-import { Board } from 'app/core/interfaces/board';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 import { CurrencySelectorService } from 'app/shared/components/selectors/currency-selector/currency-selector.service';
 import { RqModalComponent } from '../../../shared/components/rq-modal/rq-modal.component';
 import { RsModalComponent } from '../../../shared/components/rs-modal/rs-modal.component';
@@ -29,7 +22,6 @@ import { LanguageSelectorService } from '../../../shared/components/selectors/la
 import { AlertService } from 'app/shared/services/alert.service';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { RequestStorageService } from '../../../shared/services/request-storage.service';
-import { Client } from '../../../core/interfaces/client';
 import { ClientSelectorService } from '../../../shared/components/selectors/client-selector/client-selector.service';
 import { SpinnerService } from '../../../shared/services/spinner.service';
 import { SupplierAccessesService } from '../../components/supplier-accesses/supplier-accesses.service';
@@ -41,7 +33,7 @@ import { SupplierAccessesService } from '../../components/supplier-accesses/supp
 })
 export class MyBookingsComponent implements OnInit, OnDestroy {
   accessesToSearch: Access[];
-  configInputsHidden: boolean = true;
+  configInputsHidden = true;
   criteriaBooking: CriteriaBooking;
   myBookingForm: FormGroup;
   getDisabled = getDisabled;
@@ -63,7 +55,6 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
 
   constructor(
     private hubService: HubService,
-    private langService: LangService,
     private notificationService: NotificationService,
     private fb: FormBuilder,
     public calendar: NgbCalendar,
@@ -75,7 +66,7 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
     private alertService: AlertService,
     private clientSelectorService: ClientSelectorService,
     private supplierAccessesService: SupplierAccessesService,
-    private spinnerService: SpinnerService
+    private spinnerService: SpinnerService,
   ) {}
 
   ngOnInit() {
@@ -166,6 +157,7 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
   }
 
   getMyBookings(criteriaBooking: CriteriaBooking) {
+    this.requestStorageService.setCurrentType('myBookings');
     this.criteriaBooking = criteriaBooking;
     this.loading = true;
     this.bookings = null;
@@ -173,9 +165,9 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
       .getMyBookings(criteriaBooking, this.client)
       .valueChanges.subscribe(
         res => {
+          this.requestStorageService.storeRequestResponse(false, res);
           this.loading = false;
           this.bookings = [];
-          this.requestStorageService.storeResponse('myBookingsRS', res);
           if (res.data && res.data.hotelX && res.data.hotelX.booking) {
             const booking = res.data.hotelX.booking;
 
@@ -255,30 +247,26 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
    * Opens modal to show last request made of myBookings type
    */
   showRequest(booking = false) {
-    if (sessionStorage.getItem('interceptedRequest')) {
-      const modalRef = this.modalService.open(RqModalComponent, {
-        size: 'lg',
-        keyboard: false,
-        backdrop: 'static'
-      });
+    const modalRef = this.modalService.open(RqModalComponent, {
+      size: 'lg',
+      keyboard: false,
+      backdrop: 'static'
+    });
 
-      modalRef.componentInstance.input = 'myBookingsRQ';
-    }
+    modalRef.componentInstance.input = 'myBookings';
   }
 
   /**
    * Opens modal to show last response got form myBookings request
    */
   showResponse(booking = false) {
-    if (sessionStorage.getItem('storedResponses')) {
-      const modalRef = this.modalService.open(RsModalComponent, {
-        size: 'lg',
-        keyboard: false,
-        backdrop: 'static'
-      });
+    const modalRef = this.modalService.open(RsModalComponent, {
+      size: 'lg',
+      keyboard: false,
+      backdrop: 'static'
+    });
 
-      modalRef.componentInstance.book = 'myBookingsRS';
-    }
+    modalRef.componentInstance.book = 'myBookings';
   }
 
   decideIfClose(event, datepicker) {

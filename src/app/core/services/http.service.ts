@@ -1,10 +1,8 @@
-import { RequestOptionsArgs } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+
+import {throwError as observableThrowError,  Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw';
 
 /**
  * HTTP middleware which implements Auth0
@@ -19,7 +17,7 @@ export class HttpService {
    * @param body Object request
    */
   post(url: string, body: Object): Observable<any> {
-    return this.http.post(url, body).catch(this.handleError);
+    return this.http.post(url, body).pipe(catchError(this.handleError));
   }
 
   /**
@@ -27,7 +25,7 @@ export class HttpService {
    * @param url URL
    */
   delete(url: string, options?: any): Observable<any> {
-    return this.http.delete(url, options).catch(this.handleError);
+    return this.http.delete(url, options).pipe(catchError(this.handleError));
   }
 
   /**
@@ -45,7 +43,7 @@ export class HttpService {
    * @param body Object request
    */
   put(url: string, body?: Object): Observable<any> {
-    return this.http.put(url, body).catch(this.handleError);
+    return this.http.put(url, body).pipe(catchError(this.handleError));
   }
 
   /**
@@ -59,6 +57,6 @@ export class HttpService {
     } else {
       errMsg = e.message ? e.message : e.toString();
     }
-    return Observable.throw(errMsg);
+    return observableThrowError(errMsg);
   }
 }

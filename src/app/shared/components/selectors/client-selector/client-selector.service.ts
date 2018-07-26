@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Client } from '../../../../core/interfaces/client';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { BehaviorSubject ,  Subject } from 'rxjs';
 import { HubService } from '../../../../core/services/hub.service';
-import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class ClientSelectorService {
@@ -14,7 +13,7 @@ export class ClientSelectorService {
   constructor(private hubService: HubService) {}
 
   getClients() {
-    let clients = [];
+    const clients = [];
     this.hubService.getClients().valueChanges.subscribe(res => {
       if (res) {
         res.data.admin.clients.edges.map(edge => {

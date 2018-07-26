@@ -12,8 +12,8 @@ export class CancelPoliciesTableComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log("eu");
-    this.cancelPenalties.sort(function(a, b) {
+    let cancelPenaltiesAux = [...this.cancelPenalties]
+    cancelPenaltiesAux.sort(function(a, b) {
       return b.hoursBefore - a.hoursBefore || a.value - b.value
     })
   }

@@ -1,6 +1,6 @@
 import { AuthService } from './../../../core/services/auth.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 import { environment } from 'environments/environment';
 
 @Component({

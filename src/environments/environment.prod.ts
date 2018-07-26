@@ -22,8 +22,6 @@ export const auth0Config = {
 export const environment = {
   production: true,
   languages: ['en', 'es'],
-  // function: 'http://localhost:5000/smyrooms-b2b-dev/us-central1/',
-  function: 'https://us-central1-smyrooms-b2b-dev.cloudfunctions.net/',
   googleMapsKey: 'AIzaSyDnnHGVUJJCRIzFTmRwdASd60QnQi2L7LY',
   organization: {
     code: 'tgx',

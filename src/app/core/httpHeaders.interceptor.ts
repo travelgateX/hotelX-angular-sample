@@ -5,8 +5,7 @@ import {
   HttpRequest,
   HttpHeaders
 } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { RequestStorageService } from '../shared/services/request-storage.service';
 
@@ -22,11 +21,12 @@ export class HttpHeadersInterceptor implements HttpInterceptor {
       Authorization: 'Bearer ' + localStorage.getItem('token'),
       'Content-Type': 'application/json'
     });
-
-    this.requestStorageService.storeRequest(req);
-
     const cloneReq = req.clone({ headers });
-
+    const requestToStore = {
+      bearer: 'Bearer ' + localStorage.getItem('token'),
+      rq: cloneReq
+    };
+    this.requestStorageService.storeRequestResponse(requestToStore, false);
     return next.handle(cloneReq);
   }
 }
