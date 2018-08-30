@@ -28,6 +28,9 @@ export class RequestStorageService {
    */
   storeRequestResponse(req, res) {
     const type = sessionStorage.getItem('currentRequestType');
+    if (!type) {
+      return;
+    }
     if (type && req) {
       const clone = JSON.parse(JSON.stringify(req));
       this.indexedDbService.saveData(this.tableRequests, type, clone);
@@ -42,5 +45,4 @@ export class RequestStorageService {
   setCurrentType(value) {
     sessionStorage.setItem('currentRequestType', value);
   }
-
 }

@@ -21,6 +21,7 @@ export class HttpHeadersInterceptor implements HttpInterceptor {
       Authorization: 'Bearer ' + localStorage.getItem('token'),
       'Content-Type': 'application/json'
     });
+
     const cloneReq = req.clone({ headers });
     const requestToStore = {
       bearer: 'Bearer ' + localStorage.getItem('token'),

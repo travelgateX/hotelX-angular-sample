@@ -190,6 +190,7 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
    * @param response code of the hotels availables
    */
   getHotelsDetailInfo(response) {
+    this.requestStorageService.setCurrentType(false);
     const hotelsMap = new Map<string, string>();
     response.options.forEach(option => {
       if (!hotelsMap.has(option.hotelCode)) {
