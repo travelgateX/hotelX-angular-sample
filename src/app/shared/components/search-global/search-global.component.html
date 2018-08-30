@@ -1,5 +1,5 @@
-<div style="width: 100%" (document:click)="decideClosure($event)" class="dropdown-root">
-  <div [ngClass]="{'whiteBackground' : !disabled}" style="width: 100%">
+<div  (document:click)="decideClosure($event)" class="dropdown-root">
+  <div [ngClass]="{'white-background' : !disabled}">
     <div *ngFor="let item of selectedItems; let i = index" class="selected-item" [ngClass]="{'tb-removed': item.toBeRemoved}">
       <span class="mr-2" (click)="removeItem(i)">
         <i class="fa fa-times"></i>
@@ -10,7 +10,7 @@
     <input type="text" id="inputSearch" [(ngModel)]="searchValue" #inputSearch (keyup)="onKeyupFilter(inputSearch.value, $event)"
       (keydown)="selectActionByKey($event)" class="form-control w-100" placeholder="..." [disabled]="!itemData || disabled">
   </div>
-  <div style="background: white; width: 100%;">
+  <div class="white-background">
     <div #dropdownElem class="custom-dropdown hidden" [@dropdown]="hiddenDropdown">
       <div *ngFor="let collection of collections">
         <div class="dropdown-item tit pb-1">
