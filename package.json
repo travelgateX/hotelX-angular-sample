@@ -11,12 +11,12 @@
     "e2e": "ng e2e",
     "lang:es": "ng serve --configuration=es",
     "lang:en": "ng serve --configuration=en",
-    "build:i18n:tgx": "npm run build:i18n:tgx:en && npm run build:i18n:tgx:es",
-    "build:i18n:tgx:en": "ng build --output-path=dist/en --aot --base-href /en/ --i18n-file=src/i18n/messages.travelgatex.en.xlf --i18n-format=xlf --i18n-locale=en",
-    "build:i18n:tgx:es": "ng build --output-path=dist/es --aot --base-href /es/ --i18n-file=src/i18n/messages.travelgatex.es.xlf --i18n-format=xlf --i18n-locale=es",
-    "build:i18n:tgx:prod": "npm run build:i18n:tgx:prod:en && npm run build:i18n:tgx:prod:es",
-    "build:i18n:tgx:prod:en": "ng build --output-path=dist/en --aot --prod --base-href /en/ --i18n-file=src/i18n/messages.travelgatex.en.xlf --i18n-format=xlf --i18n-locale=en",
-    "build:i18n:tgx:prod:es": "ng build --output-path=dist/es --aot --prod --base-href /es/ --i18n-file=src/i18n/messages.travelgatex.es.xlf --i18n-format=xlf --i18n-locale=es"
+    "build:i18n": "npm run build:i18n:en && npm run build:i18n:es",
+    "build:i18n:en": "ng build --output-path=dist/en --aot --base-href /en/ --i18n-file=src/i18n/messages.travelgatex.en.xlf --i18n-format=xlf --i18n-locale=en",
+    "build:i18n:es": "ng build --output-path=dist/es --aot --base-href /es/ --i18n-file=src/i18n/messages.travelgatex.es.xlf --i18n-format=xlf --i18n-locale=es",
+    "build:i18n:prod": "npm run build:i18n:prod:en && npm run build:i18n:prod:es",
+    "build:i18n:prod:en": "ng build --output-path=dist/en --aot --prod --base-href /en/ --i18n-file=src/i18n/messages.travelgatex.en.xlf --i18n-format=xlf --i18n-locale=en",
+    "build:i18n:prod:es": "ng build --output-path=dist/es --aot --prod --base-href /es/ --i18n-file=src/i18n/messages.travelgatex.es.xlf --i18n-format=xlf --i18n-locale=es"
   },
   "private": true,
   "dependencies": {
