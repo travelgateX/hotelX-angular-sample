@@ -2516,7 +2516,7 @@ tbody.collapse.show {
     cursor: not-allowed;
     background-color: transparent; }
 
-.show > .dropdown-menu {
+.show > .dropdown-menu, .show.dropdown-menu{
   display: block; }
 
 .show > a {

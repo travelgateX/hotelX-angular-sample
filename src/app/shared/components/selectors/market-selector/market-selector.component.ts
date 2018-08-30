@@ -12,7 +12,8 @@ import { WebConfigService } from '../../../../core/services/web-config.service';
   styleUrls: ['./market-selector.component.css']
 })
 export class MarketSelectorComponent implements OnInit {
-  @Input() disabled: Boolean;
+  @Input()
+  disabled: Boolean;
   market: Market = {
     iso_code: 'es',
     country_name: 'Spain'
@@ -38,27 +39,26 @@ export class MarketSelectorComponent implements OnInit {
   }
 
   marketFilter = (text$: Observable<string>) =>
-    text$
-      .pipe(debounceTime(250))
-      .pipe(distinctUntilChanged())
-      .pipe(
-        map(
-          term =>
-            term === ''
-              ? []
-              : this.markets.filter(item => {
-                  const name =
-                    item.country_name
-                      .toLowerCase()
-                      .indexOf(term.toLowerCase()) !== -1;
+    text$.pipe(
+      debounceTime(250),
+      distinctUntilChanged(),
+      map(
+        term =>
+          term === ''
+            ? []
+            : this.markets.filter(item => {
+                const name =
+                  item.country_name
+                    .toLowerCase()
+                    .indexOf(term.toLowerCase()) !== -1;
 
-                  return (
-                    item.iso_code.toLowerCase().indexOf(term.toLowerCase()) !==
-                      -1 || name
-                  );
-                })
-        )
-      );
+                return (
+                  item.iso_code.toLowerCase().indexOf(term.toLowerCase()) !==
+                    -1 || name
+                );
+              })
+      )
+    );
 
   /**
    * We pass the name target due to a we cannot have objects on NgModel yet and we
