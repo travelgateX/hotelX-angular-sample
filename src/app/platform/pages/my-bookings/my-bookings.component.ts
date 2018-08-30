@@ -66,7 +66,7 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
     private alertService: AlertService,
     private clientSelectorService: ClientSelectorService,
     private supplierAccessesService: SupplierAccessesService,
-    private spinnerService: SpinnerService,
+    private spinnerService: SpinnerService
   ) {}
 
   ngOnInit() {
@@ -143,7 +143,14 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
   }
 
   checkLength() {
-    if (this.clientSP > 1 || this.supplierSP > 1) {
+    if (
+      this.clientSP &&
+      this.supplierSP &&
+      (this.clientSP > 1 ||
+        this.supplierSP > 1 ||
+        this.clientSP < 1 ||
+        this.supplierSP < 1)
+    ) {
       this.configInputsHidden = false;
     }
 
@@ -206,10 +213,12 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
   searchByDate(value) {
     const criteriaBooking: CriteriaBooking = JSON.parse(JSON.stringify(value));
     delete criteriaBooking.references;
-    criteriaBooking.dates.start = this.dateFormatter.format(<any>criteriaBooking
-      .dates.start);
-    criteriaBooking.dates.end = this.dateFormatter.format(<any>criteriaBooking
-      .dates.end);
+    criteriaBooking.dates.start = this.dateFormatter.format(<any>(
+      criteriaBooking.dates.start
+    ));
+    criteriaBooking.dates.end = this.dateFormatter.format(<any>(
+      criteriaBooking.dates.end
+    ));
     this.getMyBookings(criteriaBooking);
   }
 

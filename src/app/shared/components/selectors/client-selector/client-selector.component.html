@@ -1,7 +1,7 @@
 <div class="form-group">
   <label>
     <span i18n="@@client">Client</span>:</label>
-  <select class="form-control" [(ngModel)]="clientSelected" name="clientSelected" (change)=onClientSelected() [disabled]="!clients || clients.length === 0">
+  <select class="form-control" [(ngModel)]="clientSelected" name="clientSelected" (change)=onClientSelected()>
     <option *ngFor="let client of clients" [value]="client.code">{{client.name}}</option>
   </select>
   <p *ngIf="showErrorClients" i18n="@@no-clients">There aren't clients available</p>

@@ -13,7 +13,14 @@ import {
   NgbTypeaheadConfig,
   NgbDateParserFormatter
 } from '@ng-bootstrap/ng-bootstrap';
-import { Criteria, Distribution, Pax, Access, Country, Client } from 'app/core/interfaces';
+import {
+  Criteria,
+  Distribution,
+  Pax,
+  Access,
+  Country,
+  Client
+} from 'app/core/interfaces';
 import { BookingService } from 'app/core/services/booking.service';
 import { SearchService } from 'app/core/services/search.service';
 import { Observable, Subscription } from 'rxjs';
@@ -44,9 +51,12 @@ import { SpinnerService } from '../../../shared/services/spinner.service';
   ]
 })
 export class AvailabilityComponent implements OnInit, OnDestroy {
-  @Output() output = new EventEmitter();
-  @Input() bordered: boolean;
-  @Input() isEdit: boolean;
+  @Output()
+  output = new EventEmitter();
+  @Input()
+  bordered: boolean;
+  @Input()
+  isEdit: boolean;
   dropdownOffset = '44 6';
   private maNumRooms = 6;
   accessesToSearch: Access[];
@@ -181,7 +191,15 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
   }
 
   checkLength() {
-    if (this.clientSP > 1 || this.supplierSP > 1) {
+    console.log(this.clientSP, this.supplierSP);
+    if (
+      this.clientSP &&
+      this.supplierSP &&
+      (this.clientSP > 1 ||
+        this.supplierSP > 1 ||
+        this.clientSP < 1 ||
+        this.supplierSP < 1)
+    ) {
       this.configInputsHidden = false;
     }
 
