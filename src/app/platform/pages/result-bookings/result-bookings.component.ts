@@ -137,8 +137,11 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
           .getAvailability(
             hotelCriteriaSearch,
             this.access,
-            this.context,
-            this.client.name
+            {
+              context: this.context,
+              client: this.client.name,
+              testMode: this.access[0].isTest
+            }
           )
           .valueChanges.subscribe(
             res => {

@@ -25,6 +25,7 @@ import { RequestStorageService } from '../../../shared/services/request-storage.
 import { ClientSelectorService } from '../../../shared/components/selectors/client-selector/client-selector.service';
 import { SpinnerService } from '../../../shared/services/spinner.service';
 import { SupplierAccessesService } from '../../components/supplier-accesses/supplier-accesses.service';
+import { WebConfigService } from '../../../core/services/web-config.service';
 
 @Component({
   selector: 'b2b-my-bookings',
@@ -66,7 +67,8 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
     private alertService: AlertService,
     private clientSelectorService: ClientSelectorService,
     private supplierAccessesService: SupplierAccessesService,
-    private spinnerService: SpinnerService
+    private spinnerService: SpinnerService,
+    private webConfigService: WebConfigService
   ) {}
 
   ngOnInit() {
@@ -169,7 +171,11 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.bookings = null;
     this.hubService
-      .getMyBookings(criteriaBooking, this.client)
+      .getMyBookings(criteriaBooking, {
+        client: this.webConfigService.getClient().name,
+        auditTransactions: true,
+        testMode: this.webConfigService.getAccess().isTest
+      })
       .valueChanges.subscribe(
         res => {
           this.requestStorageService.storeRequestResponse(false, res);

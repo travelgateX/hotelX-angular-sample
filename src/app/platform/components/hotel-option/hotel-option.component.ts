@@ -125,8 +125,12 @@ export class HotelOptionComponent implements OnInit, OnDestroy, OnChanges {
       .getQuote(
         option.id,
         lang,
-        this.context,
-        this.webConfigService.getClient()
+        {
+          context: this.context,
+          client: this.webConfigService.getClient().name,
+          testMode: this.webConfigService.getAccess().isTest,
+          auditTransactions: true
+        }
       )
       .valueChanges.subscribe(
         res => {

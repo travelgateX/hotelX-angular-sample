@@ -5,7 +5,14 @@ import {
   Output,
   EventEmitter
 } from '@angular/core';
-import { CancelBooking, Board, HotelBookingDetail, Price, Client, CriteriaBooking } from 'app/core/interfaces';
+import {
+  CancelBooking,
+  Board,
+  HotelBookingDetail,
+  Price,
+  Client,
+  CriteriaBooking
+} from 'app/core/interfaces';
 import { HubService } from '../../../../core/services/hub.service';
 import { WebConfigService } from 'app/core/services/web-config.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -27,11 +34,16 @@ import { SpinnerService } from '../../../../shared/services/spinner.service';
   styleUrls: ['./my-bookings-table.component.css']
 })
 export class MyBookingsTableComponent implements OnChanges {
-  @Input() bookings: HotelBookingDetail[];
-  @Input() boards: Board[];
-  @Input() client: Client;
-  @Input() criteriaBooking: CriteriaBooking;
-  @Output() spinnerStart: EventEmitter<boolean> = new EventEmitter();
+  @Input()
+  bookings: HotelBookingDetail[];
+  @Input()
+  boards: Board[];
+  @Input()
+  client: Client;
+  @Input()
+  criteriaBooking: CriteriaBooking;
+  @Output()
+  spinnerStart: EventEmitter<boolean> = new EventEmitter();
   environment = environment;
   ngbDateMomentParserFormatter: NgbDateMomentParserFormatter;
   bookingCriteriaType = BookingCriteriaType;
@@ -198,7 +210,11 @@ export class MyBookingsTableComponent implements OnChanges {
 
     this.spinnerStart.emit(true);
     const subscription = this.hubService
-      .getMyBookings(criteriaBooking, this.webConfigService.getClient())
+      .getMyBookings(criteriaBooking, {
+        client: this.webConfigService.getClient().name,
+        auditTransactions: true,
+        testMode: this.webConfigService.getAccess().isTest
+      })
       .valueChanges.subscribe(
         res => {
           this.spinnerService.stop();

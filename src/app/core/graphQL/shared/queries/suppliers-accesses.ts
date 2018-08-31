@@ -16,6 +16,7 @@ export const suppliersAccesses = gql`
                   accessData {
                     code
                     name
+                    isTest
                   }
                   error {
                     code

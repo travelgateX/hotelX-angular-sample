@@ -5,8 +5,24 @@ import { Observable } from 'rxjs';
 import { cancelBooking } from '../graphQL/my-bookings/mutations/cancel-booking';
 import { booking } from '../graphQL/my-bookings/queries/booking';
 import { book } from '../graphQL/close-bookings/mutations/book';
-import { suppliersAccesses, destinationSearcher, boards, categories, hotelCodesFromDestination, clients } from '../graphQL/shared/queries';
-import { Access, Client, CriteriaBooking, CancelBooking, HotelBookInput, HotelAvail, CriteriaSearch } from '../interfaces';
+import {
+  suppliersAccesses,
+  destinationSearcher,
+  boards,
+  categories,
+  hotelCodesFromDestination,
+  clients
+} from '../graphQL/shared/queries';
+import {
+  Access,
+  Client,
+  CriteriaBooking,
+  CancelBooking,
+  HotelBookInput,
+  HotelAvail,
+  CriteriaSearch
+} from '../interfaces';
+import { hotelSettingsInput } from '../interfaces/hotel-settings-input';
 
 /**
  * Handles availability, quote and book requests to the Gateway
@@ -64,13 +80,16 @@ export class HubService {
   getAvailability(
     criteria: CriteriaSearch,
     access: Access[],
-    context: string,
-    client: string
+    settings: hotelSettingsInput
   ): QueryRef<any> {
     const accessCodes = access.map(res => res.code);
     return this.apollo.watchQuery<any>({
       query: avail,
-      variables: { criteria: criteria, settings: { context: context, client: client }, access: accessCodes },
+      variables: {
+        criteria: criteria,
+        settings: settings,
+        access: accessCodes
+      },
       fetchPolicy: 'network-only'
     });
   }
@@ -83,16 +102,14 @@ export class HubService {
   getQuote(
     optionRefId: string,
     language: string,
-    context: string,
-    client: Client
+    settings: hotelSettingsInput
   ): QueryRef<any> {
     return this.apollo.watchQuery<any>({
       query: quote,
       variables: {
         optionRefId: optionRefId,
         language: language,
-        context: context,
-        client: client.name
+        settings: settings
       }
     });
   }
@@ -102,10 +119,13 @@ export class HubService {
    * @param input
    * @param context
    */
-  getBook(input: HotelBookInput, context: string, client: Client): Observable<any> {
+  getBook(
+    input: HotelBookInput,
+    settings: hotelSettingsInput
+  ): Observable<any> {
     return this.apollo.mutate({
       mutation: book,
-      variables: { input: input, context: context , client: client.name}
+      variables: { input: input, settings: settings }
     });
   }
 
@@ -113,10 +133,10 @@ export class HubService {
    * get the current bookings of an user
    * @param criteriaBooking
    */
-  getMyBookings(criteriaBooking: CriteriaBooking, client: Client) {
+  getMyBookings(criteriaBooking: CriteriaBooking, settings: hotelSettingsInput) {
     return this.apollo.watchQuery<any>({
       query: booking,
-      variables: { criteriaBooking: criteriaBooking, client: client.name },
+      variables: { criteriaBooking: criteriaBooking, settings: settings },
       fetchPolicy: 'network-only'
     });
   }
@@ -158,7 +178,6 @@ export class HubService {
     return this.apollo.watchQuery<any>({
       query: suppliersAccesses
     });
-
   }
   /**
    * Get the information of suppliers/accesses

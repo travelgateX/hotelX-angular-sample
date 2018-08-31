@@ -117,7 +117,7 @@ export class SupplierAccessesComponent implements OnInit {
     if (this.accessesToSearch.length !== 0) {
       this.webConfigService.setAccess(this.accessesToSearch[0]);
     } else {
-      this.webConfigService.setAccess({ code: '', name: '' });
+      this.webConfigService.setAccess({ code: '', name: '' , isTest: false});
     }
     this.accessesToSearchOutput.emit(this.accessesToSearch);
   }
