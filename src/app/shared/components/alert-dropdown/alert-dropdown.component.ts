@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import {
   trigger,
   state,
@@ -57,9 +57,11 @@ import {
     ])
   ]
 })
-export class AlertDropdownComponent implements OnInit {
-  @Input() errors: any[];
-  @Input() warnings: any[];
+export class AlertDropdownComponent implements OnInit, OnChanges {
+  @Input()
+  errors: any[];
+  @Input()
+  warnings: any[];
 
   shownItems: string;
   items: any[];
@@ -69,6 +71,18 @@ export class AlertDropdownComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  ngOnChanges(e) {
+    if (e) {
+      if (!(this.warnings || []).length && (this.items || []).length) {
+        this.items = this.items.filter(i => i.type !== 'warning');
+      }
+
+      if (!(this.errors || []).length && (this.items || []).length) {
+        this.items = this.items.filter(i => i.type !== 'error');
+      }
+    }
+  }
 
   toggleItems(type) {
     if (this.shownItems === type || this.shownItems === undefined) {
