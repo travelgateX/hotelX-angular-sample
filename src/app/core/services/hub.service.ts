@@ -42,6 +42,7 @@ export class HubService {
   transformAvailability(response, hotels: any[]): HotelAvail[] {
     const hotelsMap = new Map<string, HotelAvail>();
     response.options.forEach(option => {
+      console.log(option);
       if (!hotelsMap.has(option.hotelCode)) {
         hotelsMap.set(option.hotelCode, <HotelAvail>{
           info: hotels.filter(h => h.code === option.hotelCode)[0],

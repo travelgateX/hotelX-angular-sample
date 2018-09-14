@@ -899,6 +899,14 @@
         <source>Binding</source>
         <target>Vinculante</target>
       </trans-unit>
+      <trans-unit id="effective-date" datatype="html">
+        <source>Effective date</source>
+        <target>Fecha efectiva</target>
+      </trans-unit>
+      <trans-unit id="expire-date" datatype="html">
+        <source>Expire date</source>
+        <target>Fecha de caducidad</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

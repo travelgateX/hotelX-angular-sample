@@ -35,6 +35,7 @@ import { SupplierAccessesService } from './components/supplier-accesses/supplier
 import { MyBookingsDetailModalComponent } from './pages/my-bookings/my-bookings-detail/my-bookings-detail-modal.component';
 import { PriceTableComponent } from './components/price-table/price-table.component';
 import { CancelPoliciesTableComponent } from './components/cancel-policies-table/cancel-policies-table.component';
+import { RatePlansModalComponent } from './components/rate-plans-modal/rate-plans-modal.component';
 
 @NgModule({
   imports: [
@@ -71,7 +72,8 @@ import { CancelPoliciesTableComponent } from './components/cancel-policies-table
     MyBookingsTableComponent,
     MyBookingsDetailModalComponent,
     PriceTableComponent,
-    CancelPoliciesTableComponent
+    CancelPoliciesTableComponent,
+    RatePlansModalComponent
   ],
   entryComponents: [
     EditCriteriaModalComponent,
@@ -82,7 +84,8 @@ import { CancelPoliciesTableComponent } from './components/cancel-policies-table
     CarouselModalComponent,
     RsModalComponent,
     RqModalComponent,
-    MyBookingsDetailModalComponent
+    MyBookingsDetailModalComponent,
+    RatePlansModalComponent
   ],
   providers: [LoginGuard, SupplierAccessesService]
 })

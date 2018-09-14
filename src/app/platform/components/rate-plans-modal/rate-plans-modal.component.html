@@ -1,0 +1,26 @@
+<div class="modal-smy cancel-policy">
+  <button type="button" (click)="activeModal.close(false)" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">×</span>
+  </button>
+
+  <table class="tb-rate-plans table table-hover">
+
+    <thead>
+      <tr>
+        <th i18n="@@code">Code</th>
+        <th i18n="@@name">Name</th>
+        <th i18n="@@effective-date">Effective date</th>
+        <th i18n="@@expire-date">Expire date</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let ratePlan of ratePlans">
+        <td>{{ratePlan.code}}</td>
+        <td>{{ratePlan.name}}</td>
+        <td>{{ratePlan.effectiveDate}}</td>
+        <td>{{ratePlan.expireDate}}</td>
+    </tbody>
+
+  </table>
+</div>

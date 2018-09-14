@@ -1,7 +1,15 @@
 import { BindingModalComponent } from '../binding-modal/binding-modal.component';
 import { Component, Input, OnDestroy, OnInit, OnChanges } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { HotelAvail, HotelInfo, Option, Search, Criteria, Board, Price } from 'app/core/interfaces';
+import {
+  HotelAvail,
+  HotelInfo,
+  Option,
+  Search,
+  Criteria,
+  Board,
+  Price
+} from 'app/core/interfaces';
 import { BookingService } from 'app/core/services/booking.service';
 import { HubService } from 'app/core/services/hub.service';
 import { GoogleMapsModalComponent } from 'app/platform/components/google-maps-modal/google-maps-modal.component';
@@ -10,13 +18,17 @@ import { Subscription } from 'rxjs';
 import { environment } from 'environments/environment';
 import { LangService } from './../../../core/services/lang.service';
 import { CancelPolicyModalComponent } from './../cancel-policy-modal/cancel-policy-modal.component';
-import { HotelInfoDetail, HotelInfoGeocode } from 'app/core/interfaces/hotel-info/';
+import {
+  HotelInfoDetail,
+  HotelInfoGeocode
+} from 'app/core/interfaces/hotel-info/';
 import { CarouselModalComponent } from 'app/platform/components/carousel-modal/carousel-modal/carousel-modal.component';
 import { AlertService } from 'app/shared/services/alert.service';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { RequestStorageService } from '../../../shared/services/request-storage.service';
 import { SpinnerService } from '../../../shared/services/spinner.service';
 import { WebConfigService } from '../../../core/services/web-config.service';
+import { RatePlansModalComponent } from '../rate-plans-modal/rate-plans-modal.component';
 
 @Component({
   selector: 'b2b-hotel-option',
@@ -24,12 +36,18 @@ import { WebConfigService } from '../../../core/services/web-config.service';
   styleUrls: ['./hotel-option.component.css']
 })
 export class HotelOptionComponent implements OnInit, OnDestroy, OnChanges {
-  @Input() hotel: HotelAvail;
-  @Input() hotelDetailInfo: HotelInfoDetail;
-  @Input() search: Search;
-  @Input() criteria: Criteria;
-  @Input() mealplansAvailable: Board[];
-  @Input() context: string;
+  @Input()
+  hotel: HotelAvail;
+  @Input()
+  hotelDetailInfo: HotelInfoDetail;
+  @Input()
+  search: Search;
+  @Input()
+  criteria: Criteria;
+  @Input()
+  mealplansAvailable: Board[];
+  @Input()
+  context: string;
   private subscriptions$: Subscription[];
   imageErrors: Object[];
   const = 5;
@@ -122,16 +140,12 @@ export class HotelOptionComponent implements OnInit, OnDestroy, OnChanges {
     const lang = this.langService.getLang();
 
     this.subscriptions$[0] = this.hubService
-      .getQuote(
-        option.id,
-        lang,
-        {
-          context: this.context,
-          client: this.webConfigService.getClient().name,
-          testMode: this.webConfigService.getAccess().isTest,
-          auditTransactions: true
-        }
-      )
+      .getQuote(option.id, lang, {
+        context: this.context,
+        client: this.webConfigService.getClient().name,
+        testMode: this.webConfigService.getAccess().isTest,
+        auditTransactions: true
+      })
       .valueChanges.subscribe(
         res => {
           this.requestStorageService.storeRequestResponse(false, res);
@@ -199,6 +213,15 @@ export class HotelOptionComponent implements OnInit, OnDestroy, OnChanges {
       backdrop: 'static'
     });
     modalRef.componentInstance.cancelPenalties = cancelPenalties;
+  }
+
+  openRatePlansModal(ratePlans) {
+    const modalRef = this.modalService.open(RatePlansModalComponent, {
+      size: 'lg',
+      keyboard: false,
+      backdrop: 'static'
+    });
+    modalRef.componentInstance.ratePlans = ratePlans;
   }
 
   ngOnDestroy() {

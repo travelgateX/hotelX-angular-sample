@@ -900,6 +900,14 @@
         <source>Binding</source>
         <target>Binding</target>
       </trans-unit>
+      <trans-unit id="effective-date" datatype="html">
+        <source>Effective date</source>
+        <target>Effective date</target>
+      </trans-unit>
+      <trans-unit id="expire-date" datatype="html">
+        <source>Expire date</source>
+        <target>Expire date</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
