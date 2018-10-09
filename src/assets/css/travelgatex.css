@@ -8293,3 +8293,8 @@ footer.mo-footer {
     padding: 5px 10px;
     border-radius: 3px;
     color: #fff; }
+
+    .indentText {
+      text-indent: 0.5rem;
+      display: inline-block;
+    }

@@ -8,7 +8,7 @@
             <strong *ngIf="availability"> {{availability?.length}}
               <span i18n="@@results">{availability?.length, plural, =0 {Results} =1 {Result} other {Results}}</span>
             </strong>
-            <span i18n="@@for"> for</span> "{{criteria | result}}"</h4>
+            <span i18n="@@for" class="indentText">for</span> "{{criteria | result}}"</h4>
           <h5 i18n="@@title-accomodations">Choose from more than 500,000 accommodations. We are present in ALL
             countries of the world.</h5>
         </div>
@@ -16,7 +16,7 @@
     </div>
   </div>
   <div class="iso-deco-triangles"></div>
-</b2b-header>
+</b2b-header>g
 
 <div class="container">
 
@@ -25,19 +25,22 @@
       <div class="mo-search-summary">
         <p class="text-center">
           <strong i18n="@@your-search">Your search: </strong>
-          <i class="fa fa-map-marker"></i>
-          <span class="destination">{{criteria | destination}}</span>
+          <i class="fa fa-map-marker indentText"></i>
+          <span class="destination indentText">{{criteria | destination}}</span>
           <span class="sep">|</span>
           <i class="fa fa-calendar"></i>
-          <span i18n="@@from">From</span> {{criteria.checkIn | dateFormat:environment.organization.dateFormat}}
-          <span i18n="@@to">to</span> {{criteria.checkOut | dateFormat:environment.organization.dateFormat}}
+          <span i18n="@@from" class="indentText">From</span> {{criteria.checkIn |
+          dateFormat:environment.organization.dateFormat}}<span i18n="@@to" class="indentText">to</span> {{criteria.checkOut |
+          dateFormat:environment.organization.dateFormat}}
           <span class="sep">|</span>
-          <i class="fa fa-bed" aria-hidden="true"></i> {{search?.roomsNum}}
-          <span i18n="@@room-plural">{search.roomsNum, plural, =0 {rooms} =1 {room} other {rooms}}</span>,
-          {{search?.adultsNum}}
-          <span i18n="@@adult-plural">{search.adultsNum, plural, =0 {adults} =1 {adult} other {adults}}</span>
-          <span i18n="@@and">and</span> {{search?.childsNum}}
-          <span i18n="@@child-plural">{search.childsNum, plural, =0 {children} =1 {child} other {children}}</span>
+          <i class="fa fa-bed" aria-hidden="true"></i><span class="indentText">{{search?.roomsNum}}</span>
+          <span i18n="@@room-plural" class="indentText">{search.roomsNum, plural, =0 {rooms} =1 {room} other {rooms}}</span>,<span
+            class="indentText">{{search?.adultsNum}}</span>
+          <span i18n="@@adult-plural" class="indentText">{search.adultsNum, plural, =0 {adults} =1 {adult} other
+            {adults}}</span>
+          <span i18n="@@and" class="indentText">and</span><span class="indentText">{{search?.childsNum}}</span>
+          <span i18n="@@child-plural" class="indentText">{search.childsNum, plural, =0 {children} =1 {child} other
+            {children}}</span>
           <a href="javascript:void(0)" (click)="openModalEdit()" class="btn btn-tertiary smy">
             <i class="fa fa-pencil"></i>
             <span i18n="@@edit">Edit</span>

@@ -191,7 +191,6 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
   }
 
   checkLength() {
-    console.log(this.clientSP, this.supplierSP);
     if (
       this.clientSP &&
       this.supplierSP &&
