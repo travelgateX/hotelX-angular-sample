@@ -40,7 +40,6 @@
             <th i18n="@@mealplan">Meaplan</th>
             <th i18n="@@no-expenses-until">No expenses until</th>
             <th i18n="@@rate">Rate</th>
-            <th i18n="@@rate">Rate Plans</th>
             <th i18n="@@payment-type">Payment type</th>
             <th i18n="@@price-type">Price type</th>
             <th i18n="@@price">Price</th>
@@ -55,27 +54,24 @@
             </ng-template>
 
             <td>
-              <div *ngFor="let room of option.rooms">{{room.description}}</div>
+              <div *ngFor="let room of option.rooms" style="white-space: nowrap">{{room.description}} <i class="fa fa-info-circle info-circle-rate-plans"
+                  aria-hidden="true" data-toggle="tooltip" data-placement="top" i18n-title="@@room-info-tooltip" title="Click to see more room info"
+                  (click)="openRatePlansModal(room.ratePlans)"></i></div>
             </td>
 
             <td>{{option.boardCode | mealplan : mealplansAvailable}}</td>
 
-            <td *ngIf="option?.cancelPolicy?.cancelPenalties | getMax; else emptyTd; let maxOption" (click)="openCancelPolicyModal(option?.cancelPolicy?.cancelPenalties)">
-              <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" i18n-title="@@penalty-tooltip"
-                title="Click to see penalty list"></i>
+            <td *ngIf="option.cancelPolicy.cancelPenalties | getMax; else emptyTd; let maxOption" (click)="openCancelPolicyModal(option?.cancelPolicy?.cancelPenalties)">
               {{(maxOption | mainPenalty : criteria.checkIn) | dateFormat:environment.organization.dateFormat}} |
               {{maxOption.value | number
-              : '1.2-2'}} {{maxOption.currency}}
+              : '1.2-2'}} {{maxOption.currency}} <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip"
+                data-placement="top" i18n-title="@@penalty-tooltip" title="Click to see penalty list"></i>
             </td>
 
             <td *ngIf="option.rateRules; else checkRefundable">{{option.rateRules | package}}</td>
             <ng-template #checkRefundable>
               <td *ngIf="option?.cancelPolicy?.refundable === false; else emptyTd">NRF</td>
             </ng-template>
-
-            <td *ngIf="option.rooms"><i *ngFor="let room of option.rooms" class="fa fa-info-circle info-circle-rate-plans" aria-hidden="true"
-                data-toggle="tooltip" data-placement="top" i18n-title="@@penalty-tooltip" title="Click to see penalty list"
-                (click)="openRatePlansModal(room.ratePlans)"></i></td>
 
             <td>{{option.paymentType}}</td>
 
