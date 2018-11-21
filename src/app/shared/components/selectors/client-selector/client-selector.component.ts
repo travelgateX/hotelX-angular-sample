@@ -23,8 +23,8 @@ export class ClientSelectorComponent implements OnInit {
     this.clientSelectorService.getClients();
     this.clientSelectorService.clients$.subscribe(
       res => {
-        this.clients = res;
-        let storedClient = this.webConfigService.getClient();
+        this.clients = res.filter(client => client.isActive === true);
+        const storedClient = this.webConfigService.getClient();
         if (
           storedClient &&
           this.clients.findIndex(
