@@ -23,7 +23,7 @@ export class ClientSelectorComponent implements OnInit {
     this.clientSelectorService.getClients();
     this.clientSelectorService.clients$.subscribe(
       res => {
-        this.clients = res.filter(client => client.isActive === true);
+        this.clients = res;
         const storedClient = this.webConfigService.getClient();
         if (
           storedClient &&
@@ -49,8 +49,8 @@ export class ClientSelectorComponent implements OnInit {
   }
 
   onClientSelected() {
-    let client = this.clients.find(
-      client => client.code === this.clientSelected
+    const client = this.clients.find(
+      clientAux => clientAux.code === this.clientSelected
     );
     if (client) {
       this.webConfigService.setClient(client);

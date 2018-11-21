@@ -3,13 +3,14 @@ import gql from 'graphql-tag';
 export const suppliersAccesses = gql`
 {
   admin {
-    suppliers (filter: {isActive: true}) {
+    suppliers {
       edges {
         node {
           supplierData {
             name
             code
             context
+            isActive
             accesses {
               edges {
                 node {

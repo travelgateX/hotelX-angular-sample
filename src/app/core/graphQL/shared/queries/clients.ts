@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 export const clients = gql`
 {
   admin {
-    clients (filter: {isActive: true}) {
+    clients {
       edges {
         node {
           clientData {

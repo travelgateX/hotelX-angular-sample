@@ -18,7 +18,7 @@ export class SupplierAccessesComponent implements OnInit {
   supplierSelected: string;
   constructor(
     private webConfigService: WebConfigService,
-    private supplierAccessesService: SupplierAccessesService,
+    private supplierAccessesService: SupplierAccessesService
   ) {}
 
   ngOnInit() {
@@ -27,6 +27,7 @@ export class SupplierAccessesComponent implements OnInit {
     this.supplierAccessesService.getSuppliersAccesses();
     this.supplierAccessesService.suppliersAccesses$.subscribe(
       res => {
+        console.log(this.supplierSelected);
         this.suppliers = res;
         if (
           this.webConfigService.getAccess() &&
@@ -86,6 +87,15 @@ export class SupplierAccessesComponent implements OnInit {
         const access = element.node.accessData;
         this.accesses.push(access);
       });
+      this.accesses = this.accesses.sort((a, b) => {
+        if (a.name < b.name) {
+          return -1;
+        }
+        if (a.name > b.name) {
+          return 1;
+        }
+        return 0;
+      });
     }
     if (this.accesses.length === 1) {
       this.accessesSelected.push(this.accesses[0].code);
@@ -117,7 +127,7 @@ export class SupplierAccessesComponent implements OnInit {
     if (this.accessesToSearch.length !== 0) {
       this.webConfigService.setAccess(this.accessesToSearch[0]);
     } else {
-      this.webConfigService.setAccess({ code: '', name: '' , isTest: false});
+      this.webConfigService.setAccess({ code: '', name: '', isTest: false });
     }
     this.accessesToSearchOutput.emit(this.accessesToSearch);
   }
