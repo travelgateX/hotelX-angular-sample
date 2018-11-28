@@ -54,14 +54,14 @@
             </ng-template>
 
             <td>
-              <div *ngFor="let room of option.rooms" style="white-space: nowrap">{{room.description}} <i class="fa fa-info-circle info-circle-rate-plans"
+              <div *ngFor="let room of option.rooms">{{room.description}} <i class="fa fa-info-circle info-circle-rate-plans"
                   aria-hidden="true" data-toggle="tooltip" data-placement="top" i18n-title="@@room-info-tooltip" title="Click to see more room info"
                   (click)="openRatePlansModal(room.ratePlans)"></i></div>
             </td>
 
             <td>{{option.boardCode | mealplan : mealplansAvailable}}</td>
 
-            <td *ngIf="option.cancelPolicy.cancelPenalties | getMax; else emptyTd; let maxOption" (click)="openCancelPolicyModal(option?.cancelPolicy?.cancelPenalties)">
+            <td *ngIf="option.cancelPolicy && option.cancelPolicy.cancelPenalties | getMax; else emptyTd; let maxOption" (click)="openCancelPolicyModal(option?.cancelPolicy?.cancelPenalties)">
               {{(maxOption | mainPenalty : criteria.checkIn) | dateFormat:environment.organization.dateFormat}} |
               {{maxOption.value | number
               : '1.2-2'}} {{maxOption.currency}} <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip"
