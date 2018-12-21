@@ -4,7 +4,9 @@ import {
   NgModule,
   ModuleWithProviders,
   Optional,
-  SkipSelf
+  SkipSelf,
+  Injector,
+  forwardRef
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginGuard } from './guard/login.guard';
@@ -17,15 +19,27 @@ import {
   InMemoryCache,
   IntrospectionFragmentMatcher
 } from 'apollo-cache-inmemory';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { HttpHeadersInterceptor } from './httpHeaders.interceptor';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { fragmentTypes } from './fragmentTypes';
 import { WebConfigService } from './services/web-config.service';
 import { CookieService } from 'ngx-cookie-service';
+import { ConfigLoader, ConfigModule } from '@ngx-config/core';
+import { ConfigHttpLoader } from '@ngx-config/http-loader';
+
+export const configFactory = (injector: Injector) => {
+  const http = forwardRef(() => injector.get(HttpClient)) as any;
+
+  return new ConfigHttpLoader(http, './assets/config.json');
+};
 
 @NgModule({
-  imports: [CommonModule, HttpClientModule, ApolloModule, HttpLinkModule],
+  imports: [CommonModule, HttpClientModule, ApolloModule, HttpLinkModule, ConfigModule.forRoot({
+    provide: ConfigLoader,
+    useFactory: configFactory,
+    deps: [Injector]
+  })],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

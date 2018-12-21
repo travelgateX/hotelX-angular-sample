@@ -31,6 +31,8 @@
     "@angular/platform-browser-dynamic": "6.0.6",
     "@angular/router": "6.0.6",
     "@ng-bootstrap/ng-bootstrap": "2.1.2",
+    "@ngx-config/core": "~6.0.0",
+    "@ngx-config/http-loader": "~6.0.0",
     "@types/jquery": "3.3.4",
     "apollo-angular": "1.1.2",
     "apollo-angular-link-http": "1.1.1",
