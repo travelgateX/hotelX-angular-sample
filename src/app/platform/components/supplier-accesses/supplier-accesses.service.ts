@@ -10,17 +10,22 @@ export class SupplierAccessesService {
   constructor(private hubService: HubService) {}
 
   getSuppliersAccesses() {
-    const suppliers = [];
+    let suppliers = [];
     this.hubService.getSuppliersAccesses().valueChanges.subscribe(res => {
       if (res) {
         res.data.admin.suppliers.edges.map(element => {
-          if (
-            element.node &&
-            element.node.supplierData &&
-            element.node.supplierData.accesses
-          ) {
+          if (element.node && element.node.supplierData) {
             suppliers.push(element.node.supplierData);
           }
+        });
+        suppliers = suppliers.sort((a, b) => {
+          if (a.name < b.name) {
+            return -1;
+          }
+          if (a.name > b.name) {
+            return 1;
+          }
+          return 0;
         });
         this.suppliersAccesses$.next(suppliers);
         this.supplierSpinner.next(suppliers.length);

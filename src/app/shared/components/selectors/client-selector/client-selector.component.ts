@@ -24,7 +24,7 @@ export class ClientSelectorComponent implements OnInit {
     this.clientSelectorService.clients$.subscribe(
       res => {
         this.clients = res;
-        let storedClient = this.webConfigService.getClient();
+        const storedClient = this.webConfigService.getClient();
         if (
           storedClient &&
           this.clients.findIndex(
@@ -49,8 +49,8 @@ export class ClientSelectorComponent implements OnInit {
   }
 
   onClientSelected() {
-    let client = this.clients.find(
-      client => client.code === this.clientSelected
+    const client = this.clients.find(
+      clientAux => clientAux.code === this.clientSelected
     );
     if (client) {
       this.webConfigService.setClient(client);

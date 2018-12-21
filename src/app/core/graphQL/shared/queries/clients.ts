@@ -9,6 +9,7 @@ export const clients = gql`
           clientData {
             code
             name
+            isActive
           }
           error {
             code

@@ -117,7 +117,8 @@ export class AuthService {
     localStorage.clear();
     this.webConfigService.setAccess({
       code: savedAccess,
-      name: 'UrlAccess'
+      name: 'UrlAccess',
+      isTest: false
     });
     this.indexedDBService.closeDB();
     for (

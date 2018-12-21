@@ -137,8 +137,11 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
           .getAvailability(
             hotelCriteriaSearch,
             this.access,
-            this.context,
-            this.client.name
+            {
+              context: this.context,
+              client: this.client.name,
+              testMode: this.access[0].isTest
+            }
           )
           .valueChanges.subscribe(
             res => {
@@ -190,6 +193,7 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
    * @param response code of the hotels availables
    */
   getHotelsDetailInfo(response) {
+    this.requestStorageService.setCurrentType(false);
     const hotelsMap = new Map<string, string>();
     response.options.forEach(option => {
       if (!hotelsMap.has(option.hotelCode)) {

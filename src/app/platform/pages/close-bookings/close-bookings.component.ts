@@ -38,7 +38,7 @@ export class CloseBookingsComponent implements OnInit, OnDestroy {
     private langService: LangService,
     private webConfigService: WebConfigService,
     private requestStorageService: RequestStorageService,
-    private alertService: AlertService,
+    private alertService: AlertService
   ) {}
 
   ngOnInit() {
@@ -55,11 +55,11 @@ export class CloseBookingsComponent implements OnInit, OnDestroy {
       }
     );
     this.errorSubscription = this.alertService.error$.subscribe(err => {
-        this.errors = err.filter( e => e.name === 'Book');
+      this.errors = err.filter(e => e.name === 'Book');
     });
 
     this.warningSubscription = this.alertService.warning$.subscribe(warning => {
-      this.warnings = warning.filter( w => w.name === 'Book');
+      this.warnings = warning.filter(w => w.name === 'Book');
     });
   }
 
@@ -72,7 +72,12 @@ export class CloseBookingsComponent implements OnInit, OnDestroy {
       const lang = this.langService.getLang();
       this.bookingDetail.input.language = lang;
       this.hubService
-        .getBook(this.bookingDetail.input, this.webConfigService.getContext(), this.webConfigService.getClient())
+        .getBook(this.bookingDetail.input, {
+          context: this.webConfigService.getContext(),
+          client: this.webConfigService.getClient().name,
+          auditTransactions: true,
+          testMode: this.webConfigService.getAccess().isTest
+        })
         .subscribe(
           res => {
             this.requestStorageService.storeRequestResponse(false, res);

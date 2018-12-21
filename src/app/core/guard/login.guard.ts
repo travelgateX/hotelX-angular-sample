@@ -39,7 +39,8 @@ export class LoginGuard implements CanActivate, CanActivateChild {
       if ((state.root.queryParams || {})['access']) {
         this.webConfigService.setAccess({
           code: state.root.queryParams['access'],
-          name: 'UrlAccess'
+          name: 'UrlAccess',
+          isTest: false
         });
         savedAccess = state.root.queryParams['access'];
       }

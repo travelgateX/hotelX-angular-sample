@@ -286,6 +286,31 @@ span.destination {
   margin: 0;
 }
 
+/* Canel Penalties Modal Table */
+.tb-rate-plans td,
+.tb-rate-plans th {
+  font-size: 14px;
+  padding: 8px 10px;
+}
+.tb-rate-plans tbody tr:hover {
+  background-color: #fdffc6;
+  background-color: #fdffc6;
+}
+.tb-rate-plans tbody + tbody {
+  border-top: none;
+}
+.tb-rate-plans thead {
+  background-color: #eaeff3;
+  background-color: #eaeff3;
+}
+.tb-rate-plans .price {
+  font-size: 21px;
+  font-weight: 600;
+}
+.tb-rate-plans p {
+  margin: 0;
+}
+
 /* Footer */
 footer.mo-footer ul li a {
   text-transform: capitalize;

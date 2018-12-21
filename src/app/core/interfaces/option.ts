@@ -3,6 +3,7 @@ import { Supplement } from './supplement';
 import { Price } from './price';
 import { Room } from './room';
 import { Occupancy } from './occupancy';
+import { RatePlan } from '.';
 
 export interface Option {
   supplier: string;

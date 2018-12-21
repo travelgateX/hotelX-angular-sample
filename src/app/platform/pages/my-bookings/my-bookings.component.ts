@@ -25,6 +25,7 @@ import { RequestStorageService } from '../../../shared/services/request-storage.
 import { ClientSelectorService } from '../../../shared/components/selectors/client-selector/client-selector.service';
 import { SpinnerService } from '../../../shared/services/spinner.service';
 import { SupplierAccessesService } from '../../components/supplier-accesses/supplier-accesses.service';
+import { WebConfigService } from '../../../core/services/web-config.service';
 
 @Component({
   selector: 'b2b-my-bookings',
@@ -67,6 +68,7 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
     private clientSelectorService: ClientSelectorService,
     private supplierAccessesService: SupplierAccessesService,
     private spinnerService: SpinnerService,
+    private webConfigService: WebConfigService
   ) {}
 
   ngOnInit() {
@@ -143,7 +145,14 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
   }
 
   checkLength() {
-    if (this.clientSP > 1 || this.supplierSP > 1) {
+    if (
+      this.clientSP &&
+      this.supplierSP &&
+      (this.clientSP > 1 ||
+        this.supplierSP > 1 ||
+        this.clientSP < 1 ||
+        this.supplierSP < 1)
+    ) {
       this.configInputsHidden = false;
     }
 
@@ -162,7 +171,12 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.bookings = null;
     this.hubService
-      .getMyBookings(criteriaBooking, this.client)
+      .getMyBookings(criteriaBooking, {
+        context: this.webConfigService.getContext(),
+        client: this.webConfigService.getClient().name,
+        auditTransactions: true,
+        testMode: this.webConfigService.getAccess().isTest
+      })
       .valueChanges.subscribe(
         res => {
           this.requestStorageService.storeRequestResponse(false, res);
@@ -206,10 +220,12 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
   searchByDate(value) {
     const criteriaBooking: CriteriaBooking = JSON.parse(JSON.stringify(value));
     delete criteriaBooking.references;
-    criteriaBooking.dates.start = this.dateFormatter.format(<any>criteriaBooking
-      .dates.start);
-    criteriaBooking.dates.end = this.dateFormatter.format(<any>criteriaBooking
-      .dates.end);
+    criteriaBooking.dates.start = this.dateFormatter.format(<any>(
+      criteriaBooking.dates.start
+    ));
+    criteriaBooking.dates.end = this.dateFormatter.format(<any>(
+      criteriaBooking.dates.end
+    ));
     this.getMyBookings(criteriaBooking);
   }
 

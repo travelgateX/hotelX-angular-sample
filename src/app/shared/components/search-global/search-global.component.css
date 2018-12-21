@@ -1,3 +1,8 @@
+div.dropdown-root,
+div.dropdown-root > div {
+  width: 100%;
+}
+
 div.selected-item {
   padding: 0.6rem;
   display: inline-block;
@@ -6,7 +11,7 @@ div.selected-item {
   color: white;
   margin: 0.25rem;
   transition: background-color 0.25s;
-  cursor: pointer
+  cursor: pointer;
 }
 
 .custom-dropdown {
@@ -15,10 +20,13 @@ div.selected-item {
   background: white;
   border-radius: 0.15rem;
   box-shadow: -1px -1px #eee;
-  width: 100%;
+  width: calc(100% - 30px);
   max-height: 40vh;
-  overflow-y: auto;
+  overflow: hidden;
+}
 
+.custom-dropdown:hover {
+  overflow: auto;
 }
 
 div.selected-item:hover {
@@ -61,6 +69,6 @@ input#inputSearch:focus {
   padding-top: 12px;
 }
 
-.whiteBackground {
+.white-background {
   background-color: white;
 }

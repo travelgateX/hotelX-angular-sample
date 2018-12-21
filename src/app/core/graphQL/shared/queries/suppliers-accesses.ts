@@ -10,12 +10,14 @@ export const suppliersAccesses = gql`
             name
             code
             context
+            isActive
             accesses {
               edges {
                 node {
                   accessData {
                     code
                     name
+                    isTest
                   }
                   error {
                     code

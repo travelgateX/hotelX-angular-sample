@@ -3,8 +3,12 @@
     <div class="row justify-content-center">
       <div class="col-md-7">
         <div class="mo-tit-section">
-          <h4><span class="lnr lnr-magnifier"></span><strong i18n="@@availability">Availability</strong> <span i18n="@@request">request</span></h4>
-          <h5 i18n="@@title-accomodations">Choose from more than 500,000 accommodations. We are present in ALL countries of the world.</h5>
+          <h4><span class="lnr lnr-magnifier"></span><strong i18n="@@availability" class="indentText">Availability</strong><span
+              i18n="@@request" class="indentText">
+              request</span></h4>
+          <h5 i18n="@@title-accomodations">Choose from more than 500,000 accommodations. We are present in ALL
+            countries
+            of the world.</h5>
         </div>
         <b2b-availability [bordered]="'false'" (output)="onSearch($event)"></b2b-availability>
       </div>
