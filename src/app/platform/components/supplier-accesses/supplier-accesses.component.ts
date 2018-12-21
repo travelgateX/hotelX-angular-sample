@@ -27,7 +27,6 @@ export class SupplierAccessesComponent implements OnInit {
     this.supplierAccessesService.getSuppliersAccesses();
     this.supplierAccessesService.suppliersAccesses$.subscribe(
       res => {
-        console.log(this.supplierSelected);
         this.suppliers = res;
         if (
           this.webConfigService.getAccess() &&
@@ -39,6 +38,7 @@ export class SupplierAccessesComponent implements OnInit {
             i++
           ) {
             if (
+              this.suppliers[i].accesses &&
               this.suppliers[i].accesses['edges'].findIndex(element => {
                 return (
                   element.node.accessData.code ===

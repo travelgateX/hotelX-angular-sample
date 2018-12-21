@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export const book = gql`
-  mutation Mutation($input: HotelBookInput!, $settings: HotelSettingsInput) {
+  mutation book($input: HotelBookInput!, $settings: HotelSettingsInput) {
     hotelX {
       book(input: $input, settings: $settings) {
         auditData {

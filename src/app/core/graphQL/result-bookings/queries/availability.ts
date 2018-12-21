@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export const avail = gql`
-  query Query(
+  query avail(
     $criteria: HotelCriteriaSearchInput
     $settings: HotelSettingsInput
     $access: [ID!]

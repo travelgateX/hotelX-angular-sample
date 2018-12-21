@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 export const quote = gql`
-  query Query($optionRefId: String!, $language: Language, $settings: HotelSettingsInput) {
+  query quote($optionRefId: String!, $language: Language, $settings: HotelSettingsInput) {
     hotelX {
       quote(
         criteria: { optionRefId: $optionRefId, language: $language }

@@ -1,3 +1,4 @@
+import { OperationsToStore } from './utils/operationsToStore';
 import {
   HttpEvent,
   HttpInterceptor,
@@ -27,7 +28,9 @@ export class HttpHeadersInterceptor implements HttpInterceptor {
       bearer: 'Bearer ' + localStorage.getItem('token'),
       rq: cloneReq
     };
-    this.requestStorageService.storeRequestResponse(requestToStore, false);
+    if (OperationsToStore.includes(requestToStore.rq.body.operationName)) {
+      this.requestStorageService.storeRequestResponse(requestToStore, false);
+    }
     return next.handle(cloneReq);
   }
 }
