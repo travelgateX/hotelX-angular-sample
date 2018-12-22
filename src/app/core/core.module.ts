@@ -6,7 +6,8 @@ import {
   Optional,
   SkipSelf,
   Injector,
-  forwardRef
+  forwardRef,
+  Provider
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginGuard } from './guard/login.guard';
@@ -25,7 +26,7 @@ import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { fragmentTypes } from './fragmentTypes';
 import { WebConfigService } from './services/web-config.service';
 import { CookieService } from 'ngx-cookie-service';
-import { ConfigLoader, ConfigModule } from '@ngx-config/core';
+import { ConfigModule } from '@ngx-config/core';
 import { ConfigHttpLoader } from '@ngx-config/http-loader';
 
 export const configFactory = (injector: Injector) => {
@@ -35,11 +36,7 @@ export const configFactory = (injector: Injector) => {
 };
 
 @NgModule({
-  imports: [CommonModule, HttpClientModule, ApolloModule, HttpLinkModule, ConfigModule.forRoot({
-    provide: ConfigLoader,
-    useFactory: configFactory,
-    deps: [Injector]
-  })],
+  imports: [CommonModule, HttpClientModule, ApolloModule, HttpLinkModule, ConfigModule.forRoot()],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
@@ -64,7 +61,7 @@ export class CoreModule {
    * ForRoot method can only be accessed from App Module
    * It prevents to import a Service more than once, in this case, services are singleton
    */
-  static forRoot(): ModuleWithProviders {
+  static forRoot(config: Provider): ModuleWithProviders {
     return {
       ngModule: CoreModule,
       providers: [
@@ -82,7 +79,8 @@ export class CoreModule {
         LoginGuard,
         LangService,
         HttpLink,
-        CookieService
+        CookieService,
+        config,
       ]
     };
   }
