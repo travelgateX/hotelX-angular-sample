@@ -5,8 +5,6 @@ import {
   ModuleWithProviders,
   Optional,
   SkipSelf,
-  Injector,
-  forwardRef,
   Provider
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -29,9 +27,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { ConfigModule } from '@ngx-config/core';
 import { ConfigHttpLoader } from '@ngx-config/http-loader';
 
-export const configFactory = (injector: Injector) => {
-  const http = forwardRef(() => injector.get(HttpClient)) as any;
-
+export const configFactory = (http: HttpClient) => {
   return new ConfigHttpLoader(http, './assets/config.json');
 };
 

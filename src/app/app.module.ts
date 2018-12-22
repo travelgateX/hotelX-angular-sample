@@ -7,7 +7,7 @@ import { configFactory, CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app.routing';
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserModule } from '@angular/platform-browser';
-import { Injector, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AgmCoreModule } from '@agm/core';
@@ -16,6 +16,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './static/components/home/home.component';
 import { NotFoundComponent } from './static/components/not-found/not-found.component';
 import { ConfigLoader } from '@ngx-config/core';
+import { HttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, NotFoundComponent],
@@ -25,7 +26,7 @@ import { ConfigLoader } from '@ngx-config/core';
     CoreModule.forRoot({
       provide: ConfigLoader,
       useFactory: configFactory,
-      deps: [Injector]
+      deps: [HttpClient]
     }),
     PlatformModule,
     SharedModule,
