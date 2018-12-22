@@ -5,6 +5,7 @@ import {
   ModuleWithProviders,
   Optional,
   SkipSelf,
+  Injector,
   Provider
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -38,6 +39,7 @@ export const configFactory = (http: HttpClient) => {
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpHeadersInterceptor,
+      deps: [Injector],
       multi: true
     },
     HttpService,
@@ -65,6 +67,7 @@ export class CoreModule {
         {
           provide: HTTP_INTERCEPTORS,
           useClass: HttpHeadersInterceptor,
+          deps: [Injector],
           multi: true
         },
         HttpService,
