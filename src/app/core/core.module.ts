@@ -26,9 +26,10 @@ import { WebConfigService } from './services/web-config.service';
 import { CookieService } from 'ngx-cookie-service';
 import { ConfigModule } from '@ngx-config/core';
 import { ConfigHttpLoader } from '@ngx-config/http-loader';
+import { environment } from '../../environments/environment';
 
 export const configFactory = (http: HttpClient) => {
-  return new ConfigHttpLoader(http, './assets/config.json');
+  return new ConfigHttpLoader(http, environment.configUrl);
 };
 
 @NgModule({
