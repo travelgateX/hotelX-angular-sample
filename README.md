@@ -1,6 +1,6 @@
 # XML Travelgate B2B
 
-[XML Travelgate B2B](https://xtg-b2b.firebaseapp.com/) platform for business to business.
+[XML Travelgate B2B](https://b2b.travelgatex.com/) platform for business to business.
 
 ## Getting Started
 
