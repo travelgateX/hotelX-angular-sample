@@ -1,52 +1,36 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export const cancelBooking = gql`
-mutation cancelBooking ($input: HotelCancelInput!, $client: String) {
-  hotelX {
-    cancel(input: $input, settings: { auditTransactions: true, client: $client }) {
-      auditData {
-        transactions {
-          request
-          response
-          timeStamp
-        }
-      }
-      errors {
-        type
-        code
-        description
-      }
-      warnings {
-        type
-        code
-        description
-      }
-      cancellation {
-        reference {
-          client
-          supplier
-        }
-        cancelReference
-        status
-        price {
-          currency
-          binding
-          net
-          gross
-          exchange {
-            currency
-            rate
+  mutation cancelBooking(
+    $input: HotelCancelInput!
+    $settings: HotelSettingsInput
+  ) {
+    hotelX {
+      cancel(input: $input, settings: $settings) {
+        auditData {
+          transactions {
+            request
+            response
+            timeStamp
           }
         }
-        booking {
+        errors {
+          type
+          code
+          description
+        }
+        warnings {
+          type
+          code
+          description
+        }
+        cancellation {
           reference {
             client
             supplier
           }
-          holder {
-            name
-            surname
-          }
+          cancelReference
+          status
           price {
             currency
             binding
@@ -57,31 +41,51 @@ mutation cancelBooking ($input: HotelCancelInput!, $client: String) {
               rate
             }
           }
-          hotel {
-            creationDate
-            checkIn
-            checkOut
-            hotelCode
-            hotelName
-            boardCode
-            occupancies {
-              id
-              paxes {
-                age
+          booking {
+            reference {
+              client
+              supplier
+            }
+            holder {
+              name
+              surname
+            }
+            price {
+              currency
+              binding
+              net
+              gross
+              exchange {
+                currency
+                rate
               }
             }
-            rooms {
-              code
-              description
-              occupancyRefId
-              price {
-                currency
-                binding
-                net
-                gross
-                exchange {
+            hotel {
+              creationDate
+              checkIn
+              checkOut
+              hotelCode
+              hotelName
+              boardCode
+              occupancies {
+                id
+                paxes {
+                  age
+                }
+              }
+              rooms {
+                code
+                description
+                occupancyRefId
+                price {
                   currency
-                  rate
+                  binding
+                  net
+                  gross
+                  exchange {
+                    currency
+                    rate
+                  }
                 }
               }
             }
@@ -90,5 +94,4 @@ mutation cancelBooking ($input: HotelCancelInput!, $client: String) {
       }
     }
   }
-}
 `;

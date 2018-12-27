@@ -146,10 +146,10 @@ export class HubService {
    * @param input
    * @param context
    */
-  cancelBook(cancelBookingInput: CancelBooking, client: Client) {
+  cancelBook(cancelBookingInput: CancelBooking, settings: hotelSettingsInput) {
     return this.apollo.mutate({
       mutation: cancelBooking,
-      variables: { input: cancelBookingInput, client: client.name }
+      variables: { input: cancelBookingInput, settings: settings }
     });
   }
 

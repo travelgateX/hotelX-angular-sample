@@ -101,41 +101,48 @@ export class MyBookingsTableComponent implements OnChanges {
       cancelBooking.reference.client = booking.reference.client;
     }
 
-    this.hubService.cancelBook(cancelBooking, this.client).subscribe(
-      res => {
-        this.requestStorageService.storeRequestResponse(false, res);
-        const cancel = res.data.hotelX.cancel;
-        booking.errors = cancel.errors || [];
-        booking.warnings = cancel.warnings || [];
+    this.hubService
+      .cancelBook(cancelBooking, {
+        context: this.webConfigService.getContext(),
+        client: this.webConfigService.getClient().name,
+        auditTransactions: true,
+        testMode: this.webConfigService.getAccess().isTest
+      })
+      .subscribe(
+        res => {
+          this.requestStorageService.storeRequestResponse(false, res);
+          const cancel = res.data.hotelX.cancel;
+          booking.errors = cancel.errors || [];
+          booking.warnings = cancel.warnings || [];
 
-        booking.showMoreOptions = true;
-        if (
-          (((((res.data || {}).hotelX || {}).cancel || {}).cancellation || {})
-            .status || '') === 'CANCELLED'
-        ) {
+          booking.showMoreOptions = true;
           if (
-            res.data.hotelX.cancel.cancellation.price &&
-            res.data.hotelX.cancel.cancellation.price.net
+            (((((res.data || {}).hotelX || {}).cancel || {}).cancellation || {})
+              .status || '') === 'CANCELLED'
           ) {
-            booking.cancelImport =
-              res.data.hotelX.cancel.cancellation.price.net;
+            if (
+              res.data.hotelX.cancel.cancellation.price &&
+              res.data.hotelX.cancel.cancellation.price.net
+            ) {
+              booking.cancelImport =
+                res.data.hotelX.cancel.cancellation.price.net;
+            }
+            if (
+              res.data.hotelX.cancel.cancellation.price &&
+              res.data.hotelX.cancel.cancellation.price.currency
+            ) {
+              booking.currencyImport =
+                res.data.hotelX.cancel.cancellation.price.currency;
+            }
+            booking.status = 'CANCELLED';
+            this.notificationService.success('Booking Cancelled');
           }
-          if (
-            res.data.hotelX.cancel.cancellation.price &&
-            res.data.hotelX.cancel.cancellation.price.currency
-          ) {
-            booking.currencyImport =
-              res.data.hotelX.cancel.cancellation.price.currency;
-          }
-          booking.status = 'CANCELLED';
-          this.notificationService.success('Booking Cancelled');
+        },
+        err => {
+          booking.showMoreOptions = true;
+          this.notificationService.error(err);
         }
-      },
-      err => {
-        booking.showMoreOptions = true;
-        this.notificationService.error(err);
-      }
-    );
+      );
   }
 
   /**
@@ -208,9 +215,10 @@ export class MyBookingsTableComponent implements OnChanges {
       // hotelCode: booking.hotel.hotelCode
     };
 
-    this.spinnerStart.emit(true);
+    this.spinnerService.start();
     const subscription = this.hubService
       .getMyBookings(criteriaBooking, {
+        context: this.webConfigService.getContext(),
         client: this.webConfigService.getClient().name,
         auditTransactions: true,
         testMode: this.webConfigService.getAccess().isTest
@@ -218,7 +226,10 @@ export class MyBookingsTableComponent implements OnChanges {
       .valueChanges.subscribe(
         res => {
           this.spinnerService.stop();
-          if (res.data.hotelX.booking.bookings) {
+          if (
+            !res.data.hotelX.booking.errors &&
+            res.data.hotelX.booking.bookings
+          ) {
             const modalRef = this.modalService.open(
               MyBookingsDetailModalComponent,
               {
@@ -233,6 +244,11 @@ export class MyBookingsTableComponent implements OnChanges {
             modalRef.result.then(_ => {
               subscription.unsubscribe();
             });
+          } else {
+            this.notificationService.error(
+              res.data.hotelX.booking.errors[0].description,
+              res.data.hotelX.booking.errors[0].code
+            );
           }
         },
         err => {
