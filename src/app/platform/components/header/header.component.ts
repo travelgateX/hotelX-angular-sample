@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   subscriptions$: Subscription[];
   profile: any;
   environment: any;
+  show: true;
 
   constructor(public authService: AuthService) {}
 
