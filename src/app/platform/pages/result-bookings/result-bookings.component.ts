@@ -71,8 +71,8 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
     this.subscriptions$[0] = this.searchService.criteria$.subscribe(res => {
       this.spinnerService.start();
       this.criteria = JSON.parse(JSON.stringify(res));
-      this.access = [this.webConfigService.getAccess()];
-      this.context = this.webConfigService.getContext();
+      this.access = [this.webConfigService.getItemFromLocalStorage('access')];
+      this.context = this.webConfigService.getItemFromLocalStorage('context');
       this.getAvailability();
       this.mealplans = [];
       this.getBoards();
@@ -91,7 +91,7 @@ export class ResultBookingsComponent implements OnInit, OnDestroy {
       );
     });
 
-    this.client = this.webConfigService.getClient();
+    this.client = this.webConfigService.getItemFromLocalStorage('client');
 
     this.bookingService.booking$.subscribe(
       res => {

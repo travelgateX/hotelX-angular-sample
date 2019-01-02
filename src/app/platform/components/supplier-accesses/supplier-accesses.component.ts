@@ -28,10 +28,8 @@ export class SupplierAccessesComponent implements OnInit {
     this.supplierAccessesService.suppliersAccesses$.subscribe(
       res => {
         this.suppliers = res;
-        if (
-          this.webConfigService.getAccess() &&
-          this.webConfigService.getAccess().code
-        ) {
+        const access = this.webConfigService.getItemFromLocalStorage('access');
+        if (access && access.code) {
           for (
             let i = 0;
             i < this.suppliers.length && !this.supplierSelected;
@@ -42,7 +40,7 @@ export class SupplierAccessesComponent implements OnInit {
               this.suppliers[i].accesses['edges'].findIndex(element => {
                 return (
                   element.node.accessData.code ===
-                  this.webConfigService.getAccess().code
+                  this.webConfigService.getItemFromLocalStorage('access')['code']
                 );
               }) !== -1
             ) {
@@ -54,13 +52,16 @@ export class SupplierAccessesComponent implements OnInit {
           this.supplierSelected = this.suppliers[0].code;
           this.onSupplierSelected();
         } else if (
-          this.webConfigService.getSupplier() &&
+          this.webConfigService.getItemFromLocalStorage('supplier') &&
           this.suppliers.findIndex(
             supplier =>
-              supplier.code === this.webConfigService.getSupplier().code
+              supplier.code ===
+              this.webConfigService.getItemFromLocalStorage('supplier')['code']
           ) !== -1
         ) {
-          this.supplierSelected = this.webConfigService.getSupplier().code;
+          this.supplierSelected = this.webConfigService.getItemFromLocalStorage(
+            'supplier'
+          )['code'];
           this.onSupplierSelected();
         }
       },
@@ -80,8 +81,8 @@ export class SupplierAccessesComponent implements OnInit {
     // this.criteria.items = [];
 
     const supplier = this.suppliers.find(s => s.code === this.supplierSelected);
-    this.webConfigService.setSupplier(supplier);
-    this.webConfigService.setContext(supplier.context);
+    this.webConfigService.setItemInLocalStorage('supplier', supplier);
+    this.webConfigService.setItemInLocalStorage('context', supplier.context);
     if (supplier && supplier.accesses) {
       supplier.accesses['edges'].forEach(element => {
         const access = element.node.accessData;
@@ -101,14 +102,13 @@ export class SupplierAccessesComponent implements OnInit {
       this.accessesSelected.push(this.accesses[0].code);
       this.onAccessSelected(this.accesses[0].code);
     } else {
+      const accessAux = this.webConfigService.getItemFromLocalStorage('access');
       if (
-        this.webConfigService.getAccess() &&
-        this.accesses.findIndex(
-          access => access.code === this.webConfigService.getAccess().code
-        ) !== -1
+        accessAux &&
+        this.accesses.findIndex(access => access.code === accessAux.code) !== -1
       ) {
-        this.accessesSelected.push(this.webConfigService.getAccess().code);
-        this.onAccessSelected(this.webConfigService.getAccess().code);
+        this.accessesSelected.push(accessAux.code);
+        this.onAccessSelected(accessAux.code);
       } else {
         this.onAccessSelected('');
       }
@@ -125,9 +125,16 @@ export class SupplierAccessesComponent implements OnInit {
       access => access.code === $event
     );
     if (this.accessesToSearch.length !== 0) {
-      this.webConfigService.setAccess(this.accessesToSearch[0]);
+      this.webConfigService.setItemInLocalStorage(
+        'access',
+        this.accessesToSearch[0]
+      );
     } else {
-      this.webConfigService.setAccess({ code: '', name: '', isTest: false });
+      this.webConfigService.setItemInLocalStorage('access', {
+        code: '',
+        name: '',
+        isTest: false
+      });
     }
     this.accessesToSearchOutput.emit(this.accessesToSearch);
   }
