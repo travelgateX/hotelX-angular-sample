@@ -14,7 +14,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   subscriptions$: Subscription[];
   profile: any;
   environment: any;
+<<<<<<< HEAD
   emailImper: string = null;
+=======
+  show: true;
+>>>>>>> b642adc860e46d4a204205313d8109485a6d012b
 
   constructor(
     public authService: AuthService,
