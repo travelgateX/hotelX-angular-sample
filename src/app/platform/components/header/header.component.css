@@ -8,6 +8,10 @@
   display: flex;
   align-items: flex-end;
 }
+.header-menu .log{
+  display: flex;
+  align-items: center;
+}
 .header-menu .logo,
 .header-menu .log {
   height: auto;
@@ -29,6 +33,10 @@
   color: #FFF;
 }
 
+.dropdown-toggle::after{
+  font-size: 18px;
+}
+
 .header-menu .log .mo-myaccount-header .drop-down {
   position: absolute;
   left: -207px;
@@ -36,6 +44,8 @@
   background-color: #FFF;
   border-radius: 3px;
   z-index: 10;
+  border: none;
+  padding: 0;
 }
 .header-menu .log .mo-myaccount-header .drop-down::before{
   content: '';
@@ -67,6 +77,9 @@
 .header-menu .log .mo-myaccount-header .drop-down ul li{
   list-style: none;
   padding: 0.5em 1em;
+}
+.header-menu .log .mo-myaccount-header .drop-down ul .lang-drop{
+  display: none;
 }
 .header-menu .log .mo-myaccount-header .drop-down ul li:hover{
   background-color: rgba(6,98,206,.05);

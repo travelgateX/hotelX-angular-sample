@@ -1,0 +1,32 @@
+
+.dropdown{
+  position: relative;
+}
+.dropdown .btn{
+  cursor: pointer;
+}
+.dropdown .btn:focus{
+  box-shadow: none;
+}
+.dropdown .drop-lang{
+  position: absolute;
+  background-color: #FFF;
+  border-radius: 3px;
+  min-width: 100px;
+  padding: 0;
+  border: none;
+}
+.dropdown .drop-lang a{
+  text-transform: uppercase;
+  padding: 1em 0;
+  width: 100px;
+  text-align: center;
+  color: #0084FF;
+  cursor: pointer;
+}
+.dropdown .drop-lang a:hover{
+  color: #182945;
+}
+.dropdown-toggle::after{
+  font-size: 18px;
+}
