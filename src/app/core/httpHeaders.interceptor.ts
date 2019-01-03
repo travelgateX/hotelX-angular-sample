@@ -25,19 +25,21 @@ export class HttpHeadersInterceptor implements HttpInterceptor {
     const headers = new HttpHeaders({
       Authorization:
         'Bearer ' +
-          this.webConfigService.getItemFromLocalStorage(
+          (this.webConfigService.getItemFromLocalStorage(
             'id_token_impersonation'
-          ) || localStorage.getItem('token'),
+          ) || localStorage.getItem('token')),
       'Content-Type': 'application/json'
     });
+
+    console.log(headers);
 
     const cloneReq = req.clone({ headers });
     const requestToStore = {
       bearer:
         'Bearer ' +
-          this.webConfigService.getItemFromLocalStorage(
+          (this.webConfigService.getItemFromLocalStorage(
             'id_token_impersonation'
-          ) || localStorage.getItem('token'),
+          ) || localStorage.getItem('token')),
       rq: cloneReq
     };
     if (OperationsToStore.includes(requestToStore.rq.body.operationName)) {

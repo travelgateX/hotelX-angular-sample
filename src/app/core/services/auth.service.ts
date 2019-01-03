@@ -182,7 +182,6 @@ export class AuthService {
     this.webConfigService.removeItemFromLocalStorage('id_token_impersonation');
     this.webConfigService.removeItemFromLocalStorage('email_impersonation');
     this.emailImpes$.next(null);
-    this.router.navigate(['/platform/search-bookings']);
   }
 
   /**
