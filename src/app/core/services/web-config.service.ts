@@ -1,63 +1,35 @@
 import { Injectable } from '@angular/core';
-import { Access, Supplier, Currency, Language, Market, Client } from 'app/core/interfaces';
+import { Access } from 'app/core/interfaces';
 
 @Injectable()
 export class WebConfigService {
   constructor() {}
 
-  setAccess(access: Access) {
-    localStorage.setItem('access', JSON.stringify(access));
+  getItemFromLocalStorage(key: string): any {
+    if (localStorage.getItem(key)) {
+      return localStorage.getItem(key);
+    }
+
+    return '';
   }
 
-  getAccess(): Access {
-    return JSON.parse(localStorage.getItem('access'));
+  setItemInLocalStorage(key: string, value: any) {
+    if (typeof value === 'string') {
+      localStorage.setItem(key, value);
+    } else {
+      localStorage.setItem(key, JSON.stringify(value));
+    }
   }
 
-  setSupplier(supplier: Supplier) {
-    localStorage.setItem('supplier', JSON.stringify(supplier));
+  clearLocalStorage() {
+    const cookiesConfirmed = localStorage.getItem('cookies-confirmed')
+      ? true
+      : false;
+    localStorage.clear();
+    localStorage.setItem('cookies-confirmed', cookiesConfirmed.toString());
   }
 
-  getSupplier(): Supplier {
-    return JSON.parse(localStorage.getItem('supplier'));
-  }
-
-  setLanguage(language: Language) {
-    localStorage.setItem('language', JSON.stringify(language));
-  }
-
-  getLanguage(): Language {
-    return JSON.parse(localStorage.getItem('language'));
-  }
-
-  setContext(context: string) {
-    localStorage.setItem('context', JSON.stringify(context));
-  }
-
-  getContext(): string {
-    return JSON.parse(localStorage.getItem('context'));
-  }
-
-  setCurrency(currency: Currency) {
-    localStorage.setItem('currency', JSON.stringify(currency));
-  }
-
-  getCurrency(): Currency {
-    return JSON.parse(localStorage.getItem('currency'));
-  }
-
-  setMarket(market: Market) {
-    localStorage.setItem('market', JSON.stringify(market));
-  }
-
-  getMarket(): Market {
-    return JSON.parse(localStorage.getItem('market'));
-  }
-
-  setClient(client: Client) {
-    localStorage.setItem('client', JSON.stringify(client));
-  }
-
-  getClient(): Client {
-    return JSON.parse(localStorage.getItem('client'));
+  removeItemFromLocalStorage(key: string) {
+    localStorage.removeItem(key);
   }
 }

@@ -1,3 +1,31 @@
+.imper {
+  padding: 0.5rem 1rem;
+}
+
+.imper .imper-link-on {
+  color: #fff;
+  padding: 0.5em 1em;
+  border-radius: 6px;
+  background-color: #082da6;
+}
+
+.imper .imper-link-on:hover {
+  transition: 0.2s all linear;
+  background-color: #ffbf00;
+  text-decoration: none;
+}
+
+.imper-link-off {
+  background-color: #ffbf00;
+  color: #fff;
+  border-radius: 6px;
+  padding: 0.5em 1em;
+}
+
+.imper-link-off:hover {
+  transition: 0.2s all linear;
+  background-color: #082da6;
+}
 .header-menu {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;

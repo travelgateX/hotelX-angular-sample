@@ -32,7 +32,7 @@ export class MarketSelectorComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    let defaultMarket = this.webConfigService.getMarket();
+    const defaultMarket = this.webConfigService.getItemFromLocalStorage('market');
     if (defaultMarket && defaultMarket.country_name) {
       this.market = defaultMarket;
     }
@@ -66,11 +66,11 @@ export class MarketSelectorComponent implements OnInit {
    * @param marketTarget
    */
   valuate(marketNameTarget) {
-    let market = this.markets.filter(
+    const market = this.markets.filter(
       x => x.country_name.toLowerCase() === marketNameTarget.toLowerCase()
     );
     if (market.length === 1) {
-      this.webConfigService.setMarket(market[0]);
+      this.webConfigService.setItemInLocalStorage('market', market[0]);
       this.marketSelectorService.market$.next(market[0]);
     } else {
       this.marketSelectorService.market$.next(null);

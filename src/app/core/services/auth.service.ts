@@ -7,6 +7,8 @@ import { NotificationService } from '../../shared/services/notification.service'
 import { IndexedDbService } from '../../shared/services/indexed-db.service';
 import { WebConfigService } from './web-config.service';
 import { CookieService } from 'ngx-cookie-service';
+import { Apollo } from 'apollo-angular';
+import { getImpersonation } from '../graphQL/shared/queries/impersonation';
 
 /**
  * Auth0 service which handles user access, information, etc
@@ -15,6 +17,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class AuthService {
   userProfile: IProfile;
   profile$ = new BehaviorSubject<any>(this.userProfile);
+  emailImpes$: BehaviorSubject<string> = new BehaviorSubject(null);
 
   lock = new Auth0Lock(
     auth0Config.clientId,
@@ -27,7 +30,8 @@ export class AuthService {
     private notificationService: NotificationService,
     private indexedDBService: IndexedDbService,
     private webConfigService: WebConfigService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private apollo: Apollo
   ) {
     // Checks if there is already a user logged checking local storage
     if (localStorage.getItem('profile') !== null) {
@@ -35,7 +39,7 @@ export class AuthService {
       this.profile$.next(this.userProfile);
     }
     if (!this.userProfile && this.cookieService.get('loggedin')) {
-      let login = JSON.parse(this.cookieService.get('loggedin'));
+      const login = JSON.parse(this.cookieService.get('loggedin'));
       this.getUserInfo(login, login.expiresAt, false);
     }
 
@@ -59,6 +63,14 @@ export class AuthService {
     this.lock.on('authorization_error', error => console.log(error));
 
     this.lock.on('unrecoverable_error', error => console.log(error));
+
+    const emailImpes = this.webConfigService.getItemFromLocalStorage('email_impersonation');
+    const idTokenImpes = this.webConfigService.getItemFromLocalStorage('id_token_impersonation');
+    if (!!emailImpes && !!idTokenImpes) {
+      this.emailImpes$.next(emailImpes);
+    } else {
+      this.clearImpersotion();
+    }
   }
 
   getUserInfo(authResult, expiresAt, redirect) {
@@ -115,7 +127,7 @@ export class AuthService {
     this.userProfile = null;
     this.profile$.next(this.userProfile);
     localStorage.clear();
-    this.webConfigService.setAccess({
+    this.webConfigService.setItemInLocalStorage('access', {
       code: savedAccess,
       name: 'UrlAccess',
       isTest: false
@@ -134,6 +146,42 @@ export class AuthService {
     } else {
       this.router.navigate(['/home']);
     }
+  }
+
+  getImpersonation(memberCode: string) {
+    return new Promise((resolve, reject) =>
+      this.apollo
+        .use('coreController')
+        .watchQuery<any>({
+          query: getImpersonation,
+          variables: { memberCode: memberCode },
+          fetchPolicy: 'network-only'
+        })
+        .valueChanges.subscribe((res: any) => {
+          const member = res.data.admin.members.edges[0].node.memberData;
+          const idToken = !member ? null : member.impersonationJWT.token;
+          if (idToken) {
+            this.webConfigService.setItemInLocalStorage(
+              'id_token_impersonation',
+              idToken
+            );
+            this.webConfigService.setItemInLocalStorage(
+              'email_impersonation',
+              memberCode
+            );
+            this.emailImpes$.next(memberCode);
+            this.router.navigate(['/platform/search-bookings']);
+            return resolve(true);
+          }
+          return resolve(false);
+        })
+    );
+  }
+
+  clearImpersotion() {
+    this.webConfigService.removeItemFromLocalStorage('id_token_impersonation');
+    this.webConfigService.removeItemFromLocalStorage('email_impersonation');
+    this.emailImpes$.next(null);
   }
 
   /**
