@@ -13,12 +13,20 @@ export class WebConfigService {
     return '';
   }
 
-  setItemInLocalStorage(key: string, value: any) {
-    if (typeof value === 'string') {
-      localStorage.setItem(key, value);
-    } else {
-      localStorage.setItem(key, JSON.stringify(value));
+  getObjectFromLocalStorage(key: string): any {
+    if (localStorage.getItem(key)) {
+      return JSON.parse(localStorage.getItem(key));
     }
+
+    return '';
+  }
+
+  setItemInLocalStorage(key: string, value: any) {
+    localStorage.setItem(key, value);
+  }
+
+  setObjectInLocalStorage(key: string, value: any) {
+    localStorage.setItem(key, JSON.stringify(value));
   }
 
   clearLocalStorage() {

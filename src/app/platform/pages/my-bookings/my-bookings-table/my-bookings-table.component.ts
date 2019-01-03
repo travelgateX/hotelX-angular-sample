@@ -68,8 +68,8 @@ export class MyBookingsTableComponent implements OnChanges {
   getBoards() {
     this.hubService
       .getBoards(
-        [this.webConfigService.getItemFromLocalStorage('access')],
-        this.webConfigService.getItemFromLocalStorage('language')['iso_code']
+        [this.webConfigService.getObjectFromLocalStorage('access')],
+        this.webConfigService.getObjectFromLocalStorage('language')['iso_code']
       )
       .valueChanges.subscribe(res => {
         this.boards = [];
@@ -87,7 +87,7 @@ export class MyBookingsTableComponent implements OnChanges {
    */
   onCancel(booking) {
     const cancelBooking: CancelBooking = {
-      accessCode: this.webConfigService.getItemFromLocalStorage('access')['code'],
+      accessCode: this.webConfigService.getObjectFromLocalStorage('access')['code'],
       hotelCode: booking.hotel.hotelCode,
       reference: {}
     };
@@ -104,9 +104,9 @@ export class MyBookingsTableComponent implements OnChanges {
     this.hubService
       .cancelBook(cancelBooking, {
         context: this.webConfigService.getItemFromLocalStorage('context'),
-        client: this.webConfigService.getItemFromLocalStorage('client')['name'],
+        client: this.webConfigService.getObjectFromLocalStorage('client')['name'],
         auditTransactions: true,
-        testMode: this.webConfigService.getItemFromLocalStorage('access')['isTest']
+        testMode: this.webConfigService.getObjectFromLocalStorage('access')['isTest']
       })
       .subscribe(
         res => {
@@ -211,7 +211,7 @@ export class MyBookingsTableComponent implements OnChanges {
         }
       ],
       hotelCode: '',
-      currency: this.webConfigService.getItemFromLocalStorage('currency')['iso_code']
+      currency: this.webConfigService.getObjectFromLocalStorage('currency')['iso_code']
       // hotelCode: booking.hotel.hotelCode
     };
 
@@ -219,9 +219,9 @@ export class MyBookingsTableComponent implements OnChanges {
     const subscription = this.hubService
       .getMyBookings(criteriaBooking, {
         context: this.webConfigService.getItemFromLocalStorage('context'),
-        client: this.webConfigService.getItemFromLocalStorage('client')['name'],
+        client: this.webConfigService.getObjectFromLocalStorage('client')['name'],
         auditTransactions: true,
-        testMode: this.webConfigService.getItemFromLocalStorage('access')['isTest']
+        testMode: this.webConfigService.getObjectFromLocalStorage('access')['isTest']
       })
       .valueChanges.subscribe(
         res => {

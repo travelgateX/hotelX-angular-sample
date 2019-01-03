@@ -31,8 +31,6 @@ export class HttpHeadersInterceptor implements HttpInterceptor {
       'Content-Type': 'application/json'
     });
 
-    console.log(headers);
-
     const cloneReq = req.clone({ headers });
     const requestToStore = {
       bearer:

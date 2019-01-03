@@ -74,9 +74,9 @@ export class CloseBookingsComponent implements OnInit, OnDestroy {
       this.hubService
         .getBook(this.bookingDetail.input, {
           context: this.webConfigService.getItemFromLocalStorage('context'),
-          client: this.webConfigService.getItemFromLocalStorage('client')['name'],
+          client: this.webConfigService.getObjectFromLocalStorage('client')['name'],
           auditTransactions: true,
-          testMode: this.webConfigService.getItemFromLocalStorage('access')['isTest']
+          testMode: this.webConfigService.getObjectFromLocalStorage('access')['isTest']
         })
         .subscribe(
           res => {

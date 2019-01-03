@@ -28,7 +28,7 @@ export class CurrencySelectorComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const defaultCurrency = this.webConfigService.getItemFromLocalStorage('currency');
+    const defaultCurrency = this.webConfigService.getObjectFromLocalStorage('currency');
     if (defaultCurrency && defaultCurrency.currency_name) {
       this.currency = defaultCurrency;
     }
@@ -67,7 +67,7 @@ export class CurrencySelectorComponent implements OnInit {
       x => x.currency_name.toLowerCase() === currencyNameTarget.toLowerCase()
     );
     if (currency.length === 1) {
-      this.webConfigService.setItemInLocalStorage('currency', currency[0]);
+      this.webConfigService.setObjectInLocalStorage('currency', currency[0]);
       this.currencySelectorService.currency$.next(currency[0]);
     } else {
       this.currencySelectorService.currency$.next(null);

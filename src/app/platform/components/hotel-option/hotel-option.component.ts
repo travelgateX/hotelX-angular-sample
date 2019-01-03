@@ -142,8 +142,8 @@ export class HotelOptionComponent implements OnInit, OnDestroy, OnChanges {
     this.subscriptions$[0] = this.hubService
       .getQuote(option.id, lang, {
         context: this.context,
-        client: this.webConfigService.getItemFromLocalStorage('client')['name'],
-        testMode: this.webConfigService.getItemFromLocalStorage('access')['isTest'],
+        client: this.webConfigService.getObjectFromLocalStorage('client')['name'],
+        testMode: this.webConfigService.getObjectFromLocalStorage('access')['isTest'],
         auditTransactions: true
       })
       .valueChanges.subscribe(
