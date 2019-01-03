@@ -1,3 +1,14 @@
+header {
+  margin-bottom: 5em;
+  padding-bottom: 0;
+  padding: 10px 10px 0px 20px;
+  font-size: 0.9rem;
+}
+
+header.imper-yellow {
+  background-color: #ffb813;
+}
+
 .imper {
   padding: 0.5rem 1rem;
 }
@@ -30,13 +41,13 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
   justify-content: space-between;
-  margin-bottom: 5em;
+  padding-bottom: 4px;
 }
 .header-menu .logo {
   display: flex;
   align-items: flex-end;
 }
-.header-menu .log{
+.header-menu .log {
   display: flex;
   align-items: center;
 }
@@ -58,10 +69,10 @@
 }
 
 .header-menu .log .mo-myaccount-header .dropdown-toggle {
-  color: #FFF;
+  color: #fff;
 }
 
-.dropdown-toggle::after{
+.dropdown-toggle::after {
   font-size: 18px;
 }
 
@@ -69,18 +80,18 @@
   position: absolute;
   left: -207px;
   top: 60px;
-  background-color: #FFF;
+  background-color: #fff;
   border-radius: 3px;
   z-index: 10;
   border: none;
   padding: 0;
 }
-.header-menu .log .mo-myaccount-header .drop-down::before{
+.header-menu .log .mo-myaccount-header .drop-down::before {
   content: '';
   position: absolute;
   width: 15px;
   height: 15px;
-  background-color: #FFF;
+  background-color: #fff;
   transform: rotate(45deg);
   top: -7px;
   right: 10px;
@@ -90,7 +101,7 @@
   align-items: center;
   padding: 1em;
 }
-.header-menu .log .mo-myaccount-header .drop-down .profile img{
+.header-menu .log .mo-myaccount-header .drop-down .profile img {
   margin-right: 0.5em;
 }
 .header-menu .log .mo-myaccount-header .drop-down .profile p {
@@ -102,23 +113,47 @@
   padding-top: 1em;
   margin: 0;
 }
-.header-menu .log .mo-myaccount-header .drop-down ul li{
+.header-menu .log .mo-myaccount-header .drop-down ul li {
   list-style: none;
   padding: 0.5em 1em;
 }
-.header-menu .log .mo-myaccount-header .drop-down ul .lang-drop{
+.header-menu .log .mo-myaccount-header .drop-down ul .lang-drop {
   display: none;
 }
-.header-menu .log .mo-myaccount-header .drop-down ul li:hover{
-  background-color: rgba(6,98,206,.05);
+.header-menu .log .mo-myaccount-header .drop-down ul li:hover {
+  background-color: rgba(6, 98, 206, 0.05);
 }
-.header-menu .log .mo-myaccount-header .drop-down ul li:last-child{
-  text-align: right;
+.header-menu .log .mo-myaccount-header .drop-down ul li:last-child {
+  text-align: left;
   border-top: 1px solid #eceeef;
   padding: 1em;
   margin: 0;
   margin-top: 1em;
 }
-.header-menu .log .mo-myaccount-header .drop-down ul li a:hover{
+.header-menu .log .mo-myaccount-header .drop-down ul li a {
+  color: #182945;
+}
+.header-menu .log .mo-myaccount-header .drop-down ul li a.log-out {
+  color: #0562ce;
+}
+.header-menu .log .mo-myaccount-header .drop-down ul li a:hover {
   text-decoration: none;
+}
+.imper-warning {
+  width: 100%;
+  padding-top: 9px;
+}
+.imper-warning p {
+  color: #fff;
+  margin: 0;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.imper-warning p::before {
+  content: '\f071';
+  font-family: fontawesome;
+  color: #fff;
+  font-size: 1rem;
+  margin-right: 0.3em;
 }

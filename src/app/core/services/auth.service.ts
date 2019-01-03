@@ -69,7 +69,7 @@ export class AuthService {
     if (!!emailImpes && !!idTokenImpes) {
       this.emailImpes$.next(emailImpes);
     } else {
-      this.clearImpersotion();
+      this.clearImpersotion(false);
     }
   }
 
@@ -170,7 +170,7 @@ export class AuthService {
               memberCode
             );
             this.emailImpes$.next(memberCode);
-            this.router.navigate(['/platform/search-bookings']);
+            window.location.reload();
             return resolve(true);
           }
           return resolve(false);
@@ -178,10 +178,13 @@ export class AuthService {
     );
   }
 
-  clearImpersotion() {
+  clearImpersotion(reload: boolean) {
     this.webConfigService.removeItemFromLocalStorage('id_token_impersonation');
     this.webConfigService.removeItemFromLocalStorage('email_impersonation');
     this.emailImpes$.next(null);
+    if (reload) {
+      window.location.reload();
+    }
   }
 
   /**

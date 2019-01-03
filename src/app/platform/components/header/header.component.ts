@@ -45,6 +45,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
   }
   offImper() {
-    // this.authUniversalService.clearImpersotion();
+    this.authService.clearImpersotion(true);
   }
 }
