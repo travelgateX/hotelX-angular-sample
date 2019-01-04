@@ -19,11 +19,7 @@ export class AuthService {
   profile$ = new BehaviorSubject<any>(this.userProfile);
   emailImpes$: BehaviorSubject<string> = new BehaviorSubject(null);
 
-  lock = new Auth0Lock(
-    auth0Config.clientId,
-    auth0Config.domain,
-    auth0Config.options
-  );
+  lock = new Auth0Lock(auth0Config.clientId, auth0Config.domain, auth0Config.options);
 
   constructor(
     private router: Router,
@@ -42,11 +38,14 @@ export class AuthService {
       const login = JSON.parse(this.cookieService.get('loggedin'));
       this.getUserInfo(login, login.expiresAt, false);
     }
+    if (this.cookieService.get('impersonation')) {
+      const impersonation = JSON.parse(this.cookieService.get('impersonation'));
+      this.webConfigService.setItemInLocalStorage('id_token_impersonation', impersonation.idToken);
+      this.webConfigService.setItemInLocalStorage('email_impersonation', impersonation.memberCode);
+    }
 
     this.lock.on('authenticated', authResult => {
-      const expiresAt = JSON.stringify(
-        authResult.expiresIn * 1000 + new Date().getTime()
-      );
+      const expiresAt = JSON.stringify(authResult.expiresIn * 1000 + new Date().getTime());
       this.getUserInfo(authResult, expiresAt, true);
       this.cookieService.set(
         'loggedin',
@@ -133,11 +132,7 @@ export class AuthService {
       isTest: false
     });
     this.indexedDBService.closeDB();
-    for (
-      let count = 0;
-      this.cookieService.check('loggedin') && count < 100;
-      count++
-    ) {
+    for (let count = 0; this.cookieService.check('loggedin') && count < 100; count++) {
       this.cookieService.delete('loggedin', '/', 'travelgatex.com');
     }
 
@@ -161,13 +156,17 @@ export class AuthService {
           const member = res.data.admin.members.edges[0].node.memberData;
           const idToken = !member ? null : member.impersonationJWT.token;
           if (idToken) {
-            this.webConfigService.setItemInLocalStorage(
-              'id_token_impersonation',
-              idToken
-            );
-            this.webConfigService.setItemInLocalStorage(
-              'email_impersonation',
-              memberCode
+            this.webConfigService.setItemInLocalStorage('id_token_impersonation', idToken);
+            this.webConfigService.setItemInLocalStorage('email_impersonation', memberCode);
+            this.cookieService.set(
+              'impersonation',
+              JSON.stringify({
+                emailImpersonation: memberCode,
+                idTokenImpersonation: idToken
+              }),
+              0,
+              '/',
+              'travelgatex.com'
             );
             this.emailImpes$.next(memberCode);
             window.location.reload();
@@ -181,6 +180,9 @@ export class AuthService {
   clearImpersotion(reload: boolean) {
     this.webConfigService.removeItemFromLocalStorage('id_token_impersonation');
     this.webConfigService.removeItemFromLocalStorage('email_impersonation');
+    for (let count = 0; this.cookieService.check('impersonation') && count < 100; count++) {
+      this.cookieService.delete('impersonation', '/', 'travelgatex.com');
+    }
     this.emailImpes$.next(null);
     if (reload) {
       window.location.reload();
