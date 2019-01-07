@@ -74,7 +74,7 @@ export class HubService {
   /**
    * Executes an availability request
    * @param criteria criteria to search
-   * @param access access
+   * @param filter filter
    * @param context context
    */
   getAvailability(
@@ -88,7 +88,11 @@ export class HubService {
       variables: {
         criteria: criteria,
         settings: settings,
-        access: accessCodes
+        filter: {
+          access: { 
+            includes: accessCodes 
+          }
+        }
       },
       fetchPolicy: 'network-only'
     });

@@ -4,13 +4,13 @@ export const avail = gql`
   query avail(
     $criteria: HotelCriteriaSearchInput
     $settings: HotelSettingsInput
-    $access: [ID!]
+    $filter: FilterInput
   ) {
     hotelX {
       search(
         criteria: $criteria
         settings: $settings
-        filter: { access: { includes: $access } }
+        filter: $filter
       ) {
         options {
           supplierCode
