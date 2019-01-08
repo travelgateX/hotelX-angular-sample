@@ -134,7 +134,7 @@ export class SearchService {
     const hotelCodes = [];
     if (items.length === 1 && items[0].destination) {
       const res = await this.hubService.getHotelCodesDestination(
-        [this.webConfigService.getAccess()],
+        [this.webConfigService.getItemFromLocalStorage('access')],
         items[0].key
       );
       res.data.hotelX.hotels.edges.forEach(element => {

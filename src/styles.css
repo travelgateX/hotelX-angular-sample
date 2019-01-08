@@ -365,6 +365,20 @@ b2b-lang-select a.dropdown-item {
     color: #888888;
   }
 }
+@media (max-width: 425px){
+  b2b-lang-select.lang-platform{
+    position: absolute;
+    top: 6.2rem;
+    right: 0;
+    left: 38%;
+  }
+  .header-menu .log .slack{
+    position: absolute;
+    right: 0;
+    top: 80px;
+    left: 38%;
+  }
+}
 
 /* Criteria */
 .mo-main-search ngb-typeahead-window {

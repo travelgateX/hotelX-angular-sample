@@ -1,0 +1,124 @@
+.imper {
+  padding: 0.5rem 1rem;
+}
+
+.imper .imper-link-on {
+  color: #fff;
+  padding: 0.5em 1em;
+  border-radius: 6px;
+  background-color: #082da6;
+}
+
+.imper .imper-link-on:hover {
+  transition: 0.2s all linear;
+  background-color: #ffbf00;
+  text-decoration: none;
+}
+
+.imper-link-off {
+  background-color: #ffbf00;
+  color: #fff;
+  border-radius: 6px;
+  padding: 0.5em 1em;
+}
+
+.imper-link-off:hover {
+  transition: 0.2s all linear;
+  background-color: #082da6;
+}
+.header-menu {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5em;
+}
+.header-menu .logo {
+  display: flex;
+  align-items: flex-end;
+}
+.header-menu .log{
+  display: flex;
+  align-items: center;
+}
+.header-menu .logo,
+.header-menu .log {
+  height: auto;
+  padding-bottom: 0.5em;
+}
+
+.header-menu .logo img {
+  margin: 0;
+  height: auto;
+  width: 190px;
+}
+
+.header-menu .log .mo-myaccount-header {
+  position: relative;
+  margin: 0;
+}
+
+.header-menu .log .mo-myaccount-header .dropdown-toggle {
+  color: #FFF;
+}
+
+.dropdown-toggle::after{
+  font-size: 18px;
+}
+
+.header-menu .log .mo-myaccount-header .drop-down {
+  position: absolute;
+  left: -207px;
+  top: 60px;
+  background-color: #FFF;
+  border-radius: 3px;
+  z-index: 10;
+  border: none;
+  padding: 0;
+}
+.header-menu .log .mo-myaccount-header .drop-down::before{
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background-color: #FFF;
+  transform: rotate(45deg);
+  top: -7px;
+  right: 10px;
+}
+.header-menu .log .mo-myaccount-header .drop-down .profile {
+  display: flex;
+  align-items: center;
+  padding: 1em;
+}
+.header-menu .log .mo-myaccount-header .drop-down .profile img{
+  margin-right: 0.5em;
+}
+.header-menu .log .mo-myaccount-header .drop-down .profile p {
+  margin: 0;
+  font-size: 14px;
+}
+.header-menu .log .mo-myaccount-header .drop-down ul {
+  padding: 0;
+  padding-top: 1em;
+  margin: 0;
+}
+.header-menu .log .mo-myaccount-header .drop-down ul li{
+  list-style: none;
+  padding: 0.5em 1em;
+}
+.header-menu .log .mo-myaccount-header .drop-down ul .lang-drop{
+  display: none;
+}
+.header-menu .log .mo-myaccount-header .drop-down ul li:hover{
+  background-color: rgba(6,98,206,.05);
+}
+.header-menu .log .mo-myaccount-header .drop-down ul li:last-child{
+  text-align: right;
+  border-top: 1px solid #eceeef;
+  padding: 1em;
+  margin: 0;
+  margin-top: 1em;
+}
+.header-menu .log .mo-myaccount-header .drop-down ul li a:hover{
+  text-decoration: none;
+}

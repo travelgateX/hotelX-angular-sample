@@ -1,0 +1,9 @@
+<form #impersonationForm="ngForm">
+  <div class="modal-header d-block">
+    <button type="button" class="close" (click)="activeModal.close(false)"><span aria-hidden="true">&times;</span></button>
+    <h5 class="modal-title font-weight-bold">Impersonation</h5>
+    <p class="subtit mb-0">Enter a members to impersonation.</p>
+  </div>
+  <div class="modal-body"><input type="email" class="form-control" id="email" required [(ngModel)]="email" name="email" placeholder="email" /></div>
+  <div class="modal-footer"><button type="submit" class="btn btn-primary" [disabled]="impersonationForm.invalid" (click)="onImpersontation()">GO</button></div>
+</form>

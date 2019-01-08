@@ -73,10 +73,10 @@ export class CloseBookingsComponent implements OnInit, OnDestroy {
       this.bookingDetail.input.language = lang;
       this.hubService
         .getBook(this.bookingDetail.input, {
-          context: this.webConfigService.getContext(),
-          client: this.webConfigService.getClient().name,
+          context: this.webConfigService.getItemFromLocalStorage('context'),
+          client: this.webConfigService.getItemFromLocalStorage('client')['name'],
           auditTransactions: true,
-          testMode: this.webConfigService.getAccess().isTest
+          testMode: this.webConfigService.getItemFromLocalStorage('access')['isTest']
         })
         .subscribe(
           res => {

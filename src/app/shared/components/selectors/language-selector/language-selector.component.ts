@@ -31,7 +31,7 @@ export class LanguageSelectorComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    let defaultLanguage = this.webConfigService.getLanguage();
+    const defaultLanguage = this.webConfigService.getItemFromLocalStorage('language');
     if (defaultLanguage && defaultLanguage.language_name) {
       this.language = defaultLanguage;
     }
@@ -66,11 +66,11 @@ export class LanguageSelectorComponent implements OnInit {
    * @param languageTarget
    */
   valuate(languageNameTarget) {
-    let language = this.languages.filter(
+    const language = this.languages.filter(
       x => x.language_name.toLowerCase() === languageNameTarget.toLowerCase()
     );
     if (language.length === 1) {
-      this.webConfigService.setLanguage(language[0]);
+      this.webConfigService.setItemInLocalStorage('language', language[0]);
       this.languageSelectorService.language$.next(language[0]);
     } else {
       this.languageSelectorService.language$.next(null);

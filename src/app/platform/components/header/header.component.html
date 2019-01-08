@@ -1,10 +1,10 @@
 <div class="aux-bg">
   <header>
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-lg-auto">
         <h1 class="logo">
           <a [routerLink]="['/home']">
-            <img [src]="environment.organization.logoHome" alt="logo">
+            <img [src]="environment.organization.logoHome" alt="logo" />
           </a>
         </h1>
       </div>
@@ -12,46 +12,120 @@
         <div class="tools">
           <div class="row">
             <div class="col">
-
               <div class="float-right">
-
                 <b2b-lang-select [class]="'lang-platform'"></b2b-lang-select>
 
-                <div class="mo-myaccount-header dropdown">
+                <a href="https://slack.travelgatex.com" target="blank">
+                  <img
+                    src="https://slack.travelgatex.com/badge.svg"
+                    alt="slack travelgatex"
+                  />
+                </a>
+
+                <div class="mo-myaccount-header dropdown pl-3">
                   <span class="welcome">
                     <span i18n="@@welcome">Welcome</span>
-                    <strong> {{profile?.name}}</strong>
+                    <strong> {{ profile?.name }}</strong>
                   </span>
-                  <a class="dropdown-toggle" href="javascript: void(0);" id="dropdownProfile" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    <img src="{{profile?.picture}}" alt="" class="rounded-circle">
+                  <a
+                    class="dropdown-toggle"
+                    href="javascript: void(0);"
+                    id="dropdownProfile"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <img
+                      src="{{ profile?.picture }}"
+                      alt=""
+                      class="rounded-circle"
+                    />
                   </a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownProfile">
-                    <!-- TODO insert links -->
                     <a class="dropdown-item" [routerLink]="['/home']" [routerLinkActive]="['active']">
                       <span class="fa fa-home"></span>
                       <span i18n="@@home">Home</span>
                     </a>
-                    <a class="dropdown-item" [routerLink]="['/platform/search-bookings']" [routerLinkActive]="['active']">
-                      <span class="fa fa-search"></span> Search</a>
-                    <a class="dropdown-item" [routerLink]="['/platform/my-bookings']" [routerLinkActive]="['active']">
-                      <span class="fa fa-bookmark"></span> My bookings</a>
-                    <a class="dropdown-item" style="color:#cc0033;" (click)="authService.logout()">
+                    <a
+                      class="dropdown-item"
+                      [routerLink]="['/platform/search-bookings']"
+                      [routerLinkActive]="['active']"
+                    >
+                      <span class="fa fa-search"></span> Search</a
+                    >
+                    <a
+                      class="dropdown-item"
+                      [routerLink]="['/platform/my-bookings']"
+                      [routerLinkActive]="['active']"
+                    >
+                      <span class="fa fa-bookmark"></span> My bookings</a
+                    >
+                    <a
+                      class="dropdown-item"
+                      style="color:#cc0033;"
+                      (click)="authService.logout()"
+                    >
                       <span class="fa fa-close"></span>
                       <span i18n="logout">Logout</span>
                     </a>
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
       </div>
 
+    </div> -->
+    <div class="ui two column stackable grid header-menu">
+      <div class="column logo">
+        <a [routerLink]="['/home']"><img src="https://www.travelgatex.com/assets/img/logo_travelgatex_claim_white.svg" alt="TravelgateX"></a>
+      </div>
+      <div class="column log">
+        <div class="slack">
+            <a _ngcontent-c0="" href="https://slack.travelgatex.com" target="blank"><img _ngcontent-c0="" src="https://slack.travelgatex.com/badge.svg"></a>
+        </div>
+        <b2b-lang-select [class]="'lang-platform'"></b2b-lang-select>
+        <div class="mo-myaccount-header dropdown">
+          <a class="dropdown-toggle" href="javascript: void(0);" id="dropdownProfile" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <img src="{{profile?.picture}}" alt="" class="rounded-circle">
+          </a>
+          <!-- <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownProfile">
+            <span class="welcome">
+              <span i18n="@@welcome">Welcome</span>
+              <strong> {{profile?.name}}</strong>
+            </span>
+            <a class="dropdown-item" [routerLink]="['/home']" [routerLinkActive]="['active']">
+              <span class="fa fa-home"></span>
+              <span i18n="@@home">Home</span>
+            </a>
+            <a class="dropdown-item" [routerLink]="['/platform/search-bookings']" [routerLinkActive]="['active']">
+              <span class="fa fa-search"></span> Search</a>
+            <a class="dropdown-item" [routerLink]="['/platform/my-bookings']" [routerLinkActive]="['active']">
+              <span class="fa fa-bookmark"></span> My bookings</a>
+            <a class="dropdown-item" style="color:#cc0033;" (click)="authService.logout()">
+              <span class="fa fa-close"></span>
+              <span i18n="logout">Logout</span>
+            </a>
+          </div> -->
+          <div class="drop-down dropdown-menu" aria-labelledby="dropdownProfile">
+            <div class="profile">
+              <img src="{{profile?.picture}}" alt="" class="rounded-circle">
+              <p>Welcome<br>{{profile?.name}}</p>
+            </div>
+            <ul>
+              <li><a [routerLink]="['/home']" [routerLinkActive]="['active']">Home</a></li>
+              <li><a [routerLink]="['/platform/search-bookings']" [routerLinkActive]="['active']">Search</a></li>
+              <li><a [routerLink]="['/platform/my-bookings']" [routerLinkActive]="['active']">My bookings</a></li>
+              <li class="lang-drop"><b2b-lang-select [class]="'lang-platform'"></b2b-lang-select></li>
+              <li><a class="log-out" (click)="authService.logout()">Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 
   <ng-content></ng-content>
-
 </div>

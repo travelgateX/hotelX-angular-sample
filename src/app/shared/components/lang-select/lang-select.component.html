@@ -3,7 +3,10 @@
     i18n="@@language">
     Language
   </button>
-  <div class="dropdown-menu" aria-labelledby="lang-navbar">
+  <!-- <div class="dropdown-menu" aria-labelledby="lang-navbar">
+    <a *ngFor="let language of languages" class="dropdown-item" href="{{language | langUrl}}" i18n="@@lang-{{lang}}">{{language}}</a>
+  </div> -->
+  <div class="drop-lang dropdown-menu" aria-labelledby="lang-navbar">
     <a *ngFor="let language of languages" class="dropdown-item" href="{{language | langUrl}}" i18n="@@lang-{{lang}}">{{language}}</a>
   </div>
 </div>

@@ -172,10 +172,10 @@ export class MyBookingsComponent implements OnInit, OnDestroy {
     this.bookings = null;
     this.hubService
       .getMyBookings(criteriaBooking, {
-        context: this.webConfigService.getContext(),
-        client: this.webConfigService.getClient().name,
+        context: this.webConfigService.getItemFromLocalStorage('context'),
+        client: this.webConfigService.getItemFromLocalStorage('client')['name'],
         auditTransactions: true,
-        testMode: this.webConfigService.getAccess().isTest
+        testMode: this.webConfigService.getItemFromLocalStorage('access')['isTest']
       })
       .valueChanges.subscribe(
         res => {

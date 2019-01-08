@@ -24,14 +24,14 @@ export class ClientSelectorComponent implements OnInit {
     this.clientSelectorService.clients$.subscribe(
       res => {
         this.clients = res;
-        const storedClient = this.webConfigService.getClient();
+        const storedClient = this.webConfigService.getItemFromLocalStorage('client');
         if (
           storedClient &&
           this.clients.findIndex(
             client => client.code === storedClient.code
           ) !== -1
         ) {
-          this.clientSelected = this.webConfigService.getClient().code;
+          this.clientSelected = this.webConfigService.getItemFromLocalStorage('client')['code'];
           this.onClientSelected();
         } else if (this.clients.length === 1) {
           this.clientSelected = this.clients[0].code;
@@ -53,7 +53,7 @@ export class ClientSelectorComponent implements OnInit {
       clientAux => clientAux.code === this.clientSelected
     );
     if (client) {
-      this.webConfigService.setClient(client);
+      this.webConfigService.setItemInLocalStorage('client', client);
       this.clientSelectorService.clientSelected$.next(client);
     }
   }

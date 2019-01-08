@@ -111,5 +111,12 @@ export class CoreModule {
       link: http,
       cache: new InMemoryCache({ fragmentMatcher })
     });
+
+    apollo.createNamed('coreController', {
+      link: httpLink.create({
+        uri: 'https://api-iam.travelgatex.com/controller/xquery'
+      }),
+      cache: new InMemoryCache()
+    });
   }
 }
