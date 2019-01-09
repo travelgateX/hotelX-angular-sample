@@ -63,36 +63,22 @@ export class AlertDropdownComponent implements OnInit, OnChanges {
   @Input()
   warnings: any[];
 
-  shownItems: string;
-  items: any[];
-
-  seeItems = 'no';
+  toggledType: string;
 
   constructor() {}
 
   ngOnInit() {}
 
   ngOnChanges(e) {
-    if (e) {
-      if (!(this.warnings || []).length && (this.items || []).length) {
-        this.items = this.items.filter(i => i.type !== 'warning');
-      }
-
-      if (!(this.errors || []).length && (this.items || []).length) {
-        this.items = this.items.filter(i => i.type !== 'error');
-      }
-    }
+    this.toggledType = undefined;
   }
 
   toggleItems(type) {
-    if (this.shownItems === type || this.shownItems === undefined) {
-      this.seeItems = this.seeItems === 'no' ? 'yes' : 'no';
-    } else if (this.shownItems !== type && this.seeItems === 'no') {
-      this.seeItems = 'yes';
+    if(this.toggledType !== type){
+      this.toggledType = type;
+    }else{
+      this.toggledType = undefined;
     }
-
-    this.items = type === 'e' ? this.errors : this.warnings;
-    this.shownItems = type;
   }
 
   removeItems(item) {
@@ -103,5 +89,12 @@ export class AlertDropdownComponent implements OnInit, OnChanges {
       const index = this.errors.findIndex(i => i.message === item.message);
       this.errors.splice(index, 1);
     }
+  }
+
+  getToggledItems(){
+    if(this.toggledType){
+      return this.toggledType === 'e' ? this.errors : this.warnings;
+    }
+    return [];
   }
 }

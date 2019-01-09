@@ -18,7 +18,7 @@ export class DateFormatPipe implements PipeTransform {
   transform(value: NgbDateStruct, format?: string): any {
     let date;
     if (value.year && value.month && value.day) {
-     date = moment(value.year + '-' + value.month + '-' + value.day);
+     date = moment(value.year + '-' + value.month + '-' + value.day, 'YYYY-MM-DD');
     } else {
      date = moment(value);
     }

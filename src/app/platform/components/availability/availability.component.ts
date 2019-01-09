@@ -267,7 +267,7 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
     this.minDateTo.year = date.getFullYear();
     this.minDateTo.month = date.getMonth() + 1;
     this.minDateTo.day = date.getDate();
-    sToggle.open();
+    setTimeout( _=> sToggle.open(), 50);
   }
 
   /**
