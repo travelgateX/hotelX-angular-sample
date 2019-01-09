@@ -135,6 +135,7 @@ export class AuthService {
     for (let count = 0; this.cookieService.check('loggedin') && count < 100; count++) {
       this.cookieService.delete('loggedin', '/', 'travelgatex.com');
     }
+    this.clearImpersotion(false);
 
     if (savedAccess) {
       this.router.navigate(['/home', { popLogin: true }]);
@@ -169,7 +170,11 @@ export class AuthService {
               'travelgatex.com'
             );
             this.emailImpes$.next(memberCode);
-            window.location.reload();
+            if (this.router.url === '/platform/search-bookings' || this.router.url === '/platform/my-bookings') {
+              window.location.reload();
+            } else {
+              window.location.replace('/home');
+            }
             return resolve(true);
           }
           return resolve(false);
@@ -185,7 +190,11 @@ export class AuthService {
     }
     this.emailImpes$.next(null);
     if (reload) {
-      window.location.reload();
+      if (this.router.url === '/platform/search-bookings' || this.router.url === '/platform/my-bookings') {
+        window.location.reload();
+      } else {
+        window.location.replace('/home');
+      }
     }
   }
 
