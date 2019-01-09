@@ -391,6 +391,14 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
    * Emits a search with the criteria object
    */
   onSearch() {
+    const checkIn = this.criteria.checkIn;
+    const checkOut = this.criteria.checkOut;
+ 
+    if(new Date(`${checkIn.year}-${checkIn.month}-${checkIn.day}`) > new Date(`${checkOut.year}-${checkOut.month}-${checkOut.day}`)){
+      this.criteria.checkIn = checkOut;
+      this.criteria.checkOut = checkIn;
+    }
+    
     this.bookingService.setSearchValue(this.criteria);
     this.output.emit({
       criteria: this.criteria
