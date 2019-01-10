@@ -40,8 +40,8 @@ export class AuthService {
     }
     if (this.cookieService.get('impersonation')) {
       const impersonation = JSON.parse(this.cookieService.get('impersonation'));
-      this.webConfigService.setItemInLocalStorage('id_token_impersonation', impersonation.idToken);
-      this.webConfigService.setItemInLocalStorage('email_impersonation', impersonation.memberCode);
+      this.webConfigService.setItemInLocalStorage('id_token_impersonation', impersonation.idTokenImpersonation);
+      this.webConfigService.setItemInLocalStorage('email_impersonation', impersonation.emailImpersonation);
     }
 
     this.lock.on('authenticated', authResult => {

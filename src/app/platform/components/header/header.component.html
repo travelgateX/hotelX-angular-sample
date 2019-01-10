@@ -28,7 +28,7 @@
               <img src="{{ profile?.picture }}" alt="" class="rounded-circle" />
               <p>Welcome<br />{{ profile?.name }}</p>
             </div>
-            <div class="imper">
+            <div class="imper" *ngIf="hasImpersonation">
               <a href="javascript:void(0)" class="imper-link-on" (click)="onImper()" *ngIf="!emailImper">Impersonation</a>
               <a href="javascript:void(0)" class="imper-link-off" (click)="offImper()" *ngIf="emailImper">Disconnect impersonation</a>
             </div>

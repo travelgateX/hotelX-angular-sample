@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   environment: any;
   emailImper: string = null;
   show: true;
+  hasImpersonation = false;
 
   constructor(
     public authService: AuthService,
@@ -26,6 +27,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.subscriptions$ = [];
     this.subscriptions$[0] = this.authService.profile$.subscribe(profile => {
       this.profile = profile;
+      if (this.profile.email.includes('@xmltravelgate.com')) {
+        this.hasImpersonation = true;
+      }
     });
     this.environment = environment;
 
