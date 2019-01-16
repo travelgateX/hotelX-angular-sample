@@ -45,7 +45,6 @@ export class OrganizationSelectorComponent implements OnInit {
   }
 
   setOrganization(event) {
-    console.log(event);
     this.webConfigService.setOrganization(event.target.outerText);
     this.selectedOrganization = event.target.outerText;
     this.organizationSelectorService.organizationSelected$.next(

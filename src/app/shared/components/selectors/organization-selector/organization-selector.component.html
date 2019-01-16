@@ -1,11 +1,12 @@
-<div class="dropdown" (keyup)="direction($event)" *ngIf="organizationsAux.length > 1">
+<div class="dropdown" *ngIf="organizationsAux?.length > 1">
+    <!-- (keyup)="direction($event)"  -->
   <button class="btn dropdown-toggle c-pointer" type="button" id="organization-navbar" data-toggle="dropdown" aria-haspopup="true"
     aria-expanded="false" i18n="@@organization" (click)="resetInput()">
     {{selectedOrganization}}
   </button>
   <div class="dropdown-menu" aria-labelledby="organization-navbar">
     <div class="form-group">
-      <input type="text" class="form-control" (keyup)=filterOptions() [(ngModel)]="filter" placeholder="Search org...">
+      <input type="text" class="form-control" (keyup)="filterOptions()" [(ngModel)]="filter" placeholder="Search org...">
     </div>
     <hr>
     <div class="container-organization-navbar">

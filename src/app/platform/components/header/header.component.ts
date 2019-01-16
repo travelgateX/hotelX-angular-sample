@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.subscriptions$ = [];
     this.subscriptions$[0] = this.authService.profile$.subscribe(profile => {
       this.profile = profile;
-      if (this.profile.email.includes('@xmltravelgate.com')) {
+      if (!!this.profile && this.profile.email.includes('@xmltravelgate.com')) {
         this.hasImpersonation = true;
       }
     });
