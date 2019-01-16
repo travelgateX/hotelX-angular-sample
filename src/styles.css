@@ -365,6 +365,7 @@ b2b-lang-select a.dropdown-item {
     color: #888888;
   }
 }
+
 @media (max-width: 425px){
   b2b-lang-select.lang-platform{
     position: absolute;
@@ -377,6 +378,75 @@ b2b-lang-select a.dropdown-item {
     right: 0;
     top: 80px;
     left: 38%;
+  }
+}
+
+b2b-organization-selector {
+  display: inline-block;
+}
+
+b2b-organization-selector .btn {
+  border: none;
+  background-color: transparent;
+  display: inline-block;
+  padding: 0;
+  font-weight: 100;
+  font-family: sans-serif;
+}
+
+b2b-organization-selector.organization-home .btn {
+  color: #ffffff;
+  font-size: 14px;
+  margin-left: 15px;
+  text-transform: uppercase;
+}
+
+b2b-organization-selector.organization-platform a.dropdown-item {
+  font-size: 13px;
+}
+
+b2b-organization-selector.organization-platform .btn {
+  color: #ffffff;
+  margin: 15px;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+b2b-organization-selector a.dropdown-item {
+  color: #888888;
+}
+
+b2b-organization-selector .container-organization-navbar {
+  max-height: 8em;
+  overflow-y: scroll;
+}
+
+b2b-organization-selector .dropdown-menu .form-group {
+  margin: 0.15rem 0.5rem 0.6rem 0.5rem;
+}
+
+b2b-organization-selector .dropdown-menu .form-group .form-control {
+  height: 1.75rem;
+  font-size: 13px;
+}
+
+b2b-organization-selector hr {
+  margin: 0.5rem 0;
+}
+
+@media (max-width: 767px) {
+  .mo-mainpage #header .tgx-logo {
+    width: auto;
+  }
+
+  b2b-organization-selector.organization-platform {
+    position: absolute;
+    top: -2.8rem;
+    right: 2rem;
+  }
+
+  b2b-organization-selector.organization-home .btn {
+    color: #888888;
   }
 }
 
@@ -420,4 +490,8 @@ ngb-typeahead-window button {
 .col-centered{
   float: none;
   margin: 0 auto;
+}
+
+.highlight {
+  font-weight: 1000;
 }

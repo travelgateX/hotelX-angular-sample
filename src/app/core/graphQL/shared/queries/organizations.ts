@@ -1,15 +1,13 @@
 import gql from 'graphql-tag';
 
-export const clients = gql`
-query clients($groupID: [ID]) {
+export const organizations = gql`
+{
   admin {
-    clients(filter: { groupID: $groupID }) {
+    organizations {
       edges {
         node {
-          clientData {
+          organizationData {
             code
-            name
-            isActive
           }
           error {
             code

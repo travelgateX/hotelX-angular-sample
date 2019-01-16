@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Supplier, Access } from 'app/core/interfaces';
 import { WebConfigService } from '../../../core/services/web-config.service';
 import { SupplierAccessesService } from './supplier-accesses.service';
+import { OrganizationSelectorService } from '../../../shared/components/selectors/organization-selector/organization-selector.service';
 
 @Component({
   selector: 'b2b-supplier-accesses',
@@ -18,13 +19,16 @@ export class SupplierAccessesComponent implements OnInit {
   supplierSelected: string;
   constructor(
     private webConfigService: WebConfigService,
-    private supplierAccessesService: SupplierAccessesService
+    private supplierAccessesService: SupplierAccessesService,
+    private organizationSelectorService: OrganizationSelectorService
   ) {}
 
   ngOnInit() {
     this.showErrorSuppliers = false;
     this.suppliers = [];
-    this.supplierAccessesService.getSuppliersAccesses();
+    this.organizationSelectorService.organizationSelected$.subscribe(res => {
+      this.supplierAccessesService.getSuppliersAccesses(res);
+    });
     this.supplierAccessesService.suppliersAccesses$.subscribe(
       res => {
         this.suppliers = res;

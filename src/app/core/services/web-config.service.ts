@@ -40,4 +40,12 @@ export class WebConfigService {
   removeItemFromLocalStorage(key: string) {
     localStorage.removeItem(key);
   }
+  
+  setOrganization(organization: string) {
+    localStorage.setItem('organization', JSON.stringify(organization));
+  }
+
+  getOrganization(): string {
+    return JSON.parse(localStorage.getItem('organization'));
+  }
 }

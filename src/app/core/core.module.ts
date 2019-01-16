@@ -23,6 +23,7 @@ import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { fragmentTypes } from './fragmentTypes';
 import { WebConfigService } from './services/web-config.service';
 import { CookieService } from 'ngx-cookie-service';
+import { CoreAdminService } from './services/core-admin.service';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, ApolloModule, HttpLinkModule],
@@ -41,7 +42,8 @@ import { CookieService } from 'ngx-cookie-service';
     LoginGuard,
     LangService,
     HttpLink,
-    CookieService
+    CookieService,
+    CoreAdminService
   ],
   declarations: []
 })
@@ -68,7 +70,8 @@ export class CoreModule {
         LoginGuard,
         LangService,
         HttpLink,
-        CookieService
+        CookieService,
+        CoreAdminService
       ]
     };
   }

@@ -6,12 +6,10 @@ import { cancelBooking } from '../graphQL/my-bookings/mutations/cancel-booking';
 import { booking } from '../graphQL/my-bookings/queries/booking';
 import { book } from '../graphQL/close-bookings/mutations/book';
 import {
-  suppliersAccesses,
   destinationSearcher,
   boards,
   categories,
-  hotelCodesFromDestination,
-  clients
+  hotelCodesFromDestination
 } from '../graphQL/shared/queries';
 import {
   Access,
@@ -172,23 +170,6 @@ export class HubService {
     return this.apollo.watchQuery<any>({
       query: hotelInfo,
       variables: { codes: hotels, access: accessCodes[0], language: [language] }
-    });
-  }
-
-  /**
-   * Get the information of suppliers/accesses
-   */
-  getSuppliersAccesses(): QueryRef<any> {
-    return this.apollo.watchQuery<any>({
-      query: suppliersAccesses
-    });
-  }
-  /**
-   * Get the information of suppliers/accesses
-   */
-  getClients(): QueryRef<any> {
-    return this.apollo.watchQuery<any>({
-      query: clients
     });
   }
 

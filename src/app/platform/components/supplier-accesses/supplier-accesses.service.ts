@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HubService } from '../../../core/services/hub.service';
+import { CoreAdminService } from '../../../core/services/core-admin.service';
+import { WebConfigService } from '../../../core/services/web-config.service';
 import { Subject } from 'rxjs';
 
 @Injectable()
@@ -7,11 +8,11 @@ export class SupplierAccessesService {
   suppliersAccesses$ = new Subject<any>();
   supplierSpinner = new Subject<number>();
 
-  constructor(private hubService: HubService) {}
+  constructor(private coreAdminService: CoreAdminService, private webConfigService: WebConfigService) {}
 
-  getSuppliersAccesses() {
+  getSuppliersAccesses(organization) {
     let suppliers = [];
-    this.hubService.getSuppliersAccesses().valueChanges.subscribe(res => {
+    this.coreAdminService.getSuppliersAccesses(organization).valueChanges.subscribe(res => {
       if (res) {
         res.data.admin.suppliers.edges.map(element => {
           if (element.node && element.node.supplierData) {

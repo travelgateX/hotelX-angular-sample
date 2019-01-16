@@ -612,6 +612,11 @@ pre {
     background-color: transparent;
     border-radius: 0; }
 
+
+.c-pointer {
+  cursor: pointer;
+}
+    
 .pre-scrollable {
   max-height: 340px;
   overflow-y: scroll; }
