@@ -23,7 +23,7 @@ export class CoreAdminService {
   getClients(organization: string): QueryRef<any> {
     return this.apollo.watchQuery<any>({
       query: clients,
-      variables: { groupID: [organization] }
+      variables: { org: [organization] }
     });
   }
 

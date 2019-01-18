@@ -88,10 +88,10 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
       false,
       {
         title: 'Hotels',
-        display: function(item) {
+        display: function (item) {
           return `${item.display} - [hotel in ${item.location.city} - (${
             item.location.country
-          }) - (${item.value})]`;
+            }) - (${item.value})]`;
         }
       }
     ],
@@ -99,7 +99,7 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
       true,
       {
         title: 'Destinations',
-        display: function(item) {
+        display: function (item) {
           return `${item.display} - (${item.value})`;
         }
       }
@@ -191,22 +191,20 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
   }
 
   checkLength() {
+    console.log(this.clientSP, this.supplierSP)
     if (
       this.clientSP &&
-      this.supplierSP &&
-      (this.clientSP > 1 ||
-        this.supplierSP > 1 ||
-        this.clientSP < 1 ||
-        this.supplierSP < 1)
+      this.supplierSP
     ) {
       this.configInputsHidden = false;
-    }
-
-    if (
+      this.spinnerService.stop();
+    } else if (
       this.clientSP !== null &&
       this.clientSP !== undefined &&
       (this.supplierSP !== null && this.supplierSP !== undefined)
     ) {
+      console.log('adios')
+      this.configInputsHidden = true;
       this.spinnerService.stop();
     }
   }
@@ -240,13 +238,13 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
             term === ''
               ? []
               : this.markets.filter((item: Country) => {
-                  const name =
-                    item.country_name.toLowerCase().indexOf(term) !== -1;
+                const name =
+                  item.country_name.toLowerCase().indexOf(term) !== -1;
 
-                  return (
-                    item.iso_code.toLowerCase().indexOf(term) !== -1 || name
-                  );
-                })
+                return (
+                  item.iso_code.toLowerCase().indexOf(term) !== -1 || name
+                );
+              })
         )
       );
 
@@ -260,14 +258,14 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
     eToggle.close();
     const date = new Date(
       `${this.criteria.checkIn.year}/${this.criteria.checkIn.month}/${
-        this.criteria.checkIn.day
+      this.criteria.checkIn.day
       }`
     );
     date.setDate(date.getDate() + 1);
     this.minDateTo.year = date.getFullYear();
     this.minDateTo.month = date.getMonth() + 1;
     this.minDateTo.day = date.getDate();
-    setTimeout( _=> sToggle.open(), 50);
+    setTimeout(_ => sToggle.open(), 50);
   }
 
   /**
@@ -393,12 +391,12 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
   onSearch() {
     const checkIn = this.criteria.checkIn;
     const checkOut = this.criteria.checkOut;
- 
-    if(new Date(`${checkIn.year}-${checkIn.month}-${checkIn.day}`) > new Date(`${checkOut.year}-${checkOut.month}-${checkOut.day}`)){
+
+    if (new Date(`${checkIn.year}-${checkIn.month}-${checkIn.day}`) > new Date(`${checkOut.year}-${checkOut.month}-${checkOut.day}`)) {
       this.criteria.checkIn = checkOut;
       this.criteria.checkOut = checkIn;
     }
-    
+
     this.bookingService.setSearchValue(this.criteria);
     this.output.emit({
       criteria: this.criteria

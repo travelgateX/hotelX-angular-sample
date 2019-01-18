@@ -10,6 +10,7 @@ export const suppliersAccesses = gql`
               name
               code
               context
+              isActive
               accesses {
                 edges {
                   node {

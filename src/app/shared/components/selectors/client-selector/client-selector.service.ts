@@ -20,10 +20,13 @@ export class ClientSelectorService {
     }
     this.coreAdminService.getClients(organization).valueChanges.subscribe(res => {
       if (res) {
-        res.data.admin.clients.edges.map(edge => {
-          if (edge.node && edge.node.clientData) {
-            clients.push(edge.node.clientData);
-          }
+        res.data.admin.organizations.edges.map(edge => {
+          const clientsEdges = (((edge.node || {}).organizationData || {}).clients || {}).edges;
+          clientsEdges.map(ce => {
+            if (ce.node && ce.node.clientData) {
+              clients.push(ce.node.clientData);
+            }
+          });
         });
         clients = clients.sort((a, b) => {
           if (a.name < b.name) {
@@ -34,6 +37,7 @@ export class ClientSelectorService {
           }
           return 0;
         });
+        console.log(clients);
         this.clients$.next(clients);
         this.clientSpinner.next(clients.length);
       }else{
