@@ -3,6 +3,7 @@ import { Client } from '../../../../core/interfaces/client';
 import { WebConfigService } from '../../../../core/services/web-config.service';
 import { ClientSelectorService } from './client-selector.service';
 import { OrganizationSelectorService } from '../organization-selector/organization-selector.service';
+import { NotificationService } from 'app/shared/services/notification.service';
 
 @Component({
   selector: 'b2b-client-selector',
@@ -17,7 +18,8 @@ export class ClientSelectorComponent implements OnInit {
   constructor(
     private webConfigService: WebConfigService,
     private clientSelectorService: ClientSelectorService,
-    private organizationSelectorService: OrganizationSelectorService
+    private organizationSelectorService: OrganizationSelectorService, 
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit() {
@@ -42,6 +44,7 @@ export class ClientSelectorComponent implements OnInit {
           this.onClientSelected();
         }
         if (this.clients.length === 0) {
+          this.notificationService.toast('Clients', 'No clients available', 5);
           this.showErrorClients = true;
         }
       },

@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { OrganizationSelectorService } from './organization-selector.service';
 import { WebConfigService } from '../../../../core/services/web-config.service';
+import { organizations } from 'app/core/graphQL/shared/queries/organizations';
+import { NotificationService } from 'app/shared/services/notification.service';
 
 /**
  * Displays a select for allowed organizations
@@ -19,7 +21,8 @@ export class OrganizationSelectorComponent implements OnInit {
 
   constructor(
     private organizationSelectorService: OrganizationSelectorService,
-    private webConfigService: WebConfigService
+    private webConfigService: WebConfigService,
+    private notificationService: NotificationService
   ) {}
 
   /**
@@ -38,6 +41,10 @@ export class OrganizationSelectorComponent implements OnInit {
         defaultOrg && this.organizations.includes(defaultOrg)
           ? defaultOrg
           : res[0];
+
+      if(this.organizations.length === 0){
+        this.notificationService.toast('Organizations', 'No organizations available', 5);
+      }
       this.organizationSelectorService.organizationSelected$.next(
         this.selectedOrganization
       );

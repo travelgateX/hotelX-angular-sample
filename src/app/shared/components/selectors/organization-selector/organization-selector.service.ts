@@ -16,8 +16,13 @@ export class OrganizationSelectorService {
         if (((element.node || {}).organizationData || {}).code){
           organizations.push(element.node.organizationData.code)
         }
-      })
-      this.organizations$.next(organizations)
+      });
+      organizations.sort(function(a, b){
+        if(a < b) { return -1; }
+        if(a > b) { return 1; }
+        return 0;
+      });
+      this.organizations$.next(organizations);
     });
   }
 }

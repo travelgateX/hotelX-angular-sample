@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Client } from '../../../../core/interfaces/client';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { HubService } from '../../../../core/services/hub.service';
 import { CoreAdminService } from '../../../../core/services/core-admin.service';
-import { WebConfigService } from '../../../../core/services/web-config.service';
 
 @Injectable()
 export class ClientSelectorService {
@@ -12,10 +10,14 @@ export class ClientSelectorService {
 
   clientSpinner = new Subject<number>();
 
-  constructor(private coreAdminService: CoreAdminService, private webConfigService: WebConfigService) {}
+  constructor(private coreAdminService: CoreAdminService) {}
 
   getClients(organization) {
     let clients = [];
+    if(!organization){
+      this.clientSpinner.next(0);
+      return;
+    }
     this.coreAdminService.getClients(organization).valueChanges.subscribe(res => {
       if (res) {
         res.data.admin.clients.edges.map(edge => {
@@ -34,6 +36,8 @@ export class ClientSelectorService {
         });
         this.clients$.next(clients);
         this.clientSpinner.next(clients.length);
+      }else{
+        this.clientSpinner.next(0);
       }
     });
   }

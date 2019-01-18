@@ -3,6 +3,7 @@ import { Supplier, Access } from 'app/core/interfaces';
 import { WebConfigService } from '../../../core/services/web-config.service';
 import { SupplierAccessesService } from './supplier-accesses.service';
 import { OrganizationSelectorService } from '../../../shared/components/selectors/organization-selector/organization-selector.service';
+import { NotificationService } from 'app/shared/services/notification.service';
 
 @Component({
   selector: 'b2b-supplier-accesses',
@@ -20,7 +21,8 @@ export class SupplierAccessesComponent implements OnInit {
   constructor(
     private webConfigService: WebConfigService,
     private supplierAccessesService: SupplierAccessesService,
-    private organizationSelectorService: OrganizationSelectorService
+    private organizationSelectorService: OrganizationSelectorService,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit() {
@@ -32,6 +34,9 @@ export class SupplierAccessesComponent implements OnInit {
     this.supplierAccessesService.suppliersAccesses$.subscribe(
       res => {
         this.suppliers = res;
+        if(this.suppliers.length === 0){
+          this.notificationService.toast('Suppliers', 'No suppliers available', 5)
+        }
         const access = this.webConfigService.getObjectFromLocalStorage('access');
         if (access && access.code) {
           for (

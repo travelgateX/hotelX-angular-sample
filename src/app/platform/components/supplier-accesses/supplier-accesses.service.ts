@@ -12,6 +12,10 @@ export class SupplierAccessesService {
 
   getSuppliersAccesses(organization) {
     let suppliers = [];
+    if(!organization){
+      this.supplierSpinner.next(0);
+      return;
+    }
     this.coreAdminService.getSuppliersAccesses(organization).valueChanges.subscribe(res => {
       if (res) {
         res.data.admin.suppliers.edges.map(element => {
@@ -30,6 +34,8 @@ export class SupplierAccessesService {
         });
         this.suppliersAccesses$.next(suppliers);
         this.supplierSpinner.next(suppliers.length);
+      }else{
+        this.supplierSpinner.next(0);
       }
     });
   }
