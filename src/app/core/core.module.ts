@@ -4,7 +4,9 @@ import {
   NgModule,
   ModuleWithProviders,
   Optional,
-  SkipSelf
+  SkipSelf,
+  Injector,
+  Provider
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginGuard } from './guard/login.guard';
@@ -17,19 +19,27 @@ import {
   InMemoryCache,
   IntrospectionFragmentMatcher
 } from 'apollo-cache-inmemory';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { HttpHeadersInterceptor } from './httpHeaders.interceptor';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { fragmentTypes } from './fragmentTypes';
 import { WebConfigService } from './services/web-config.service';
 import { CookieService } from 'ngx-cookie-service';
+import { ConfigModule } from '@ngx-config/core';
+import { ConfigHttpLoader } from '@ngx-config/http-loader';
+import { environment } from '../../environments/environment';
+
+export const configFactory = (http: HttpClient) => {
+  return new ConfigHttpLoader(http, environment.configUrl);
+};
 
 @NgModule({
-  imports: [CommonModule, HttpClientModule, ApolloModule, HttpLinkModule],
+  imports: [CommonModule, HttpClientModule, ApolloModule, HttpLinkModule, ConfigModule.forRoot()],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpHeadersInterceptor,
+      deps: [Injector],
       multi: true
     },
     HttpService,
@@ -50,13 +60,14 @@ export class CoreModule {
    * ForRoot method can only be accessed from App Module
    * It prevents to import a Service more than once, in this case, services are singleton
    */
-  static forRoot(): ModuleWithProviders {
+  static forRoot(config: Provider): ModuleWithProviders {
     return {
       ngModule: CoreModule,
       providers: [
         {
           provide: HTTP_INTERCEPTORS,
           useClass: HttpHeadersInterceptor,
+          deps: [Injector],
           multi: true
         },
         HttpService,
@@ -68,7 +79,8 @@ export class CoreModule {
         LoginGuard,
         LangService,
         HttpLink,
-        CookieService
+        CookieService,
+        config,
       ]
     };
   }

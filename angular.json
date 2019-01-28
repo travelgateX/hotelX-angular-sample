@@ -16,7 +16,10 @@
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
             "polyfills": "src/polyfills.ts",
-            "assets": ["src/assets/img"],
+            "assets": [
+              "src/assets/img",
+              "src/assets/config.json"
+            ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/ngx-toastr/toastr.css",

@@ -27,6 +27,7 @@ export const auth0Config = {
 
 export const environment = {
   production: false,
+  configUrl: './assets/config.json',
   languages: ['en', 'es'],
   googleMapsKey: 'AIzaSyDnnHGVUJJCRIzFTmRwdASd60QnQi2L7LY',
   organization: {
