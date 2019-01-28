@@ -47,6 +47,7 @@ export class ClientSelectorComponent implements OnInit {
         }
         if (this.clients.length === 0) {
           this.notificationService.toast('Clients', 'No clients available', 5);
+          this.clientSelectorService.clientSelected$.next(null);
           this.showErrorClients = true;
         }
       },
