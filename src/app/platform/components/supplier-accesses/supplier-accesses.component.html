@@ -3,6 +3,7 @@
     <div class="form-group">
       <label> <span i18n="@@supplier">Supplier</span>:</label>
       <select
+        [disabled]="suppliers?.length === 1"
         class="form-control"
         [(ngModel)]="supplierSelected"
         name="supplierSelected"

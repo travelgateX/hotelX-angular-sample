@@ -191,7 +191,6 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
   }
 
   checkLength() {
-    console.log(this.clientSP, this.supplierSP)
     if (
       this.clientSP &&
       this.supplierSP
@@ -203,7 +202,6 @@ export class AvailabilityComponent implements OnInit, OnDestroy {
       this.clientSP !== undefined &&
       (this.supplierSP !== null && this.supplierSP !== undefined)
     ) {
-      console.log('adios')
       this.configInputsHidden = true;
       this.spinnerService.stop();
     }

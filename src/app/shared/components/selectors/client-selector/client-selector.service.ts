@@ -37,7 +37,6 @@ export class ClientSelectorService {
           }
           return 0;
         });
-        console.log(clients);
         this.clients$.next(clients);
         this.clientSpinner.next(clients.length);
       }else{
