@@ -7,42 +7,52 @@ import {
   HttpHeaders
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { RequestStorageService } from '../shared/services/request-storage.service';
-import { WebConfigService } from './services/web-config.service';
+import { flow, get, includes } from 'lodash/fp';
+import { ConfigService } from '@ngx-config/core';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class HttpHeadersInterceptor implements HttpInterceptor {
-  constructor(
-    private requestStorageService: RequestStorageService,
-    private webConfigService: WebConfigService
-  ) {}
+  constructor(private readonly injector: Injector, private requestStorageService: RequestStorageService) {
+  }
 
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    if (req.url === environment.configUrl) {
+      return next.handle(req);
+    }
+
+    const config = this.injector.get(ConfigService);
+    const apiKey = config.getSettings<string>()['apiKey'];
+
     const headers = new HttpHeaders({
-      Authorization:
-        'Bearer ' +
-          (this.webConfigService.getItemFromLocalStorage(
-            'id_token_impersonation'
-          ) || localStorage.getItem('token')),
+      Authorization: !apiKey
+        ? `Bearer ${localStorage.getItem('token')}`
+        : `Apikey ${apiKey}`,
       'Content-Type': 'application/json'
     });
 
     const cloneReq = req.clone({ headers });
     const requestToStore = {
-      bearer:
-        'Bearer ' +
-          (this.webConfigService.getItemFromLocalStorage(
-            'id_token_impersonation'
-          ) || localStorage.getItem('token')),
+      ...(!apiKey
+        ? { bearer: `Bearer ${localStorage.getItem('token')}` }
+        : { Authorization: `Apikey ${apiKey}` }),
       rq: cloneReq
     };
-    if (OperationsToStore.includes(requestToStore.rq.body.operationName)) {
+
+    const hasOperation = flow(
+      get('body.operationName'),
+      cur => includes(cur)(OperationsToStore)
+    )(requestToStore.rq);
+
+    if (hasOperation) {
       this.requestStorageService.storeRequestResponse(requestToStore, false);
     }
+
     return next.handle(cloneReq);
   }
 }
