@@ -66,7 +66,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let policy of quote.cancelPolicy.cancelPenalties">
+        <tr *ngFor="let policy of quote?.cancelPolicy?.cancelPenalties">
           <td>{{policy.penaltyType.toUpperCase() === 'IMPORT' ? "Amount" : policy.penaltyType}}</td>
           <td>
             <a class="tip" data-toggle="tooltip" data-placement="top">{{policy.value | number : '1.2-2'}} {{policy.currency}}</a>

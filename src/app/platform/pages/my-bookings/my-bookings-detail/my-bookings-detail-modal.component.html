@@ -58,7 +58,7 @@
     </tbody>
 
   </table>
-  <b2b-cancel-policies-table *ngIf="booking?.cancelPolicy?.cancelPenalties; else noPenalties" [cancelPenalties]="booking.cancelPolicy.cancelPenalties"></b2b-cancel-policies-table>
+  <b2b-cancel-policies-table *ngIf="booking?.cancelPolicy?.cancelPenalties; else noPenalties" [cancelPenalties]="booking?.cancelPolicy?.cancelPenalties"></b2b-cancel-policies-table>
   <ng-template #noPenalties>
     <table class="tb-cancel-penalties table table-hover">
 

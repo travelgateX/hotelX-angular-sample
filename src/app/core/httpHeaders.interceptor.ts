@@ -15,7 +15,7 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class HttpHeadersInterceptor implements HttpInterceptor {
-  constructor(private readonly injector: Injector, private requestStorageService: RequestStorageService) {
+  constructor(private readonly injector: Injector) {
   }
 
   intercept(
@@ -27,6 +27,7 @@ export class HttpHeadersInterceptor implements HttpInterceptor {
     }
 
     const config = this.injector.get(ConfigService);
+    const requestStorageService = this.injector.get(RequestStorageService)
     const apiKey = config.getSettings<string>()['apiKey'];
 
     const headers = new HttpHeaders({
@@ -50,7 +51,7 @@ export class HttpHeadersInterceptor implements HttpInterceptor {
     )(requestToStore.rq);
 
     if (hasOperation) {
-      this.requestStorageService.storeRequestResponse(requestToStore, false);
+      requestStorageService.storeRequestResponse(requestToStore, false);
     }
 
     return next.handle(cloneReq);
