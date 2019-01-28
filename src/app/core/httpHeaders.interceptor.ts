@@ -27,7 +27,7 @@ export class HttpHeadersInterceptor implements HttpInterceptor {
     }
 
     const config = this.injector.get(ConfigService);
-    const apiKey = config.getSettings('apiKey');
+    const apiKey = config.getSettings<string>()['apiKey'];
 
     const headers = new HttpHeaders({
       Authorization: !apiKey
