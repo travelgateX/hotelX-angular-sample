@@ -39,11 +39,7 @@ export class SupplierAccessesComponent implements OnInit {
         }
         const access = this.webConfigService.getObjectFromLocalStorage('access');
         if (access && access.code) {
-          for (
-            let i = 0;
-            i < this.suppliers.length && !this.supplierSelected;
-            i++
-          ) {
+          for (let i = 0; i < this.suppliers.length; i++) {
             if (
               this.suppliers[i].accesses &&
               this.suppliers[i].accesses['edges'].findIndex(element => {
@@ -55,7 +51,12 @@ export class SupplierAccessesComponent implements OnInit {
             ) {
               this.supplierSelected = this.suppliers[i].code;
               this.onSupplierSelected();
+              break;
             }
+          }
+          if(!this.supplierSelected){
+            this.supplierSelected = this.suppliers[0].code;
+            this.onSupplierSelected();
           }
         } else if (this.suppliers.length === 1) {
           this.supplierSelected = this.suppliers[0].code;
