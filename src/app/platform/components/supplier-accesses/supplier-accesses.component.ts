@@ -38,12 +38,10 @@ export class SupplierAccessesComponent implements OnInit {
           this.notificationService.toast('Suppliers', 'No suppliers available', 5)
         }
         const access = this.webConfigService.getObjectFromLocalStorage('access');
+        console.log(access)
         if (access && access.code) {
-          for (
-            let i = 0;
-            i < this.suppliers.length && !this.supplierSelected;
-            i++
-          ) {
+          for (let i = 0; i < this.suppliers.length; i++) {
+            console.log(this.suppliers[i].accesses)
             if (
               this.suppliers[i].accesses &&
               this.suppliers[i].accesses['edges'].findIndex(element => {
@@ -55,7 +53,12 @@ export class SupplierAccessesComponent implements OnInit {
             ) {
               this.supplierSelected = this.suppliers[i].code;
               this.onSupplierSelected();
+              break;
             }
+          }
+          if(!this.supplierSelected){
+            this.supplierSelected = this.suppliers[0].code;
+            this.onSupplierSelected();
           }
         } else if (this.suppliers.length === 1) {
           this.supplierSelected = this.suppliers[0].code;
