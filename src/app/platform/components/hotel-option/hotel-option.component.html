@@ -61,7 +61,7 @@
 
             <td>{{option.boardCode | mealplan : mealplansAvailable}}</td>
 
-            <td *ngIf="option?.cancelPolicy.cancelPenalties | getMax; else emptyTd; let maxOption" (click)="openCancelPolicyModal(option?.cancelPolicy?.cancelPenalties)">
+            <td *ngIf="option?.cancelPolicy?.cancelPenalties | getMax; else emptyTd; let maxOption" (click)="openCancelPolicyModal(option?.cancelPolicy?.cancelPenalties)">
               {{(maxOption | mainPenalty : criteria.checkIn) | dateFormat:environment.organization.dateFormat}} |
               {{maxOption.value | number
               : '1.2-2'}} {{maxOption.currency}} <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip"
