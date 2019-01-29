@@ -33,6 +33,7 @@ export class SupplierAccessesComponent implements OnInit {
     });
     this.supplierAccessesService.suppliersAccesses$.subscribe(
       res => {
+        this.supplierSelected = null;
         this.suppliers = res;
         if(this.suppliers.length === 0){
           this.notificationService.toast('Suppliers', 'No suppliers available', 5)
@@ -50,14 +51,15 @@ export class SupplierAccessesComponent implements OnInit {
               }) !== -1
             ) {
               this.supplierSelected = this.suppliers[i].code;
-              this.onSupplierSelected();
               break;
             }
           }
+          
           if(!this.supplierSelected){
             this.supplierSelected = this.suppliers[0].code;
-            this.onSupplierSelected();
           }
+          
+          this.onSupplierSelected();
         } else if (this.suppliers.length === 1) {
           this.supplierSelected = this.suppliers[0].code;
           this.onSupplierSelected();

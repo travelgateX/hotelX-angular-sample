@@ -23,12 +23,12 @@ export class ClientSelectorComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.showErrorClients = false;
     this.organizationSelectorService.organizationSelected$.subscribe(res => {
       this.clientSelectorService.getClients(res);
     });
     this.clientSelectorService.clients$.subscribe(
       res => {
+        this.showErrorClients = false;
         this.clients = res;
         const storedClient = this.webConfigService.getObjectFromLocalStorage('client');
         if (
@@ -39,11 +39,9 @@ export class ClientSelectorComponent implements OnInit {
         ) {
           this.clientSelected = this.webConfigService.getObjectFromLocalStorage('client')['code'];
           this.onClientSelected();
-          this.showErrorClients = false;
         } else if (this.clients.length === 1) {
           this.clientSelected = this.clients[0].code;
           this.onClientSelected();
-          this.showErrorClients = false;
         }
         if (this.clients.length === 0) {
           this.notificationService.toast('Clients', 'No clients available', 5);
