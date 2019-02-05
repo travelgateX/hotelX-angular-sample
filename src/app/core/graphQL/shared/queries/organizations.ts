@@ -9,9 +9,8 @@ export const organizations = gql`
           organizationData {
             code
           }
-          error {
+          adviseMessage {
             code
-            type
             description
           }
         }

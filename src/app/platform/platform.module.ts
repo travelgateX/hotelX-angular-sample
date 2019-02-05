@@ -37,6 +37,7 @@ import { PriceTableComponent } from './components/price-table/price-table.compon
 import { CancelPoliciesTableComponent } from './components/cancel-policies-table/cancel-policies-table.component';
 import { RatePlansModalComponent } from './components/rate-plans-modal/rate-plans-modal.component';
 import { ImpersonationModalComponent } from './components/impersonation-modal/impersonation-modal.component';
+import { NoOrganizationModalComponent } from './components/no-organization-modal/no-organization-modal.component';
 
 @NgModule({
   imports: [
@@ -75,7 +76,8 @@ import { ImpersonationModalComponent } from './components/impersonation-modal/im
     PriceTableComponent,
     CancelPoliciesTableComponent,
     RatePlansModalComponent,
-    ImpersonationModalComponent
+    ImpersonationModalComponent,
+    NoOrganizationModalComponent
   ],
   entryComponents: [
     EditCriteriaModalComponent,
@@ -88,7 +90,8 @@ import { ImpersonationModalComponent } from './components/impersonation-modal/im
     RqModalComponent,
     MyBookingsDetailModalComponent,
     RatePlansModalComponent,
-    ImpersonationModalComponent
+    ImpersonationModalComponent,
+    NoOrganizationModalComponent
   ],
   providers: [LoginGuard, SupplierAccessesService]
 })

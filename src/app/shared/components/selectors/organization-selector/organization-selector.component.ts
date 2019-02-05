@@ -1,8 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { OrganizationSelectorService } from './organization-selector.service';
 import { WebConfigService } from '../../../../core/services/web-config.service';
-import { organizations } from 'app/core/graphQL/shared/queries/organizations';
 import { NotificationService } from 'app/shared/services/notification.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NoOrganizationModalComponent } from 'app/platform/components/no-organization-modal/no-organization-modal.component';
+import { AuthService } from '../../../../core/services/auth.service';
 
 /**
  * Displays a select for allowed organizations
@@ -22,7 +24,9 @@ export class OrganizationSelectorComponent implements OnInit {
   constructor(
     private organizationSelectorService: OrganizationSelectorService,
     private webConfigService: WebConfigService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private modalService: NgbModal, 
+    private authService: AuthService
   ) {}
 
   /**
@@ -44,6 +48,16 @@ export class OrganizationSelectorComponent implements OnInit {
 
       if(this.organizations.length === 0){
         this.notificationService.toast('Organizations', 'No organizations available', 5);
+        const modalRef = this.modalService.open(NoOrganizationModalComponent, {
+          size: 'lg',
+          keyboard: false,
+          backdrop: 'static'
+        });
+    
+        modalRef.result
+          .then(res => {
+            this.authService.logout();
+          });
       }
       this.organizationSelectorService.organizationSelected$.next(
         this.selectedOrganization
