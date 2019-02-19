@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { CoreAdminService } from '../../../../core/services/core-admin.service';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class OrganizationSelectorService {
   constructor(private coreAdminService: CoreAdminService) {}
 
-  organizationSelected$ = new Subject<any>();
+  organizationSelected$ = new BehaviorSubject<any>(null);
   organizations$ = new Subject<any>();
 
   getOrganizations() {
