@@ -15,7 +15,7 @@
         "title": ""
       },
       "theme": {
-        "logo": "assets/img/xtg_two_color_logo.svg"
+        "logo": "assets/img/logo-traveltino.jpg"
       },
       "autoclose": true
     }
@@ -29,19 +29,12 @@
       "isoCode": "es",
       "name": "Spain"
     },
-    "email": "info@xmltravelgate.com",
+    "email": "lidia.sancho@logitravelgroup.com",
+    "linkedin": "https://www.linkedin.com/company/traveltino",
     "dateFormat": "YYYY/MM/DD",
-    "headquarters": [
-      {
-        "country": "Spain",
-        "telephone": "+(34) 871 968 181 ",
-        "address":
-        "Edificio Europa, Local 1, bajos, 07121 (ParcBIT), Palma de Mallorca, Spain"
-      }
-    ],
-    "logoNav": "assets/img/xtg_two_color_logo.svg",
-    "logoHome": "assets/img/xtg_logo.svg",
-    "logo": "assets/img/xtg_two_color_logo.svg",
-    "name": "Travelgatex"
+    "logoNav": "assets/img/logo-traveltino.jpg",
+    "logoHome": "assets/img/traveltino.png",
+    "logo": "assets/img/logo-traveltino.jpg",
+    "name": "Traveltino"
   }
 }

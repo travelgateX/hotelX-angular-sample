@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file source-language="en" datatype="plaintext" original="ng2.template">
+  <file source-language="es" datatype="plaintext" original="ng2.template">
     <body>
       <trans-unit id="home" datatype="html">
         <source>home</source>
@@ -8,135 +8,135 @@
       </trans-unit>
       <trans-unit id="about" datatype="html">
         <source>about</source>
-        <target>about</target>
+        <target>sobre nosotros</target>
       </trans-unit>
       <trans-unit id="products" datatype="html">
         <source>products</source>
-        <target>products</target>
+        <target>productos</target>
       </trans-unit>
       <trans-unit id="contact-us" datatype="html">
         <source>contact us</source>
-        <target>contact us</target>
+        <target>contáctanos</target>
       </trans-unit>
       <trans-unit id="logout" datatype="html">
         <source>Logout</source>
-        <target>Logout</target>
+        <target>Cerrar sesión</target>
       </trans-unit>
       <trans-unit id="b2bplatform" datatype="html">
         <source>B2B Platform</source>
-        <target>B2B Platform</target>
+        <target>Plataforma B2B</target>
       </trans-unit>
       <trans-unit id="login" datatype="html">
         <source>Login</source>
-        <target>Login</target>
+        <target>Iniciar sesión</target>
       </trans-unit>
       <trans-unit id="signup" datatype="html">
         <source>Sign up</source>
-        <target>Sign up</target>
+        <target>Registrarse</target>
       </trans-unit>
       <trans-unit id="about-title" datatype="html">
         <source>Welcome to Travelgatex</source>
-        <target>Welcome to Travelgatex</target>
+        <target>Bienvenido a Traveltino</target>
       </trans-unit>
       <trans-unit id="about-subtitle" datatype="html">
         <source>Integration specialists</source>
-        <target>Integration specialists</target>
+        <target>Especialistas en integraciones</target>
       </trans-unit>
       <trans-unit id="about-p-1" datatype="html">
         <source>Know more about us</source>
-        <target>Know more about us</target>
+        <target>Conozca más sobre nosotros</target>
       </trans-unit>
       <trans-unit id="about-p-2" datatype="html">
         <source>Travelgatex is dedicated 100% to the integrations of the different touristic providers, be it hotels, flights, ferries, trains, rental cars and transfers.</source>
-        <target>Travelgatex is dedicated 100% to the integrations of the different touristic providers, be it hotels, flights, ferries, trains, rental cars and transfers.</target>
+        <target>TRAVELTINO cuenta con más de 40 reclutadores especializados para destinos, programación dinámica, vuelos de bajo costo incluidos en paquetes y circuitos. A finales de 2013, comenzó su incursión en la programación de Circuito y Viaje Largo, haciendo coincidir las necesidades actuales de los clientes con las tecnologías de tabletas y móviles. Destinos como Costa Rica, Tailandia, China, México o los más cercanos, como Marruecos, Turquía, Egipto o Europa Central son algunas de sus especialidades.</target>
       </trans-unit>
       <trans-unit id="about-p-3" datatype="html">
         <source>Travel product available in one single connection</source>
-        <target>Travel product available in one single connection</target>
+        <target></target>
       </trans-unit>
       <trans-unit id="about-p-4" datatype="html">
         <source>Travelgatex has the most extensive product on the market. More than 800,000 hotels, both directly contracted and more than 600 suppliers.</source>
-        <target>Travelgatex has the most extensive product on the market. More than 800,000 hotels, both directly contracted and more than 600 suppliers.</target>
+        <target>Las costas en verano, así como las Operaciones Especiales a las Islas, son su núcleo en temporada alta, con paquetes dinámicos, servicios de integración como el alquiler o la transferencia de automóviles en línea. En invierno, City Breaks and Snow son sus puntos fuertes, operando y contratando sus propios productos en todo el mundo.</target>
       </trans-unit>
       <trans-unit id="service-title" datatype="html">
         <source>Why Travelgatex?</source>
-        <target>Why Travelgatex?</target>
+        <target>¿Por qué Traveltino?</target>
       </trans-unit>
       <trans-unit id="service-1-title" datatype="html">
         <source>More than 15.000 directly contracted hotels</source>
-        <target>More than 15.000 directly contracted hotels</target>
+        <target>Más de 15.000 hoteles contratados directamente</target>
       </trans-unit>
       <trans-unit id="service-2-title" datatype="html">
         <source>Advanced technology</source>
-        <target>Advanced technology</target>
+        <target>Tecnología avanzada</target>
       </trans-unit>
       <trans-unit id="service-2-subtitle" datatype="html">
         <source>We use the latest technology to offer 800,000 hotels in a single XML connection with a response time of less than 1 second.</source>
-        <target>We use the latest technology to offer 800,000 hotels in a single XML connection with a response time of less than 1 second.</target>
+        <target>Utilizamos la última tecnología para ofrecer 800.000 hoteles en una única conexión XML con un tiempo de respuesta de menos de 1 segundo.</target>
       </trans-unit>
       <trans-unit id="service-3-title" datatype="html">
         <source>More than 600 suppliers</source>
-        <target>More than 600 suppliers</target>
+        <target>Más de 600 proveedores</target>
       </trans-unit>
       <trans-unit id="service-3-subtitle" datatype="html">
         <source>We add the options of all our suppliers to offer you the best available option in less time.</source>
-        <target>We add the options of all our suppliers to offer you the best available option in less time.</target>
+        <target>Agregamos las opciones de todos nuestros proveedores para ofrecerle la mejor opción disponible en menos tiempo.</target>
       </trans-unit>
       <trans-unit id="service-4-title" datatype="html">
         <source>Free mapping services</source>
-        <target>Free mapping services</target>
+        <target>Servicios de mapeo gratuitos</target>
       </trans-unit>
       <trans-unit id="service-4-subtitle" datatype="html">
         <source>Our mapping tool will help you prioritize the hotels you already have in your system and will also propose others to expand your product.</source>
-        <target>Our mapping tool will help you prioritize the hotels you already have in your system and will also propose others to expand your product.</target>
+        <target>Nuestra herramienta de mapeo le ayudará a priorizar los hoteles que ya tiene en su sistema y también le propondrá a otros para ampliar su producto.</target>
       </trans-unit>
       <trans-unit id="product-title" datatype="html">
         <source>Learn about our products</source>
-        <target>Learn about our products</target>
+        <target>Conozca nuestros productos</target>
       </trans-unit>
       <trans-unit id="hotels" datatype="html">
         <source>Hotels</source>
-        <target>Hotels</target>
+        <target>Hoteles</target>
       </trans-unit>
       <trans-unit id="hotel-mediterranean" datatype="html">
         <source>Mediterranean destinations</source>
-        <target>Mediterranean destinations</target>
+        <target>Destinos mediterráneos</target>
       </trans-unit>
-       <trans-unit id="hotel-mediterranean-spain" datatype="html">
+      <trans-unit id="hotel-mediterranean-spain" datatype="html">
         <source>Spain Sun &amp; Beach</source>
-        <target>Spain Sun &amp; Beach</target>
+        <target>España Sol &amp; Playa</target>
       </trans-unit>
       <trans-unit id="hotel-mediterranean-spain-list" datatype="html">
         <source>including Balearic Islands and Canary Islands</source>
-        <target>including Balearic Islands and Canary Islands</target>
+        <target>incluyendo Islas Baleares e Islas Canarias</target>
       </trans-unit>
       <trans-unit id="hotel-mediterranean-portugal" datatype="html">
         <source>Portugal Sun &amp; Beach</source>
-        <target>Portugal Sun &amp; Beach</target>
+        <target>Portugal Sol &amp; Playa</target>
       </trans-unit>
       <trans-unit id="hotel-mediterranean-portugal-list" datatype="html">
         <source>including Algarve, Madeira and Azores</source>
-        <target>including Algarve, Madeira and Azores</target>
+        <target>incluyendo Algarve, Madeira y las Azores</target>
       </trans-unit>
       <trans-unit id="hotel-mediterranean-italy" datatype="html">
-        <source>Italy Sun &amp; Beach </source>
-        <target>Italy Sun &amp; Beach </target>
+        <source>Italy Sun &amp; Beach</source>
+        <target>Italia Sol &amp; Playa</target>
       </trans-unit>
       <trans-unit id="hotel-mediterranean-italy-list" datatype="html">
         <source>including Sardinia, Sicily, Amalfi and Adriatic coasts</source>
-        <target>including Sardinia, Sicily, Amalfi and Adriatic coasts</target>
+        <target>incluyendo Cerdeña, Sicilia, Amalfi y Costas Adriáticas</target>
       </trans-unit>
       <trans-unit id="hotel-mediterranean-greece" datatype="html">
         <source>Greece, Malta, Croatia, Morocco &amp; Tunisia</source>
-        <target>Greece, Malta, Croatia, Morocco &amp; Tunisia</target>
+        <target>Grecia, Malta, Croacia, Marruecos y Túnez</target>
       </trans-unit>
       <trans-unit id="hotel-mexico" datatype="html">
         <source>Mexico and Dominican Republic</source>
-        <target>Mexico and Dominican Republic</target>
+        <target>México y República Dominicana</target>
       </trans-unit>
       <trans-unit id="hotel-mexico-area" datatype="html">
         <source>Leisure Areas</source>
-        <target>Leisure Areas</target>
+        <target>Areas de ocio</target>
       </trans-unit>
       <trans-unit id="hotel-cuba" datatype="html">
         <source>Cuba</source>
@@ -144,47 +144,46 @@
       </trans-unit>
       <trans-unit id="hotel-cuba-list" datatype="html">
         <source>hotels and vacation homes</source>
-        <target>hotels and vacation homes</target>
+        <target>hoteles y casas de vacaciones</target>
       </trans-unit>
       <trans-unit id="hotel-ski" datatype="html">
         <source>Ski</source>
-        <target>Ski</target>
+        <target>Esquí</target>
       </trans-unit>
       <trans-unit id="hotel-ski-list" datatype="html">
         <source>hotels including Spain, Andorra, Italy, France and Austria</source>
-        <target>hotels including Spain, Andorra, Italy, France and Austria</target>
+        <target>hoteles como España, Andorra, Italia, Francia y Austria</target>
       </trans-unit>
       <trans-unit id="hotel-city" datatype="html">
         <source>Cities</source>
-        <target>Cities</target>
+        <target>Ciudades</target>
       </trans-unit>
       <trans-unit id="hotel-city-list" datatype="html">
         <source>Madrid, Barcelona, Rome, Venice, Florence, Milan, London, Lisbon, Oporto, Dubai</source>
-        <target>Madrid, Barcelona, Rome, Venice, Florence, Milan, London, Lisbon, Oporto, Dubai</target>
+        <target>Madrid, Barcelona, Roma, Venecia, Florencia, Milán, Londres, Lisboa, Oporto, Dubai</target>
       </trans-unit>
       <trans-unit id="hotel-desc" datatype="html">
         <source>In addition to our directly contracted hotels, we have agreements with more than 200 suppliers including bed banks
             and local DMCs. We use the latest technology to deliver 300,000 hotels in one single XML connection with a response
             time of less than 1 second.</source>
-        <target>In addition to our directly contracted hotels, we have agreements with more than 200 suppliers including bed banks
-            and local DMCs. We use the latest technology to deliver 300,000 hotels in one single XML connection with a response
-            time of less than 1 second.</target>
+        <target>Además de nuestros hoteles contratados directamente, tenemos acuerdos con más de 200 proveedores incluyendo bancos de camas y
+        DMCs locales. Utilizamos la última tecnología para ofrecer 300.000 hoteles en una única conexión XML con una respuesta de menos de 1 segundo.</target>
       </trans-unit>
       <trans-unit id="flight-title" datatype="html">
         <source>Flights</source>
-        <target>Flights</target>
+        <target>Vuelos</target>
       </trans-unit>
       <trans-unit id="flight-subtitlt" datatype="html">
         <source>XML integration with different GDS and LowCost Platforms such as Amadeus, Travelport, Sabre, Travelfusion and HitchHiker.</source>
-        <target>XML integration with different GDS and LowCost Platforms such as Amadeus, Travelport, Sabre, Travelfusion and HitchHiker.</target>
+        <target>Integración XML con diferentes GDS y Plataformas LowCost como amadeus, Travelport, Sabre, Travelfusion y HitchHiker.</target>
       </trans-unit>
       <trans-unit id="packages" datatype="html">
         <source>Packages</source>
-        <target>Packages</target>
+        <target>Paquetes</target>
       </trans-unit>
       <trans-unit id="package-subtitle" datatype="html">
         <source>Tailor made dynamic packages on XML.</source>
-        <target>Tailor made dynamic packages on XML.</target>
+        <target>Paquetes dinámicos hechos a medida en XML.</target>
       </trans-unit>
       <trans-unit id="transfer-title" datatype="html">
         <source>Transfers</source>
@@ -192,37 +191,37 @@
       </trans-unit>
       <trans-unit id="transfer-subtitle" datatype="html">
         <source>Worldwide private or shared transfers.</source>
-        <target>Worldwide private or shared transfers.</target>
+        <target>Traslados privados o compartidos a nivel mundial.</target>
       </trans-unit>
       <trans-unit id="activity-title" datatype="html">
         <source>Activities</source>
-        <target>Activities</target>
+        <target>Actividades</target>
       </trans-unit>
       <trans-unit id="activity-subtitle" datatype="html">
         <source>Activities in more than 4.000 destinations worldwide including theme parks, museums, guided tours, tickets, sport
             events, restaurants and many more...</source>
-        <target>Activities in more than 4.000 destinations worldwide including theme parks, museums, guided tours, tickets, sport
-            events, restaurants and many more...</target>
+        <target>Actividades en más de 4.000 destinos en todo el mundo incluyendo parques temáticos, museos, visitas guiadas, entradas, deportes
+            eventos, restaurantes y mucho más ...</target>
       </trans-unit>
       <trans-unit id="connect" datatype="html">
         <source>Let&apos;s get connected</source>
-        <target>Let&apos;s get connected</target>
+        <target>Conectémonos</target>
       </trans-unit>
       <trans-unit id="get-in-touch" datatype="html">
         <source>Get in touch</source>
-        <target>Get in touch</target>
+        <target>Estar en contacto</target>
       </trans-unit>
       <trans-unit id="contact-us-at" datatype="html">
         <source>Contact us at <x id="START_LINK" ctype="x-a"/>sales@smyrooms.com<x id="CLOSE_LINK" ctype="x-a"/></source>
-        <target>Contact us at <x id="START_LINK" ctype="x-a"/>sales@smyrooms.com<x id="CLOSE_LINK" ctype="x-a"/></target>
+        <target>Contáctenos a <x id="START_LINK" ctype="x-a"/>sales@smyrooms.com<x id="CLOSE_LINK" ctype="x-a"/></target>
       </trans-unit>
       <trans-unit id="emirates" datatype="html">
         <source>United Arab Emirates</source>
-        <target>United Arab Emirates</target>
+        <target>Emiratos Árabes</target>
       </trans-unit>
       <trans-unit id="spain" datatype="html">
         <source>Spain</source>
-        <target>Spain</target>
+        <target>España</target>
       </trans-unit>
       <trans-unit id="uruguay" datatype="html">
         <source>Uruguay</source>
@@ -230,179 +229,179 @@
       </trans-unit>
       <trans-unit id="work-with-us" datatype="html">
         <source>Work with us</source>
-        <target>Work with us</target>
+        <target>Trabaje con nosotros</target>
       </trans-unit>
       <trans-unit id="work-with-us-desc" datatype="html">
         <source>To stay abreast of travel and technology requires a constant search for the best professionals in all areas of the business. If you are ambitious and want to be part of a company with a high annual growth rate since 2011, get in touch with us and discover how you can be part of a team of great talent and experience.</source>
-        <target>To stay abreast of travel and technology requires a constant search for the best professionals in all areas of the business. If you are ambitious and want to be part of a company with a high annual growth rate since 2011, get in touch with us and discover how you can be part of a team of great talent and experience.</target>
+        <target>Para mantenerse al tanto de los viajes y la tecnología requiere una búsqueda constante de los mejores profesionales en todas las áreas del negocio. Si eres ambicioso y quieres formar parte de una empresa que con una alta tasa de crecimiento anual desde 2011, ponte en contacto con nosotros y descubre cómo puedes formar parte de un equipo de gran talento y experiencia.</target>
       </trans-unit>
       <trans-unit id="our-products" datatype="html">
         <source>Our products</source>
-        <target>Our products</target>
+        <target>Nuestros productos</target>
       </trans-unit>
       <trans-unit id="xml-api" datatype="html">
         <source>travelgateX's API</source>
-        <target>travelgateX's API</target>
+        <target>API de travelgateX</target>
       </trans-unit>
       <trans-unit id="copyright" datatype="html">
-        <source>Copyright © 2018 Travelgatex. All rights reserved.</source>
-        <target>Copyright © 2018 Travelgatex. All rights reserved.</target>
+        <source>Copyright © 2018 Travelgatex. All rights reserved..</source>
+        <target>Copyright © 2018 Traveltino. Todos los derechos reservados.</target>
       </trans-unit>
       <trans-unit id="terms-conditions" datatype="html">
         <source>Terms & Conditions</source>
-        <target>Terms & Conditions</target>
+        <target>Términos y Condiciones</target>
       </trans-unit>
       <trans-unit id="404-title" datatype="html">
         <source>Something is wrong</source>
-        <target>Something is wrong</target>
+        <target>Parece que algo va mal</target>
       </trans-unit>
       <trans-unit id="404-subtitle" datatype="html">
         <source>The page you are looking for was moved, removed, renamed or might never existed.</source>
-        <target>The page you are looking for was moved, removed, renamed or might never existed.</target>
+        <target>La página que está buscando fue movida, eliminada, renombrada o puede que nunca existiera.</target>
       </trans-unit>
       <trans-unit id="book-success" datatype="html">
         <source>Booking success!</source>
-        <target>Booking success!</target>
+        <target>¡Reserva realizada con éxito!</target>
       </trans-unit>
       <trans-unit id="book-pending" datatype="html">
         <source>Booking pending!</source>
-        <target>Booking pending!</target>
+        <target>¡Reserva en estado pendiente!</target>
       </trans-unit>
       <trans-unit id="book-error" datatype="html">
         <source>Booking error!</source>
-        <target>Booking error!</target>
+        <target>¡Error en la reserva!</target>
       </trans-unit>
       <trans-unit id="title-accomodations" datatype="html">
         <source>Choose from more than 500,000 accommodations. We are present in ALL countries of the world!</source>
-        <target>Choose from more than 500,000 accommodations. We are present in ALL countries of the world!</target>
+        <target>Elige entre más de 500.000 alojamientos. Estamos presentes en TODOS los países del mundo.</target>
       </trans-unit>
       <trans-unit id="availability" datatype="html">
         <source>Availability</source>
-        <target>Availability</target>
+        <target>Disponibilidad</target>
       </trans-unit>
       <trans-unit id="request" datatype="html">
         <source>request</source>
-        <target>request</target>
+        <target>solicitud</target>
       </trans-unit>
       <trans-unit id="no-results" datatype="html">
         <source>It seems we have no results for this request.</source>
-        <target>It seems we have no results for this request.</target>
+        <target>Parece ser que no hay resultados para esta búsqueda.</target>
       </trans-unit>
       <trans-unit id="search-hotel" datatype="html">
         <source>Search hotel:</source>
-        <target>Search hotel:</target>
+        <target>Buscar hotel:</target>
       </trans-unit>
       <trans-unit id="your-search" datatype="html">
         <source>Your search:</source>
-        <target>Your search:</target>
+        <target>Su búsqueda:</target>
       </trans-unit>
       <trans-unit id="edit" datatype="html">
         <source>Edit</source>
-        <target>Edit</target>
+        <target>Editar</target>
       </trans-unit>
       <trans-unit id="destination" datatype="html">
         <source>Destination:</source>
-        <target>Destination:</target>
+        <target>Destino:</target>
       </trans-unit>
       <trans-unit id="date-from" datatype="html">
         <source>Date from:</source>
-        <target>Date from:</target>
+        <target>Entrada:</target>
       </trans-unit>
       <trans-unit id="date-to" datatype="html">
         <source>Date to:</source>
-        <target>Date to:</target>
+        <target>Salida:</target>
       </trans-unit>
       <trans-unit id="room" datatype="html">
         <source>Room</source>
-        <target>Room</target>
+        <target>Habitación</target>
       </trans-unit>
       <trans-unit id="rooms" datatype="html">
-        <source>Rooms</source>
-        <target>Rooms</target>
+        <source>rooms</source>
+        <target>Habitaciones</target>
       </trans-unit>
       <trans-unit id="room-info" datatype="html">
         <source>Room Info</source>
-        <target>Room Info</target>
+        <target>Información de las habitaciones</target>
       </trans-unit>
       <trans-unit id="room-number" datatype="html">
         <source>Room Number</source>
-        <target>Room Number</target>
+        <target>Numero de habitaciones</target>
       </trans-unit>
       <trans-unit id="add-room" datatype="html">
         <source>Add another room</source>
-        <target>Add another room</target>
+        <target>Añadir otra habitación</target>
       </trans-unit>
       <trans-unit id="adults" datatype="html">
         <source>Adults:</source>
-        <target>Adults:</target>
+        <target>Adultos:</target>
       </trans-unit>
       <trans-unit id="valuation-adult" datatype="html">
         <source>Adult</source>
-        <target>Adult</target>
+        <target>Adulto</target>
       </trans-unit>
       <trans-unit id="children" datatype="html">
         <source>Children...</source>
-        <target>Children...</target>
+        <target>Niños...</target>
       </trans-unit>
       <trans-unit id="valuation-child" datatype="html">
         <source>Child</source>
-        <target>Child</target>
+        <target>Niño</target>
       </trans-unit>
       <trans-unit id="age" datatype="html">
         <source>Age</source>
-        <target>Age</target>
+        <target>Edad</target>
       </trans-unit>
       <trans-unit id="search" datatype="html">
         <source>Search</source>
-        <target>Search</target>
+        <target>Buscar</target>
       </trans-unit>
       <trans-unit id="booked-at" datatype="html">
         <source>Booked at</source>
-        <target>Booked at</target>
+        <target>Reservado a las</target>
       </trans-unit>
       <trans-unit id="provider-locator" datatype="html">
         <source>Provider locator:</source>
-        <target>Provider locator:</target>
+        <target>Localizador proveedor:</target>
       </trans-unit>
       <trans-unit id="booking-status" datatype="html">
         <source>Booking status:</source>
-        <target>Booking status:</target>
+        <target>Estado de la reserva:</target>
       </trans-unit>
       <trans-unit id="price" datatype="html">
         <source>Price</source>
-        <target>Price</target>
+        <target>Precio</target>
       </trans-unit>
       <trans-unit id="booking-possible-error" datatype="html">
         <source>It is possible that there was an error making the request or that you are trying to access it without following the reservation process.</source>
-        <target>It is possible that there was an error making the request or that you are trying to access it without following the reservation process.</target>
+        <target>Es posible que haya habido un error en la petición o que esté intentando sin haber seguido el proceso de reserva.</target>
       </trans-unit>
       <trans-unit id="logo-title" datatype="html">
         <source>Travelgatex - Global bedbank</source>
-        <target>Travelgatex - Global bedbank</target>
+        <target>Travelgatex - Banco de Camas Global</target>
       </trans-unit>
       <trans-unit id="welcome" datatype="html">
         <source>Welcome</source>
-        <target>Welcome</target>
+        <target>Bienvenido</target>
       </trans-unit>
       <trans-unit id="booking" datatype="html">
         <source>Bookings</source>
-        <target>Bookings</target>
+        <target>Reservas</target>
       </trans-unit>
       <trans-unit id="my" datatype="html">
         <source>My</source>
-        <target>My</target>
+        <target>Mis</target>
       </trans-unit>
       <trans-unit id="booking-reference" datatype="html">
         <source>Booking reference:</source>
-        <target>Booking reference:</target>
+        <target>Referencia reserva:</target>
       </trans-unit>
       <trans-unit id="supplier-reference" datatype="html">
         <source>Supplier reference</source>
-        <target>Supplier reference</target>
+        <target>Referencia proveedor</target>
       </trans-unit>
       <trans-unit id="by-dates" datatype="html">
         <source>By dates:</source>
-        <target>By dates:</target>
+        <target>Por fechas:</target>
       </trans-unit>
       <trans-unit id="hotel" datatype="html">
         <source>Hotel</source>
@@ -410,71 +409,71 @@
       </trans-unit>
       <trans-unit id="booking-date" datatype="html">
         <source>Booking date</source>
-        <target>Booking date</target>
+        <target>Día reserva</target>
       </trans-unit>
       <trans-unit id="status" datatype="html">
         <source>Status</source>
-        <target>Status</target>
+        <target>Estado</target>
       </trans-unit>
       <trans-unit id="provided-locator" datatype="html">
         <source>Provided locator</source>
-        <target>Provided locator</target>
+        <target>Localizador proporcionado</target>
       </trans-unit>
       <trans-unit id="options" datatype="html">
         <source>Options</source>
-        <target>Options</target>
+        <target>Opciones</target>
       </trans-unit>
       <trans-unit id="cancel" datatype="html">
         <source>Cancel</source>
-        <target>Cancel</target>
+        <target>Cancelar</target>
       </trans-unit>
       <trans-unit id="view-rq" datatype="html">
         <source>View RQ</source>
-        <target>View RQ</target>
+        <target>Ver RQ</target>
       </trans-unit>
       <trans-unit id="view-rs" datatype="html">
         <source>View RS</source>
-        <target>View RS</target>
+        <target>Ver RS</target>
       </trans-unit>
       <trans-unit id="reservation-locator" datatype="html">
         <source>Reservation locator:</source>
-        <target>Reservation locator:</target>
+        <target>Localizador reserva:</target>
       </trans-unit>
       <trans-unit id="client" datatype="html">
         <source>Client</source>
-        <target>Client</target>
+        <target>Cliente</target>
       </trans-unit>
       <trans-unit id="provider" datatype="html">
         <source>Provider</source>
-        <target>Provider</target>
+        <target>Proveedor</target>
       </trans-unit>
       <trans-unit id="view-bookings" datatype="html">
         <source>View bookings</source>
-        <target>View bookings</target>
+        <target>Ver reservas</target>
       </trans-unit>
       <trans-unit id="todays-bookings" datatype="html">
         <source>Today's bookings</source>
-        <target>Today's bookings</target>
+        <target>Reservas de hoy</target>
       </trans-unit>
       <trans-unit id="yesterdays-bookings" datatype="html">
         <source>Yesterday's bookings</source>
-        <target>Yesterday's bookings</target>
+        <target>Reservas de ayer</target>
       </trans-unit>
       <trans-unit id="book" datatype="html">
         <source>Book</source>
-        <target>Book</target>
+        <target>Reserva</target>
       </trans-unit>
       <trans-unit id="invalid-age" datatype="html">
         <source>Please provide a valid age.</source>
-        <target>Please provide a valid age.</target>
+        <target>Proporcione una edad válida.</target>
       </trans-unit>
       <trans-unit id="invalid-surname" datatype="html">
         <source>Please provide a valid surname.</source>
-        <target>Please provide a valid surname.</target>
+        <target>Proporcione un apellido válido.</target>
       </trans-unit>
       <trans-unit id="surname" datatype="html">
         <source>Surname</source>
-        <target>Surname</target>
+        <target>Apellido</target>
       </trans-unit>
       <trans-unit id="invalid-name" datatype="html">
         <source>Please provide a valid name.</source>
@@ -482,263 +481,263 @@
       </trans-unit>
       <trans-unit id="name" datatype="html">
         <source>Name</source>
-        <target>Name</target>
+        <target>Nombre</target>
       </trans-unit>
       <trans-unit id="pax" datatype="html">
         <source>Pax</source>
-        <target>Pax</target>
+        <target>Persona</target>
       </trans-unit>
       <trans-unit id="paxes" datatype="html">
         <source>Paxes</source>
-        <target>Paxes</target>
+        <target>Personas</target>
       </trans-unit>
       <trans-unit id="distribution" datatype="html">
         <source>Distribution</source>
-        <target>Distribution</target>
+        <target>Distribucion</target>
       </trans-unit>
       <trans-unit id="remarks" datatype="html">
         <source>Remarks</source>
-        <target>Remarks</target>
+        <target>Observaciones</target>
       </trans-unit>
       <trans-unit id="holder" datatype="html">
         <source>Holder</source>
-        <target>Holder</target>
+        <target>Titular</target>
       </trans-unit>
         <trans-unit id="invalid-client-reference" datatype="html">
         <source>Please provide a valid client reference.</source>
-        <target>Please provide a valid client reference.</target>
+        <target>Proporcione una referencia de cliente válida.</target>
       </trans-unit>
       <trans-unit id="client-reference" datatype="html">
         <source>Client reference</source>
-        <target>Client reference</target>
+        <target>Referencia cliente</target>
       </trans-unit>
       <trans-unit id="client-example" datatype="html">
         <source>Ex: #FDSFDS2424</source>
-        <target>Ex: #FDSFDS2424</target>
+        <target>Ej: #FDSFDS2424</target>
       </trans-unit>
       <trans-unit id="booking-detail" datatype="html">
         <source>Booking detail</source>
-        <target>Booking detail</target>
+        <target>Detalle de la reserva</target>
       </trans-unit>
       <trans-unit id="booking-details" datatype="html">
         <source>Booking details</source>
-        <target>Booking details</target>
+        <target>Detalles reserva</target>
       </trans-unit>
       <trans-unit id="detail" datatype="html">
         <source>Detail</source>
-        <target>Detail</target>
+        <target>Detalle</target>
       </trans-unit>
       <trans-unit id="applied-over" datatype="html">
-        <source>Applied over</source>
-        <target>Applied over</target>
+        <source>Applied Over</source>
+        <target>Aplicado</target>
       </trans-unit>
       <trans-unit id="hours-before" datatype="html">
         <source>Hours before checkin</source>
-        <target>Hours before checkin</target>
+        <target>Horas antes checkin</target>
       </trans-unit>
       <trans-unit id="days-before" datatype="html">
         <source>Days before checkin</source>
-        <target>Days before checkin</target>
+        <target>Days antes checkin</target>
       </trans-unit>
       <trans-unit id="total-price" datatype="html">
         <source>Total price</source>
-        <target>Total price</target>
+        <target>Precio total</target>
       </trans-unit>
       <trans-unit id="penalty-type" datatype="html">
         <source>Penalty type</source>
-        <target>Penalty type</target>
+        <target>Tipo sanción</target>
       </trans-unit>
       <trans-unit id="cancellation-policies" datatype="html">
         <source>Cancellation policies</source>
-        <target>Cancellation policies</target>
+        <target>Políticas cancelación</target>
       </trans-unit>
       <trans-unit id="cancellation-rules" datatype="html">
         <source>Cancellation rules</source>
-        <target>Cancellation rules</target>
-      </trans-unit>
-      <trans-unit id="hotel-name" datatype="html">
-        <source>Hotel name</source>
-        <target>Hotel name</target>
+        <target>Reglas cancelación</target>
       </trans-unit>
       <trans-unit id="hotel-code" datatype="html">
         <source>Hotel code</source>
-        <target>Hotel code</target>
+        <target>Código hotel</target>
+      </trans-unit>
+      <trans-unit id="hotel-name" datatype="html">
+        <source>Hotel name</source>
+        <target>Nombre hotel</target>
       </trans-unit>
       <trans-unit id="view-map" datatype="html">
         <source>View map</source>
-        <target>View map</target>
+        <target>Ver mapa</target>
       </trans-unit>
       <trans-unit id="mealplan" datatype="html">
         <source>Mealplan</source>
-        <target>Mealplan</target>
+        <target>Régimen</target>
       </trans-unit>
       <trans-unit id="no-expenses-until" datatype="html">
         <source>No expenses until</source>
-        <target>No expenses until</target>
+        <target>Sin gastos hasta</target>
       </trans-unit>
       <trans-unit id="min-sell-price" datatype="html">
         <source>Minimum selling price</source>
-        <target>Minimum selling price</target>
+        <target>Precio mínimo de venta</target>
       </trans-unit>
       <trans-unit id="show-more" datatype="html">
         <source>Show more</source>
-        <target>Show more</target>
+        <target>Mostrar más</target>
       </trans-unit>
       <trans-unit id="show-all" datatype="html">
         <source>Show all</source>
-        <target>Show all</target>
+        <target>Mostrar todos</target>
       </trans-unit>
       <trans-unit id="show-less" datatype="html">
         <source>Show less</source>
-        <target>Show less</target>
+        <target>Mostrar menos</target>
       </trans-unit>
       <trans-unit id="no-cancellation-policies" datatype="html">
         <source>Seems there are no cancellation policies.</source>
-        <target>Seems there are no cancellation policies.</target>
+        <target>Parece que no hay políticas de cancelación.</target>
       </trans-unit>
       <trans-unit id="booking-reference-tooltip" datatype="html">
         <source>Corresponds to the provider locator</source>
-        <target>Corresponds to the provider locator</target>
+        <target>Corresponde al localizador del proveedor</target>
       </trans-unit>
       <trans-unit id="hotel-name-placeholder" datatype="html">
         <source>Hotel name...</source>
-        <target>Hotel name...</target>
+        <target>Nombre del hotel...</target>
       </trans-unit>
       <trans-unit id="from" datatype="html">
         <source>From</source>
-        <target>From</target>
+        <target>De</target>
       </trans-unit>
       <trans-unit id="to" datatype="html">
         <source>to</source>
-        <target>to</target>
+        <target>a</target>
       </trans-unit>
       <trans-unit id="and" datatype="html">
         <source>and</source>
-        <target>and</target>
+        <target>y</target>
       </trans-unit>
-      <trans-unit id="room-search-plural" datatype="html">
+       <trans-unit id="room-search-plural" datatype="html">
         <source>{roomsSearch.roomsNum, plural, =0 {Rooms} =1 {Room} other {Rooms}}</source>
-        <target>{roomsSearch.roomsNum, plural, =0 {Rooms} =1 {Room} other {Rooms}}</target>
+        <target>{roomsSearch.roomsNum, plural, =0 {Habitaciones} =1 {Habitación} other {Habitaciones}}</target>
       </trans-unit>
       <trans-unit id="adult-search-plural" datatype="html">
         <source>{roomsSearch.adultsNum, plural, =0 {Adults} =1 {Adult} other {Adults}}</source>
-        <target>{roomsSearch.adultsNum, plural, =0 {Adults} =1 {Adult} other {Adults}}</target>
+        <target>{roomsSearch.adultsNum, plural, =0 {Adultos} =1 {Adulto} other {Adultos}}</target>
       </trans-unit>
       <trans-unit id="child-search-plural" datatype="html">
         <source>{roomsSearch.childsNum, plural, =0 {Children} =1 {Child} other {Children}}</source>
-        <target>{roomsSearch.childsNum, plural, =0 {Children} =1 {Child} other {Children}}</target>
+        <target>{roomsSearch.childsNum, plural, =0 {Niños} =1 {Niño} other {Niños}}</target>
       </trans-unit>
       <trans-unit id="room-plural" datatype="html">
         <source>{search.roomsNum, plural, =0 {Rooms} =1 {Room} other {Rooms}}</source>
-        <target>{search.roomsNum, plural, =0 {Rooms} =1 {Room} other {Rooms}}</target>
+        <target>{search.roomsNum, plural, =0 {Habitaciones} =1 {Habitación} other {Habitaciones}}</target>
       </trans-unit>
       <trans-unit id="adult-plural" datatype="html">
         <source>{search.adultsNum, plural, =0 {Adults} =1 {Adult} other {Adults}}</source>
-        <target>{search.adultsNum, plural, =0 {Adults} =1 {Adult} other {Adults}}</target>
+        <target>{search.adultsNum, plural, =0 {Adultos} =1 {Adulto} other {Adultos}}</target>
       </trans-unit>
       <trans-unit id="child-plural" datatype="html">
         <source>{search.childsNum, plural, =0 {Children} =1 {Child} other {Children}}</source>
-        <target>{search.childsNum, plural, =0 {Children} =1 {Child} other {Children}}</target>
+        <target>{search.childsNum, plural, =0 {Niños} =1 {Niño} other {Niños}}</target>
       </trans-unit>
       <trans-unit id="detail-room-plural" datatype="html">
         <source>{bookingDetail.search.roomsNum, plural, =0 {Rooms} =1 {Room} other {Rooms}}</source>
-        <target>{bookingDetail.search.roomsNum, plural, =0 {Rooms} =1 {Room} other {Rooms}}</target>
+        <target>{bookingDetail.search.roomsNum, plural, =0 {Habitaciones} =1 {Habitación} other {Habitaciones}}</target>
       </trans-unit>
       <trans-unit id="detail-adult-plural" datatype="html">
         <source>{bookingDetail.search.adultsNum, plural, =0 {Adults} =1 {Adult} other {Adults}}</source>
-        <target>{bookingDetail.search.adultsNum, plural, =0 {Adults} =1 {Adult} other {Adults}}</target>
+        <target>{bookingDetail.search.adultsNum, plural, =0 {Adultos} =1 {Adulto} other {Adultos}}</target>
       </trans-unit>
       <trans-unit id="detail-child-plural" datatype="html">
         <source>{bookingDetail.search.childsNum, plural, =0 {Children} =1 {Child} other {Children}}</source>
-        <target>{bookingDetail.search.childsNum, plural, =0 {Children} =1 {Child} other {Children}}</target>
+        <target>{bookingDetail.search.childsNum, plural, =0 {Niños} =1 {Niño} other {Niños}}</target>
       </trans-unit>
       <trans-unit id="booking-status-select" datatype="html">
-        <source>{book.bookDetail.status, select, OK {OK} PENDING {PENDING} other {PENDING}}</source>
-        <target>{book.bookDetail.status, select, OK {OK} PENDING {PENDING} other {PENDING}}</target>
+        <source>{book.bookDetail.status, select, OK {OK} PENDING {PENDIENTE} other {PENDING}}</source>
+        <target>{book.bookDetail.status, select, OK {OK} PENDING {PENDIENTE} other {PENDIENTE}}</target>
       </trans-unit>
       <trans-unit id="language" datatype="html">
         <source>Language</source>
-        <target>Language</target>
+        <target>Idioma</target>
       </trans-unit>
       <trans-unit id="lang-en" datatype="html">
         <source></source>
-        <target>English</target>
+        <target>Inglés</target>
       </trans-unit>
       <trans-unit id="lang-es" datatype="html">
         <source></source>
-        <target>Spanish</target>
+        <target>Español</target>
       </trans-unit>
       <trans-unit id="penalty-tooltip" datatype="html">
         <source>Click to see penalty list</source>
-        <target>Click to see penalty list</target>
+        <target>Haz clic para ver listado de penalizaciones</target>
       </trans-unit>
       <trans-unit id="results" datatype="html">
-        <source>{availability.length, plural, =0 {Results} =1 {Results} other {Results}}</source>
-        <target>{availability.length, plural, =0 {Results} =1 {Result} other {Results}}</target>
+        <source>{availability.length, plural, =0 {Results} =1 {Result} other {Results}}</source>
+        <target>{availability.length, plural, =0 {Resultados} =1 {Resultado} other {Resultados}}</target>
       </trans-unit>
       <trans-unit id="for" datatype="html">
         <source>for</source>
-        <target>for</target>
+        <target>para</target>
       </trans-unit>
       <trans-unit id="value" datatype="html">
         <source>Value</source>
-        <target>Value</target>
+        <target>Valor</target>
       </trans-unit>
       <trans-unit id="market" datatype="html">
         <source>Market</source>
-        <target>Market</target>
+        <target>Mercado</target>
       </trans-unit>
       <trans-unit id="market-placeholder" datatype="html">
         <source>Select Market</source>
-        <target>Select Market</target>
+        <target>Seleccionar Mercado</target>
       </trans-unit>
       <trans-unit id="currency-placeholder" datatype="html">
         <source>Select Currency</source>
-        <target>Select Currency</target>
+        <target>Seleccionar Moneda</target>
       </trans-unit>
       <trans-unit id="language-placeholder" datatype="html">
         <source>Select Language</source>
-        <target>Select Language</target>
-      </trans-unit>
-      <trans-unit id="nationality-placeholder" datatype="html">
-        <source>Select Nationality</source>
-        <target>Select Nationality</target>
+        <target>Seleccionar Idioma</target>
       </trans-unit>
       <trans-unit id="nationality" datatype="html">
         <source>Nationality</source>
-        <target>Nationality</target>
+        <target>Nacionalidad</target>
+      </trans-unit>
+      <trans-unit id="nationality-placeholder" datatype="html">
+        <source>Select Nationality</source>
+        <target>Seleccionar Nacionalidad</target>
       </trans-unit>
       <trans-unit id="show-entries" datatype="html">
         <source>Show entries:</source>
-        <target>Show entries:</target>
+        <target>Mostrar resultados:</target>
       </trans-unit>
       <trans-unit id="net" datatype="html">
         <source>Net</source>
-        <target>Net</target>
+        <target>Neto</target>
       </trans-unit>
       <trans-unit id="net-price" datatype="html">
         <source>Net price</source>
-        <target>Net price</target>
+        <target>Precio neto</target>
       </trans-unit>
       <trans-unit id="mandatory" datatype="html">
         <source>Mandatory</source>
-        <target>Mandatory</target>
+        <target>Obligatorio</target>
       </trans-unit>
       <trans-unit id="commission" datatype="html">
         <source>Commission</source>
-        <target>Commission</target>
+        <target>Comisión</target>
       </trans-unit>
       <trans-unit id="commission-percentage" datatype="html">
         <source>Commission Percentage</source>
-        <target>Commission Percentage</target>
+        <target>Porcentaje Comisión</target>
       </trans-unit>
       <trans-unit id="gross" datatype="html">
         <source>Gross</source>
-        <target>Gross</target>
+        <target>Bruto</target>
       </trans-unit>
       <trans-unit id="price-type" datatype="html">
         <source>Price type</source>
-        <target>Price type</target>
+        <target>Tipo precio</target>
       </trans-unit>
       <trans-unit id="ok" datatype="html">
         <source>Ok</source>
@@ -746,7 +745,7 @@
       </trans-unit>
       <trans-unit id="pending" datatype="html">
         <source>Pending</source>
-        <target>Pending</target>
+        <target>Pendiente</target>
       </trans-unit>
       <trans-unit id="error" datatype="html">
         <source>Error</source>
@@ -754,59 +753,59 @@
       </trans-unit>
       <trans-unit id="clear" datatype="html">
         <source>Clear</source>
-        <target>Clear</target>
+        <target>Borrar</target>
       </trans-unit>
       <trans-unit id="select-price" datatype="html">
         <source>Select price</source>
-        <target>Select price</target>
+        <target>Seleccionar precio</target>
       </trans-unit>
       <trans-unit id="select-rate" datatype="html">
         <source>Select rate</source>
-        <target>Select rate</target>
+        <target>Seleccionar tarifa</target>
       </trans-unit>
       <trans-unit id="rate" datatype="html">
         <source>Rate</source>
-        <target>Rate</target>
+        <target>Tarifa</target>
       </trans-unit>
       <trans-unit id="select-mealplan" datatype="html">
         <source>Select mealplan</source>
-        <target>Select mealplan</target>
+        <target>Seleccionar régimen</target>
       </trans-unit>
       <trans-unit id="empty" datatype="html">
         <source>Empty</source>
-        <target>Empty</target>
+        <target>Vacío</target>
       </trans-unit>
       <trans-unit id="select-category" datatype="html">
         <source>Select category</source>
-        <target>Select category</target>
+        <target>Seleccionar categoría</target>
       </trans-unit>
       <trans-unit id="category" datatype="html">
-        <source>Category</source>
-        <target>Category</target>
+        <source>Categoría</source>
+        <target>Categoría</target>
       </trans-unit>
       <trans-unit id="code" datatype="html">
         <source>Code:</source>
-        <target>Code:</target>
+        <target>Código:</target>
       </trans-unit>
       <trans-unit id="airConditioner" datatype="html">
         <source>airConditioner</source>
-        <target>Air conditioner</target>
+        <target>Aire acondicionado</target>
       </trans-unit>
       <trans-unit id="cleaning" datatype="html">
         <source>cleaning</source>
-        <target>Cleaning</target>
+        <target>Limpieza</target>
       </trans-unit>
       <trans-unit id="laundry" datatype="html">
         <source>laundry</source>
-        <target>Laundry</target>
+        <target>Lavandería</target>
       </trans-unit>
       <trans-unit id="lifts" datatype="html">
         <source>lifts</source>
-        <target>Lifts</target>
+        <target>Ascensores</target>
       </trans-unit>
       <trans-unit id="reception" datatype="html">
         <source>reception</source>
-        <target>Reception</target>
+        <target>Recepcion</target>
       </trans-unit>
       <trans-unit id="parking" datatype="html">
         <source>parking</source>
@@ -814,7 +813,7 @@
       </trans-unit>
       <trans-unit id="transfer" datatype="html">
         <source>transfer</source>
-        <target>Transfer</target>
+        <target>Translados</target>
       </trans-unit>
       <trans-unit id="internet" datatype="html">
         <source>internet</source>
@@ -822,7 +821,7 @@
       </trans-unit>
       <trans-unit id="childrenAmenities" datatype="html">
         <source>childrenAmenities</source>
-        <target>Children amenities</target>
+        <target>Instalaciones para niños</target>
       </trans-unit>
       <trans-unit id="bar" datatype="html">
         <source>bar</source>
@@ -830,87 +829,87 @@
       </trans-unit>
       <trans-unit id="restaurant" datatype="html">
         <source>restaurant</source>
-        <target>Restaurant</target>
+        <target>Restaurante</target>
       </trans-unit>
       <trans-unit id="pool" datatype="html">
         <source>pool</source>
-        <target>Pool</target>
+        <target>Piscina</target>
       </trans-unit>
       <trans-unit id="privateBeach" datatype="html">
         <source>privateBeach</source>
-        <target>Private beach</target>
+        <target>Playa privada</target>
       </trans-unit>
       <trans-unit id="healthAndSpa" datatype="html">
         <source>healthAndSpa</source>
-        <target>Health and spa</target>
+        <target>Salud y spa</target>
       </trans-unit>
       <trans-unit id="businessInstallations" datatype="html">
         <source>businessInstallations</source>
-        <target>Business installations</target>
+        <target>Instalaciones comerciales</target>
       </trans-unit>
       <trans-unit id="supplier" datatype="html">
         <source>Supplier</source>
-        <target>Supplier</target>
+        <target>Proveedor</target>
       </trans-unit>
       <trans-unit id="no-suppliers" datatype="html">
         <source>There aren't suppliers available</source>
-        <target>There aren't suppliers available</target>
+        <target>No hay proveedores disponibles</target>
       </trans-unit>
       <trans-unit id="no-clients" datatype="html">
         <source>There aren't clients available</source>
-        <target>There aren't clients available</target>
+        <target>No hay clientes disponibles</target>
       </trans-unit>
       <trans-unit id="accesses" datatype="html">
         <source>Accesses</source>
-        <target>Accesses</target>
+        <target>Accesos</target>
       </trans-unit>
       <trans-unit id="searchType" datatype="html">
         <source>Search type</source>
-        <target>Search type</target>
+        <target>Tipo de búsqueda</target>
       </trans-unit>
       <trans-unit id="currency" datatype="html">
         <source>Currency</source>
-        <target>Currency</target>
+        <target>Moneda</target>
       </trans-unit>
       <trans-unit id="quote" datatype="html">
         <source>Quote</source>
-        <target>Quote</target>
+        <target>Valoración</target>
       </trans-unit>
       <trans-unit id="payment-type" datatype="html">
         <source>Payment type</source>
-        <target>Payment type</target>
-      </trans-unit>
+        <target>Tipo de pago</target>
+        </trans-unit>
       <trans-unit id="show-request" datatype="html">
         <source>Show RQ</source>
-        <target>Show RQ</target>
+        <target>Mostrar RQ</target>
       </trans-unit>
       <trans-unit id="show-response" datatype="html">
-        <source>Show RS</source>
-        <target>Show RS</target>
+        <source>Show RQ</source>
+        <target>Mostrar RQ</target>
       </trans-unit>
       <trans-unit id="copy-to-clipboard" datatype="html">
         <source>Copy to clipboard</source>
-        <target>Copy to clipboard</target>
+        <target>Copiar al portapapeles</target>
       </trans-unit>
       <trans-unit id="my-bookings-room-plural" datatype="html">
         <source>{booking.hotel.rooms.length, plural, =0 {rooms} =1 {room} other {rooms}}</source>
-        <target>{booking.hotel.rooms.length, plural, =0 {rooms} =1 {room} other {rooms}}</target>
+        <target>{booking.hotel.rooms.length, plural, =0 {Habitaciones} =1 {Habitación} other {Habitaciones}}</target>
       </trans-unit>
       <trans-unit id="binding" datatype="html">
         <source>Binding</source>
-        <target>Binding</target>
+        <target>Vinculante</target>
       </trans-unit>
       <trans-unit id="effective-date" datatype="html">
         <source>Effective date</source>
-        <target>Effective date</target>
+        <target>Fecha efectiva</target>
       </trans-unit>
       <trans-unit id="expire-date" datatype="html">
         <source>Expire date</source>
-        <target>Expire date</target>
+        <target>Fecha de caducidad</target>
       </trans-unit>
       <trans-unit id="room-info-tooltip" datatype="html">
         <source>Click to see more room info</source>
-        <target>Click to see more room info</target>
+        <target>Haz clic para ver más información de la habitación</target>
       </trans-unit>
     </body>
   </file>

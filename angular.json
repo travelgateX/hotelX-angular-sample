@@ -57,14 +57,14 @@
             "es": {
               "aot": true,
               "outputPath": "dist/es",
-              "i18nFile": "src/i18n/messages.travelgatex.es.xlf",
+              "i18nFile": "src/i18n/messages.traveltino.es.xlf",
               "i18nFormat": "xlf",
               "i18nLocale": "es"
             },
             "en": {
               "aot": true,
               "outputPath": "dist/en",
-              "i18nFile": "src/i18n/messages.travelgatex.en.xlf",
+              "i18nFile": "src/i18n/messages.traveltino.en.xlf",
               "i18nFormat": "xlf",
               "i18nLocale": "en"
             }

@@ -1,7 +1,7 @@
+import { environment } from './../../../../environments/environment';
 import { AuthService } from './../../../core/services/auth.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { environment } from 'environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ImpersonationModalComponent } from '../impersonation-modal/impersonation-modal.component';
 
@@ -13,15 +13,12 @@ import { ImpersonationModalComponent } from '../impersonation-modal/impersonatio
 export class HeaderComponent implements OnInit, OnDestroy {
   subscriptions$: Subscription[];
   profile: any;
-  environment: any;
   emailImper: string = null;
   show: true;
   hasImpersonation = false;
+  environment = environment;
 
-  constructor(
-    public authService: AuthService,
-    private modalService: NgbModal
-  ) {}
+  constructor(public authService: AuthService, private modalService: NgbModal) {}
 
   ngOnInit() {
     this.subscriptions$ = [];
@@ -31,7 +28,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.hasImpersonation = true;
       }
     });
-    this.environment = environment;
+
+    console.log(this.environment);
 
     this.authService.emailImpes$.subscribe(res => {
       this.emailImper = res;

@@ -1,8 +1,8 @@
 <div class="aux-bg">
-  <header [ngClass]="{'imper-yellow': emailImper}">
+  <header [ngClass]="{ 'imper-yellow': emailImper }">
     <div class="ui three column stackable grid header-menu">
       <div class="column logo">
-        <a [routerLink]="['/home']"><img src="https://www.travelgatex.com/assets/img/logo_travelgatex_claim_white.svg" alt="TravelgateX"/></a>
+        <a [routerLink]="['/home']"><img src="{{ environment.organization.logoNav }}" alt="TravelgateX"/></a>
       </div>
       <div class="column">
         <ng-container>
@@ -14,9 +14,9 @@
         </ng-container>
       </div>
       <div class="column log">
-        <div class="slack">
+        <!-- <div class="slack">
           <a _ngcontent-c0="" href="https://slack.travelgatex.com" target="blank"><img _ngcontent-c0="" src="https://slack.travelgatex.com/badge.svg"/></a>
-        </div>
+        </div> -->
         <b2b-organization-selector [class]="'organization-platform'"></b2b-organization-selector>
         <b2b-lang-select [class]="'lang-platform'"></b2b-lang-select>
         <div class="mo-myaccount-header dropdown">
