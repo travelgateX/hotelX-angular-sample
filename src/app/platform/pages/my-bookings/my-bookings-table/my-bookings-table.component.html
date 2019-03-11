@@ -32,7 +32,7 @@
               <td>{{booking?.reference?.client}}</td>
               <td>{{booking?.hotel?.rooms?.length}}</td>
               <td class="price" style="white-space: nowrap;">
-                <a (click)="openBindingModal(booking.price)" class="tip" data-toggle="tooltip" data-placement="top" title="">{{booking.price.net.toFixed(2)}} {{booking.price.currency}}</a>
+                <a (click)="openBindingModal(booking.price)" class="tip" data-toggle="tooltip" data-placement="top" title="">{{booking?.price?.net.toFixed(2)}} {{booking?.price?.currency}}</a>
               </td>
               <td class="text-right" style="white-space: nowrap;">
                 <p class="detail">

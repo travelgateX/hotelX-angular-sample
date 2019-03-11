@@ -5,21 +5,8 @@ import { Observable } from 'rxjs';
 import { cancelBooking } from '../graphQL/my-bookings/mutations/cancel-booking';
 import { booking } from '../graphQL/my-bookings/queries/booking';
 import { book } from '../graphQL/close-bookings/mutations/book';
-import {
-  destinationSearcher,
-  boards,
-  categories,
-  hotelCodesFromDestination
-} from '../graphQL/shared/queries';
-import {
-  Access,
-  Client,
-  CriteriaBooking,
-  CancelBooking,
-  HotelBookInput,
-  HotelAvail,
-  CriteriaSearch
-} from '../interfaces';
+import { destinationSearcher, boards, categories, hotelCodesFromDestination } from '../graphQL/shared/queries';
+import { Access, Client, CriteriaBooking, CancelBooking, HotelBookInput, HotelAvail, CriteriaSearch } from '../interfaces';
 import { hotelSettingsInput } from '../interfaces/hotel-settings-input';
 
 /**
@@ -75,11 +62,7 @@ export class HubService {
    * @param filter filter
    * @param context context
    */
-  getAvailability(
-    criteria: CriteriaSearch,
-    access: Access[],
-    settings: hotelSettingsInput
-  ): QueryRef<any> {
+  getAvailability(criteria: CriteriaSearch, access: Access[], settings: hotelSettingsInput): QueryRef<any> {
     const accessCodes = access.map(res => res.code);
     return this.apollo.watchQuery<any>({
       query: avail,
@@ -87,8 +70,8 @@ export class HubService {
         criteria: criteria,
         settings: settings,
         filter: {
-          access: { 
-            includes: accessCodes 
+          access: {
+            includes: accessCodes
           }
         }
       },
@@ -101,18 +84,15 @@ export class HubService {
    * @param optionRefId
    * @param language
    */
-  getQuote(
-    optionRefId: string,
-    language: string,
-    settings: hotelSettingsInput
-  ): QueryRef<any> {
+  getQuote(optionRefId: string, language: string, settings: hotelSettingsInput): QueryRef<any> {
     return this.apollo.watchQuery<any>({
       query: quote,
       variables: {
         optionRefId: optionRefId,
         language: language,
         settings: settings
-      }
+      },
+      fetchPolicy: 'network-only'
     });
   }
 
@@ -121,10 +101,7 @@ export class HubService {
    * @param input
    * @param context
    */
-  getBook(
-    input: HotelBookInput,
-    settings: hotelSettingsInput
-  ): Observable<any> {
+  getBook(input: HotelBookInput, settings: hotelSettingsInput): Observable<any> {
     return this.apollo.mutate({
       mutation: book,
       variables: { input: input, settings: settings }
@@ -161,11 +138,7 @@ export class HubService {
    * @param access access
    * @param language language
    */
-  getHotelInfo(
-    hotels: string[],
-    access: Access[],
-    language: string
-  ): QueryRef<any> {
+  getHotelInfo(hotels: string[], access: Access[], language: string): QueryRef<any> {
     const accessCodes = access.map(res => res.code);
     return this.apollo.watchQuery<any>({
       query: hotelInfo,
@@ -191,10 +164,7 @@ export class HubService {
    * @param access access
    * @param destinationCodes destinationCodes
    */
-  getHotelCodesDestination(
-    access: Access[],
-    destinationCodes: string
-  ): Promise<any> {
+  getHotelCodesDestination(access: Access[], destinationCodes: string): Promise<any> {
     const accessCodes = access.map(res => res.code);
     return new Promise((resolve, reject) => {
       this.apollo
