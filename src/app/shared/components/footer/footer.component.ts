@@ -37,19 +37,19 @@ export class FooterComponent implements OnInit {
       let archive: string;
 
       if (this.language === 'es') {
-        archive = 'TraveltinoTermsES.docx';
+        archive = 'TraveltinoTermsES.pdf';
       } else {
-        archive = 'TraveltinoTermsEN.docx';
+        archive = 'TraveltinoTermsEN.pdf';
       }
       xhr.open('GET', './assets/img/traveltino/' + archive, true);
-      xhr.setRequestHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document; charset=utf-8');
+      xhr.setRequestHeader('Content-Type', 'application/pdf; charset=utf-8');
 
       xhr.responseType = 'blob';
 
       xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
           if (xhr.status === 200) {
-            const contentType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+            const contentType = 'application/pdf';
             const blob = new Blob([xhr.response], { type: contentType });
             observer.next(blob);
             observer.complete();
