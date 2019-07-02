@@ -24,7 +24,6 @@ export const environment = {
   production: true,
   configUrl: './assets/config.json',
   languages: ['en', 'es'],
-  googleMapsKey: 'AIzaSyDnnHGVUJJCRIzFTmRwdASd60QnQi2L7LY',
   organization: {
     code: 'tgx',
     assetsPath: 'assets/img/traveltino/',
