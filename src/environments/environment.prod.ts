@@ -27,25 +27,34 @@ export const environment = {
   googleMapsKey: 'AIzaSyDnnHGVUJJCRIzFTmRwdASd60QnQi2L7LY',
   organization: {
     code: 'tgx',
-    assetsPath: 'assets/img/travelgatex/',
+    assetsPath: 'assets/img/traveltino/',
     defaultMarket: {
       isoCode: 'es',
       name: 'Spain'
     },
-    email: 'info@xmltravelgate.com',
+    email: 'sales@traveltino.com',
     dateFormat: 'YYYY/MM/DD',
     headquarters: [
       {
+        country: 'United Arab Emirates',
+        telephone: '+(971) 8000 32 00 55 ',
+        address: 'Unit No. 2407, Mazaya Business Avenue BB2, Jumeirah Lakes Towers, Dubai'
+      },
+      {
         country: 'Spain',
-        telephone: '+(34) 871 968 181 ',
-        address:
-          'Edificio Europa, Local 1, bajos, 07121 (ParcBIT), Palma de Mallorca, Spain'
+        telephone: '+(34) 922 938 041 ',
+        address: 'Oficina No. 20-21, Edificio Lanzateide, Vá Transversal 2, Muelle los Llanos, 28003, Santa Cruz de Tenerife'
+      },
+      {
+        country: 'United Arab Emirates',
+        telephone: '+(971) 8000 32 00 55 ',
+        address: 'Oficina No. 402, Calle Paraguay 2141, 11800, Montevideo'
       }
     ],
-    // linkedin: 'https://www.linkedin.com/company/smyrooms',
-    logoNav: 'assets/img/xtg_two_color_logo.svg',
-    logoHome: 'assets/img/xtg_logo.svg',
-    logo: 'assets/img/xtg_two_color_logo.svg',
-    name: 'Travelgatex'
+    linkedin: 'https://www.linkedin.com/company/traveltino',
+    logoNav: 'assets/img/logo_traveltino.png',
+    logoHome: 'assets/img/logo_traveltino.png',
+    logo: 'assets/img/logo_traveltino.png',
+    name: 'Traveltino'
   }
 };

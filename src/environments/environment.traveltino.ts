@@ -1,32 +1,26 @@
-// The file contents for the current environment will overwrite these during build.
-// The build system defaults to the dev environment which uses `environment.ts`, but if you do
-// `ng build --env=prod` then `environment.prod.ts` will be used instead.
-// The list of which env maps to which file can be found in `.angular-cli.json`.
-
 export const auth0Config = {
   domain: 'xtg.eu.auth0.com',
-  clientId: 'f8mTlypd0j0tfBsKTu1ppxvC6Mk2DTnX',
+  clientId: 'RWf2MF3MVC3WSLvEtPU3ZDouexfIVLgY',
   options: {
-    auth: {
+    auth:  {
       redirectUrl: location.origin + '/home',
       responseType: 'token id_token',
       params: {
-        scope: 'openid profile email picture name'
+        scope: 'openid profile email picture name',
       },
-      leeway: 30
+      leeway: 30,
     },
     languageDictionary: {
       title: ''
     },
     theme: {
-      logo: 'assets/img/xtg_two_color_logo.svg'
-    },
-    autoclose: true
+      logo: 'assets/img/logo_traveltino.jpg'
+    }
   }
 };
 
 export const environment = {
-  production: false,
+  production: true,
   configUrl: './assets/config.json',
   languages: ['en', 'es'],
   googleMapsKey: 'AIzaSyDnnHGVUJJCRIzFTmRwdASd60QnQi2L7LY',

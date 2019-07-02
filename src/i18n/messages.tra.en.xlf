@@ -1,0 +1,800 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="home" datatype="html">
+        <source>home</source>
+        <target>home</target>
+      </trans-unit>
+      <trans-unit id="about" datatype="html">
+        <source>about</source>
+        <target>about</target>
+      </trans-unit>
+      <trans-unit id="products" datatype="html">
+        <source>products</source>
+        <target>products</target>
+      </trans-unit>
+      <trans-unit id="contact-us" datatype="html">
+        <source>contact us</source>
+        <target>contact us</target>
+      </trans-unit>
+      <trans-unit id="logout" datatype="html">
+        <source>Logout</source>
+        <target>Logout</target>
+      </trans-unit>
+      <trans-unit id="b2bplatform" datatype="html">
+        <source>B2B Platform</source>
+        <target>B2B Platform</target>
+      </trans-unit>
+      <trans-unit id="login" datatype="html">
+        <source>Login</source>
+        <target>Login</target>
+      </trans-unit>
+      <trans-unit id="signup" datatype="html">
+        <source>Sign up</source>
+        <target>Sign up</target>
+      </trans-unit>
+      <trans-unit id="about-title" datatype="html">
+        <source>Welcome to Smyrooms</source>
+        <target>Welcome to Traveltino</target>
+      </trans-unit>
+      <trans-unit id="about-subtitle" datatype="html">
+        <source>Specialist in leisure travel.</source>
+        <target>Specialist in leisure travel.</target>
+      </trans-unit>
+      <trans-unit id="about-p-1" datatype="html">
+        <source>Know more about us</source>
+        <target>Know more about us</target>
+      </trans-unit>
+      <trans-unit id="about-p-2" datatype="html">
+        <source>Smyrooms is an online global tour operator with over 10 years experience in the travel market part of Logitravel
+          Group. The Company was founded with the aim of supplying the many brands of the group and all our customers with
+          our travel inventory at competitive prices. We strive to offer our customers the most advanced technology</source>
+          <target>Traveltino is an online global tour operator with over 10 years experience in the travel market part of Logitravel Group. The Company was founded with the aim of supplying the many brands of the group and all our customers with our travel inventory at competitive prices. We strive to offer our customers the most advanced technology</target>
+      </trans-unit>
+      <trans-unit id="about-p-3" datatype="html">
+        <source>Travel product available in one single connection</source>
+        <target>Travel product available in one single connection</target>
+      </trans-unit>
+      <trans-unit id="about-p-4" datatype="html">
+        <source>Smyrooms has the most extensive product on the market. More than 300.000 hotels, both direct contracted and more
+          than 200 suppliers.</source>
+        <target>Traveltino has the most extensive product on the market. More than 300.000 hotels, both direct contracted and more than 200 suppliers.</target>
+      </trans-unit>
+      <trans-unit id="service-title" datatype="html">
+        <source>Why Magic Rooms?</source>
+        <target>Why Traveltino?</target>
+      </trans-unit>
+      <trans-unit id="service-1-title" datatype="html">
+        <source>More than 15.000 directly contracted hotels</source>
+        <target>More than 15.000 directly contracted hotels</target>
+      </trans-unit>
+      <trans-unit id="service-2-title" datatype="html">
+        <source>Advanced technology</source>
+        <target>Advanced technology</target>
+      </trans-unit>
+      <trans-unit id="service-2-subtitle" datatype="html">
+        <source>We use the latest technology to deliver 300.000 hotels in one single XML connection with a response time
+                  of less than 1 second.</source>
+        <target>We use the latest technology to deliver 300.000 hotels in one single XML connection with a response time
+                  of less than 1 second.</target>
+      </trans-unit>
+      <trans-unit id="service-3-title" datatype="html">
+        <source>More than 200 suppliers</source>
+        <target>More than 200 providers</target>
+      </trans-unit>
+      <trans-unit id="service-3-subtitle" datatype="html">
+        <source>We aggregate options from all our suppliers to serve you the best option available in less time.</source>
+        <target>We aggregate options from all our providers to serve you the best option available in less time.</target>
+      </trans-unit>
+      <trans-unit id="service-4-title" datatype="html">
+        <source>Free mapping services</source>
+        <target>Free mapping services</target>
+      </trans-unit>
+      <trans-unit id="service-4-subtitle" datatype="html">
+        <source>Our mapping tool will help you to priorize hotels you already have on your system and will also propose others
+                  to expand your product.</source>
+        <target>Our mapping tool will help you to priorize hotels you already have on your system and will also propose others
+                  to expand your product.</target>
+      </trans-unit>
+      <trans-unit id="product-title" datatype="html">
+        <source>Learn about our products</source>
+        <target>Learn about our products</target>
+      </trans-unit>
+      <trans-unit id="hotels" datatype="html">
+        <source>Hotels</source>
+        <target>Hotels</target>
+      </trans-unit>
+      <trans-unit id="hotel-mediterranean" datatype="html">
+        <source>Mediterranean destinations</source>
+        <target>Mediterranean destinations</target>
+      </trans-unit>
+       <trans-unit id="hotel-mediterranean-spain" datatype="html">
+        <source>Spain Sun &amp; Beach</source>
+        <target>Spain Sun &amp; Beach</target>
+      </trans-unit>
+      <trans-unit id="hotel-mediterranean-spain-list" datatype="html">
+        <source>including Balearic Islands and Canary Islands</source>
+        <target>including Balearic Islands and Canary Islands</target>
+      </trans-unit>
+      <trans-unit id="hotel-mediterranean-portugal" datatype="html">
+        <source>Portugal Sun &amp; Beach</source>
+        <target>Portugal Sun &amp; Beach</target>
+      </trans-unit>
+      <trans-unit id="hotel-mediterranean-portugal-list" datatype="html">
+        <source>including Algarve, Madeira and Azores</source>
+        <target>including Algarve, Madeira and Azores</target>
+      </trans-unit>
+      <trans-unit id="hotel-mediterranean-italy" datatype="html">
+        <source>Italy Sun &amp; Beach </source>
+        <target>Italy Sun &amp; Beach </target>
+      </trans-unit>
+      <trans-unit id="hotel-mediterranean-italy-list" datatype="html">
+        <source>including Sardinia, Sicily, Amalfi and Adriatic coasts</source>
+        <target>including Sardinia, Sicily, Amalfi and Adriatic coasts</target>
+      </trans-unit>
+      <trans-unit id="hotel-mediterranean-greece" datatype="html">
+        <source>Greece, Malta, Croatia, Morocco &amp; Tunisia</source>
+        <target>Greece, Malta, Croatia, Morocco &amp; Tunisia</target>
+      </trans-unit>
+      <trans-unit id="hotel-mexico" datatype="html">
+        <source>Mexico and Dominican Republic</source>
+        <target>Mexico and Dominican Republic</target>
+      </trans-unit>
+      <trans-unit id="hotel-mexico-area" datatype="html">
+        <source>Leisure Areas</source>
+        <target>Leisure Areas</target>
+      </trans-unit>
+      <trans-unit id="hotel-cuba" datatype="html">
+        <source>Cuba</source>
+        <target>Cuba</target>
+      </trans-unit>
+      <trans-unit id="hotel-cuba-list" datatype="html">
+        <source>hotels and vacation homes</source>
+        <target>hotels and vacation homes</target>
+      </trans-unit>
+      <trans-unit id="hotel-ski" datatype="html">
+        <source>Ski</source>
+        <target>Ski</target>
+      </trans-unit>
+      <trans-unit id="hotel-ski-list" datatype="html">
+        <source>hotels including Spain, Andorra, Italy, France and Austria</source>
+        <target>hotels including Spain, Andorra, Italy, France and Austria</target>
+      </trans-unit>
+      <trans-unit id="hotel-city" datatype="html">
+        <source>Cities</source>
+        <target>Cities</target>
+      </trans-unit>
+      <trans-unit id="hotel-city-list" datatype="html">
+        <source>Madrid, Barcelona, Rome, Venice, Florence, Milan, London, Lisbon, Oporto, Dubai</source>
+        <target>Madrid, Barcelona, Rome, Venice, Florence, Milan, London, Lisbon, Oporto, Dubai</target>
+      </trans-unit>
+      <trans-unit id="hotel-desc" datatype="html">
+        <source>In addition to our directly contracted hotels, we have agreements with more than 200 suppliers including bed banks
+            and local DMCs. We use the latest technology to deliver 300,000 hotels in one single XML connection with a response
+            time of less than 1 second.</source>
+        <target>In addition to our directly contracted hotels, we have agreements with more than 200 providers including bed banks
+            and local DMCs. We use the latest technology to deliver 300,000 hotels in one single XML connection with a response
+            time of less than 1 second.</target>
+      </trans-unit>
+      <trans-unit id="flight-title" datatype="html">
+        <source>Flights</source>
+        <target>Flights</target>
+      </trans-unit>
+      <trans-unit id="flight-subtitlt" datatype="html">
+        <source>XML integration with different GDS and LowCost Platforms such as Amadeus, Travelport, Sabre, Travelfusion and HitchHiker.</source>
+        <target>XML integration with different GDS and LowCost Platforms such as Amadeus, Travelport, Sabre, Travelfusion and HitchHiker.</target>
+      </trans-unit>
+      <trans-unit id="packages" datatype="html">
+        <source>Packages</source>
+        <target>Packages</target>
+      </trans-unit>
+      <trans-unit id="package-subtitle" datatype="html">
+        <source>Tailor made dynamic packages on XML.</source>
+        <target>Tailor made dynamic packages on XML.</target>
+      </trans-unit>
+      <trans-unit id="transfer-title" datatype="html">
+        <source>Transfers</source>
+        <target>Transfers</target>
+      </trans-unit>
+      <trans-unit id="transfer-subtitle" datatype="html">
+        <source>Worldwide private or shared transfers.</source>
+        <target>Worldwide private or shared transfers.</target>
+      </trans-unit>
+      <trans-unit id="activity-title" datatype="html">
+        <source>Activities</source>
+        <target>Activities</target>
+      </trans-unit>
+      <trans-unit id="activity-subtitle" datatype="html">
+        <source>Activities in more than 4.000 destinations worldwide including theme parks, museums, guided tours, tickets, sport
+            events, restaurants and many more...</source>
+        <target>Activities in more than 4.000 destinations worldwide including theme parks, museums, guided tours, tickets, sport
+            events, restaurants and many more...</target>
+      </trans-unit>
+      <trans-unit id="connect" datatype="html">
+        <source>Let&apos;s get connected</source>
+        <target>Let&apos;s get connected</target>
+      </trans-unit>
+      <trans-unit id="get-in-touch" datatype="html">
+        <source>Get in touch</source>
+        <target>Get in touch</target>
+      </trans-unit>
+      <trans-unit id="contact-us-at" datatype="html">
+        <source>Contact us at <x id="START_LINK" ctype="x-a"/>sales@smyrooms.com<x id="CLOSE_LINK" ctype="x-a"/></source>
+        <target>Contact us at <x id="START_LINK" ctype="x-a"/>lidia.sancho@logitravelgroup.com<x id="CLOSE_LINK" ctype="x-a"/></target>
+      </trans-unit>
+      <trans-unit id="emirates" datatype="html">
+        <source>United Arab Emirates</source>
+        <target>United Arab Emirates</target>
+      </trans-unit>
+      <trans-unit id="spain" datatype="html">
+        <source>Spain</source>
+        <target>Spain</target>
+      </trans-unit>
+      <trans-unit id="uruguay" datatype="html">
+        <source>Uruguay</source>
+        <target>Uruguay</target>
+      </trans-unit>
+      <trans-unit id="work-with-us" datatype="html">
+        <source>Work with us</source>
+        <target>Work with us</target>
+      </trans-unit>
+      <trans-unit id="work-with-us-desc" datatype="html">
+        <source>To stay on top of travel and technology requires a constant search for the best professionals in all areas of the business. If you are ambitious and want to be part of a company that growing at a 30% rate per year since 2005, contact us and find out how you could be part of a team of great talent and experience</source>
+        <target>To stay on top of travel and technology requires a constant search for the best professionals in all areas of the business. If you are ambitious and want to be part of a company that growing at a 30% rate per year since 2005, contact us and find out how you could be part of a team of great talent and experience.</target>
+      </trans-unit>
+      <trans-unit id="our-products" datatype="html">
+        <source>Our products</source>
+        <target>Our products</target>
+      </trans-unit>
+      <trans-unit id="xml-api" datatype="html">
+        <source>XML Travelgate's API</source>
+        <target>TravelgateX API</target>
+      </trans-unit>
+      <trans-unit id="copyright" datatype="html">
+        <source>Copyright © 2017 Smyrooms. All rights reserved.</source>
+        <target>Copyright © 2017 Traveltino. All rights reserved.</target>
+      </trans-unit>
+      <trans-unit id="terms-conditions" datatype="html">
+        <source>Terms & Conditions</source>
+        <target>Terms & Conditions</target>
+      </trans-unit>
+      <trans-unit id="404-title" datatype="html">
+        <source>Something is wrong</source>
+        <target>Something is wrong</target>
+      </trans-unit>
+      <trans-unit id="404-subtitle" datatype="html">
+        <source>The page you are looking for was moved, removed, renamed or might never existed.</source>
+        <target>The page you are looking for was moved, removed, renamed or might never existed.</target>
+      </trans-unit>
+      <trans-unit id="book-success" datatype="html">
+        <source>Booking success!</source>
+        <target>Booking success!</target>
+      </trans-unit>
+      <trans-unit id="book-pending" datatype="html">
+        <source>Booking pending!</source>
+        <target>Booking pending!</target>
+      </trans-unit>
+      <trans-unit id="book-error" datatype="html">
+        <source>Booking error!</source>
+        <target>Booking error!</target>
+      </trans-unit>
+      <trans-unit id="title-accomodations" datatype="html">
+        <source>Choose from more than 500,000 accommodations. We are present in ALL countries of the world!</source>
+        <target>Choose from more than 500,000 accommodations. We are present in ALL countries of the world!</target>
+      </trans-unit>
+      <trans-unit id="availability" datatype="html">
+        <source>Availability</source>
+        <target>Availability</target>
+      </trans-unit>
+      <trans-unit id="request" datatype="html">
+        <source>request</source>
+        <target>request</target>
+      </trans-unit>
+      <trans-unit id="no-results" datatype="html">
+        <source>It seems we have no results for this request.</source>
+        <target>It seems we have no results for this request.</target>
+      </trans-unit>
+      <trans-unit id="search-hotel" datatype="html">
+        <source>Search hotel:</source>
+        <target>Search hotel:</target>
+      </trans-unit>
+      <trans-unit id="your-search" datatype="html">
+        <source>Your search:</source>
+        <target>Your search:</target>
+      </trans-unit>
+      <trans-unit id="edit" datatype="html">
+        <source>Edit</source>
+        <target>Edit</target>
+      </trans-unit>
+      <trans-unit id="destination" datatype="html">
+        <source>Destination:</source>
+        <target>Destination:</target>
+      </trans-unit>
+      <trans-unit id="date-from" datatype="html">
+        <source>Date from:</source>
+        <target>Date from:</target>
+      </trans-unit>
+      <trans-unit id="date-to" datatype="html">
+        <source>Date to:</source>
+        <target>Date to:</target>
+      </trans-unit>
+      <trans-unit id="room" datatype="html">
+        <source>Room</source>
+        <target>Room</target>
+      </trans-unit>
+      <trans-unit id="add-room" datatype="html">
+        <source>Add another room</source>
+        <target>Add another room</target>
+      </trans-unit>
+      <trans-unit id="adults" datatype="html">
+        <source>Adults:</source>
+        <target>Adults:</target>
+      </trans-unit>
+      <trans-unit id="valuation-adult" datatype="html">
+        <source>Adult</source>
+        <target>Adult</target>
+      </trans-unit>
+      <trans-unit id="children" datatype="html">
+        <source>Children...</source>
+        <target>Children...</target>
+      </trans-unit>
+      <trans-unit id="valuation-child" datatype="html">
+        <source>Child</source>
+        <target>Child</target>
+      </trans-unit>
+      <trans-unit id="ages" datatype="html">
+        <source>...Ages</source>
+        <target>...Ages</target>
+      </trans-unit>
+      <trans-unit id="search" datatype="html">
+        <source>Search</source>
+        <target>Search</target>
+      </trans-unit>
+      <trans-unit id="booked-at" datatype="html">
+        <source>Booked at</source>
+        <target>Booked at</target>
+      </trans-unit>
+      <trans-unit id="provider-locator" datatype="html">
+        <source>Provider locator:</source>
+        <target>Booking Reference:</target>
+      </trans-unit>
+      <trans-unit id="booking-status" datatype="html">
+        <source>Booking status:</source>
+        <target>Booking status:</target>
+      </trans-unit>
+      <trans-unit id="price" datatype="html">
+        <source>Price</source>
+        <target>Price</target>
+      </trans-unit>
+      <trans-unit id="booking-possible-error" datatype="html">
+        <source>It is possible that there was an error making the request or that you are trying to access it without following the reservation process.</source>
+        <target>It is possible that there was an error making the request or that you are trying to access it without following the reservation process.</target>
+      </trans-unit>
+      <trans-unit id="logo-title" datatype="html">
+        <source>Smyrooms - Global bedbank</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="welcome" datatype="html">
+        <source>Welcome</source>
+        <target>Welcome</target>
+      </trans-unit>
+      <trans-unit id="booking" datatype="html">
+        <source>Bookings</source>
+        <target>Bookings</target>
+      </trans-unit>
+      <trans-unit id="my" datatype="html">
+        <source>My</source>
+        <target>My</target>
+      </trans-unit>
+      <trans-unit id="booking-reference" datatype="html">
+        <source>Booking reference:</source>
+        <target>Booking reference:</target>
+      </trans-unit>
+      <trans-unit id="by-dates" datatype="html">
+        <source>By dates:</source>
+        <target>By dates:</target>
+      </trans-unit>
+      <trans-unit id="hotel" datatype="html">
+        <source>Hotel</source>
+        <target>Hotel</target>
+      </trans-unit>
+      <trans-unit id="booking-day" datatype="html">
+        <source>Booking day</source>
+        <target>Booking day</target>
+      </trans-unit>
+      <trans-unit id="status" datatype="html">
+        <source>Status</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="provided-locator" datatype="html">
+        <source>Provided locator</source>
+        <target>Provided locator</target>
+      </trans-unit>
+      <trans-unit id="options" datatype="html">
+        <source>Options</source>
+        <target>Options</target>
+      </trans-unit>
+      <trans-unit id="cancel" datatype="html">
+        <source>Cancel</source>
+        <target>Cancel</target>
+      </trans-unit>
+      <trans-unit id="view-rq" datatype="html">
+        <source>View RQ</source>
+        <target>View RQ</target>
+      </trans-unit>
+      <trans-unit id="view-rs" datatype="html">
+        <source>View RS</source>
+        <target>View RS</target>
+      </trans-unit>
+      <trans-unit id="reservation-locator" datatype="html">
+        <source>Reservation locator:</source>
+        <target>Reservation locator:</target>
+      </trans-unit>
+      <trans-unit id="client" datatype="html">
+        <source>Client</source>
+        <target>Client</target>
+      </trans-unit>
+      <trans-unit id="provider" datatype="html">
+        <source>Provider</source>
+        <target>Provider</target>
+      </trans-unit>
+      <trans-unit id="view-bookings" datatype="html">
+        <source>View bookings</source>
+        <target>View bookings</target>
+      </trans-unit>
+      <trans-unit id="todays-bookings" datatype="html">
+        <source>Today's bookings</source>
+        <target>Today's bookings</target>
+      </trans-unit>
+      <trans-unit id="yesterdays-bookings" datatype="html">
+        <source>Yesterday's bookings</source>
+        <target>Yesterday's bookings</target>
+      </trans-unit>
+      <trans-unit id="book" datatype="html">
+        <source>Book</source>
+        <target>Book</target>
+      </trans-unit>
+      <trans-unit id="invalid-age" datatype="html">
+        <source>Please provide a valid age.</source>
+        <target>Please provide a valid age.</target>
+      </trans-unit>
+      <trans-unit id="invalid-surname" datatype="html">
+        <source>Please provide a valid surname.</source>
+        <target>Please provide a valid surname.</target>
+      </trans-unit>
+      <trans-unit id="surname" datatype="html">
+        <source>Surname</source>
+        <target>Surname</target>
+      </trans-unit>
+      <trans-unit id="invalid-name" datatype="html">
+        <source>Please provide a valid name.</source>
+        <target>Please provide a valid name.</target>
+      </trans-unit>
+      <trans-unit id="name" datatype="html">
+        <source>Name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="pax" datatype="html">
+        <source>Pax</source>
+        <target>Pax</target>
+      </trans-unit>
+      <trans-unit id="distribution" datatype="html">
+        <source>Distribution</source>
+        <target>Distribution</target>
+      </trans-unit>
+      <trans-unit id="remarks" datatype="html">
+        <source>Remarks</source>
+        <target>Remarks</target>
+      </trans-unit>
+      <trans-unit id="holder" datatype="html">
+        <source>Holder</source>
+        <target>Holder</target>
+      </trans-unit>
+        <trans-unit id="invalid-client-reference" datatype="html">
+        <source>Please provide a valid client reference.</source>
+        <target>Please provide a valid client reference.</target>
+      </trans-unit>
+      <trans-unit id="client-reference" datatype="html">
+        <source>Client reference:</source>
+        <target>Client reference:</target>
+      </trans-unit>
+      <trans-unit id="client-example" datatype="html">
+        <source>Ex: #FDSFDS2424</source>
+        <target>Ex: #FDSFDS2424</target>
+      </trans-unit>
+      <trans-unit id="booking-details" datatype="html">
+        <source>Booking details</source>
+        <target>Booking details</target>
+      </trans-unit>
+      <trans-unit id="applied-over" datatype="html">
+        <source>Applied over</source>
+        <target>Applied over</target>
+      </trans-unit>
+      <trans-unit id="hours-before" datatype="html">
+        <source>Hours before checkin</source>
+        <target>Hours before checkin</target>
+      </trans-unit>
+      <trans-unit id="days-before" datatype="html">
+        <source>Days before checkin</source>
+        <target>Days before checkin</target>
+      </trans-unit>
+      <trans-unit id="total-price" datatype="html">
+        <source>Total price</source>
+        <target>Total price</target>
+      </trans-unit>
+      <trans-unit id="penalty-type" datatype="html">
+        <source>Penalty type</source>
+        <target>Penalty type</target>
+      </trans-unit>
+      <trans-unit id="cancellation-policies" datatype="html">
+        <source>Cancellation policies</source>
+        <target>Cancellation policies</target>
+      </trans-unit>
+      <trans-unit id="cancellation-rules" datatype="html">
+        <source>Cancellation rules</source>
+        <target>Cancellation rules</target>
+      </trans-unit>
+      <trans-unit id="hotel-code" datatype="html">
+        <source>Hotel code</source>
+        <target>Hotel code</target>
+      </trans-unit>
+      <trans-unit id="view-map" datatype="html">
+        <source>View map</source>
+        <target>View map</target>
+      </trans-unit>
+      <trans-unit id="mealplan" datatype="html">
+        <source>Mealplan</source>
+        <target>Board Basis</target>
+      </trans-unit>
+      <trans-unit id="no-expenses-until" datatype="html">
+        <source>No expenses until</source>
+        <target>Cancellation fees</target>
+      </trans-unit>
+      <trans-unit id="min-sell-price" datatype="html">
+        <source>Minimum selling price</source>
+        <target>Minimum selling price</target>
+      </trans-unit>
+      <trans-unit id="show-more" datatype="html">
+        <source>Show more</source>
+        <target>Show more</target>
+      </trans-unit>
+      <trans-unit id="show-all" datatype="html">
+        <source>Show all</source>
+        <target>Show all</target>
+      </trans-unit>
+      <trans-unit id="show-less" datatype="html">
+        <source>Show less</source>
+        <target>Show less</target>
+      </trans-unit>
+      <trans-unit id="no-cancellation-policies" datatype="html">
+        <source>Seems there are no cancellation policies.</source>
+        <target>Seems there are no cancellation policies.</target>
+      </trans-unit>
+      <trans-unit id="booking-reference-tooltip" datatype="html">
+        <source>Corresponds to the provider locator</source>
+        <target>Corresponds to the provider locator</target>
+      </trans-unit>
+      <trans-unit id="hotel-name-placeholder" datatype="html">
+        <source>Hotel name...</source>
+        <target>Hotel name...</target>
+      </trans-unit>
+      <trans-unit id="from" datatype="html">
+        <source>From</source>
+        <target>From</target>
+      </trans-unit>
+      <trans-unit id="to" datatype="html">
+        <source>to</source>
+        <target>to</target>
+      </trans-unit>
+      <trans-unit id="and" datatype="html">
+        <source>and</source>
+        <target>and</target>
+      </trans-unit>
+      <trans-unit id="room-search-plural" datatype="html">
+        <source>{roomsSearch.roomsNum, plural, =0 {Rooms} =1 {Room} other {Rooms}}</source>
+        <target>{roomsSearch.roomsNum, plural, =0 {Rooms} =1 {Room} other {Rooms}}</target>
+      </trans-unit>
+      <trans-unit id="adult-search-plural" datatype="html">
+        <source>{roomsSearch.adultsNum, plural, =0 {Adults} =1 {Adult} other {Adults}}</source>
+        <target>{roomsSearch.adultsNum, plural, =0 {Adults} =1 {Adult} other {Adults}}</target>
+      </trans-unit>
+      <trans-unit id="child-search-plural" datatype="html">
+        <source>{roomsSearch.childsNum, plural, =0 {Children} =1 {Child} other {Children}}</source>
+        <target>{roomsSearch.childsNum, plural, =0 {Children} =1 {Child} other {Children}}</target>
+      </trans-unit>
+      <trans-unit id="room-plural" datatype="html">
+        <source>{search.roomsNum, plural, =0 {Rooms} =1 {Room} other {Rooms}}</source>
+        <target>{search.roomsNum, plural, =0 {Rooms} =1 {Room} other {Rooms}}</target>
+      </trans-unit>
+      <trans-unit id="adult-plural" datatype="html">
+        <source>{search.adultsNum, plural, =0 {Adults} =1 {Adult} other {Adults}}</source>
+        <target>{search.adultsNum, plural, =0 {Adults} =1 {Adult} other {Adults}}</target>
+      </trans-unit>
+      <trans-unit id="child-plural" datatype="html">
+        <source>{search.childsNum, plural, =0 {Children} =1 {Child} other {Children}}</source>
+        <target>{search.childsNum, plural, =0 {Children} =1 {Child} other {Children}}</target>
+      </trans-unit>
+      <trans-unit id="detail-room-plural" datatype="html">
+        <source>{bookingDetail.search.roomsNum, plural, =0 {Rooms} =1 {Room} other {Rooms}}</source>
+        <target>{bookingDetail.search.roomsNum, plural, =0 {Rooms} =1 {Room} other {Rooms}}</target>
+      </trans-unit>
+      <trans-unit id="detail-adult-plural" datatype="html">
+        <source>{bookingDetail.search.adultsNum, plural, =0 {Adults} =1 {Adult} other {Adults}}</source>
+        <target>{bookingDetail.search.adultsNum, plural, =0 {Adults} =1 {Adult} other {Adults}}</target>
+      </trans-unit>
+      <trans-unit id="detail-child-plural" datatype="html">
+        <source>{bookingDetail.search.childsNum, plural, =0 {Children} =1 {Child} other {Children}}</source>
+        <target>{bookingDetail.search.childsNum, plural, =0 {Children} =1 {Child} other {Children}}</target>
+      </trans-unit>
+      <trans-unit id="booking-status-select" datatype="html">
+        <source>{book.bookDetail.status, select, OK {OK} PENDING {PENDING} other {PENDING}}</source>
+        <target>{book.bookDetail.status, select, OK {OK} PENDING {PENDING} other {PENDING}}</target>
+      </trans-unit>
+      <trans-unit id="select-lang" datatype="html">
+        <source>Language</source>
+        <target>Language</target>
+      </trans-unit>
+      <trans-unit id="lang-en" datatype="html">
+        <source></source>
+        <target>English</target>
+      </trans-unit>
+      <trans-unit id="lang-es" datatype="html">
+        <source></source>
+        <target>Spanish</target>
+      </trans-unit>
+      <trans-unit id="penalty-tooltip" datatype="html">
+        <source>Click to see penalty list</source>
+        <target>Click to see penalty list</target>
+      </trans-unit>
+      <trans-unit id="results" datatype="html">
+        <source>{availability.length, plural, =0 {Results} =1 {Results} other {Results}}</source>
+        <target>{availability.length, plural, =0 {Results} =1 {Result} other {Results}}</target>
+      </trans-unit>
+      <trans-unit id="for" datatype="html">
+        <source>for</source>
+        <target>for</target>
+      </trans-unit>
+      <trans-unit id="value" datatype="html">
+        <source>Value</source>
+        <target>Value</target>
+      </trans-unit>
+      <trans-unit id="market" datatype="html">
+        <source>Market</source>
+        <target>Market</target>
+      </trans-unit>
+      <trans-unit id="market-placeholder" datatype="html">
+        <source>Select Market</source>
+        <target>Select Market</target>
+      </trans-unit>
+      <trans-unit id="show-entries" datatype="html">
+        <source>Show entries:</source>
+        <target>Show entries:</target>
+      </trans-unit>
+      <trans-unit id="net" datatype="html">
+        <source>Net</source>
+        <target>Net</target>
+      </trans-unit>
+      <trans-unit id="commission-percentage" datatype="html">
+        <source>Commission Percentage</source>
+        <target>Commission Percentage</target>
+      </trans-unit>
+      <trans-unit id="gross" datatype="html">
+        <source>Gross</source>
+        <target>Gross</target>
+      </trans-unit>
+      <trans-unit id="price-type" datatype="html">
+        <source>Price type</source>
+        <target>Price type</target>
+      </trans-unit>
+      <trans-unit id="ok" datatype="html">
+        <source>Ok</source>
+        <target>Ok</target>
+      </trans-unit>
+      <trans-unit id="pending" datatype="html">
+        <source>Pending</source>
+        <target>Pending</target>
+      </trans-unit>
+      <trans-unit id="error" datatype="html">
+        <source>Error</source>
+        <target>Error</target>
+      </trans-unit>
+      <trans-unit id="clear" datatype="html">
+        <source>Clear</source>
+        <target>Clear</target>
+      </trans-unit>
+      <trans-unit id="select-price" datatype="html">
+        <source>Select price</source>
+        <target>Select price</target>
+      </trans-unit>
+      <trans-unit id="select-rate" datatype="html">
+        <source>Select rate</source>
+        <target>Select rate</target>
+      </trans-unit>
+      <trans-unit id="rate" datatype="html">
+        <source>Rate</source>
+        <target>Rate</target>
+      </trans-unit>
+      <trans-unit id="select-mealplan" datatype="html">
+        <source>Select mealplan</source>
+        <target>Select mealplan</target>
+      </trans-unit>
+      <trans-unit id="empty" datatype="html">
+        <source>Empty</source>
+        <target>Empty</target>
+      </trans-unit>
+      <trans-unit id="select-category" datatype="html">
+        <source>Select category</source>
+        <target>Select category</target>
+      </trans-unit>
+      <trans-unit id="category" datatype="html">
+        <source>Category</source>
+        <target>Category</target>
+      </trans-unit>
+      <trans-unit id="code" datatype="html">
+        <source>Code:</source>
+        <target>Hotel ID:</target>
+      </trans-unit>
+      <trans-unit id="airConditioner" datatype="html">
+        <source>airConditioner</source>
+        <target>Air conditioner</target>
+      </trans-unit>
+      <trans-unit id="cleaning" datatype="html">
+        <source>cleaning</source>
+        <target>Cleaning</target>
+      </trans-unit>
+      <trans-unit id="laundry" datatype="html">
+        <source>laundry</source>
+        <target>Laundry</target>
+      </trans-unit>
+      <trans-unit id="lifts" datatype="html">
+        <source>lifts</source>
+        <target>Lifts</target>
+      </trans-unit>
+      <trans-unit id="reception" datatype="html">
+        <source>reception</source>
+        <target>Reception</target>
+      </trans-unit>
+      <trans-unit id="parking" datatype="html">
+        <source>parking</source>
+        <target>Parking</target>
+      </trans-unit>
+      <trans-unit id="transfer" datatype="html">
+        <source>transfer</source>
+        <target>Transfer</target>
+      </trans-unit>
+      <trans-unit id="internet" datatype="html">
+        <source>internet</source>
+        <target>Internet</target>
+      </trans-unit>
+      <trans-unit id="childrenAmenities" datatype="html">
+        <source>childrenAmenities</source>
+        <target>Children amenities</target>
+      </trans-unit>
+      <trans-unit id="bar" datatype="html">
+        <source>bar</source>
+        <target>Bar</target>
+      </trans-unit>
+      <trans-unit id="restaurant" datatype="html">
+        <source>restaurant</source>
+        <target>Restaurant</target>
+      </trans-unit>
+      <trans-unit id="pool" datatype="html">
+        <source>pool</source>
+        <target>Pool</target>
+      </trans-unit>
+      <trans-unit id="privateBeach" datatype="html">
+        <source>privateBeach</source>
+        <target>Private beach</target>
+      </trans-unit>
+      <trans-unit id="healthAndSpa" datatype="html">
+        <source>healthAndSpa</source>
+        <target>Health and spa</target>
+      </trans-unit>
+      <trans-unit id="businessInstallations" datatype="html">
+        <source>businessInstallations</source>
+        <target>Business installations</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
