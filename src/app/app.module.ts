@@ -33,9 +33,6 @@ import { HttpClient } from '@angular/common/http';
     AppRoutingModule,
     ToastrModule.forRoot(),
     NgbModule.forRoot(),
-    AgmCoreModule.forRoot({
-      apiKey: environment.googleMapsKey
-    })
   ],
   providers: [NgbActiveModal],
   bootstrap: [AppComponent]

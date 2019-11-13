@@ -5,7 +5,6 @@ import { LangSelectComponent } from './components/lang-select/lang-select.compon
 import { ResultPipe } from './pipes/result.pipe';
 import { DestinationPipe } from './pipes/destination.pipe';
 import { DateFormatPipe } from './pipes/date-format.pipe';
-import { FooterComponent } from './components/footer/footer.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { StarComponent } from './components/star/star.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
@@ -67,7 +66,6 @@ import { HighlightPipe } from './pipes/highlight.pipe';
     PaginationComponent,
     StarComponent,
     SpinnerComponent,
-    FooterComponent,
     DateFormatPipe,
     DestinationPipe,
     ResultPipe,
@@ -99,7 +97,6 @@ import { HighlightPipe } from './pipes/highlight.pipe';
     PaginationComponent,
     StarComponent,
     SpinnerComponent,
-    FooterComponent,
     DateFormatPipe,
     DestinationPipe,
     ResultPipe,
