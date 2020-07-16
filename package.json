@@ -50,7 +50,7 @@
     "graphql": "0.13.2",
     "graphql-tag": "2.9.2",
     "jquery": "3.3.1",
-    "lodash": "4.17.11",
+    "lodash": "4.17.19",
     "moment": "2.22.2",
     "ngx-chips": "1.9.2",
     "ngx-cookie-service": "1.0.10",
