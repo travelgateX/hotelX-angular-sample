@@ -41,7 +41,7 @@
     "apollo-link-http": "1.5.4",
     "apollo-utilities": "1.0.22",
     "auth0-js": "9.6.1",
-    "auth0-lock": "11.7.2",
+    "auth0-lock": "11.26.3",
     "body-parser": "1.18.3",
     "bootstrap": "4.0.0-alpha.6",
     "core-js": "2.5.7",
